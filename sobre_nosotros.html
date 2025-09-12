@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="sobre_nosotros.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="sobre_nosotros.js" rel="script">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>sobre nosotros </h1>
+
+<!-- Botones Mision, vision, valores -->
+ 
+<div class="container text-center">
+  <div class="row align-items-center">
+    <div class="col">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMision" id="button_mision">Misión</button>
+    </div>
+    <div class="col">    
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVision" id="button_vision">Visión</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-primary" type="button" id="button_valores" data-bs-toggle="modal" data-bs-target="#modalValores">Valores</button> 
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Mision -->
+<div class="modal fade" id="modalMision" tabindex="-1" aria-labelledby="modalMisionLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalMisionLabel" id="modalMisionLabel"> <span id="keyWordsValores">Misión</span></h1>
+        <!-- X que aparece en el modal -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!--Cuerpo del modal -->
+      <div class="modal-body">
+        Facilitar la vida de nuestros clientes y modernizar el comercio local, ofreciendo una plataforma en línea segura, sencilla y conveniente que conecta a la comunidad con nuestra tienda, permitiendo acceder a productos frescos y de calidad directamente desde nuestro establecimiento, fortaleciendo la economía del vecindario.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Vision -->
+<div class="modal fade" id="modalVision" tabindex="-1" aria-labelledby="modalVisionLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalVisionLabel"><span id="keyWordsValores">Visión</span></h1>
+        <!-- X que aparece en el modal -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!--Cuerpo del modal -->
+      <div class="modal-body">
+        Ser el punto de referencia en nuestra comunidad, conectando a los vecinos con nuestra tienda de manera práctica y confiable. Nos proponemos ampliar el alcance de nuestro comercio, generando una experiencia de compra moderna que fomente la cercanía y la confianza. En un plazo de 5 años, buscamos consolidar un modelo de negocio que pueda inspirar y replicarse en otros pequeños locales.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Valores -->
+<div class="modal fade" id="modalValores" tabindex="-1" aria-labelledby="modalValoresLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalValoresLabel"> <span id="keyWordsValores">Visión</span></h1>
+        <!-- X que aparece en el modal -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!--Cuerpo del modal -->
+      <div class="modal-body">
+        <p class="text-start">En nuestra plataforma creemos que cada entrega es una oportunidad para generar impacto positivo. Por eso, nuestros valores fundamentales guían todo lo que hacemos: </p>
+
+        <p class="text-start"> <span id="keyWordsValores">Enfoque en la Comunidad.</span> Creemos en el poder de las redes locales para fortalecer la economía y crear vecindarios más unidos, fomentando apoyo mutuo y un verdadero sentido de pertenencia.</p>
+        <p class="text-start"> <span id="keyWordsValores">Calidad y Confianza. </span>Nos aseguramos de que cada producto cumpla con los más altos estándares y que cada interacción sea transparente. La confianza de nuestros clientes es nuestra mayor fortaleza, y la cuidamos con dedicación.</p>
+        <p class="text-start"> <span id="keyWordsValores">Inclusión y Accesibilidad. </span>Diseñamos una plataforma intuitiva y fácil de usar, pensada para todos, sin importar edad, habilidades o limitaciones. Queremos eliminar barreras y garantizar que cada persona pueda acceder a productos de calidad de manera sencilla.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
+

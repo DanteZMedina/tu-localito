@@ -1,0 +1,36 @@
+:root {
+    --color-principal-botones: #FF4E4E;
+    --color-boton-border: #FF4E4E;
+    --border-button: 1px solid;
+    --border-button-radius: 8px;
+    --font-family: "Inter", sans-serif;
+    --font-style: normal;
+    --font-weight: 600;
+    --font-size: 32px;
+    --line-height: 120%
+    --padding-button: 12px;
+    --gap-button: 8px;
+    --width-button: 269px;
+    --height-button: 91px;
+    --font-color-MisionVisionValores: #E85C14
+}
+
+#button_mision, #button_vision, #button_valores { 
+    width: var(--width-button);
+    height: var(--height-button);
+    padding: var(--padding-button);
+    gap: var(--gap-button);
+    background-color: var(--color-principal-botones);
+    border: var(--color-boton-border);
+    border: var(--border-button);
+    border-radius: var(--border-button-radius);
+    font-family: var(--font-family);
+    font-style: var(--font-style);
+    font-weight: var(--font-weight);
+    line-height: var(--line-height);
+}
+
+#keyWordsValores{
+    color: var(--font-color-MisionVisionValores);
+    font-family: var(--font-family);
+}
