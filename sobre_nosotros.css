@@ -1,0 +1,54 @@
+.title {
+  color: #E85C14;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(40px,5vw,64px);
+  font-weight: bold;
+  margin-top: 45px;
+  margin-bottom: 26px;
+}
+
+.mainText {
+    font-family: 'Inter', ;
+    font-weight: 600;
+    text-align-last: center;
+    text-align: justify;
+    margin-bottom: 8px;
+}
+
+.brandTuLocalito{
+    justify-content: center;
+}
+
+.boxImagenesVerduras{
+    background-color: #ffffff;
+}
+
+.container{
+    background-color: #FFDE59;
+    width: 100%;/*Ocupa todo el espacio disponible*/
+   /* border: 10px solid purple;ancho del borde*/
+   
+}
+
+#cardImages{
+    background-color:#FFDE59;
+    border: none;
+    border-radius: 0%;
+    height: 320px;
+}
+
+.card{
+    background-color:#FFDE59;
+    padding: 25px;
+    margin: 50px;
+    /*Flexbox*/
+    display: flex;/*Conviente al vontenedor en un contenedor flexible*/
+    align-items: center; /*Alinea los elemetos dentro del contenedror*/
+    gap: 20px;/*Crear un espacio de 200px entre cada elemento de la caja*/
+
+}
+
+img{
+    height: auto;
+    
+}
