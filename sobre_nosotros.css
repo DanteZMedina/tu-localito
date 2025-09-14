@@ -1,3 +1,75 @@
+/*
+.inter-<uniquifier> {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
+:root {
+  --font-family: 'Inter', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+}
+
 footer.principal {
-  background-color: #FFDE59;
+  background-color: #ffde59;
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 12px;
+
+  .footer-about-us {
+    a {
+      display: block;
+      color: #000;
+      text-decoration: none;
+      font-weight: var(--font-weight-bold);
+      margin-bottom: 15px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .hecho-en-mexico {
+      display: flex;
+      align-items: center;
+      font-weight: var(--font-weight-bold);
+      gap: 5px;
+
+      img {
+        width: 20px;
+        height: auto;
+      }
+    }
+  }
+
+  .footer-social {
+
+    .social-icons {
+      #footer-social-instagram,
+      #footer-social-whatsapp,
+      #footer-social-facebook {
+        width: 25px;
+        height: 25px;
+        margin: 0 10px;
+        transition: transform 0.3s;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .footer-logo {
+      img {
+        width: 120px;
+        height: auto;
+      }
+    }
+  }
+
+  .footer-info {
+    font-weight: var(--font-weight-bold);
+  }
 }
