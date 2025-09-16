@@ -63,3 +63,62 @@
 .modal-body { 
     text-align: justify;
 }
+.btn{
+    background-color: #B5651D;
+    width: 154px;
+    height:35px;
+    color:#ffffff;
+    border-radius: 8px;
+    font-size: "Inter", sans-serif;
+    font-weight: bold;
+    box-shadow: 1px 5px 5px #4e4d4d;
+    border-color: #A0522D;
+    border-width: 1px;
+    text-align: center;
+}
+
+.nav-item{
+    margin-left:40px;
+}
+
+.btn:hover{
+    transform: translateY(8px)
+}
+
+#boton-carrito{
+    background-color: #E92736;
+    color:#ffffff;
+}
+
+.carrito{
+    margin-right: 5px;
+}
+
+#boton-ingresar{
+    background-color: #ffffff;
+    border-color: #13A751;
+    color:#13A751;
+}
+
+.btn::before,
+.btn::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 50px;
+  background-color: #A0522D;
+  top: -50px;
+  z-index: -1;
+  animation: swing 2s infinite ease-in-out;
+}
+
+.btn::before {
+  left: 20%;
+}
+
+.btn::after {
+  right: 20%;
+}
+
+
+
