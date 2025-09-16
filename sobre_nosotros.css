@@ -1,0 +1,337 @@
+/* ==================== RESET & BASE ==================== */
+
+/* 1. Box-sizing más intuitivo */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Eliminar márgenes y padding por defecto */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Animaciones accesibles */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+/* 4. Line-height accesible */
+body {
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Medios de comunicación */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Heredar fuente en formularios */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 7. Evitar overflow de texto */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Mejorar wrapping de texto */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/* 9. Root stacking context */
+#root, #__next {
+  isolation: isolate;
+}
+
+/* ==================== VARIABLES CSS ==================== */
+:root {
+  /* Fonts */
+  --font-family: 'Inter', sans-serif;
+  --font-family-all: 'Inter', sans-serif;
+  --font-family-heading: 'JetBrains Mono', monospace;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  /* Colores */
+  --color-orange: #E85C14;
+  --color-footer-bg: #FFDE59;
+  --color-card-bg: #FEBCBC;
+  --color-border-card: #E85E14;
+  --color-carousel-control: #E85E14;
+  --color-button-navbar: #B5651D;
+  --color-button-mvv: #FF4E4E;
+  --color-button-principal: #134DB9;
+  --color-button-carrito: #E92736;
+  --color-button-ingresar: #13A751;
+
+  /* Tamaños y bordes */
+  --border-radius: 8px;
+  --box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  --btn-width-navbar: 154px;
+  --btn-height-navbar: 35px;
+
+  /* Fonts */
+  --font-size-heading1: 66px;
+  --font-size-heading2: 40px;
+  --font-size-heading3: 30px;
+  --font-size-large: 20px;
+  --font-size-medium: 16px;
+  --font-size-small: 13px;
+}
+
+/* ==================== NAVBAR ==================== */
+nav.navbar {
+  padding: 10px 30px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(181,101,29,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.menu a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  background: var(--color-button-navbar);
+  padding: 5px 30px;
+  border: 1px solid #A0522D;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease;
+}
+
+.menu a::before,
+.menu a::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  width: 3px;
+  height: 30px;
+  background: #A0522D;
+}
+
+.menu a:hover {
+  transform: translateY(5px);
+}
+
+/* Acciones */
+.acciones .carrito {
+  background: var(--color-button-carrito);
+  color: white;
+  border: 2px solid var(--color-button-carrito);
+  padding: 5px 30px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+}
+.acciones .ingresar {
+  background: white;
+  color: var(--color-button-ingresar);
+  border: 2px solid var(--color-button-ingresar);
+  padding: 5px 30px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+}
+.acciones .carrito:hover { background: #c62828; }
+.acciones .ingresar:hover { background: #e8f5e9; }
+
+/* ==================== SOBRE NOSOTROS ==================== */
+.title {
+  color: var(--color-orange);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(40px,5vw,64px);
+  font-weight: bold;
+  margin-top: 45px;
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+.mainText {
+  font-family: var(--font-family);
+  font-weight: 600;
+  text-align: justify;
+  margin-bottom: 8px;
+}
+
+.brandTuLocalito{
+  display: block;
+  margin: 20px auto;
+}
+
+.boxImagenesVerduras{
+  background-color: #ffffff;
+}
+
+#cardImages {
+  background-color: var(--color-footer-bg);
+}
+
+.card {
+  padding: 25px;
+  margin: 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+/* ==================== CAROUSEL ==================== */
+.card-wrapper {
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: var(--color-card-bg);
+  opacity: 0.95;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.team-image {
+  border: 3px solid var(--color-border-card);
+}
+
+.team-name {
+  color: var(--color-orange);
+  font-size: 30px;
+}
+
+.team-attribute {
+  color: var(--color-orange);
+}
+
+.text-justify { text-align: justify; }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-image: none;
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  position: relative;
+}
+
+.carousel-control-prev-icon::after {
+  content: "❮";
+  color: var(--color-carousel-control);
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.carousel-control-next-icon::after {
+  content: "❯";
+  color: var(--color-carousel-control);
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ==================== BOTONES MISION/VISION/VALORES ==================== */
+#button_mision, #button_vision, #button_valores { 
+  background-color: var(--color-button-mvv);
+  border: 1px solid var(--color-button-mvv);
+  box-shadow: var(--box-shadow);
+  font-family: var(--font-family);
+}
+
+.keyWordsValores{
+  color: var(--color-orange);
+  font-family: var(--font-family-all);
+}
+
+.modal-body { text-align: justify; }
+
+.btn {
+  background-color: var(--color-button-navbar);
+  width: var(--btn-width-navbar);
+  height: var(--btn-height-navbar);
+  color:#ffffff;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  box-shadow: 1px 5px 5px #4e4d4d;
+  border: 1px solid #A0522D;
+  position: relative;
+}
+
+.btn:hover { transform: translateY(8px); }
+
+/* ==================== FOOTER ==================== */
+footer.principal {
+  background-color: var(--color-footer-bg);
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 12px;
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-about-us a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 10px;
+}
+
+.footer-about-us a:hover { text-decoration: underline; }
+
+.hecho-en-mexico {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: var(--font-weight-bold);
+}
+
+.footer-social .social-icons img {
+  width: 25px;
+  height: 25px;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+.footer-social .social-icons img:hover { transform: scale(1.1); }
+
+.footer-logo img {
+  width: 120px;
+  height: auto;
+}
+
+.footer-info { font-weight: var(--font-weight-bold); }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 991.98px) {
+  .menu a { width: 100%; text-align: center; transition: none; }
+  #navbarMenu { text-align: center; }
+  .menu { align-items: center; padding-top: 10px; }
+  .menu a::before, .menu a::after { content: none; }
+  .brandTuLocalito { margin: 20px auto; display: block; }
+  .boxImagenesVerduras { display: none; }
+}
