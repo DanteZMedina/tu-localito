@@ -6,7 +6,7 @@
 *::after {
   box-sizing: border-box;
 }
- 
+
 /* 2. Eliminar márgenes y padding por defecto */
 * {
   margin: 0;
@@ -161,9 +161,10 @@ nav.navbar {
   background: #A0522D;
 }
 
-.menu a:hover {
-  transform: translateY(5px);
+.menu a:hover, .menu a.active {
+    transform: translateY(5px);
 }
+
 
 /* Acciones */
 .acciones .carrito {
@@ -347,8 +348,13 @@ footer.principal {
 }
 
 .footer-about-us a:hover {
+  color: var(--color-orange);
   text-decoration: underline;
 }
+
+.footer-about-us a.active{
+    text-decoration: underline;
+} 
 
 .hecho-en-mexico {
   display: flex;
