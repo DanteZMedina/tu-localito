@@ -1,7 +1,9 @@
 /* ==================== RESET & BASE ==================== */
 
 /* 1. Box-sizing más intuitivo */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -26,18 +28,31 @@ body {
 }
 
 /* 5. Medios de comunicación */
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
 /* 6. Heredar fuente en formularios */
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
 /* 7. Evitar overflow de texto */
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
@@ -45,12 +60,19 @@ p, h1, h2, h3, h4, h5, h6 {
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
 /* 9. Root stacking context */
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
 
@@ -59,17 +81,19 @@ h1, h2, h3, h4, h5, h6 {
   /* Fonts */
   --font-family: 'Inter', sans-serif;
   --font-family-all: 'Inter', sans-serif;
-  --font-family-heading: 'JetBrains Mono', monospace;
+  --font-family-heading: "Playwrite HU", cursive;
+  ;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
 
   /* Colores */
   --color-orange: #E85C14;
-  --color-footer-bg: #FFDE59;
+  --color-amarillo: #FFDE59;
   --color-card-bg: #FEBCBC;
   --color-border-card: #E85E14;
   --color-carousel-control: #E85E14;
   --color-button-navbar: #B5651D;
+  --color-navbar-toggler-focus: #B5651D;
   --color-button-mvv: #FF4E4E;
   --color-button-principal: #134DB9;
   --color-button-carrito: #E92736;
@@ -77,12 +101,12 @@ h1, h2, h3, h4, h5, h6 {
 
   /* Tamaños y bordes */
   --border-radius: 8px;
-  --box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   --btn-width-navbar: 154px;
   --btn-height-navbar: 35px;
 
   /* Fonts */
-  --font-size-heading1: 66px;
+  --font-size-heading1: 50px;
   --font-size-heading2: 40px;
   --font-size-heading3: 30px;
   --font-size-large: 20px;
@@ -90,15 +114,24 @@ h1, h2, h3, h4, h5, h6 {
   --font-size-small: 13px;
 }
 
+
+body {
+  padding-top: 65px;
+}
+
 /* ==================== NAVBAR ==================== */
 nav.navbar {
-  padding: 10px 30px;
-  background: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-toggler {
   border: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 2px var(--color-navbar-toggler-focus);
+  border-color: var(--color-navbar-toggler-focus);
 }
 
 .navbar-toggler-icon {
@@ -143,6 +176,7 @@ nav.navbar {
   cursor: pointer;
   box-shadow: var(--box-shadow);
 }
+
 .acciones .ingresar {
   background: white;
   color: var(--color-button-ingresar);
@@ -153,17 +187,25 @@ nav.navbar {
   cursor: pointer;
   box-shadow: var(--box-shadow);
 }
-.acciones .carrito:hover { background: #c62828; }
-.acciones .ingresar:hover { background: #e8f5e9; }
+
+.acciones .carrito:hover {
+  background: #c62828;
+}
+
+.acciones .ingresar:hover {
+  background: #e8f5e9;
+}
 
 /* ==================== SOBRE NOSOTROS ==================== */
+.my-6 {
+  margin: 55px;
+}
+
 .title {
   color: var(--color-orange);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(40px,5vw,64px);
+  font-family: var(--font-family-heading);
+  font-size: clamp(40px, 5vw, 60px);
   font-weight: bold;
-  margin-top: 45px;
-  margin-bottom: 26px;
   text-align: center;
 }
 
@@ -174,39 +216,45 @@ nav.navbar {
   margin-bottom: 8px;
 }
 
-.brandTuLocalito{
+.brandTuLocalito {
   display: block;
   margin: 20px auto;
 }
 
-.boxImagenesVerduras{
+.boxImagenesVerduras {
   background-color: #ffffff;
 }
 
 #cardImages {
-  background-color: var(--color-footer-bg);
+  background-color: var(--color-amarillo);
+  min-height: 300px;
+  /* ejemplo */
 }
+
 
 .card {
   padding: 25px;
-  margin: 50px;
+  margin: 10px;
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-img {
-  height: auto;
-  max-width: 100%;
-}
+
 
 /* ==================== CAROUSEL ==================== */
+.subtitle {
+  color: var(--color-orange);
+  font-family: var(--font-family-heading);
+  font-size: clamp(30px, 5vw, 40px);
+  font-weight: bold;
+}
+
 .card-wrapper {
   max-width: 900px;
-  margin: 2rem auto;
+  margin: 20px auto;
   background-color: var(--color-card-bg);
-  opacity: 0.95;
-  padding: 1rem;
+  padding: 5px;
   border-radius: 12px;
 }
 
@@ -223,7 +271,9 @@ img {
   color: var(--color-orange);
 }
 
-.text-justify { text-align: justify; }
+.text-justify {
+  text-align: justify;
+}
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -255,83 +305,107 @@ img {
 }
 
 /* ==================== BOTONES MISION/VISION/VALORES ==================== */
-#button_mision, #button_vision, #button_valores { 
-  background-color: var(--color-button-mvv);
-  border: 1px solid var(--color-button-mvv);
+.identidad {
+  background: var(--color-button-carrito);
+  color: white;
+  border: 2px solid var(--color-button-carrito);
+  padding: 5px 30px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  cursor: pointer;
   box-shadow: var(--box-shadow);
-  font-family: var(--font-family);
 }
 
-.keyWordsValores{
+.identidad:hover {
+  background: #c62828;
+}
+
+.keyWordsValores {
   color: var(--color-orange);
   font-family: var(--font-family-all);
 }
 
-.modal-body { text-align: justify; }
-
-.btn {
-  background-color: var(--color-button-navbar);
-  width: var(--btn-width-navbar);
-  height: var(--btn-height-navbar);
-  color:#ffffff;
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  box-shadow: 1px 5px 5px #4e4d4d;
-  border: 1px solid #A0522D;
-  position: relative;
+.modal-body {
+  text-align: justify;
 }
 
-.btn:hover { transform: translateY(8px); }
 
 /* ==================== FOOTER ==================== */
 footer.principal {
-  background-color: var(--color-footer-bg);
-  margin: 0;
+  background-color: var(--color-amarillo);
   font-family: var(--font-family);
   font-size: 12px;
-  padding: 1.5rem 0;
   display: flex;
   justify-content: center;
 }
 
 .footer-about-us a {
   display: block;
-  color: #000;
+  color: black;
   text-decoration: none;
   font-weight: var(--font-weight-bold);
-  margin-bottom: 10px;
 }
 
-.footer-about-us a:hover { text-decoration: underline; }
+.footer-about-us a:hover {
+  text-decoration: underline;
+}
 
 .hecho-en-mexico {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-regular);
 }
 
-.footer-social .social-icons img {
+.hecho-en-mexico img {
+  width: 30px;
+}
+
+.footer-social img {
   width: 25px;
   height: 25px;
   margin: 0 10px;
   transition: transform 0.3s;
 }
-.footer-social .social-icons img:hover { transform: scale(1.1); }
 
-.footer-logo img {
-  width: 120px;
-  height: auto;
+.footer-social img:hover {
+  transform: scale(1.1);
 }
 
-.footer-info { font-weight: var(--font-weight-bold); }
+.logo-footer {
+  width: 120px;
+  height: 40px;
+}
+
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 991.98px) {
-  .menu a { width: 100%; text-align: center; transition: none; }
-  #navbarMenu { text-align: center; }
-  .menu { align-items: center; padding-top: 10px; }
-  .menu a::before, .menu a::after { content: none; }
-  .brandTuLocalito { margin: 20px auto; display: block; }
-  .boxImagenesVerduras { display: none; }
+  .menu a {
+    width: 100%;
+    text-align: center;
+    transition: none;
+  }
+
+  #navbarMenu {
+    text-align: center;
+  }
+
+  .menu {
+    align-items: center;
+    padding-top: 10px;
+  }
+
+  .menu a::before,
+  .menu a::after {
+    content: none;
+  }
+
+  .brandTuLocalito {
+    margin: 20px auto;
+    display: block;
+  }
+
+  .boxImagenesVerduras {
+    display: none;
+  }
 }
