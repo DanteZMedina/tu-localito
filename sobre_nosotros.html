@@ -32,170 +32,178 @@
   </head>
   <body>
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-      <div
-        class="container-fluid d-flex align-items-center justify-content-between"
-      >
-        <!-- Contenedor para centrar logo solo en móviles -->
-        <div class="d-flex d-lg-none flex-grow-1 justify-content-center">
-          <a class="navbar-brand m-0" href="#">
-            <img src="img/logo-nav-bar.png" alt="Logo oficial de Tu localito" height="50" />
-          </a>
-        </div>
-
-        <!-- Logo para desktop (izquierda) -->
-        <a class="navbar-brand d-none d-lg-block me-auto" href="#">
-          <img src="img/logo-nav-bar.png" alt="Logo" height="50" />
-        </a>
-
-        <!-- Botón toggler (siempre a la derecha en mobile) -->
-        <button
-          class="navbar-toggler ms-auto"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarMenu"
+    <header>
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <div
+          class="container-fluid d-flex align-items-center justify-content-between"
         >
-          <span class="navbar-toggler-icon">.</span>
-        </button>
-
-        <!-- Menú -->
-        <div class="collapse navbar-collapse" id="navbarMenu">
-          <div
-            class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center w-100 justify-content-lg-center gap-3 menu"
-          >
-            <a href="#">Inicio</a>
-            <a href="#">Catálogo</a>
-            <a href="#">Sobre Nosotros</a>
-            <a href="#">Recetario</a>
+          <!-- Contenedor para centrar logo solo en móviles -->
+          <div class="d-flex d-lg-none flex-grow-1 justify-content-center">
+            <a class="navbar-brand m-0" href="#">
+              <img
+                src="img/logo-nav-bar.png"
+                alt="Logo oficial de Tu localito"
+                height="50"
+              />
+            </a>
           </div>
 
-          <!-- Acciones mobile (centradas) -->
-          <div class="d-lg-none d-flex justify-content-center w-100">
-            <div class="acciones mt-3 d-flex gap-3">
+          <!-- Logo para desktop (izquierda) -->
+          <a class="navbar-brand d-none d-lg-block me-auto" href="#">
+            <img src="img/logo-nav-bar.png" alt="Logo" height="50" />
+          </a>
+
+          <!-- Botón toggler (siempre a la derecha en mobile) -->
+          <button
+            class="navbar-toggler ms-auto"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+          >
+            <span class="navbar-toggler-icon">.</span>
+          </button>
+
+          <!-- Menú -->
+          <div class="collapse navbar-collapse" id="navbarMenu">
+            <div
+              class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center w-100 justify-content-lg-center gap-3 menu"
+            >
+              <a href="#">Inicio</a>
+              <a href="#">Catálogo</a>
+              <a href="#">Sobre Nosotros</a>
+              <a href="#">Recetario</a>
+            </div>
+
+            <!-- Acciones mobile (centradas) -->
+            <div class="d-lg-none d-flex justify-content-center w-100">
+              <div class="acciones mt-3 d-flex gap-3">
+                <button class="carrito">Carrito</button>
+                <button class="ingresar">Ingresar</button>
+              </div>
+            </div>
+
+            <!-- Acciones desktop (derecha) -->
+            <div class="d-none d-lg-flex acciones ms-lg-3 mt-lg-0 gap-3">
               <button class="carrito">Carrito</button>
               <button class="ingresar">Ingresar</button>
             </div>
           </div>
+        </div>
+      </nav>
+    </header>
 
-          <!-- Acciones desktop (derecha) -->
-          <div class="d-none d-lg-flex acciones ms-lg-3 mt-lg-0 gap-3">
-            <button class="carrito">Carrito</button>
-            <button class="ingresar">Ingresar</button>
+    <main>
+      <!-- SOBRE NOSOTROS -->
+      <div class="row container mx-auto my-6">
+        <div class="col-12 col-lg-7">
+          <h1 class="title">Sobre Nosotros</h1>
+          <p class="mainText">
+            Actualmente, muchas comunidades enfrentan desafíos para acceder a
+            productos frescos y de calidad de sus mercados o tiendas locales ya
+            sea por falta de tiempo, dificultades de movilidad o la
+            inconveniencia de horarios de compra. Los pequeños comercios, por su
+            parte, luchan por competir con las grandes cadenas de supermercados
+            y las plataformas de entrega masivas, que dominan el mercado
+            digital. La mayoría de estos negocios carecen de una presencia en
+            línea, lo que limita su alcance y les impide ofrecer opciones de
+            compra modernas a sus clientes.<br />
+            Nuestra plataforma surge para cerrar esta brecha. Al mismo tiempo,
+            brindamos a los miembros de la comunidad una solución conveniente
+            para hacer sus compras desde la comodidad de su hogar, apoyando al
+            comercio local y fortaleciendo la economía del vecindario.
+          </p>
+        </div>
+        <div
+          id="cardImages"
+          class="boxImagenesVerduras gap-2 col-md-5 d-none d-lg-flex justify-content-center align-items-center"
+        >
+          <img
+            class="img-fluid"
+            src="img/descripcion/verduras-rojas.png"
+            alt="Aguacates y chayotes"
+          />
+          <img
+            class="img-fluid"
+            src="img/descripcion/verduras-verdes.svg"
+            alt=""
+          />
+        </div>
+        <div class="col-12 col-md-7 mainText">
+          <img
+            src="img/descripcion/logoTuLocalito.svg"
+            alt="Logo, Tu Localito"
+            class="brandTuLocalito"
+          />
+        </div>
+      </div>
+
+      <!-- CAROUSEL -->
+      <section class="container">
+        <h2 class="text-start subtitle">Conoce al equipo</h2>
+        <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- Items generados dinámicamente por JS -->
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#teamCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#teamCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- BOTONES MISION/VISION/VALORES -->
+      <div class="container-fluid text-center my-5">
+        <div class="row">
+          <div class="col-12 col-md-4 my-2">
+            <button
+              type="button"
+              class="identidad"
+              data-bs-toggle="modal"
+              data-bs-target="#modalMision"
+              id="button_mision"
+            >
+              Misión
+            </button>
+          </div>
+          <div class="col-12 col-md-4 my-2">
+            <button
+              type="button"
+              class="identidad"
+              data-bs-toggle="modal"
+              data-bs-target="#modalVision"
+              id="button_vision"
+            >
+              Visión
+            </button>
+          </div>
+          <div class="col-12 col-md-4 my-2">
+            <button
+              type="button"
+              class="identidad"
+              data-bs-toggle="modal"
+              data-bs-target="#modalValores"
+              id="button_valores"
+            >
+              Valores
+            </button>
           </div>
         </div>
       </div>
-    </nav>
-
-    <!-- SOBRE NOSOTROS -->
-    <div class="row container mx-auto my-6">
-      <div class="col-12 col-lg-7">
-        <h1 class="title">Sobre Nosotros</h1>
-        <p class="mainText">
-          Actualmente, muchas comunidades enfrentan desafíos para acceder a
-          productos frescos y de calidad de sus mercados o tiendas locales ya
-          sea por falta de tiempo, dificultades de movilidad o la inconveniencia
-          de horarios de compra. Los pequeños comercios, por su parte, luchan
-          por competir con las grandes cadenas de supermercados y las
-          plataformas de entrega masivas, que dominan el mercado digital. La
-          mayoría de estos negocios carecen de una presencia en línea, lo que
-          limita su alcance y les impide ofrecer opciones de compra modernas a
-          sus clientes.<br />
-          Nuestra plataforma surge para cerrar esta brecha. Al mismo tiempo,
-          brindamos a los miembros de la comunidad una solución conveniente para
-          hacer sus compras desde la comodidad de su hogar, apoyando al comercio
-          local y fortaleciendo la economía del vecindario.
-        </p>
-      </div>
-      <div
-        id="cardImages"
-        class="boxImagenesVerduras gap-2 col-md-5 d-none d-lg-flex justify-content-center align-items-center"
-      >
-        <img
-          class="img-fluid"
-          src="img/descripcion/verduras-rojas.png"
-          alt="Aguacates y chayotes"
-        />
-        <img
-          class="img-fluid"
-          src="img/descripcion/verduras-verdes.svg"
-          alt=""
-        />
-      </div>
-      <div class="col-12 col-md-7 mainText">
-        <img
-          src="img/descripcion/logoTuLocalito.svg"
-          alt="Logo, Tu Localito"
-          class="brandTuLocalito"
-        />
-      </div>
-    </div>
-
-    <!-- CAROUSEL -->
-    <section class="container">
-      <h2 class="text-start subtitle">Conoce al equipo</h2>
-      <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- Items generados dinámicamente por JS -->
-        </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#teamCarousel"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Anterior</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#teamCarousel"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Siguiente</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- BOTONES MISION/VISION/VALORES -->
-    <div class="container-fluid text-center my-5">
-      <div class="row">
-        <div class="col-12 col-md-4 my-2">
-          <button
-            type="button"
-            class="identidad"
-            data-bs-toggle="modal"
-            data-bs-target="#modalMision"
-            id="button_mision"
-          >
-            Misión
-          </button>
-        </div>
-        <div class="col-12 col-md-4 my-2">
-          <button
-            type="button"
-            class="identidad"
-            data-bs-toggle="modal"
-            data-bs-target="#modalVision"
-            id="button_vision"
-          >
-            Visión
-          </button>
-        </div>
-        <div class="col-12 col-md-4 my-2">
-          <button
-            type="button"
-            class="identidad"
-            data-bs-toggle="modal"
-            data-bs-target="#modalValores"
-            id="button_valores"
-          >
-            Valores
-          </button>
-        </div>
-      </div>
-    </div>
+    </main>
 
     <!-- MODALES (Misión, Visión, Valores) -->
     <!-- Modal Mision -->
@@ -304,7 +312,9 @@
       <div class="container-fluid">
         <!-- Redes sociales -->
         <div class="row">
-          <div class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3">
+          <div
+            class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3"
+          >
             <a href="#" class="d-block">Preguntas Frecuentes</a>
             <a href="#" class="d-block">Sobre nosotros</a>
             <a href="#" class="d-block">Contacto</a>
