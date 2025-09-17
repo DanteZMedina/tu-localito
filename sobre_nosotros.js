@@ -4,57 +4,57 @@ const teamMembers = [
     nombre: "Dante Medina",
     rol: "Full Stack Jr Developer",
     bio: "Desarrollador Fullstack Jr. con experiencia en frontend (JavaScript, HTML5, CSS3) y backend (Java, SQL), con sólida trayectoria en QA manual y automatizado (Python, Selenium, Jira, Zephyr). Experiencia en pruebas funcionales y de regresión, garantizando calidad en todo el ciclo de desarrollo. Ha trabajado en proyectos financieros con Citibanamex, Banxico y TCS, aportando soluciones robustas y seguras. Busco contribuir al desarrollo de aplicaciones escalables en equipos ágiles y colaborativos.",
-    foto: "img/team-carousel-pictures/team-dante.png",
-    icono: "img/team-carousel-icons/team-avatar-mango.png"
+    foto: "img/sobre-nosotros/team-carousel-pictures/team-dante.png",
+    icono: "img/sobre-nosotros/team-carousel-icons/team-avatar-mango.png"
   },
   {
     nombre: "Dominique Rangel",
     rol: "Full Stack Jr Developer",
     bio: "Soy Ingeniera Biomédica con sólida base en matemáticas aplicadas. Actualmente desarrollo mi carrera en el ámbito tecnológico, me especializo en desarrollo web, aplicando buenas prácticas y herramientas modernas para crear soluciones funcionales y escalables. Me motiva aprender de forma continua y consolidar mi experiencia en el área para aportar valor en proyectos digitales con impacto.",
-    foto: "img/team-carousel-pictures/team-domi.png",
-    icono: "img/team-carousel-icons/team-avatar-zanahoria.png"
+    foto: "img/sobre-nosotros/team-carousel-pictures/team-domi.png",
+    icono: "img/sobre-nosotros/team-carousel-icons/team-avatar-zanahoria.png"
   },
   {
     nombre: "Francisco Roch",
     rol: "Full Stack Jr Developer",
     bio: "Profesional del área financiera con experiencia en análisis y gestión de recursos. Actualmente en formación en programación, con enfoque en Java y tecnologías digitales. Mi objetivo es integrar el conocimiento financiero con herramientas tecnológicas para generar soluciones que impulsen la eficiencia y la innovación en las empresas.",
-    foto: "img/team-carousel-pictures/team-paco.png",
-    icono: "img/team-carousel-icons/team-avatar-sandia.png"
+    foto: "img/sobre-nosotros/team-carousel-pictures/team-paco.png",
+    icono: "img/sobre-nosotros/team-carousel-icons/team-avatar-sandia.png"
   },
   {
     nombre: "Jesús De la Rosa",
     rol: "Full Stack Jr Developer",
     bio: "Soy Químico Farmacéutico Biólogo con experiencia en control de calidad e inventarios en empresas de giro logístico. Actualmente me encuentro en formación como Desarrollador Full Stack Jr. Mi objetivo es impementar la lógica, el detalle y el método científico para potenciar el desarrollo de soluciones tecnológicas.",
-    foto: "img/team-carousel-pictures/team-aaron.png",
-    icono: "img/team-carousel-icons/team-avatar-pera.png"
+    foto: "img/sobre-nosotros/team-carousel-pictures/team-aaron.png",
+    icono: "img/sobre-nosotros/team-carousel-icons/team-avatar-pera.png"
   },
   {
     nombre: "Jorge Rodriguez",
     rol: "Full Stack Jr Developer",
     bio: "Soy Ingeniero de Software con pasión por crear soluciones tecnológicas eficientes y escalables.Actualmente me especializo en el desarrollo backend utilizando Java y el framework Spring Boot.Me interesa la arquitectura de software y las buenas prácticas de programación.Siempre busco aprender y aplicar nuevas tecnologías que potencien el desarrollo de proyectos innovadores.",
-    foto: "img/team-carousel-pictures/team-jorge.png",
-    icono: "img/team-carousel-icons/team-avatar-brocoli.png"
+    foto: "img/sobre-nosotros/team-carousel-pictures/team-jorge.png",
+    icono: "img/sobre-nosotros/team-carousel-icons/team-avatar-brocoli.png"
   },
   {
     nombre: "Lilia Quiroz",
     rol: "Full Stack Jr Developer",
     bio: "Soy ingeniera geofísica de formación, con experiencia en logística, administración, atención al cliente y marketing digital. Actualmente estoy en transición hacia el mundo de la tecnología, formándome como Desarrolladora Full Stack Java. Mi trayectoria me ha dado habilidades como análisis de datos, comunicación efectiva y resolución de problemas, que ahora aplico al desarrollo de software. Me entusiasma crear soluciones digitales escalables, centradas en el usuario y con impacto real.",
-    foto: "img/team-carousel-pictures/team-lili.png",
-    icono: "img/team-carousel-icons/team-avatar-uva.png"
+    foto: "img/sobre-nosotros/team-carousel-pictures/team-lili.png",
+    icono: "img/sobre-nosotros/team-carousel-icons/team-avatar-uva.png"
   },
   {
     nombre: "Yesenia Quiroz",
     rol: "Full Stack Jr Developer",
     bio: "Soy Ingeniera Bioquímica Industrial con experiencia en control de calidad, atención al cliente y ventas. Actualmente me encuentro en formación en el el Área de TI como Desarrolladora Full Stack,  busco combinar mi experiencia para implementar  herramientas nuevas para automatizar y mejorar la eficiencia de procesos.",
-    foto: "img/team-carousel-pictures/team-yes.png",
-    icono: "img/team-carousel-icons/team-avatar-cereza.png"
+    foto: "img/sobre-nosotros/team-carousel-pictures/team-yes.png",
+    icono: "img/sobre-nosotros/team-carousel-icons/team-avatar-cereza.png"
   },
   {
     nombre: "Thalia Espinola",
     rol: "Full Stack Jr Developer",
     bio: "Soy Ingeniera en Tecnologías de Manufactura y actualmente me encuentro en formación como Desarrolladora Fullstack. Aunque estoy iniciando mi trayectoria en desarrollo, me apasiona aprender y aplicar mis conocimientos para crear soluciones tecnológicas.",
-    foto: "img/team-carousel-pictures/team-thal.png",
-    icono: "img/team-carousel-icons/team-avatar-pinia.png"
+    foto: "img/sobre-nosotros/team-carousel-pictures/team-thal.png",
+    icono: "img/sobre-nosotros/team-carousel-icons/team-avatar-pinia.png"
   },
 ];
 
