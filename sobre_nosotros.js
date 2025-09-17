@@ -125,7 +125,7 @@ teamMembers.forEach((member, index) => {
   cardBody.appendChild(h2);
   cardBody.appendChild(pRol);
   cardBody.appendChild(pBio);
-
+  
   colText.appendChild(cardBody);
 
   row.appendChild(colImg);

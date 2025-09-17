@@ -6,7 +6,7 @@
 *::after {
   box-sizing: border-box;
 }
-
+ 
 /* 2. Eliminar márgenes y padding por defecto */
 * {
   margin: 0;
