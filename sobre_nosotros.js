@@ -3,7 +3,7 @@ const teamMembers = [
   {
     nombre: "Dante Medina",
     rol: "Full Stack Jr Developer",
-    bio: "Desarrollador Fullstack Jr. con experiencia en frontend (JavaScript, HTML5, CSS3) y backend con Java y SQL, complementado por una sólida trayectoria en QA manual y automatizado. He participado en pruebas funcionales, regresión y automatización con Python y Selenium, gestionando defectos en Jira y Zephyr. Mi enfoque integral asegura calidad en todo el ciclo de desarrollo. Destaco experiencia en proyectos bancarios con Citibanamex, Banxico y TCS, aportando soluciones robustas y seguras en entornos financieros. Busco contribuir al desarrollo de aplicaciones escalables en equipos ágiles y colaborativos.",
+    bio: "Desarrollador Fullstack Jr. con experiencia en frontend (JavaScript, HTML5, CSS3) y backend (Java, SQL), con sólida trayectoria en QA manual y automatizado (Python, Selenium, Jira, Zephyr). Experiencia en pruebas funcionales y de regresión, garantizando calidad en todo el ciclo de desarrollo. Ha trabajado en proyectos financieros con Citibanamex, Banxico y TCS, aportando soluciones robustas y seguras. Busco contribuir al desarrollo de aplicaciones escalables en equipos ágiles y colaborativos.",
     foto: "img/team-carousel-pictures/team-dante.png",
     icono: "img/team-carousel-icons/team-avatar-mango.png"
   },
