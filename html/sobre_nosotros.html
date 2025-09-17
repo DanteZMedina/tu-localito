@@ -77,14 +77,24 @@
             <!-- Acciones mobile -->
             <div class="d-lg-none d-flex justify-content-center w-100">
               <div class="acciones mt-3 d-flex gap-3">
-                <a class="carrito btn">Carrito</a>
+                <a
+                  class="carrito btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#carritoModal"
+                  >Carrito</a
+                >
                 <a class="ingresar btn">Ingresar</a>
               </div>
             </div>
 
             <!-- Acciones desktop -->
             <div class="d-none d-lg-flex acciones ms-lg-3 mt-lg-0 gap-3">
-              <a class="carrito btn">Carrito</a>
+              <a
+                class="carrito btn"
+                data-bs-toggle="modal"
+                data-bs-target="#carritoModal"
+                >Carrito</a
+              >
               <a class="ingresar btn">Ingresar</a>
             </div>
           </div>
@@ -306,6 +316,43 @@
         </div>
       </div>
     </div>
+    <!-- Modal del carrito -->
+    <div
+      class="modal fade"
+      id="carritoModal"
+      tabindex="-1"
+      aria-labelledby="carritoModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="carritoModalLabel">
+              Carrito de compras
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>Aquí se mostrarán los productos del carrito.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button type="button" class="btn btn-primary">Ir a pagar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="principal">
@@ -316,7 +363,9 @@
             class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3"
           >
             <a href="#" class="d-block">Preguntas Frecuentes</a>
-            <a href="sobre_nosotros.html" class="d-block active">Sobre nosotros</a>
+            <a href="sobre_nosotros.html" class="d-block active"
+              >Sobre nosotros</a
+            >
             <a href="contacto.html" class="d-block">Contacto</a>
           </div>
           <div
