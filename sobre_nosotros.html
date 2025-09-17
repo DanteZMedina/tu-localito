@@ -1,181 +1,373 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tu Localito - Sobre Nosotros</title>
-    
+
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=JetBrains+Mono"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="sobre_nosotros.css">
-</head>
-<body>
+    <link rel="stylesheet" href="sobre_nosotros.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div
+        class="container-fluid d-flex align-items-center justify-content-between"
+      >
+        <!-- Contenedor para centrar logo solo en móviles -->
+        <div class="d-flex d-lg-none flex-grow-1 justify-content-center">
+          <a class="navbar-brand m-0" href="#">
+            <img src="img/header/logo-nav-bar.png" alt="Logo" height="50" />
+          </a>
+        </div>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid d-flex justify-content-center justify-content-lg-start align-items-center">
-    <a class="navbar-brand" href="#">
-      <img src="img/logo-nav-bar.png" alt="Logo" height="50">
-    </a>
+        <!-- Logo para desktop (izquierda) -->
+        <a class="navbar-brand d-none d-lg-block me-auto" href="#">
+          <img src="img/logo-nav-bar.png" alt="Logo" height="50" />
+        </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <!-- Botón toggler (siempre a la derecha en mobile) -->
+        <button
+          class="navbar-toggler ms-auto"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarMenu">
-      <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center w-100 justify-content-lg-center gap-3 menu">
-        <a href="#">Inicio</a>
-        <a href="#">Catálogo</a>
-        <a href="#">Sobre Nosotros</a>
-        <a href="#">Recetario</a>
+        <!-- Menú -->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+          <div
+            class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center w-100 justify-content-lg-center gap-3 menu"
+          >
+            <a href="#">Inicio</a>
+            <a href="#">Catálogo</a>
+            <a href="#">Sobre Nosotros</a>
+            <a href="#">Recetario</a>
+          </div>
+
+          <!-- Acciones mobile (centradas) -->
+          <div class="d-lg-none d-flex justify-content-center w-100">
+            <div class="acciones mt-3 d-flex gap-3">
+              <button class="carrito">Carrito</button>
+              <button class="ingresar">Ingresar</button>
+            </div>
+          </div>
+
+          <!-- Acciones desktop (derecha) -->
+          <div class="d-none d-lg-flex acciones ms-lg-3 mt-lg-0 gap-3">
+            <button class="carrito">Carrito</button>
+            <button class="ingresar">Ingresar</button>
+          </div>
+        </div>
       </div>
+    </nav>
 
-      <div class="acciones ms-lg-3 mt-3 mt-lg-0 d-flex gap-3">
-        <button class="carrito">Carrito</button>
-        <button class="ingresar">Ingresar</button>
+    <!-- SOBRE NOSOTROS -->
+    <div class="row container mx-auto my-6">
+      <div class="col-12 col-lg-7">
+        <h1 class="title">Sobre Nosotros</h1>
+        <p class="mainText">
+          Actualmente, muchas comunidades enfrentan desafíos para acceder a
+          productos frescos y de calidad de sus mercados o tiendas locales ya
+          sea por falta de tiempo, dificultades de movilidad o la inconveniencia
+          de horarios de compra. Los pequeños comercios, por su parte, luchan
+          por competir con las grandes cadenas de supermercados y las
+          plataformas de entrega masivas, que dominan el mercado digital. La
+          mayoría de estos negocios carecen de una presencia en línea, lo que
+          limita su alcance y les impide ofrecer opciones de compra modernas a
+          sus clientes.<br />
+          Nuestra plataforma surge para cerrar esta brecha. Al mismo tiempo,
+          brindamos a los miembros de la comunidad una solución conveniente para
+          hacer sus compras desde la comodidad de su hogar, apoyando al comercio
+          local y fortaleciendo la economía del vecindario.
+        </p>
+      </div>
+      <div
+        id="cardImages"
+        class="boxImagenesVerduras gap-2 col-md-5 d-none d-lg-flex justify-content-center align-items-center"
+      >
+        <img
+          class="img-fluid"
+          src="img/descripcion/verduras-rojas.png"
+          alt="Aguacates y chayotes"
+        />
+        <img
+          class="img-fluid"
+          src="img/descripcion/verduras-verdes.svg"
+          alt=""
+        />
+      </div>
+      <div class="col-12 col-md-7 mainText">
+        <img
+          src="img/descripcion/logoTuLocalito.svg"
+          alt="Logo, Tu Localito"
+          class="brandTuLocalito"
+        />
       </div>
     </div>
-  </div>
-</nav>
 
-<!-- SOBRE NOSOTROS -->
-<div class="row container mx-auto my-5">
-  <div class="col-12 col-md-8 mainText">
-    <h1 class="title">Sobre Nosotros</h1>
-    <p class="mainText ps-3 pe-3 ps-lg-5 pe-lg-5">
-      Actualmente, muchas comunidades enfrentan desafíos para acceder a productos frescos y de calidad de sus mercados o tiendas locales ya sea por falta de tiempo, dificultades de movilidad o la inconveniencia de horarios de compra. Los pequeños comercios, por su parte, luchan por competir con las grandes cadenas de supermercados y las plataformas de entrega masivas, que dominan el mercado digital. La mayoría de estos negocios carecen de una presencia en línea, lo que limita su alcance y les impide ofrecer opciones de compra modernas a sus clientes.<br>
-      Nuestra plataforma surge para cerrar esta brecha. Al mismo tiempo, brindamos a los miembros de la comunidad una solución conveniente para hacer sus compras desde la comodidad de su hogar, apoyando al comercio local y fortaleciendo la economía del vecindario.
-    </p> 
-    <img src="img/descripcion/logoTuLocalito.svg" alt="Logo, Tu Localito" class="brandTuLocalito">
-  </div>
-
-  <div class="boxImagenesVerduras col-12 col-md-4 d-none d-md-block">
-    <section id="cardImages" class="card container">
-      <figure>
-        <img src="img/descripcion/verduras-rojas.png" alt="Aguacates y chayotes">
-        <img src="img/descripcion/verduras-verdes.svg" alt="Chiles rojos y amarillos">
-      </figure>
-    </section>
-  </div>
-</div>
-
-<!-- CAROUSEL -->
-<section class="container py-5">
-  <h2 class="text-center mb-4 title">Conoce al equipo</h2>
-  <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <!-- Items generados dinámicamente por JS -->
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#teamCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#teamCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Siguiente</span>
-    </button>
-  </div>
-</section>
-
-<!-- BOTONES MISION/VISION/VALORES -->
-<div class="container text-center my-5">
-  <div class="row align-items-center">
-    <div class="col"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMision" id="button_mision">Misión</button></div>
-    <div class="col"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVision" id="button_vision">Visión</button></div>
-    <div class="col"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalValores" id="button_valores">Valores</button></div>
-  </div>
-</div>
-
-<!-- MODALES (Misión, Visión, Valores) -->
-<!-- Modal Mision -->
-<div class="modal fade" id="modalMision" tabindex="-1" aria-labelledby="modalMisionLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5"><span class="keyWordsValores">Misión</span></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- CAROUSEL -->
+    <section class="container">
+      <h2 class="text-start subtitle">Conoce al equipo</h2>
+      <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Items generados dinámicamente por JS -->
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#teamCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#teamCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
       </div>
-      <div class="modal-body">
-        Facilitar la vida de nuestros clientes y modernizar el comercio local, ofreciendo una plataforma en línea segura, sencilla y conveniente que conecta a la comunidad con nuestra tienda, permitiendo acceder a productos frescos y de calidad directamente desde nuestro establecimiento, fortaleciendo la economía del vecindario.
-      </div>
-      <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-    </div>
-  </div>
-</div>
-<!-- Modal Vision -->
-<div class="modal fade" id="modalVision" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5"><span class="keyWordsValores">Visión</span></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        Ser el punto de referencia en nuestra comunidad, conectando a los vecinos con nuestra tienda de manera práctica y confiable. Nos proponemos ampliar el alcance de nuestro comercio, generando una experiencia de compra moderna que fomente la cercanía y la confianza. En un plazo de 5 años, buscamos consolidar un modelo de negocio que pueda inspirar y replicarse en otros pequeños locales.
-      </div>
-      <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-    </div>
-  </div>
-</div>
-<!-- Modal Valores -->
-<div class="modal fade" id="modalValores" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5"><span class="keyWordsValores">Valores</span></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <p>En nuestra plataforma creemos que cada entrega es una oportunidad para generar impacto positivo. Por eso, nuestros valores fundamentales guían todo lo que hacemos:</p>
-        <p><span class="keyWordsValores">Enfoque en la Comunidad.</span> Creemos en el poder de las redes locales para fortalecer la economía y crear vecindarios más unidos, fomentando apoyo mutuo y un verdadero sentido de pertenencia.</p>
-        <p><span class="keyWordsValores">Calidad y Confianza.</span> Nos aseguramos de que cada producto cumpla con los más altos estándares y que cada interacción sea transparente. La confianza de nuestros clientes es nuestra mayor fortaleza, y la cuidamos con dedicación.</p>
-        <p><span class="keyWordsValores">Inclusión y Accesibilidad.</span> Diseñamos una plataforma intuitiva y fácil de usar, pensada para todos, sin importar edad, habilidades o limitaciones. Queremos eliminar barreras y garantizar que cada persona pueda acceder a productos de calidad de manera sencilla.</p>
-      </div>
-      <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="principal">
-  <div class="container p-4 d-sm-flex justify-content-between">
-    <section class="footer-about-us d-none d-sm-flex flex-column justify-content-around">
-      <div>
-        <a href="#">Preguntas Frecuentes</a>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Contacto</a>
-      </div>
-      <p class="hecho-en-mexico mb-0">Hecho en <img src="img/footer/mexico.png" alt="Bandera de México"></p>
     </section>
 
-    <section class="footer-social text-center d-flex flex-column gap-4">
-      <div class="social-icons d-flex justify-content-center align-items-center">
-        <a href="#"><img id="footer-social-instagram" src="img/footer/instagram.png" alt="Instagram"></a>
-        <a href="#"><img id="footer-social-whatsapp" src="img/footer/whatsapp.png" alt="WhatsApp"></a>
-        <a href="#"><img id="footer-social-facebook" src="img/footer/facebook.png" alt="Facebook"></a>
+    <!-- BOTONES MISION/VISION/VALORES -->
+    <div class="container-fluid text-center my-5">
+      <div class="row">
+        <div class="col-12 col-md-4 my-2">
+          <button
+            type="button"
+            class="identidad"
+            data-bs-toggle="modal"
+            data-bs-target="#modalMision"
+            id="button_mision"
+          >
+            Misión
+          </button>
+        </div>
+        <div class="col-12 col-md-4 my-2">
+          <button
+            type="button"
+            class="identidad"
+            data-bs-toggle="modal"
+            data-bs-target="#modalVision"
+            id="button_vision"
+          >
+            Visión
+          </button>
+        </div>
+        <div class="col-12 col-md-4 my-2">
+          <button
+            type="button"
+            class="identidad"
+            data-bs-toggle="modal"
+            data-bs-target="#modalValores"
+            id="button_valores"
+          >
+            Valores
+          </button>
+        </div>
       </div>
-      <div class="footer-logo"><img id="footer-social-tu-localito-logo" src="img/footer/tu-localito-logo.png" alt="Tu localito"></div>
-      <p class="tu-localito-copyright mb-0 fst-italic">© 2025 Tu localito</p>
-    </section>
+    </div>
 
-    <section class="footer-info d-none d-sm-flex flex-column justify-content-around">
-      <p>Dirección:</p>
-      <p>Calle Juan Escutia</p>
-      <p class="mb-4">Colonia Roma</p>
-      <p class="mb-0">Tel: 522 234 2344</p>
-    </section>
-  </div>
-</footer>
+    <!-- MODALES (Misión, Visión, Valores) -->
+    <!-- Modal Mision -->
+    <div
+      class="modal fade"
+      id="modalMision"
+      tabindex="-1"
+      aria-labelledby="modalMisionLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">
+              <span class="keyWordsValores">Misión</span>
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Facilitar la vida de nuestros clientes y modernizar el comercio
+            local, ofreciendo una plataforma en línea segura, sencilla y
+            conveniente que conecta a la comunidad con nuestra tienda,
+            permitiendo acceder a productos frescos y de calidad directamente
+            desde nuestro establecimiento, fortaleciendo la economía del
+            vecindario.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Vision -->
+    <div class="modal fade" id="modalVision" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">
+              <span class="keyWordsValores">Visión</span>
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Ser el punto de referencia en nuestra comunidad, conectando a los
+            vecinos con nuestra tienda de manera práctica y confiable. Nos
+            proponemos ampliar el alcance de nuestro comercio, generando una
+            experiencia de compra moderna que fomente la cercanía y la
+            confianza. En un plazo de 5 años, buscamos consolidar un modelo de
+            negocio que pueda inspirar y replicarse en otros pequeños locales.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Valores -->
+    <div class="modal fade" id="modalValores" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">
+              <span class="keyWordsValores">Valores</span>
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              En nuestra plataforma creemos que cada entrega es una oportunidad
+              para generar impacto positivo. Por eso, nuestros valores
+              fundamentales guían todo lo que hacemos:
+            </p>
+            <p>
+              <span class="keyWordsValores">Enfoque en la Comunidad.</span>
+              Creemos en el poder de las redes locales para fortalecer la
+              economía y crear vecindarios más unidos, fomentando apoyo mutuo y
+              un verdadero sentido de pertenencia.
+            </p>
+            <p>
+              <span class="keyWordsValores">Calidad y Confianza.</span> Nos
+              aseguramos de que cada producto cumpla con los más altos
+              estándares y que cada interacción sea transparente. La confianza
+              de nuestros clientes es nuestra mayor fortaleza, y la cuidamos con
+              dedicación.
+            </p>
+            <p>
+              <span class="keyWordsValores">Inclusión y Accesibilidad.</span>
+              Diseñamos una plataforma intuitiva y fácil de usar, pensada para
+              todos, sin importar edad, habilidades o limitaciones. Queremos
+              eliminar barreras y garantizar que cada persona pueda acceder a
+              productos de calidad de manera sencilla.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<!-- JS Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="sobre_nosotros.js"></script>
+    <!-- FOOTER -->
+    <footer class="principal">
+      <div class="container-fluid">
+        <!-- Redes sociales -->
+        <div class="row">
+          <div class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3">
+            <a href="#" class="d-block">Preguntas Frecuentes</a>
+            <a href="#" class="d-block">Sobre nosotros</a>
+            <a href="#" class="d-block">Contacto</a>
+          </div>
+          <div
+            class="footer-social my-3 col-12 col-lg-4 d-flex justify-content-center align-items-center"
+          >
+            <a href="#"
+              ><img
+                id="footer-social-instagram"
+                src="img/footer/instagram.png"
+                alt="Instagram"
+            /></a>
+            <a href="#"
+              ><img
+                id="footer-social-whatsapp"
+                src="img/footer/whatsapp.png"
+                alt="WhatsApp"
+            /></a>
+            <a href="#"
+              ><img
+                id="footer-social-facebook"
+                src="img/footer/facebook.png"
+                alt="Facebook"
+            /></a>
+          </div>
+          <div
+            class="my-3 d-none d-lg-block col-lg-4 d-flex flex-column text-end justify-content-center"
+          >
+            <p class="mb-0">Dirección:</p>
+            <p class="mb-0">Calle Juan Escutia</p>
+            <p class="mb-0">Colonia Roma</p>
+          </div>
+        </div>
 
-</body>
+        <div class="row align-items-center">
+          <div class="col-12 d-flex justify-content-center">
+            <img
+              class="logo-footer"
+              src="img/footer/tu-localito-logo.png"
+              alt="Tu localito"
+            />
+          </div>
+        </div>
+        <div class="row mt-3 mb-0">
+          <div class="col-4 d-none d-lg-block">
+            <p class="hecho-en-mexico mb-0">
+              Hecho en
+              <img src="img/footer/mexico.png" alt="Bandera de México" />
+            </p>
+          </div>
+          <div class="tu-localito-copyright fst-italic col-md-4 text-center">
+            <p class="tu-localito-copyright fst-italic">© 2025 Tu localito</p>
+          </div>
+          <div class="col-4 text-end d-none d-lg-block">
+            <p>Tel: 522 234 2344</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JS Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="sobre_nosotros.js"></script>
+  </body>
 </html>
