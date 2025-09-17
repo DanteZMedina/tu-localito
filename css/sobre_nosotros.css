@@ -348,8 +348,7 @@ footer.principal {
 }
 
 .footer-about-us a:hover {
-  color: var(--color-orange);
-  text-decoration: underline;
+    color: var(--color-orange);
 }
 
 .footer-about-us a.active{

@@ -166,7 +166,6 @@ nav.navbar {
     transform: translateY(5px);
 }
 
-
 /* Acciones */
 .acciones .carrito {
     background: var(--color-button-carrito);
@@ -198,72 +197,11 @@ nav.navbar {
     background: #e8f5e9;
 }
 
-/* ==================== FORM ==================== */
-/* Contenedor principal */
-.contact-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 50px;
-    padding: 50px;
-    flex-wrap: wrap;
-}
-
-/* Formulario */
-.contact-form {
-    flex: 1;
-    width: 80%;
-    min-width: 300px;
-    max-width: 500px;
-}
-
-.contact-form h1 {
-    margin-bottom: 20px;
+h1{
     font-family: var(--font-family-heading);
     font-size: var(--font-size-heading1);
-    font-weight: bold;
 }
 
-.contact-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: var(--font-weight-bold);
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid var(--color-input-bg);
-    background-color: var(--color-input-bg);
-    font-size: var(--font-size-small);
-    color: #000;
-}
-
-.contact-form textarea {
-    resize: vertical;
-}
-
-.contact-form button {
-    background: var(--color-button-principal);
-    color: white;
-    border: 2px solid var(--color-button-principal);
-    padding: 5px 30px;
-    border-radius: var(--border-radius);
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: var(--box-shadow);
-}
-
-.contact-form button:hover {
-    background-color: #0e2a5e;
-}
-
-.contact-image img {
-    max-width: 250px;
-    height: auto;
-}
 
 /* ==================== FOOTER ==================== */
 footer.principal {
