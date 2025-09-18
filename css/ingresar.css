@@ -223,6 +223,63 @@ h1{
     font-size: var(--font-size-heading1);
 }
 
+h2{
+    font-size: var(--font-size-large);
+}
+
+
+/* Formulario */
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: var(--font-weight-bold);
+}
+
+.contact-form input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--color-input-bg);
+    background-color: var(--color-input-bg);
+    font-size: var(--font-size-small);
+    color: #000;
+}
+
+
+.contact-form button, .register button {
+    background: var(--color-button-principal);
+    color: white;
+    border: 2px solid var(--color-button-principal);
+    padding: 5px 30px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+}
+
+.contact-form button:hover, .register button:hover{
+    background-color: #0e2a5e;
+}
+
+.btn-google img {
+    max-width: 80px;
+    height: auto;
+}
+
+main {
+  position: relative; /* para que la cereza se posicione respecto a este contenedor */
+}
+
+/* Imagen cereza */
+.cereza {
+  position: absolute;
+  left: 60%;
+  top: 85%; /* un poco más arriba para no tocar footer */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 200px;
+}
 
 /* ==================== FOOTER ==================== */
 footer.principal {
