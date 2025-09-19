@@ -258,6 +258,14 @@ h2{
     background-color: #0e2a5e;
 }
 
+.mensaje {
+  font-size: 1rem;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+.mensaje.error {
+  color: #FF0000;
+}
 
 main {
   position: relative; /* para que la cereza se posicione respecto a este contenedor */

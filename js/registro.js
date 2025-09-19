@@ -1,6 +1,6 @@
 const formulario = document.getElementById("zona-form");
 const inputCP = document.getElementById("codigo-postal");
-const mensaje = document.getElementById("mensaje-zona");
+const mensaje = document.getElementById("mensaje-error");
 
 const codigosPermitidos = ["54000", "54030", "54050", "54100"];
 

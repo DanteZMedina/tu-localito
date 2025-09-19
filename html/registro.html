@@ -105,11 +105,11 @@
 
     <!--Interfaz de codigo postal-->
     <main>
-      <section class="registro container my-4">
+      <!--VALIDACIÓN CÓDIGO POSTAL-->
+      <section class="registro container mt-4">
         <div class="row d-flex justify-content-center">
           <div class="col-12 col-lg-6">
-            <h1>Crea tu cuenta</h1>
-            <form class="contact-form">
+            <form class="contact-form" id="zona-form">
               <div class="campo">
                 <label for="codigo-postal">Código Postal:</label>
                 <div class="input-grupo">
@@ -120,11 +120,11 @@
                       name="codigo-postal"
                       required
                     />
+                    <p id="mensaje-error" class="mensaje text-start"></p>
                     <button class="btn-primary">Registrar</button>
                   </div>
                 </div>
               </div>
-              <p id="mensaje-zona" class="mensaje"></p>
             </form>
             <div class="d-flex justify-content-center">
               <img
@@ -133,6 +133,111 @@
                 class="pera"
               />
             </div>
+          </div>
+        </div>
+      </section>
+      <!--FORMULARIO COMPLETO-->
+      <section class="registro-completo container mt-4">
+        <div class="row">
+          <div class="form-completo col-5">
+            <h1>Crea tu cuenta</h1>
+            <form class="contact-form">
+              <div>
+                <label for="codigo-postal">Código Postal:</label>
+                <div class="input-grupo">
+                  <div class="text-end">
+                    <input
+                      type="text"
+                      id="codigo-postal"
+                      name="codigo-postal"
+                      disabled
+                    />
+                    <p id="mensaje-error" class="mensaje text-start"></p>
+                  </div>
+                </div>
+                <label for="nombre">Nombre:</label>
+                <div class="input-grupo">
+                  <div class="text-end">
+                    <input
+                      type="text"
+                      id="nombre"
+                      name="nombre"
+                      required
+                    />
+                    <p id="mensaje-error" class="mensaje text-start"></p>
+                  </div>
+                </div>
+                <label for="primer-apellido">Primer Apellido:</label>
+                <div class="input-grupo">
+                  <div class="text-end">
+                    <input
+                      type="text"
+                      id="primer-apellido"
+                      name="primer-apellido"
+                      required
+                    />
+                    <p id="mensaje-error" class="mensaje text-start"></p>
+                  </div>
+                </div>
+                <label for="telefono">Teléfono:</label>
+                <div class="input-grupo">
+                  <div class="text-end">
+                    <input
+                      type="tel"
+                      id="telefono"
+                      name="telefono"
+                      required
+                    />
+                    <p id="mensaje-error" class="mensaje text-start"></p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="correo">Correo:</label>
+                <div class="input-grupo">
+                  <div class="text-end">
+                    <input
+                      type="email"
+                      id="correo"
+                      name="correo"
+                      required
+                    />
+                    <p id="mensaje-error" class="mensaje text-start"></p>
+                  </div>
+                </div>
+                <label for="contraseña">Contraseña:</label>
+                <div class="input-grupo">
+                  <div class="text-end">
+                    <input
+                      type="text"
+                      name="contraseña"
+                      id="contraseña"
+                      required
+                    />
+                    <p id="mensaje-error" class="mensaje text-start"></p>
+                  </div>
+                </div>
+                <label for="contraseña-validada">Volver a escribir tu contraseña:</label>
+                <div class="input-grupo">
+                  <div class="text-end">
+                    <input
+                      type="text"
+                      id="contraseña-validada"
+                      name="contraseña-validada"
+                      required
+                    />
+                    <p id="mensaje-error" class="mensaje text-start"></p>
+                  </div>
+                </div>
+                <label for="telefono">Teléfono:</label>
+              </div>
+            </form>
+          </div>
+          <div class="contenedor-imagen col-md-2">
+            <img
+              src="../img/ingresar/pera.png"
+              alt="Pera animada sorprendida"
+            />
           </div>
         </div>
       </section>
