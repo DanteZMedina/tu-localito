@@ -28,6 +28,7 @@ form.addEventListener('submit', function (event) {
     } else {
         errorEmail.textContent = ''; // Limpia el mensaje de error si es válido
     }
+    /*
     // Validación para teléfono
     if (valorPhone.trim() === "") {
         phoneError.textContent = "El teléfono es obligatorio.";
@@ -40,7 +41,7 @@ form.addEventListener('submit', function (event) {
     } else {
         phoneError.style.display = 'none';
     }
-
+*/
 
     // Si todos los campos son válidos, puedes enviar el formulario
     if (isValid) {
