@@ -36,7 +36,7 @@ const teamMembers = [
     icono: "../img/sobre-nosotros/team-carousel-icons/team-avatar-brocoli.png"
   },
   {
-    nombre: "Lilia Quiroz",
+    nombre: "Lilia Rivas",
     rol: "Full Stack Jr Developer",
     bio: "Soy ingeniera geofísica de formación, con experiencia en logística, administración, atención al cliente y marketing digital. Actualmente estoy en transición hacia el mundo de la tecnología, formándome como Desarrolladora Full Stack Java. Mi trayectoria me ha dado habilidades como análisis de datos, comunicación efectiva y resolución de problemas, que ahora aplico al desarrollo de software. Me entusiasma crear soluciones digitales escalables, centradas en el usuario y con impacto real.",
     foto: "../img/sobre-nosotros/team-carousel-pictures/team-lili.png",

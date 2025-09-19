@@ -169,4 +169,34 @@ footer.principal {
   .boxImagenesVerduras {
     display: none;
   }
+
+table {
+  font-family: var(--font-family);
+  font-size: var(--font-size-medium);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+thead {
+  background-color: var(--color-orange);
+  color: white;
+  font-weight: var(--font-weight-bold);
+}
+
+td img {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(71, 42, 29, 0.2);
+}
+
+.table-hover tbody tr:hover {
+  background-color: #fff5e6;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-button-principal);
+  border: none;
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--box-shadow);
 }
