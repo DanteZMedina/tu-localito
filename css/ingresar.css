@@ -263,6 +263,9 @@ h2{
     height: auto;
 }
 
+.actions-container{
+    width: 80%;
+}
 main {
   position: relative; /* para que la cereza se posicione respecto a este contenedor */
 }
