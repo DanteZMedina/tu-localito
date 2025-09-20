@@ -110,7 +110,7 @@
               <h1>Contacto</h1>
               <form
                 id="contactForm"
-                action="https://formspree.io/f/YOUR_FORM_ID"
+                action="https://formspree.io/f/xrbawdlz"
                 method="POST"
               >
                 <label for="name">Nombre:</label>
@@ -120,7 +120,12 @@
                   name="name"
                   placeholder="Ejemplo: María"
                   required
+                  pattern="[A-Za-zÁáÉéÍíÓóÚúÑñÜü]+"
+                   title="Solo se permiten letras"
                 />
+                <span 
+                id="error-name" 
+                class="error-message"></span>
 
                 <label for="email">Correo:</label>
                 <input
@@ -130,14 +135,23 @@
                   placeholder="ejemplo@gmail.com"
                   required
                 />
+                <span 
+                id="error-email" 
+                class="error-message">
+              </span>
 
                 <label for="phone">Teléfono:</label>
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  placeholder="Ejemplo: 5555555555"
-                />
+                <input 
+                type="text" 
+                id="phone" 
+                name="phone" 
+                placeholder="Ejemplo a 10 dígitos: 55 5425 1234"
+                pattern="[0-9]{10}" 
+                maxlength="10" 
+                required/>
+                <span id="phoneError" 
+                style="color: red; 
+                display: none;"></span>
 
                 <label for="message">Mensaje:</label>
                 <textarea

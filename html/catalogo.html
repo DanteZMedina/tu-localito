@@ -1,149 +1,234 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tu localito - Catálogo</title>
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tu localito - Catálogo</title>
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=JetBrains+Mono"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap"
-      rel="stylesheet"
-    />
-    <!-- CSS personalziado -->
-    <link rel="stylesheet" href="../css/catalogo.css" />
-  </head>
-  <body>
-    <header>
-      <!-- NAVBAR -->
-      <nav class="navbar navbar-expand-lg fixed-top">
-        <div
-          class="container-fluid d-flex align-items-center justify-content-between"
-        >
-          <!-- Contenedor logo mobile -->
-          <div class="d-flex d-lg-none flex-grow-1 justify-content-center">
-            <a class="navbar-brand m-0" href="#">
-              <img
-                src="../img/logo-nav-bar.png"
-                alt="Logo oficial de Tu localito"
-                height="50"
-              />
-            </a>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet" />
+  <!-- CSS personalziado -->
+  <link rel="stylesheet" href="../css/catalogo.css" />
+</head>
+
+<body>
+  <header>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container-fluid d-flex align-items-center justify-content-between">
+        <!-- Contenedor logo mobile -->
+        <div class="d-flex d-lg-none flex-grow-1 justify-content-center">
+          <a class="navbar-brand m-0" href="#">
+            <img src="../img/logo-nav-bar.png" alt="Logo oficial de Tu localito" height="50" />
+          </a>
+        </div>
+
+        <!-- Logo desktop -->
+        <a class="navbar-brand d-none d-lg-block me-auto" href="#">
+          <img src="../img/logo-nav-bar.png" alt="Logo" height="50" />
+        </a>
+
+        <!-- Botón toggler mobile -->
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+          <span class="navbar-toggler-icon">.</span>
+        </button>
+
+        <!-- Menú -->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+          <div
+            class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center w-100 justify-content-lg-center gap-3 menu">
+            <a href="index.html">Inicio</a>
+            <a href="catalogo.html" class="active">Catálogo</a>
+            <a href="sobre_nosotros.html">Sobre Nosotros</a>
+            <a href="contacto.html">Contacto</a>
           </div>
 
-          <!-- Logo desktop -->
-          <a class="navbar-brand d-none d-lg-block me-auto" href="#">
-            <img src="../img/logo-nav-bar.png" alt="Logo" height="50" />
-          </a>
-
-          <!-- Botón toggler mobile -->
-          <button
-            class="navbar-toggler ms-auto"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu"
-          >
-            <span class="navbar-toggler-icon">.</span>
-          </button>
-
-          <!-- Menú -->
-          <div class="collapse navbar-collapse" id="navbarMenu">
-            <div
-              class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center w-100 justify-content-lg-center gap-3 menu"
-            >
-              <a href="../index.html">Inicio</a>
-              <a href="catalogo.html" class="active">Catálogo</a>
-              <a href="sobre_nosotros.html">Sobre Nosotros</a>
-              <a href="contacto.html">Contacto</a>
-            </div>
-
-            <!-- Acciones mobile -->
-            <div class="d-lg-none d-flex justify-content-center w-100">
-              <div class="acciones mt-3 d-flex gap-3">
-                <a
-                  class="carrito btn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#carritoModal"
-                  >Carrito</a
-                >
-                <a href="ingresar.html" class="ingresar btn">Ingresar</a>
-              </div>
-            </div>
-
-            <!-- Acciones desktop -->
-            <div class="d-none d-lg-flex acciones ms-lg-3 mt-lg-0 gap-3">
-              <a
-                class="carrito btn"
-                data-bs-toggle="modal"
-                data-bs-target="#carritoModal"
-                >Carrito</a
-              >
+          <!-- Acciones mobile -->
+          <div class="d-lg-none d-flex justify-content-center w-100">
+            <div class="acciones mt-3 d-flex gap-3">
+              <a class="carrito btn" data-bs-toggle="modal" data-bs-target="#carritoModal">Carrito</a>
               <a href="ingresar.html" class="ingresar btn">Ingresar</a>
             </div>
           </div>
-        </div>
-      </nav>
-    </header>
 
-    <main>
-      <div class="container">
-        <div class="row my-4 align-items-center justify-content-center">
-          <div class="col-12 d-flex flex-column align-items-center">
-            <img src="../img/trabajando.png" alt="Página en desarrollo" />
-          </div>
-          <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-            <h1>Catálogo</h1>
+          <!-- Acciones desktop -->
+          <div class="d-none d-lg-flex acciones ms-lg-3 mt-lg-0 gap-3">
+            <a class="carrito btn" data-bs-toggle="modal" data-bs-target="#carritoModal">Carrito</a>
+            <a href="ingresar.html" class="ingresar btn">Ingresar</a>
           </div>
         </div>
       </div>
-    </main>
+    </nav>
+  </header>
+
+  <main>
+
+
+    <div class="container-fluid my-4">
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+
+        <!-- Frutas -->
+        <div class="category-card active" data-category="frutas">
+          <img src="frutas.jpg" class="category-img" alt="Frutas">
+          <div class="category-text">FRUTAS</div>
+        </div>
+
+        <!-- Verduras -->
+        <div class="category-card" data-category="verduras">
+          <img src="verduras.jpg" class="category-img" alt="Verduras">
+          <div class="category-text">VERDURAS</div>
+        </div>
+
+        <!-- Granel -->
+        <div class="category-card" data-category="granel">
+          <img src="granel.jpg" class="category-img" alt="Granel">
+          <div class="category-text">GRANEL</div>
+        </div>
+
+        <!-- Lácteos -->
+        <div class="category-card" data-category="lacteos">
+          <img src="lacteos.jpg" class="category-img" alt="Lácteos">
+          <div class="category-text">LÁCTEOS</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- Barra lateral de filtros -->
+        <div class="col-md-3 col-lg-2 bg-light p-3 border-end">
+          <h5>Filtrar</h5>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="nuevo">
+            <label class="form-check-label" for="nuevo">Productos nuevos</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="mayorPrecio">
+            <label class="form-check-label" for="mayorPrecio">Mayor precio</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="menorPrecio">
+            <label class="form-check-label" for="menorPrecio">Menor precio</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="promociones">
+            <label class="form-check-label" for="promociones">Promociones</label>
+          </div>
+
+          <hr>
+          <h6>Categorías</h6>
+          <select class="form-select mb-2">
+            <option>Categoria 1</option>
+          </select>
+          <select class="form-select mb-2">
+            <option>Categoria 2</option>
+          </select>
+
+          <hr>
+          <h6>Marca</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="huerta">
+            <label class="form-check-label" for="huerta">Huerta Feliz</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="granja">
+            <label class="form-check-label" for="granja">Granja San Juan</label>
+          </div>
+
+          <hr>
+          <h6>Precio</h6>
+          <div class="d-flex">
+            <input type="number" class="form-control me-2" placeholder="Desde">
+            <input type="number" class="form-control" placeholder="Hasta">
+          </div>
+          <button class="btn btn-primary w-100 mt-3">Filtrar</button>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="col-md-9 col-lg-10 p-4">
+          <div class="row row-cols-2 row-cols-md-5 g-4">
+
+            <!-- Producto 1 -->
+            <div class="col producto-card" data-category="verduras" data-producto="jitomate">
+              <div class="card h-100 text-center">
+                <img src="jitomate.png" class="card-img-top" alt="Jitomate">
+                <div class="card-body">
+                  <h5 class="card-title">Jitomate</h5>
+                  <p class="card-text">$25.50 / kg</p>
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-danger  minus-btn">-</button>
+                    <span class="cantidad">0</span>
+                    <button class="btn btn-sm btn-outline-success plus-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="col producto-card" data-category="verduras" data-producto="aguacate">
+              <div class="card h-100 text-center">
+                <img src="aguacate.png" class="card-img-top" alt="Aguacate">
+                <div class="card-body">
+                  <h5 class="card-title">Aguacate</h5>
+                  <p class="card-text">$53.50 / kg</p>
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
+                    <span class="cantidad">0</span>
+                    <button class="btn btn-sm btn-outline-success plus-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Agrega más productos aquí -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de paginación -->
+    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><span class="page-link">...</span></li>
+        <li class="page-item"><a class="page-link" href="#">67</a></li>
+        <li class="page-item"><a class="page-link" href="#">68</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
 
     <!-- Modal del carrito -->
-    <div
-      class="modal fade"
-      id="carritoModal"
-      tabindex="-1"
-      aria-labelledby="carritoModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="carritoModalLabel">
               Carrito de compras
             </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
           <div class="modal-body">
             <p>Aquí se mostrarán los productos del carrito.</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Cerrar
             </button>
             <button type="button" class="btn btn-primary">Ir a pagar</button>
@@ -157,38 +242,17 @@
       <div class="container-fluid">
         <!-- Redes sociales -->
         <div class="row">
-          <div
-            class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3"
-          >
+          <div class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3">
             <a href="#" class="d-block">Preguntas Frecuentes</a>
             <a href="sobre_nosotros.html" class="d-block">Sobre nosotros</a>
             <a href="contacto.html" class="d-block">Contacto</a>
           </div>
-          <div
-            class="footer-social my-3 col-12 col-lg-4 d-flex justify-content-center align-items-center"
-          >
-            <a href="#"
-              ><img
-                id="footer-social-instagram"
-                src="../img/footer/instagram.png"
-                alt="Instagram"
-            /></a>
-            <a href="#"
-              ><img
-                id="footer-social-whatsapp"
-                src="../img/footer/whatsapp.png"
-                alt="WhatsApp"
-            /></a>
-            <a href="#"
-              ><img
-                id="footer-social-facebook"
-                src="../img/footer/facebook.png"
-                alt="Facebook"
-            /></a>
+          <div class="footer-social my-3 col-12 col-lg-4 d-flex justify-content-center align-items-center">
+            <a href="#"><img id="footer-social-instagram" src="../img/footer/instagram.png" alt="Instagram" /></a>
+            <a href="#"><img id="footer-social-whatsapp" src="../img/footer/whatsapp.png" alt="WhatsApp" /></a>
+            <a href="#"><img id="footer-social-facebook" src="../img/footer/facebook.png" alt="Facebook" /></a>
           </div>
-          <div
-            class="my-3 d-none d-lg-block col-lg-4 d-flex flex-column text-end justify-content-center"
-          >
+          <div class="my-3 d-none d-lg-block col-lg-4 d-flex flex-column text-end justify-content-center">
             <p class="mb-0">Dirección:</p>
             <p class="mb-0">Calle Juan Escutia</p>
             <p class="mb-0">Colonia Roma</p>
@@ -197,11 +261,7 @@
 
         <div class="row align-items-center">
           <div class="col-12 d-flex justify-content-center">
-            <img
-              class="logo-footer"
-              src="../img/footer/tu-localito-logo.png"
-              alt="Tu localito"
-            />
+            <img class="logo-footer" src="../img/footer/tu-localito-logo.png" alt="Tu localito" />
           </div>
         </div>
         <div class="row mt-3 mb-0">
@@ -223,5 +283,8 @@
 
     <!-- JS Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+    <!-- Js Personalizado -->
+    <script src="../js/catalogo.js"></script>
+</body>
+
 </html>
