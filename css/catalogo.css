@@ -333,3 +333,24 @@ footer.principal {
   justify-content: center;
   padding: 0;
 }
+
+/* Estilo base para escritorio */
+#catalogo_cards_image {
+  height: 220px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Para tablets y móviles */
+@media (max-width: 768px) {
+  #catalogo_cards_image {
+    height: 160px; /* más pequeño para pantallas medianas */
+  }
+}
+
+@media (max-width: 480px) {
+  #catalogo_cards_image {
+    height: 120px; /* aún más pequeño para móviles */
+  }
+}

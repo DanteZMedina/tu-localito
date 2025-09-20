@@ -77,25 +77,25 @@
 
         <!-- Frutas -->
         <div class="category-card active" data-category="frutas">
-          <img src="frutas.jpg" class="category-img" alt="Frutas">
+          <img src="/img/Catalogo/FRUTAS.png" class="category-img" alt="Frutas">
           <div class="category-text">FRUTAS</div>
         </div>
 
         <!-- Verduras -->
         <div class="category-card" data-category="verduras">
-          <img src="verduras.jpg" class="category-img" alt="Verduras">
+          <img src="/img/Catalogo/vegetables.jpg" class="category-img" alt="Verduras">
           <div class="category-text">VERDURAS</div>
         </div>
 
         <!-- Granel -->
         <div class="category-card" data-category="granel">
-          <img src="granel.jpg" class="category-img" alt="Granel">
+          <img src="/img/Catalogo/grains.jpg" class="category-img" alt="Granel">
           <div class="category-text">GRANEL</div>
         </div>
 
         <!-- Lácteos -->
         <div class="category-card" data-category="lacteos">
-          <img src="lacteos.jpg" class="category-img" alt="Lácteos">
+          <img src="/img/Catalogo/dairy.jpg" class="category-img" alt="Lácteos">
           <div class="category-text">LÁCTEOS</div>
         </div>
 
@@ -155,12 +155,12 @@
 
         <!-- Contenido principal -->
         <div class="col-md-9 col-lg-10 p-4">
-          <div class="row row-cols-2 row-cols-md-5 g-4">
+          <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
 
             <!-- Producto 1 -->
             <div class="col producto-card" data-category="verduras" data-producto="jitomate">
               <div class="card h-100 text-center">
-                <img src="jitomate.png" class="card-img-top" alt="Jitomate">
+                <img src="/img/Catalogo/tomatoe.jpg" id="catalogo_cards_image" class="card-img-top" alt="Jitomate">
                 <div class="card-body">
                   <h5 class="card-title">Jitomate</h5>
                   <p class="card-text">$25.50 / kg</p>
@@ -176,10 +176,104 @@
             <!-- Producto 2 -->
             <div class="col producto-card" data-category="verduras" data-producto="aguacate">
               <div class="card h-100 text-center">
-                <img src="aguacate.png" class="card-img-top" alt="Aguacate">
+                <img src="/img/Catalogo/avocado.jpg" id="catalogo_cards_image" class="card-img-top" alt="Aguacate">
                 <div class="card-body">
                   <h5 class="card-title">Aguacate</h5>
                   <p class="card-text">$53.50 / kg</p>
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
+                    <span class="cantidad">0</span>
+                    <button class="btn btn-sm btn-outline-success plus-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="col producto-card" data-category="frutas" data-producto="manzana">
+              <div class="card h-100 text-center">
+                <img src="/img/Catalogo/apple.jpg" id="catalogo_cards_image" class="card-img-top" alt="Manzana">
+                <div class="card-body">
+                  <h5 class="card-title">Manzana</h5>
+                  <p class="card-text">$53.50 / kg</p>
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
+                    <span class="cantidad">0</span>
+                    <button class="btn btn-sm btn-outline-success plus-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Producto 4 -->
+            <div class="col producto-card" data-category="frutas" data-producto="fresa">
+              <div class="card h-100 text-center">
+                <img src="/img/Catalogo/strawberry.jpg" id="catalogo_cards_image" class="card-img-top" alt="Fresa">
+                <div class="card-body">
+                  <h5 class="card-title">Fresa</h5>
+                  <p class="card-text">$53.50 / kg</p>
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
+                    <span class="cantidad">0</span>
+                    <button class="btn btn-sm btn-outline-success plus-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Producto 5 -->
+            <div class="col producto-card" data-category="granel" data-producto="arroz">
+              <div class="card h-100 text-center">
+                <img src="/img/Catalogo/rice.jpg" id="catalogo_cards_image" class="card-img-top" alt="Arroz">
+                <div class="card-body">
+                  <h5 class="card-title">Arroz</h5>
+                  <p class="card-text">$53.50 / kg</p>
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
+                    <span class="cantidad">0</span>
+                    <button class="btn btn-sm btn-outline-success plus-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="col producto-card" data-category="granel" data-producto="amaranto">
+              <div class="card h-100 text-center">
+                <img src="/img/Catalogo/millet.jpg" id="catalogo_cards_image" class="card-img-top" alt="Amaranto">
+                <div class="card-body">
+                  <h5 class="card-title">Amaranto</h5>
+                  <p class="card-text">$53.50 / kg</p>
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
+                    <span class="cantidad">0</span>
+                    <button class="btn btn-sm btn-outline-success plus-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Producto 7 -->
+            <div class="col producto-card" data-category="lacteos" data-producto="leche">
+              <div class="card h-100 text-center">
+                <img src="/img/Catalogo/milk.jpg" id="catalogo_cards_image" class="card-img-top img-fluid" alt="Leche">
+                <div class="card-body">
+                  <h5 class="card-title">Leche</h5>
+                  <p class="card-text">$33.50 / pza</p>
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
+                    <span class="cantidad">0</span>
+                    <button class="btn btn-sm btn-outline-success plus-btn">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Producto 8 -->
+            <div class="col producto-card" data-category="lacteos" data-producto="queso">
+              <div class="card h-100 text-center">
+                <img src="/img/Catalogo/chesse.jpg" id="catalogo_cards_image" class="card-img-top img-fluid" alt="Queso">
+                <div class="card-body">
+                  <h5 class="card-title">Queso</h5>
+                  <p class="card-text">$83.50 / kg</p>
                   <div class="d-flex justify-content-center align-items-center gap-2">
                     <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
                     <span class="cantidad">0</span>
