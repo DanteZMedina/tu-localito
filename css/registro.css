@@ -258,6 +258,11 @@ h2{
     background-color: #0e2a5e;
 }
 
+.contact-form p{
+    font-size: 14px;
+}
+/* jarf-frutita-removebg-preview 1 */
+
 .mensaje {
   font-size: 1rem;
   color: transparent;
@@ -275,6 +280,12 @@ main {
 .pera {
   width: 200px;
 }
+
+.pera-de-cabeza{
+    transform: rotate(-151.15deg);
+}
+
+
 
 /* ==================== FOOTER ==================== */
 footer.principal {
