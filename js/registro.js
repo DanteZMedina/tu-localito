@@ -12,6 +12,12 @@ formulario.addEventListener("submit", function (e) {
   // Validación: 5 dígitos numéricos
   const esValido = /^\d{5}$/.test(cp);
 
+  if (cp === "") {
+    mensaje.textContent = "Inserta tu código postal, por favor.";
+    mensaje.classList.add("error");
+    return;
+  }
+
   if (!esValido) {
     mensaje.textContent = "Por favor, ingresa un código postal válido de 5 dígitos.";
     mensaje.classList.add("error");
