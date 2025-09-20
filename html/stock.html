@@ -1,450 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock</title>
-    <link rel="stylesheet" href="../css/stock.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock</title>
+  <link rel="stylesheet" href="../css/stock.css">
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=JetBrains+Mono"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet" />
 </head>
+
 <body>
 
-       <!-- NAVBAR -->
-    <header>
-      <nav class="navbar navbar-expand-lg fixed-top">
-        <div
-          class="container-fluid d-flex align-items-center justify-content-between"
-        >
-          <!-- Contenedor para centrar logo solo en móviles -->
-          <div class="d-flex d-lg-none flex-grow-1 justify-content-center">
-            <a class="navbar-brand m-0" href="#">
-              <img
-                src="../img/logo-nav-bar.png"
-                alt="Logo oficial de Tu localito. Canasta con verduras animada a la izquierda, letras cursivas a la derecha para Tu localito"
-                height="50"
-              />
-            </a>
-          </div>
-
-          <!-- Logo para desktop (izquierda) -->
-          <a class="navbar-brand d-none d-lg-block me-auto" href="#">
-            <img src="../img/logo-nav-bar.png" alt="Logo" height="50" />
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container-fluid d-flex align-items-center justify-content-between">
+        <!-- Contenedor para centrar logo solo en móviles -->
+        <div class="d-flex d-lg-none flex-grow-1 justify-content-center">
+          <a class="navbar-brand m-0" href="#">
+            <img src="../img/logo-nav-bar.png"
+              alt="Logo oficial de Tu localito. Canasta con verduras animada a la izquierda, letras cursivas a la derecha para Tu localito"
+              height="50" />
           </a>
+        </div>
 
-          <!-- Botón toggler (siempre a la derecha en mobile) -->
-          <button
-            class="navbar-toggler ms-auto"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu"
-          >
-            <span class="navbar-toggler-icon">.</span>
-          </button>
+        <!-- Logo para desktop (izquierda) -->
+        <a class="navbar-brand d-none d-lg-block me-auto" href="#">
+          <img src="../img/logo-nav-bar.png" alt="Logo" height="50" />
+        </a>
 
-        
+        <!-- Botón toggler (siempre a la derecha en mobile) -->
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+          <span class="navbar-toggler-icon">.</span>
+        </button>
 
-            <!-- Acciones mobile -->
-            <div class="d-lg-none d-flex justify-content-center w-100">
-              <div class="acciones mt-3 d-flex gap-3">
-                <a href="ingresar.html" class="ingresar btn">Mi cuenta</a>
-              </div>
-            </div>
 
-            <!-- Acciones desktop -->
-              <a href="mi_cuenta.html" class="ingresar btn">Mi cuenta</a>
-            </div>
+
+        <!-- Acciones mobile -->
+        <div class="d-lg-none d-flex justify-content-center w-100">
+          <div class="acciones mt-3 d-flex gap-3">
+            <a href="ingresar.html" class="ingresar btn">Mi cuenta</a>
           </div>
         </div>
-      </nav>
-    </header>
-    
-    <!-- Contenedor principal -->
-     <div class="row col-12" >
-    <!-- Espacio de filtros -->
-  <div class="col-md-8">
-    <!-- contenido principal -->
-     
-    <!-- BARRA DE BÚSQUEDA -->
-      <div class="input-group">
-        <input
-        type="text"
-        class="form-control search-bar"
-        placeholder="Buscar producto, SKU o categoría"
-        />
-        <button class="btn btn-outline-secondary" type="button">
-      <i class="bi bi-search"></i>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-    </svg>
-    </button>
-  </div>
-</div>
-</div>
-</div>
 
-<!-- Botones debajo del buscador -->
-<div class="row">
-  <div class="col-md-6 d-flex gap-3">
-    <button class="btn btn-primary w-100">Agregar Nueva Categoría</button>
-    <button class="btn btn-primary w-100">Agregar Nuevo Producto</button>
-  </div>
-</div>
-</div>
-<form class="mb-1">
-  <div class="row g-3">
-    <div class="col-md-4">
-      <input type="text" class="form-control" placeholder="Nombre de categoría: Limpieza">
-    </div>
-        
-        <div class="container my-4">
-          <!-- Nombre de la categoría -->
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="fw-bold">Categoría: </h4>
-          </div>
-          
-          <!-- Tabla editable de productos -->
-          <div class="col-md-8">
-            <table class="table table-bordered align-middle">
-    <thead class="table-light">
-      
-    </thead>
-    <tbody>
-      <tr>
-        <td><button class="btn btn-outline-secondary btn-sm">Imagen</button></td>
-        <td><input type="text" class="form-control" value="Nombre"></td>
-        <td><input type="text" class="form-control" value="Categoria"></td>
-        <td><input type="text" class="form-control" value="SKU"></td>
-        <td><input type="number" class="form-control" value="Cantidad"></td>
-        <td><input type="text" class="form-control" value="Unidad"></td>
-        <td><input type="number" class="form-control" value="Precio"></td>
-      </tr>
-      <tr>
-        <td><button class="btn btn-outline-secondary btn-sm">Imagen</button></td>
-        <td><input type="text" class="form-control" value="DetergenteY"></td>
-        <td><input type="text" class="form-control" value="Limpieza"></td>
-        <td><input type="text" class="form-control" placeholder="SKU"></td>
-        <td><input type="number" class="form-control" placeholder="Cantidad"></td>
-        <td><input type="text" class="form-control" placeholder="Unidad"></td>
-        <td><input type="number" class="form-control" value="0.00"></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <!-- Botón Guardar -->
-  <div class="text-end">
-    <button class="btn btn-primary">Guardar</button>
-    <button class="btn btn-success">
-      <i class="bi bi-plus-lg"> + </i> <!-- Ícono de Bootstrap -->
-    </button>
-  </div>
-</div>
-</div>
-</div>
-    
-  </div>
-  <div class="col-md-4">
-    <!-- panel lateral aquí -->
-    <aside class="panel-lateral card p-3 shadow-sm">
-      <h5 class="fw-bold mb-3">Palabras relacionadas</h5>
-      <div class="tags mb-3">
-        <span class="tag">Frutas <button class="btn-close btn-sm"></button></span>
-        <span class="tag">Granel <button class="btn-close btn-sm"></button></span>
-        <span class="tag">Verduras <button class="btn-close btn-sm"></button></span>
-        <span class="tag">Promociones <button class="btn-close btn-sm"></button></span>
-        <span class="tag">Nuevos <button class="btn-close btn-sm"></button></span>
+        <!-- Acciones desktop -->
+        <a href="mi_cuenta.html" class="ingresar btn">Mi cuenta</a>
       </div>
-      
-      <div class="mb-3">
-        <label for="stock-alert" class="form-label">Alerta de Stock:</label>
-    <input type="number" id="stock-alert" class="form-control" value="5" />
-    </div>
-    
-   <div class="mb-4">
-    <label for="ordenar" class="form-label">Ordenar por:</label>
-    <input type="text" id="ordenar" class="form-control" value="Nombre" />
-  </div>
+      </div>
+      </div>
+    </nav>
+  </header>
 
-  <div class="text-end">
-    <a href="cerrar_sesion.html" class="btn btn-danger">Cerrar Sesión</a>
-    </div>
-  </div>
-</aside>
-</div>
-</div>
-    
+  <!-- Contenedor principal -->
+  <div class="row col-12">
+    <!-- Espacio de filtros -->
+    <div class="col-md-8">
+      <!-- contenido principal -->
 
-</div>
-</div>
-<!-- BARRA DE BÚSQUEDA -->
-
-<div class="container my-4">
-  <div class="row">
-    <div class="col-md-6">
+      <!-- BARRA DE BÚSQUEDA -->
       <div class="input-group">
-        <input
-        type="text"
-        class="form-control search-bar"
-        placeholder="Buscar producto, SKU o categoría"
-        />
+        <input type="text" class="form-control search-bar" placeholder="Buscar producto, SKU o categoría" />
         <button class="btn btn-outline-secondary" type="button">
-      <i class="bi bi-search"></i>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-    </svg>
-    </button>
-  </div>
-</div>
-</div>
-</div>
-
-<!-- Botones debajo del buscador -->
-<div class="row">
-  <div class="col-md-6 d-flex gap-3">
-    <button class="btn btn-primary w-100">Agregar Nueva Categoría</button>
-    <button class="btn btn-primary w-100">Agregar Nuevo Producto</button>
-  </div>
-</div>
-</div>
-<form class="mb-1">
-  <div class="row g-3">
-    <div class="col-md-4">
-      <input type="text" class="form-control" placeholder="Nombre de categoría: Limpieza">
+          <i class="bi bi-search"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+            viewBox="0 0 16 16">
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+          </svg>
+        </button>
+      </div>
     </div>
-        
-        <div class="container my-4">
-          <!-- Nombre de la categoría -->
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="fw-bold">Categoría: </h4>
-          </div>
-          
-          <!-- Tabla editable de productos -->
-          <div class="col-md-8">
-            <table class="table table-bordered align-middle">
-    <thead class="table-light">
-      
-    </thead>
-    <tbody>
-      <tr>
-        <td><button class="btn btn-outline-secondary btn-sm">Imagen</button></td>
-        <td><input type="text" class="form-control" value="Nombre"></td>
-        <td><input type="text" class="form-control" value="Categoria"></td>
-        <td><input type="text" class="form-control" value="SKU"></td>
-        <td><input type="number" class="form-control" value="Cantidad"></td>
-        <td><input type="text" class="form-control" value="Unidad"></td>
-        <td><input type="number" class="form-control" value="Precio"></td>
-      </tr>
-      <tr>
-        <td><button class="btn btn-outline-secondary btn-sm">Imagen</button></td>
-        <td><input type="text" class="form-control" value="DetergenteY"></td>
-        <td><input type="text" class="form-control" value="Limpieza"></td>
-        <td><input type="text" class="form-control" placeholder="SKU"></td>
-        <td><input type="number" class="form-control" placeholder="Cantidad"></td>
-        <td><input type="text" class="form-control" placeholder="Unidad"></td>
-        <td><input type="number" class="form-control" value="0.00"></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <!-- Botón Guardar -->
-  <div class="text-end">
-    <button class="btn btn-primary">Guardar</button>
-    <button class="btn btn-success">
-      <i class="bi bi-plus-lg"> + </i> <!-- Ícono de Bootstrap -->
-    </button>
   </div>
-</div>
-</div>
-</div>
+  </div>
 
+  <div class="container my-4">
+    <div class="row">
+      <!-- Columna izquierda (productos) -->
+      <div class="col-md-8">
+        <!-- Nombre de la categoría -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold">Productos:</h4>
+        </div>
 
-<h2>Surtido rapido</h2>
-<form
-id="boxSurtidoRapido"
-action="https://formspree.io/f/YOUR_FORM_ID"
-method="POST"
->
-                <label for="categoria">Categoria:</label>
-                <input
-                  type="text"
-                  placeholder="Verduras"
-                  required
-                  />
-                </form>
-<table class="table table-bordered">
-  <thead class="tabla-productos">
-    <tr>
-      <th id="imagen-header">Imágen</th>
-      <th id="imagen-header">Nombre</th>
-      <th id="imagen-header">Categoría</th>
-      <th id="imagen-header">SKU</th>
-      <th id="imagen-header">Unidades</th>
-      <th id="imagen-header">Precio</th>
-    </tr>
-    <tr id="fila">
-      <th id="imagen-primer-renglon"></th>
-      <th>Zanahoria</th>
-      <th>Verdura</th>
-      <th>VE-005</th>
-      <th>15 KG</th>
-      <th>$15.00 MXN</th>
-    </tr>
+        <!-- Tabla editable de productos -->
+        <table class="table table-bordered align-middle">
+          <tbody>
+            <tr>
+              <td><button class="btn btn-outline-secondary btn-sm">Imagen</button></td>
+              <td><input type="text" class="form-control" value="DetergenteX"></td>
+              <td>
+                <select class="form-select">
+                  <option selected>Limpieza</option>
+                </select>
+              </td>
+              <td><input type="text" class="form-control" value="LI-001"></td>
+              <td><input type="number" class="form-control" value="20"></td>
+              <td>
+                <select class="form-select">
+                  <option selected>PZA</option>
+                </select>
+              </td>
+              <td><input type="text" class="form-control" value="$20.00"></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-outline-secondary btn-sm">Imagen</button></td>
+              <td><input type="text" class="form-control" value="DetergenteY"></td>
+              <td>
+                <select class="form-select">
+                  <option selected>Limpieza</option>
+                </select>
+              </td>
+              <td><input type="text" class="form-control" placeholder="SKU"></td>
+              <td><input type="number" class="form-control" placeholder="Cantidad"></td>
+              <td>
+                <select class="form-select">
+                  <option>Unidad</option>
+                </select>
+              </td>
+              <td><input type="text" class="form-control" value="$00.00"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Botones -->
+        <div class="text-end">
+          <button class="btn btn-primary">Guardar</button>
+          <button class="btn btn-success">
+            <i class="bi bi-plus-lg">+</i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Columna derecha (panel lateral) -->
+      <div class="col-md-4">
+        <aside class="panel-lateral card p-3 shadow-sm">
+          <h5 class="fw-bold mb-3">Palabras relacionadas</h5>
+          <div class="tags mb-3">
+            <span class="tag">Frutas <button class="btn-close btn-sm"></button></span>
+            <span class="tag">Granel <button class="btn-close btn-sm"></button></span>
+            <span class="tag">Verduras <button class="btn-close btn-sm"></button></span>
+            <span class="tag">Promociones <button class="btn-close btn-sm"></button></span>
+            <span class="tag">Nuevos <button class="btn-close btn-sm"></button></span>
+          </div>
+
+          <div class="mb-3">
+            <label for="stock-alert" class="form-label">Alerta de Stock:</label>
+            <input type="number" id="stock-alert" class="form-control" value="5" />
+          </div>
+
+          <div class="mb-4">
+            <label for="ordenar" class="form-label">Ordenar por:</label>
+            <input type="text" id="ordenar" class="form-control" value="Nombre" />
+          </div>
+
+          <div class="text-end">
+            <a href="cerrar_sesion.html" class="btn btn-danger">Cerrar Sesión</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+  <!--Barra de Surtido Rápido -->
+  <h2 class="mb-4">Surtido rápido</h2>
+  <form id="boxSurtidoRapido" method="POST"
+    class="p-4 border rounded shadow-sm bg-light">
+    <div class="row g-3">
+      <!-- Categoría -->
+      <div class="col-md-2">
+        <label for="categoria" class="form-label">Categoría</label>
+        <select id="categoria" name="categoria" class="form-select" required>
+          <option value="">Selecciona una categoría</option>
+          <option value="frutas">Frutas</option>
+          <option value="verduras">Verduras</option>
+          <option value="granel">Granel</option>
+          <option value="lacteos">Lácteos</option>
+        </select>
+      </div>
+      <!-- Nombre del producto o SKU -->
+      <div class="col-md-4">
+        <label for="producto" class="form-label">Nombre del producto o SKU</label>
+        <input type="text" id="producto" name="producto" class="form-control" placeholder="Ej. Zanahoria 12345"
+          required>
+      </div>
+      <!-- Cantidad -->
+      <div class="col-md-4">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="number" id="cantidad" name="cantidad" class="form-control" min="1" placeholder="Ej. 10" required>
+      </div>
+    </div>
+    <!-- Botón -->
+    <div class="mt-4 text-end">
+      <button type="submit" class="btn btn-primary">Surtir</button>
+    </div>
+  </form>
+
+  <table class="table table-bordered">
+    <thead class="tabla-productos">
+      <tr>
+        <th id="imagen-header">Imágen</th>
+        <th id="imagen-header">Nombre</th>
+        <th id="imagen-header">Categoría</th>
+        <th id="imagen-header">SKU</th>
+        <th id="imagen-header">Unidades</th>
+        <th id="imagen-header">Precio</th>
+      </tr>
       <tr id="fila">
-      <th id="imagen-segundo-renglon"></th>
-      <th>Zarzamora</th>
-      <th>Fruta</th>
-      <th>FR-005</th>
-      <th>23 KG</th>
-      <th>$70.00 MXN</th>
-    </tr>
+        <th id="imagen-primer-renglon"></th>
+        <th>Zanahoria</th>
+        <th>Verdura</th>
+        <th>VE-005</th>
+        <th>15 KG</th>
+        <th>$15.00 MXN</th>
+      </tr>
       <tr id="fila">
-      <th id="imagen-tercer-renglon"></th>
-      <th>Sandia</th>
-      <th>Fruta</th>
-      <th>FR-002</th>
-      <th>50 KG</th>
-      <th>$29.50 MXN</th>
-    </tr>
+        <th id="imagen-segundo-renglon"></th>
+        <th>Zarzamora</th>
+        <th>Fruta</th>
+        <th>FR-005</th>
+        <th>23 KG</th>
+        <th>$70.00 MXN</th>
+      </tr>
       <tr id="fila">
-      <th id="imagen-cuarto-renglon"></th>
-      <th>Pimiento</th>
-      <th>Verdura</th>
-      <th>VR-001</th>
-      <th>18 kg</th>
-      <th>$49.90 MXN</th>
-    </tr>
+        <th id="imagen-tercer-renglon"></th>
+        <th>Sandia</th>
+        <th>Fruta</th>
+        <th>FR-002</th>
+        <th>50 KG</th>
+        <th>$29.50 MXN</th>
+      </tr>
       <tr id="fila">
-      <th id="imagen-quinto-renglon"></th>
-      <th>Mango</th>
-      <th>Fruta</th>
-      <th>FR-004</th>
-      <th>40 KG</th>
-      <th>43.90 MXN</th>
-    </tr>
+        <th id="imagen-cuarto-renglon"></th>
+        <th>Pimiento</th>
+        <th>Verdura</th>
+        <th>VR-001</th>
+        <th>18 kg</th>
+        <th>$49.90 MXN</th>
+      </tr>
       <tr id="fila">
-      <th id="imagen-sexto-renglon"></th>
-      <th>Pera</th>
-      <th>Fruta</th>
-      <th>FR-001</th>
-      <th>20 KG</th>
-      <th>$89.00 MXN</th>
-    </tr>
+        <th id="imagen-quinto-renglon"></th>
+        <th>Mango</th>
+        <th>Fruta</th>
+        <th>FR-004</th>
+        <th>40 KG</th>
+        <th>43.90 MXN</th>
+      </tr>
       <tr id="fila">
-      <th id="imagen-septimo-renglon"></th>
-      <th>Aguacate</th>
-      <th>Fruta</th>
-      <th>FR-007</th>
-      <th>40 KG</th>
-      <th>$79.90 MXN</th>
-    </tr>
+        <th id="imagen-sexto-renglon"></th>
+        <th>Pera</th>
+        <th>Fruta</th>
+        <th>FR-001</th>
+        <th>20 KG</th>
+        <th>$89.00 MXN</th>
+      </tr>
       <tr id="fila">
-      <th id="imagen-octavo-renglon"></th>
-      <th>Kiwi</th>
-      <th>Fruta</th>
-      <th>FR-006</th>
-      <th>25 KG</th>
-      <th>$59.90 MXN</th>
-    </tr>
+        <th id="imagen-septimo-renglon"></th>
+        <th>Aguacate</th>
+        <th>Fruta</th>
+        <th>FR-007</th>
+        <th>40 KG</th>
+        <th>$79.90 MXN</th>
+      </tr>
+      <tr id="fila">
+        <th id="imagen-octavo-renglon"></th>
+        <th>Kiwi</th>
+        <th>Fruta</th>
+        <th>FR-006</th>
+        <th>25 KG</th>
+        <th>$59.90 MXN</th>
+      </tr>
     </thead>
-</table>
+  </table>
   <!-- Paginación -->
   <div class="paginacion text-end mt-3">
-  <button class="btn btn-outline-primary">Next</button>
+    <button class="btn btn-outline-primary">Next</button>
   </div>
 
 
 
 
-     <!-- FOOTER -->
-    <footer class="principal">
-      <div class="container-fluid">
-        <!-- Redes sociales -->
-        <div class="row">
-          <div
-            class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3"
-          >
-            <a href="#" class="d-block">Preguntas Frecuentes</a>
-            <a href="sobre_nosotros.html" class="d-block active"
-              >Sobre nosotros</a
-            >
-            <a href="contacto.html" class="d-block">Contacto</a>
-          </div>
-          <div
-            class="footer-social my-3 col-12 col-lg-4 d-flex justify-content-center align-items-center"
-          >
-            <a href="#"
-              ><img
-                id="footer-social-instagram"
-                src="../img/footer/instagram.png"
-                alt="Instagram"
-            /></a>
-            <a href="#"
-              ><img
-                id="footer-social-whatsapp"
-                src="../img/footer/whatsapp.png"
-                alt="WhatsApp"
-            /></a>
-            <a href="#"
-              ><img
-                id="footer-social-facebook"
-                src="../img/footer/facebook.png"
-                alt="Facebook"
-            /></a>
-          </div>
-          <div
-            class="my-3 d-none d-lg-block col-lg-4 d-flex flex-column text-end justify-content-center"
-          >
-            <p class="mb-0">Dirección:</p>
-            <p class="mb-0">Calle Juan Escutia</p>
-            <p class="mb-0">Colonia Roma</p>
-          </div>
+  <!-- FOOTER -->
+  <footer class="principal">
+    <div class="container-fluid">
+      <!-- Redes sociales -->
+      <div class="row">
+        <div class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3">
+          <a href="#" class="d-block">Preguntas Frecuentes</a>
+          <a href="sobre_nosotros.html" class="d-block active">Sobre nosotros</a>
+          <a href="contacto.html" class="d-block">Contacto</a>
         </div>
-
-        <div class="row align-items-center">
-          <div class="col-12 d-flex justify-content-center">
-            <img
-              class="logo-footer"
-              src="../img/footer/tu-localito-logo.png"
-              alt="Tu localito"
-            />
-          </div>
+        <div class="footer-social my-3 col-12 col-lg-4 d-flex justify-content-center align-items-center">
+          <a href="#"><img id="footer-social-instagram" src="../img/footer/instagram.png" alt="Instagram" /></a>
+          <a href="#"><img id="footer-social-whatsapp" src="../img/footer/whatsapp.png" alt="WhatsApp" /></a>
+          <a href="#"><img id="footer-social-facebook" src="../img/footer/facebook.png" alt="Facebook" /></a>
         </div>
-        <div class="row mt-3 mb-0">
-          <div class="col-4 d-none d-lg-block">
-            <p class="hecho-en-mexico mb-0">
-              Hecho en
-              <img src="../img/footer/mexico.png" alt="Bandera de México" />
-            </p>
-          </div>
-          <div class="tu-localito-copyright fst-italic col-md-4 text-center">
-            <p class="tu-localito-copyright fst-italic">© 2025 Tu localito</p>
-          </div>
-          <div class="col-4 text-end d-none d-lg-block">
-            <p>Tel: 522 234 2344</p>
-          </div>
+        <div class="my-3 d-none d-lg-block col-lg-4 d-flex flex-column text-end justify-content-center">
+          <p class="mb-0">Dirección:</p>
+          <p class="mb-0">Calle Juan Escutia</p>
+          <p class="mb-0">Colonia Roma</p>
         </div>
       </div>
-    </footer>
-    <script src="../stock.js"></script>
+
+      <div class="row align-items-center">
+        <div class="col-12 d-flex justify-content-center">
+          <img class="logo-footer" src="../img/footer/tu-localito-logo.png" alt="Tu localito" />
+        </div>
+      </div>
+      <div class="row mt-3 mb-0">
+        <div class="col-4 d-none d-lg-block">
+          <p class="hecho-en-mexico mb-0">
+            Hecho en
+            <img src="../img/footer/mexico.png" alt="Bandera de México" />
+          </p>
+        </div>
+        <div class="tu-localito-copyright fst-italic col-md-4 text-center">
+          <p class="tu-localito-copyright fst-italic">© 2025 Tu localito</p>
+        </div>
+        <div class="col-4 text-end d-none d-lg-block">
+          <p>Tel: 522 234 2344</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../stock.js"></script>
 </body>
+
 </html>
