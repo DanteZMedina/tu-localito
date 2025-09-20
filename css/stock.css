@@ -179,8 +179,8 @@ table {
 }
 
 thead {
-  background-color: var(--color-orange);
-  color: white;
+  background-color: var(--color-white);
+  color: rgb(250, 249, 249);
   font-weight: var(--font-weight-bold);
 }
 
@@ -190,13 +190,154 @@ td img {
 }
 
 .table-hover tbody tr:hover {
-  background-color: #fff5e6;
+  background-color: #7b4b03;
   cursor: pointer;
 }
-
+}
 .btn-primary {
   background-color: var(--color-button-principal);
   border: none;
   font-weight: var(--font-weight-bold);
   box-shadow: var(--box-shadow);
+}
+
+
+#imagen-header {
+  background-image: url('../img/stock/tabla.png');
+  background-size: cover;
+  background-position: center;
+  width: auto;
+  height: auto;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-primer-renglon {
+  background-image: url('../img/stock/zanahoria.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-segundo-renglon {
+  background-image: url('../img/stock/zarzamora.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-tercer-renglon {
+  background-image: url('../img/stock/sandia.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-cuarto-renglon {
+  background-image: url('../img/stock/pimiento.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-quinto-renglon {
+  background-image: url('../img/stock/mango.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-sexto-renglon {
+  background-image: url('../img/stock/pera.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-septimo-renglon {
+  background-image: url('../img/stock/aguacate.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-octavo-renglon {
+  background-image: url('../img/stock/kiwi.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tabla-productos {
+    text-align: center;
+    display: table-row;
+    border-spacing: 20px 25px; 
+    border-collapse: separate;
+    transform: translateX(50px);
+    width: 90%;
+}
+
+#fila {
+  border-collapse: collapse;
+  border: 2px solid white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  vertical-align: middle;
+}
+
+.panel-lateral {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: var(--border-radius);
+  max-width: 300px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background-color: var(--color-amarillo);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-close {
+  background-color: transparent;
+  border: none;
+  font-size: 0.8rem;
 }
