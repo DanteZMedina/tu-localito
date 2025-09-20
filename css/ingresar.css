@@ -243,7 +243,7 @@ h2{
 }
 
 
-.contact-form button, .register button {
+.contact-form button, .btn-register {
     background: var(--color-button-principal);
     color: white;
     border: 2px solid var(--color-button-principal);
@@ -254,7 +254,7 @@ h2{
     box-shadow: var(--box-shadow);
 }
 
-.contact-form button:hover, .register button:hover{
+.contact-form button:hover, .btn-register:hover{
     background-color: #0e2a5e;
 }
 
