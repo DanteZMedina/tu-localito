@@ -26,8 +26,12 @@ formulario.addEventListener("submit", function (e) {
 
   // Validación de zona
   if (codigosPermitidos.includes(cp)) {
-    mensaje.textContent = "Zona válida ✅";
     mensaje.classList.remove("error");
+    formCp = document.getElementById("registro-cp");
+    completeForm = document.getElementById("formulario-completo"); 
+    completeForm.classList.add("active");
+    formCp.classList.add("hidden");
+
   } else {
     mensaje.textContent = "Estas fuerade nuestro alcance. :(";
     mensaje.classList.add("error");

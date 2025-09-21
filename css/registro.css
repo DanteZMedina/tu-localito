@@ -276,16 +276,27 @@ main {
   position: relative; /* para que la cereza se posicione respecto a este contenedor */
 }
 
-/* Imagen cereza */
+/* Imagen pera */
 .pera {
-  width: 200px;
+  width: 300px;
 }
 
 .pera-de-cabeza{
     transform: rotate(-151.15deg);
 }
 
+/* ==================== mostra formulario ==================== */
+.registro-completo {
+    display : none;
+}
 
+.registro-completo.active{
+    display : block;
+}
+
+.registro.hidden{
+    display : none;
+}
 
 /* ==================== FOOTER ==================== */
 footer.principal {
