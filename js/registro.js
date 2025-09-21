@@ -32,18 +32,33 @@ formulario.addEventListener("submit", function (e) {
     completeForm = document.getElementById("formulario-completo");
     completeForm.classList.add("active");
     formCp.classList.add("hidden");
-    $('input[type="text"], input[type="email"]').blur(function () {
-      validateInput(this);
-    });
-    $("#personalPhone").on("input", function () {
-      formatPhoneNumber(this);
-    });
-
   } else {
-    mensaje.textContent = "Estas fuerade nuestro alcance. :(";
+    mensaje.textContent = "Estás fuera de nuestro alcance. :(";
     mensaje.classList.add("error");
   }
 });
+
+$('input[type="text"], input[type="email"]').blur(function () {
+  validateInput(this);
+});
+$("#personalPhone").on("input", function () {
+  formatPhoneNumber(this);
+});
+
+function formatPhoneNumber(input) {
+  let value = input.value.replace(/\D/g, "");
+  if (value.length >= 4 && value.length <= 8) {
+    value = value.substring(0, 4) + "-" + value.substring(4);
+  } else if (value.length > 8) {
+    value =
+      value.substring(0, 4) +
+      "-" +
+      value.substring(4, 8) +
+      "-" +
+      value.substring(8, 10);
+  }
+  input.value = value;
+}
 
 function validateInput(input) {
   const value = input.value.trim();
@@ -63,10 +78,6 @@ function validateInput(input) {
       return validatePhoneNumber(input);
     case "userEmail":
       return validateEmail(input);
-    case "pesonalName":
-      return validateName(input);
-    case "personalNameLast":
-      return validateLastName(input);
     default:
       showValidationSuccess(input);
       return true;
@@ -74,28 +85,27 @@ function validateInput(input) {
 }
 
 function validatePhoneNumber(input) {
-    const phoneRegex = /^\d{4}-\d{4}-\d{2}$/;
-    if (!phoneRegex.test(input.value)) {
-        showValidationError(input, 'El formato del teléfono debe ser 5555-5555-55');
-        return false;
-    }
-    showValidationSuccess(input);
-    return true;
+  const phoneRegex = /^\d{4}-\d{4}-\d{2}$/;
+  if (!phoneRegex.test(input.value)) {
+    showValidationError(input, "El formato del teléfono debe ser 5555-5555-55");
+    return false;
+  }
+  showValidationSuccess(input);
+  return true;
 }
 
 function validateEmail(input) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(input.value)) {
-        showValidationError(input, 'El formato del email no es válido');
-        return false;
-    }
-    showValidationSuccess(input);
-    return true;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(input.value)) {
+    showValidationError(input, "El formato del email no es válido");
+    return false;
+  }
+  showValidationSuccess(input);
+  return true;
 }
 
 function showValidationError(input, message) {
   $(input).addClass("is-invalid");
-
   let feedback = $(input).siblings(".invalid-feedback");
   if (feedback.length === 0) {
     feedback = $('<div class="invalid-feedback"></div>');

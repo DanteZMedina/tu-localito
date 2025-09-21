@@ -272,6 +272,17 @@ h2{
   color: #FF0000;
 }
 
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
 main {
   position: relative; /* para que la cereza se posicione respecto a este contenedor */
 }
