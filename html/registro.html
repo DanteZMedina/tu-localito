@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tu Localito - Ingresar</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap 5 CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -26,6 +26,7 @@
       href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap"
       rel="stylesheet"
     />
+
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="../css/registro.css" />
   </head>
@@ -150,12 +151,10 @@
             <form class="contact-form row">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label for="codigo-postal" class="form-label"
-                    >Código Postal:</label
-                  >
+                  <label for="cp" class="form-label">Código Postal:</label>
                   <input
                     type="text"
-                    id="codigo-postal"
+                    id="cp"
                     name="postalCode"
                     class="form-control"
                     disabled
@@ -353,12 +352,12 @@
       </div>
     </footer>
 
-    <!-- JS Bootstrap --><!-- Bootstrap 4 JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- JS -->
+    <!-- Bootstrap 5 JS (bundle incluye Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Agrega esto antes de tu registro.js -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+    <!-- JS personalizado -->
     <script src="../js/registro.js"></script>
   </body>
 </html>
