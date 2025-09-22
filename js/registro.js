@@ -45,6 +45,9 @@ $("#personalPhone").on("input", function () {
   formatPhoneNumber(this);
 });
 
+
+
+/* Formateo de número telefonico
 function formatPhoneNumber(input) {
   let value = input.value.replace(/\D/g, "");
   if (value.length >= 4 && value.length <= 8) {
@@ -58,13 +61,19 @@ function formatPhoneNumber(input) {
       value.substring(8, 10);
   }
   input.value = value;
-}
+}*/
+
+
+/*===Esta función valida los input, según el caso o la necesidad.===*/
+
 
 function validateInput(input) {
+  /*limpieza de datos y obtención por medio delname input o id del input.*/
   const value = input.value.trim();
   const name = input.name || input.id;
   clearValidation(input);
 
+  /*Validación de campo vacio del valor, sin importar el nombre del input.*/ 
   if (value === "") {
     showValidationError(
       input,
@@ -72,28 +81,66 @@ function validateInput(input) {
     );
     return false;
   }
-
+/*Según el name obtenido del input, va a usar la función requerida.*/ 
   switch (name) {
     case "personalPhone":
       return validatePhoneNumber(input);
     case "userEmail":
       return validateEmail(input);
+    case "personalName":
+      return ;
+    case "personalLastaName":
+      return ;
+    case "password":
+      return ;
+    case "confirmPassword":
+      return ;
     default:
       showValidationSuccess(input);
       return true;
   }
-}
+};
 
+
+
+function formatPhoneNumber(input) {
+  let value = input.value.replace(/\D/g, "");
+  if (value.length >= 4 && value.length <= 8) {
+    value = value.substring(0, 4) + "-" + value.substring(4);
+  } else if (value.length > 8) {
+    value =
+      value.substring(0, 4) +
+      "-" +
+      value.substring(4, 8) +
+      "-" +
+      value.substring(8, 10);
+  }
+  input.value = value;
+};
+
+/*===Vaidaciones de cada input especial,recibe el input como argumento.
+Familia: Validate===*/
+
+/*Validación de número teléfonico. */
 function validatePhoneNumber(input) {
+  /*Aquí se genera un test. Si es false, se llama a la función showValidateError para mostrar
+  un mensaje de error.*/
   const phoneRegex = /^\d{4}-\d{4}-\d{2}$/;
   if (!phoneRegex.test(input.value)) {
+    /* Se conecta con la función de mostrar error, dando el input y el mensaje que debe 
+    mostrar. */
     showValidationError(input, "El formato del teléfono debe ser 5555-5555-55");
     return false;
   }
+  /* En este segemento se explica el if anterior. Si phoneRegex no cumple el test, retornará
+  un false, pero para que entre en el bloque if debe ser true, por eso se niega el false, se 
+  vuelve true y entra la validación. En caso de que eltest de phoneRegex sea true, se 
+  niega a false, y entra a la siguiente sección, donde se muestra el mensaje de validación
+  exitosa. */
   showValidationSuccess(input);
   return true;
-}
-
+};
+/*Validación de email. */
 function validateEmail(input) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(input.value)) {
@@ -102,19 +149,43 @@ function validateEmail(input) {
   }
   showValidationSuccess(input);
   return true;
-}
+};
 
+
+
+
+/*=== Funciones de mostrar mensaje si las validaciones fueron exitosas o no.
+Familia: Showc===*/
+
+/*Esta función muestra un mensaje de invalidación si la validación no se logra.
+Recibe como argumento el input que se valido, y el message que se debe mostrar. Esta 
+función se conecta con las funciones de la familia validate. */
 function showValidationError(input, message) {
+  /*En el input se adiciona la clase is-invalid */
   $(input).addClass("is-invalid");
+  /*El método .sibblings buscara etiquetas con .invalid-feedback en el contenedor 
+  en donde se encuentre el input. */
   let feedback = $(input).siblings(".invalid-feedback");
+  /*Si no encuentra algo parecido, feedback estará vacio, entonces .length será 0, 
+  lo que reasignara a feedback con la etiqueta con la clase necesaria. */
   if (feedback.length === 0) {
+    /*Aquí se genera la etiqueta html para el mensaje de invalidación.*/
     feedback = $('<div class="invalid-feedback"></div>');
+    /*Aquí, se adiciona la etqueta, justo despues de la etiqueta del input.*/
     $(input).after(feedback);
   }
+  /*En esta etiqueta se adiciona el mensaje que se dio como argumento en la etiqueta que antes
+  se creo con el nombre de feedback. Si feedback no estaba vacio, se reutiliza feedback 
+  y se adiciona el texto seleccionado. */
   feedback.text(message);
-}
+};
 
+/*Esta función muestra un mensaje de validación exitosa si esta se logra.
+Recibe como argumento el input que se valido, y el mensaje que se debe mostrar. Esta 
+función se conecta con las funciones de la familia validate */
 function showValidationSuccess(input) {
+  /*Remueve la clase is-invalidate y agrega la clase is-validate. Esta función trabaja de 
+  manera similar que showValidateError.*/
   $(input).removeClass("is-invalid").addClass("is-valid");
   $(input).siblings(".invalid-feedback").remove();
 
@@ -126,8 +197,10 @@ function showValidationSuccess(input) {
   feedback.text("✓ Válido");
 }
 
+/*Esta función limpia las clases*/
 function clearValidation(input) {
   $(input).removeClass("is-invalid is-valid");
+  /*Limpia lo que se agrega despues de llamar las funciones de la familia Show */
   $(input).siblings(".invalid-feedback, .success-feedback").remove();
 }
 
