@@ -38,30 +38,27 @@ formulario.addEventListener("submit", function (e) {
   }
 });
 
+
+/*=== lógica de formulario ===*/
+
 $('input[type="text"], input[type="email"]').blur(function () {
   validateInput(this);
 });
 $("#personalPhone").on("input", function () {
   formatPhoneNumber(this);
 });
-
-
-
-/* Formateo de número telefonico
-function formatPhoneNumber(input) {
-  let value = input.value.replace(/\D/g, "");
-  if (value.length >= 4 && value.length <= 8) {
-    value = value.substring(0, 4) + "-" + value.substring(4);
-  } else if (value.length > 8) {
-    value =
-      value.substring(0, 4) +
-      "-" +
-      value.substring(4, 8) +
-      "-" +
-      value.substring(8, 10);
-  }
-  input.value = value;
-}*/
+$('#personalName').blur(function () {
+  validateInput(this);
+});
+$('#personalLastName').blur(function () {
+  validateInput(this);
+});
+$('#contraseña').blur(function () {
+  validateInput(this);
+});
+$('#contraseña-validada').blur(function () {
+  validateInput(this);
+});
 
 
 /*===Esta función valida los input, según el caso o la necesidad.===*/
@@ -88,13 +85,13 @@ function validateInput(input) {
     case "userEmail":
       return validateEmail(input);
     case "personalName":
-      return ;
-    case "personalLastaName":
-      return ;
+      return validateName(input);
+    case "personalLastName":
+      return validateLastName(input);
     case "password":
-      return ;
+      return validatePassword(input);
     case "confirmPassword":
-      return ;
+      return validateConfirmPassword(input);
     default:
       showValidationSuccess(input);
       return true;
@@ -150,12 +147,69 @@ function validateEmail(input) {
   showValidationSuccess(input);
   return true;
 };
+/*Validacion de nombre*/
+ function validateName(input){
+  const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+  const value = input.value.trim();
 
+  if(!nameRegex.test(value)){
+    showValidationError(input, "El formato del nombre no es válido");
+    return false;
+  }
+  showValidationSuccess(input);
+  return true;
+ };
+/*Validación de nombre*/
+ function validateLastName(input){
+  const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+  const value = input.value.trim();
+  if(!nameRegex.test(value)){
+    showValidationError(input, "El formato del nombre no es válido");
+    return false;
+  }
+  showValidationSuccess(input);
+  return true;
+ };
+/*Validación de contraseña*/
+ function validatePassword(input) {
+  const value = input.value.trim();
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+  if (!passwordRegex.test(value)) {
+    showValidationError(
+      input,
+      "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, un número y un carácter especial."
+    );
+    return false;
+  }
+  showValidationSuccess(input);
+  return true;
+};
+
+
+/*Validacion de contraseña confirmada*/
+function validateConfirmPassword(input) {
+  const passwordInput = document.getElementById("contraseña");
+  const passwordValue = passwordInput.value.trim();
+  const confirmValue = input.value.trim();
+
+  if (confirmValue === "") {
+    showValidationError(input, "Debes confirmar tu contraseña.");
+    return false;
+  }
+
+  if (confirmValue !== passwordValue) {
+    showValidationError(input, "Las contraseñas no coinciden.");
+    return false;
+  }
+
+  showValidationSuccess(input);
+  return true;
+};
 
 
 
 /*=== Funciones de mostrar mensaje si las validaciones fueron exitosas o no.
-Familia: Showc===*/
+Familia: Show===*/
 
 /*Esta función muestra un mensaje de invalidación si la validación no se logra.
 Recibe como argumento el input que se valido, y el message que se debe mostrar. Esta 
@@ -195,14 +249,14 @@ function showValidationSuccess(input) {
     $(input).after(feedback);
   }
   feedback.text("✓ Válido");
-}
+};
 
 /*Esta función limpia las clases*/
 function clearValidation(input) {
   $(input).removeClass("is-invalid is-valid");
   /*Limpia lo que se agrega despues de llamar las funciones de la familia Show */
   $(input).siblings(".invalid-feedback, .success-feedback").remove();
-}
+};
 
 function getFieldDisplayName(fieldName) {
   const fieldNames = {
@@ -215,4 +269,4 @@ function getFieldDisplayName(fieldName) {
     confirmPassword: "Confirmar Contraseña",
   };
   return fieldNames[fieldName] || fieldName;
-}
+};
