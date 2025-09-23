@@ -70,19 +70,6 @@ nav.navbar {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(181,101,29,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-.menu a {
-  position: relative;
-  text-decoration: none;
-  color: #13a751;
-  background: var(--color-button-navbar);
-  padding: 5px 30px;
-  border: 1px solid #a0522d;
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  box-shadow: var(--box-shadow);
-  transition: transform 0.3s ease;
-}
-
 .menu a::before,
 .menu a::after {
   content: '';
@@ -190,14 +177,6 @@ footer.principal {
     border-radius: var(--border-radius);
   }
 
-  #picture-btn {
-    color: white;
-    background: #134db9;
-    padding: 5px 20px;
-    border: 1px solid #134db9;
-    border-radius: var(--border-radius);
-  }
-
   table {
     font-family: var(--font-family);
     font-size: var(--font-size-medium);
@@ -222,6 +201,15 @@ footer.principal {
     cursor: pointer;
   }
 }
+
+#picture-btn {
+  color: white;
+  background: #134db9;
+  padding: 5px 20px;
+  border: 1px solid #134db9;
+  border-radius: var(--border-radius);
+}
+
 .btn-primary {
   background-color: var(--color-button-principal);
   border: none;
@@ -229,15 +217,10 @@ footer.principal {
   box-shadow: var(--box-shadow);
 }
 
-#fila-imagenes {
-  border-collapse: separate; /* default, pero aseguramos */
-  border-spacing: 10px 5px;  /* horizontal vertical */
-}
-
 #imagen-header {
   background-image: url('../img/stock/tabla.png');
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
   width: auto;
   height: auto;
   color: white;
@@ -330,22 +313,13 @@ footer.principal {
   padding: 0 12px;
 }
 
-.tabla-productos {
-  /* text-align: start;
-  display: table-row;
-  border-spacing: 20px 25px;
-  border-collapse: separate;
-  transform: translateX(50px);
-  width: 100%; */
-}
-
 #fila {
   border-collapse: collapse;
   border: 2px solid white;
   border-radius: var(--border-radius);
   overflow: hidden;
   padding: 12px;
-  /* text-align: center; */
+  text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   vertical-align: middle;
 }
