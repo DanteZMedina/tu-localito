@@ -83,7 +83,7 @@
         </button>
       </div>
 
-      <!-- Contenedor productos -->
+      <!-- Contenedor form productos -->
       <div class="container my-4">
         <div class="row">
           <!-- Columna izquierda (productos) -->
@@ -94,44 +94,55 @@
             </div>
 
             <!-- Tabla editable de productos -->
-            <table class="table table-bordered align-middle">
-              <tbody>
-                <tr>
-                  <td><button class="btn btn-secondary btn-sm" id="picture-btn">Imagen</button></td>
-                  <td><input type="text" class="form-control" value="DetergenteX"></td>
-                  <td>
-                    <select class="form-select">
-                      <option selected>Limpieza</option>
-                    </select>
-                  </td>
-                  <td><input type="text" class="form-control" value="LI-001"></td>
-                  <td><input type="number" class="form-control" value="20"></td>
-                  <td>
-                    <select class="form-select">
-                      <option selected>PZA</option>
-                    </select>
-                  </td>
-                  <td><input type="text" class="form-control" value="$20.00"></td>
-                </tr>
-                <tr>
-                  <td><button class="btn btn-secondary btn-sm" id="picture-btn">Imagen</button></td>
-                  <td><input type="text" class="form-control" value="DetergenteY"></td>
-                  <td>
-                    <select class="form-select">
-                      <option selected>Limpieza</option>
-                    </select>
-                  </td>
-                  <td><input type="text" class="form-control" placeholder="SKU"></td>
-                  <td><input type="number" class="form-control" placeholder="Cantidad"></td>
-                  <td>
-                    <select class="form-select">
-                      <option>Unidad</option>
-                    </select>
-                  </td>
-                  <td><input type="text" class="form-control" value="$00.00"></td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="contenedor-form-producto">
+              <form id="form-producto" class="d-flex flex-wrap gap-2" novalidate>
+                <button type="button">Imagen</button>
+
+                <div class="input-producto d-flex flex-column mx-2">
+                  <label for="nombre-producto">Nombre</label>
+                  <input type="text" id="nombre-producto" name="nombre" required />
+                </div>
+
+                <div class="input-producto d-flex flex-column mx-2">
+                  <label for="categoria-producto">Categoría</label>
+                  <select id="categoria-producto" name="categoria" required>
+                    <option value="" selected disabled>Selecciona una categoría</option>
+                    <option value="frutas">Frutas</option>
+                    <option value="verduras">Verduras</option>
+                    <option value="granel">Granel</option>
+                    <option value="lacteos">Lácteos</option>
+                  </select>
+                </div>
+
+                <div class="input-producto d-flex flex-column mx-2">
+                  <label for="sku-producto">SKU</label>
+                  <input type="number" id="sku-producto" name="sku" required />
+                </div>
+
+                <div class="input-producto d-flex flex-column mx-2">
+                  <label for="cantidad-producto">Cantidad</label>
+                  <input type="number" id="cantidad-producto" name="cantidad" min="0" required />
+                </div>
+
+                <div class="input-producto d-flex flex-column mx-2">
+                  <label for="unidad-producto">Unidad</label>
+                  <select id="unidad-producto" name="unidad" required>
+                    <option value="" selected disabled>Selecciona la unidad</option>
+                    <option value="pieza">Pieza</option>
+                    <option value="kilo">Kilo</option>
+                  </select>
+                </div>
+
+                <div class="input-producto d-flex flex-column mx-2">
+                  <label for="precio-producto">Precio</label>
+                  <input type="number" id="precio-producto" name="precio" min="0" step="0.01" required />
+                </div>
+
+                <div class="mx-2 d-flex align-items-end">
+                  <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+              </form>
+            </div>
 
             <!-- Botones -->
             <div class="text-end">
@@ -193,90 +204,17 @@
               <th id="imagen-header">Unidades</th>
               <th id="imagen-header">Precio</th>
             </tr>
-            <tr id="fila">
-              <th id="imagen-primer-renglon"></th>
-              <th>Zanahoria</th>
-              <th>Verdura</th>
-              <th>VE-004</th>
-              <th>14 KG</th>
-              <th>$14.00 MXN</th>
-            </tr>
-            <tr id="fila">
-              <th id="imagen-segundo-renglon"></th>
-              <th>Zarzamora</th>
-              <th>Fruta</th>
-              <th>FR-004</th>
-              <th>22 KG</th>
-              <th>$69.00 MXN</th>
-            </tr>
-            <tr id="fila">
-              <th id="imagen-tercer-renglon"></th>
-              <th>Sandia</th>
-              <th>Fruta</th>
-              <th>FR-001</th>
-              <th>49 KG</th>
-              <th>$28.50 MXN</th>
-            </tr>
-            <tr id="fila">
-              <th id="imagen-cuarto-renglon"></th>
-              <th>Pimiento</th>
-              <th>Verdura</th>
-              <th>VR-000</th>
-              <th>17 kg</th>
-              <th>$48.90 MXN</th>
-            </tr>
-            <tr id="fila">
-              <th id="imagen-quinto-renglon"></th>
-              <th>Mango</th>
-              <th>Fruta</th>
-              <th>FR-003</th>
-              <th>39 KG</th>
-              <th>42.90 MXN</th>
-            </tr>
-            <tr id="fila">
-              <th id="imagen-sexto-renglon"></th>
-              <th>Pera</th>
-              <th>Fruta</th>
-              <th>FR-000</th>
-              <th>19 KG</th>
-              <th>$88.00 MXN</th>
-            </tr>
-            <tr id="fila">
-              <th id="imagen-septimo-renglon"></th>
-              <th>Aguacate</th>
-              <th>Fruta</th>
-              <th>FR-006</th>
-              <th>39 KG</th>
-              <th>$78.90 MXN</th>
-            </tr>
-            <tr id="fila">
-              <th id="imagen-octavo-renglon"></th>
-              <th>Kiwi</th>
-              <th>Fruta</th>
-              <th>FR-005</th>
-              <th>24 KG</th>
-              <th>$58.90 MXN</th>
-            </tr>
           </thead>
+          <tbody id="tbody-productos">
+            <!-- Filas de productos se generarán aquí dinámicamente -->
+          </tbody>
         </table>
       </div>
 
       <!-- Paginación -->
       <!-- Barra de paginación -->
       <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
-        <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><span class="page-link">...</span></li>
-          <li class="page-item"><a class="page-link" href="#">67</a></li>
-          <li class="page-item"><a class="page-link" href="#">68</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
+        <ul class="pagination" id="paginacion">
         </ul>
       </nav>
     </div>
@@ -357,7 +295,7 @@
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../stock.js"></script>
+  <script type="module" src="../js/stock.js"></script>
 </body>
 
 </html>

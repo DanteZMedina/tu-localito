@@ -210,6 +210,10 @@ footer.principal {
   border-radius: var(--border-radius);
 }
 
+#sku-producto, #cantidad-producto, #precio-producto {
+  width: 100px;
+}
+
 .btn-primary {
   background-color: var(--color-button-principal);
   border: none;
