@@ -1,27 +1,27 @@
 // stock.js
-import { products, addProduct, getProducts } from './stock-productos.js';
+import { products, addProduct, getProducts } from "./stock-productos.js";
 
 // ========================= Config de paginación =========================
 const PAGE_SIZE = 10;
 let currentPage = 1;
 
 // ========================= Referencias a los campos =========================
-const form = document.getElementById('product-form');
-const nombreInput = document.getElementById('product-name');
-const departamentoSelect = document.getElementById('product-department');
-const categoriaSelect = document.getElementById('product-category');
-const skuInput = document.getElementById('product-sku');
-const cantidadInput = document.getElementById('product-stock');
-const unidadSelect = document.getElementById('product-unit');
-const precioInput = document.getElementById('product-price');
+const form = document.getElementById("product-form");
+const nombreInput = document.getElementById("product-name");
+const departamentoSelect = document.getElementById("product-department");
+const categoriaSelect = document.getElementById("product-category");
+const skuInput = document.getElementById("product-sku");
+const cantidadInput = document.getElementById("product-stock");
+const unidadSelect = document.getElementById("product-unit");
+const precioInput = document.getElementById("product-price");
 
 // ===================== Helpers para custom validity =====================
 function clearValidity(...els) {
-  els.forEach(el => el.setCustomValidity(''));
+  els.forEach((el) => el.setCustomValidity(""));
 }
 
 function isEmpty(value) {
-  return value == null || String(value).trim() === '';
+  return value == null || String(value).trim() === "";
 }
 
 function isNegativeNumber(el) {
@@ -30,73 +30,85 @@ function isNegativeNumber(el) {
 }
 
 function isDuplicateSKU(value) {
-  return products.some(p => String(p.sku) === String(value));
+  return products.some((p) => String(p.sku) === String(value));
 }
 
 function isDuplicateName(value) {
-  return products.some(p => String(p.nombre).toLowerCase() === String(value).toLowerCase());
+  return products.some(
+    (p) => String(p.nombre).toLowerCase() === String(value).toLowerCase()
+  );
 }
 
 // ============================ Submit del formulario ============================
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   // Limpiar estados previos
-  clearValidity(nombreInput,departamentoSelect, categoriaSelect, skuInput, cantidadInput, unidadSelect, precioInput);
+  clearValidity(
+    nombreInput,
+    departamentoSelect,
+    categoriaSelect,
+    skuInput,
+    cantidadInput,
+    unidadSelect,
+    precioInput
+  );
 
   let valid = true;
 
   // Nombre: no vacío, no repetido
   if (isEmpty(nombreInput.value)) {
-    nombreInput.setCustomValidity('El nombre es obligatorio.');
+    nombreInput.setCustomValidity("El nombre es obligatorio.");
     valid = false;
   } else if (isDuplicateName(nombreInput.value)) {
-    nombreInput.setCustomValidity('El nombre del producto ya existe. Debe ser único.');
+    nombreInput.setCustomValidity(
+      "El nombre del producto ya existe. Debe ser único."
+    );
     valid = false;
   }
 
   // Departamento: seleccionado
   if (isEmpty(departamentoSelect.value)) {
-    categoriaSelect.setCustomValidity('Selecciona una categoría.');
+    categoriaSelect.setCustomValidity("Selecciona una categoría.");
     valid = false;
   }
 
   // Categoría: seleccionada
   if (isEmpty(categoriaSelect.value)) {
-    categoriaSelect.setCustomValidity('Selecciona una categoría.');
+    categoriaSelect.setCustomValidity("Selecciona una categoría.");
     valid = false;
   }
 
   // SKU: no vacío y no repetido
   if (isEmpty(skuInput.value)) {
-    skuInput.setCustomValidity('El SKU es obligatorio.');
+    skuInput.setCustomValidity("El SKU es obligatorio.");
     valid = false;
   } else if (isDuplicateSKU(skuInput.value)) {
-    skuInput.setCustomValidity('El SKU ya existe. Debe ser único.');
+    skuInput.setCustomValidity("El SKU ya existe. Debe ser único.");
     valid = false;
   }
 
   // Cantidad: no vacía y no negativa
   if (isEmpty(cantidadInput.value)) {
-    cantidadInput.setCustomValidity('La cantidad es obligatoria.');
+    cantidadInput.setCustomValidity("La cantidad es obligatoria.");
     valid = false;
   } else if (isNegativeNumber(cantidadInput)) {
-    cantidadInput.setCustomValidity('La cantidad no puede ser negativa.');
+    cantidadInput.setCustomValidity("La cantidad no puede ser negativa.");
     valid = false;
   }
 
   // Unidad: seleccionada
   if (isEmpty(unidadSelect.value)) {
-    unidadSelect.setCustomValidity('Selecciona la unidad.');
+    unidadSelect.setCustomValidity("Selecciona la unidad.");
     valid = false;
   }
 
   // Precio: no vacío y no negativo
   if (isEmpty(precioInput.value)) {
-    precioInput.setCustomValidity('El precio es obligatorio.');
+    precioInput.setCustomValidity("El precio es obligatorio.");
     valid = false;
   } else if (isNegativeNumber(precioInput)) {
-    precioInput.setCustomValidity('El precio no puede ser negativo.');
+    precioInput.setCustomValidity("El precio no puede ser negativo.");
     valid = false;
   }
 
@@ -112,10 +124,12 @@ form.addEventListener('submit', (e) => {
     sku: String(skuInput.value).trim(),
     cantidad: Number(cantidadInput.value),
     unidad: unidadSelect.value,
-    precio: Number(precioInput.value)
+    precio: Number(precioInput.value),
   };
 
-  const creado = addProduct ? addProduct(data) : (products.push({ ...data, id: Date.now() }), data);
+  const creado = addProduct
+    ? addProduct(data)
+    : (products.push({ ...data, id: Date.now() }), data);
 
   alert(`Producto agregado ✅ (ID: ${creado.id})`);
   console.log(products);
@@ -130,15 +144,19 @@ form.addEventListener('submit', (e) => {
 // ============================ Cargar datos del stock ============================
 
 // Utilidad para formatear moneda MXN
-const mxn = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', minimumFractionDigits: 2 });
+const mxn = new Intl.NumberFormat("es-MX", {
+  style: "currency",
+  currency: "MXN",
+  minimumFractionDigits: 2,
+});
 
 // Mapea la unidad a cómo la quieres mostrar en la tabla
 function formatUnits(p) {
-  const u = (p.unidad || '').toLowerCase();
-  if (u === 'kilo') return `${p.cantidad} Kg`;
-  if (u === 'pieza') return `${p.cantidad} Pza`;
-  if (u === 'litro') return `${p.cantidad} L`;
-  return `${p.cantidad} ${p.unidad || ''}`.trim();
+  const u = (p.unidad || "").toLowerCase();
+  if (u === "kilo") return `${p.cantidad} Kg`;
+  if (u === "pieza") return `${p.cantidad} Pza`;
+  if (u === "litro") return `${p.cantidad} L`;
+  return `${p.cantidad} ${p.unidad || ""}`.trim();
 }
 
 // =============== Paginación ===============
@@ -156,23 +174,23 @@ function getPagedItems(page = 1) {
     pageItems: items.slice(start, end),
     total,
     totalPages,
-    page: safePage
+    page: safePage,
   };
 }
 
 function renderProductsTable(page = 1) {
-  const tbody = document.getElementById('tbody-productos');
+  const tbody = document.getElementById("tbody-productos");
   if (!tbody) return;
 
   const { pageItems, totalPages, page: safePage } = getPagedItems(page);
   currentPage = safePage;
 
   // Limpia el cuerpo de la tabla
-  tbody.innerHTML = '';
+  tbody.innerHTML = "";
 
   // Crea filas
-  pageItems.forEach(p => {
-    const tr = document.createElement('tr');
+  pageItems.forEach((p) => {
+    const tr = document.createElement("tr");
     tr.innerHTML = `
       <td><!-- imagen --></td>
       <td>${p.nombre}</td>
@@ -188,22 +206,30 @@ function renderProductsTable(page = 1) {
 }
 
 function renderPagination(totalPages, page) {
-  const ul = document.getElementById('paginacion');
+  const ul = document.getElementById("paginacion");
   if (!ul) return;
 
-  ul.innerHTML = '';
+  ul.innerHTML = "";
 
-  const makeLi = (label, targetPage, disabled = false, active = false, ariaLabel = null) => {
-    const liEl = document.createElement('li');
-    liEl.className = `page-item${disabled ? ' disabled' : ''}${active ? ' active' : ''}`;
+  const makeLi = (
+    label,
+    targetPage,
+    disabled = false,
+    active = false,
+    ariaLabel = null
+  ) => {
+    const liEl = document.createElement("li");
+    liEl.className = `page-item${disabled ? " disabled" : ""}${
+      active ? " active" : ""
+    }`;
 
-    const aEl = document.createElement('a');
-    aEl.className = 'page-link';
-    aEl.href = '#';
+    const aEl = document.createElement("a");
+    aEl.className = "page-link";
+    aEl.href = "#";
     aEl.textContent = label;
-    if (ariaLabel) aEl.setAttribute('aria-label', ariaLabel);
+    if (ariaLabel) aEl.setAttribute("aria-label", ariaLabel);
 
-    aEl.addEventListener('click', (e) => {
+    aEl.addEventListener("click", (e) => {
       e.preventDefault();
       if (!disabled && targetPage !== page) goToPage(targetPage);
     });
@@ -213,7 +239,7 @@ function renderPagination(totalPages, page) {
   };
 
   // Previous
-  ul.appendChild(makeLi('Previous', page - 1, page === 1, false, 'Previous'));
+  ul.appendChild(makeLi("Previous", page - 1, page === 1, false, "Previous"));
 
   // Ventana de páginas (máx 5 visibles)
   const MAX_VISIBLE = 5;
@@ -223,10 +249,10 @@ function renderPagination(totalPages, page) {
 
   // Inicio con "1" + …
   if (start > 1) {
-    ul.appendChild(makeLi('1', 1, false, page === 1));
+    ul.appendChild(makeLi("1", 1, false, page === 1));
     if (start > 2) {
-      const dots = document.createElement('li');
-      dots.className = 'page-item disabled';
+      const dots = document.createElement("li");
+      dots.className = "page-item disabled";
       dots.innerHTML = `<span class="page-link">…</span>`;
       ul.appendChild(dots);
     }
@@ -240,16 +266,18 @@ function renderPagination(totalPages, page) {
   // … + última
   if (end < totalPages) {
     if (end < totalPages - 1) {
-      const dots = document.createElement('li');
-      dots.className = 'page-item disabled';
+      const dots = document.createElement("li");
+      dots.className = "page-item disabled";
       dots.innerHTML = `<span class="page-link">…</span>`;
       ul.appendChild(dots);
     }
-    ul.appendChild(makeLi(String(totalPages), totalPages, false, page === totalPages));
+    ul.appendChild(
+      makeLi(String(totalPages), totalPages, false, page === totalPages)
+    );
   }
 
   // Next
-  ul.appendChild(makeLi('Next', page + 1, page === totalPages, false, 'Next'));
+  ul.appendChild(makeLi("Next", page + 1, page === totalPages, false, "Next"));
 }
 
 function goToPage(page) {
@@ -257,6 +285,29 @@ function goToPage(page) {
 }
 
 // ============================ Inicializa ============================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   renderProductsTable(1);
+  //============================= Agregar formulario de nuevo producto ============
+  const btnShowForm = document.getElementById("btn-show-form");
+  const productForm = document.getElementById("product-form");
+  const btnAdd = document.getElementById("btn-add");
+  const productsContainer = document.querySelector(".products-container");
+
+
+  btnShowForm.addEventListener("click", () => {
+    productForm.classList.remove("d-none"); // Muestra el formulario
+  });
+
+  btnAdd.addEventListener("click", () => {
+    const firstRow = productsContainer.querySelector(".product-row");
+    const newRow = firstRow.cloneNode(true);
+
+    // Limpiar inputs y selects del clon
+    newRow.querySelectorAll("input").forEach((input) => (input.value = ""));
+    newRow
+      .querySelectorAll("select")
+      .forEach((select) => (select.selectedIndex = 0));
+
+    productsContainer.appendChild(newRow); // Agrega la nueva fila al contenedor
+  });
 });
