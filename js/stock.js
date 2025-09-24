@@ -6,13 +6,14 @@ const PAGE_SIZE = 10;
 let currentPage = 1;
 
 // ========================= Referencias a los campos =========================
-const form = document.getElementById('form-producto');
-const nombreInput = document.getElementById('nombre-producto');
-const categoriaSelect = document.getElementById('categoria-producto');
-const skuInput = document.getElementById('sku-producto');
-const cantidadInput = document.getElementById('cantidad-producto');
-const unidadSelect = document.getElementById('unidad-producto');
-const precioInput = document.getElementById('precio-producto');
+const form = document.getElementById('product-form');
+const nombreInput = document.getElementById('product-name');
+const departamentoSelect = document.getElementById('product-department');
+const categoriaSelect = document.getElementById('product-category');
+const skuInput = document.getElementById('product-sku');
+const cantidadInput = document.getElementById('product-stock');
+const unidadSelect = document.getElementById('product-unit');
+const precioInput = document.getElementById('product-price');
 
 // ===================== Helpers para custom validity =====================
 function clearValidity(...els) {
@@ -41,7 +42,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   // Limpiar estados previos
-  clearValidity(nombreInput, categoriaSelect, skuInput, cantidadInput, unidadSelect, precioInput);
+  clearValidity(nombreInput,departamentoSelect, categoriaSelect, skuInput, cantidadInput, unidadSelect, precioInput);
 
   let valid = true;
 
@@ -51,6 +52,12 @@ form.addEventListener('submit', (e) => {
     valid = false;
   } else if (isDuplicateName(nombreInput.value)) {
     nombreInput.setCustomValidity('El nombre del producto ya existe. Debe ser único.');
+    valid = false;
+  }
+
+  // Departamento: seleccionado
+  if (isEmpty(departamentoSelect.value)) {
+    categoriaSelect.setCustomValidity('Selecciona una categoría.');
     valid = false;
   }
 
@@ -100,6 +107,7 @@ form.addEventListener('submit', (e) => {
 
   const data = {
     nombre: nombreInput.value.trim(),
+    departamento: departamentoSelect.value,
     categoria: categoriaSelect.value,
     sku: String(skuInput.value).trim(),
     cantidad: Number(cantidadInput.value),
@@ -127,7 +135,7 @@ const mxn = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN',
 // Mapea la unidad a cómo la quieres mostrar en la tabla
 function formatUnits(p) {
   const u = (p.unidad || '').toLowerCase();
-  if (u === 'kilo') return `${p.cantidad} KG`;
+  if (u === 'kilo') return `${p.cantidad} Kg`;
   if (u === 'pieza') return `${p.cantidad} Pza`;
   if (u === 'litro') return `${p.cantidad} L`;
   return `${p.cantidad} ${p.unidad || ''}`.trim();

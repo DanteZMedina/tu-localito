@@ -88,7 +88,7 @@ h6 {
 
     /* Colores */
     --color-orange: #E85C14;
-    --color-amarillo: #FFDE59;
+    --color-verde: #4dbe87;;
     --color-card-bg: #FEBCBC;
     --color-border-card: #E85E14;
     --color-carousel-control: #E85E14;
@@ -236,7 +236,6 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 input,section{
-    max-width: 100px;
     height: 37px;
 }
 
@@ -246,6 +245,16 @@ input{
     background-color: var(--color-input-bg);
     font-size: var(--font-size-small);
     color: #000;
+}
+
+.tag {
+    background-color: var(--color-verde);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 20px;
+    gap: 6px;
 }
 
 .new-product-form button{
@@ -281,7 +290,7 @@ input{
 
 /* ==================== FOOTER ==================== */
 footer.principal {
-    background-color: var(--color-amarillo);
+    background-color: var(--color-verde);
     font-family: var(--font-family);
     font-size: 12px;
     display: flex;

@@ -84,77 +84,89 @@
       </div>
 
       <!-- Contenedor form productos -->
-      <div class="container my-4">
-        <div class="row">
-          <!-- Columna izquierda (productos) -->
-          <div class="col-md-8">
-            <!-- Nombre de la categoría -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="fw-bold">Productos:</h4>
+      <div class="container d-none d-md-flex">
+      <div class="row my-4">
+        <div class="col-12 d-flex flex-column align-items-start new-product-form">
+          <button class="btn btn-primary my-3">Agregar Nuevo Producto</button>
+          <form>
+            <div class="p-3 d-flex gap-2 align-items-bottom form-container">
+              <div class="d-flex flex-column">
+                <label for="product-name">Nombre:</label>
+                <input type="text" id="product-name" />
+              </div>
+              <div class="d-flex flex-column">
+                <label for="product-department">Departamento:</label>
+                <select id="product-department" name="departments">
+                  <option value="Alimentos">Alimentos</option>
+                  <option value="opcion2">Bebidas</option>
+                  <option value="opcion3">Productos de limpieza</option>
+                  <option value="opcion4">Mascotas</option>
+                  <option value="opcion5">Abarrotes</option>
+                  <option value="opcion6">Cuidado Personal</option>
+                </select>
+              </div>
+              <div class="d-flex flex-column">
+                <label for="product-category">Categoría:</label>
+                <select id="product-category" name="categories">
+                  <option value="opcion1">Categoria 1</option>
+                </select>
+              </div>
+              <div class="d-flex flex-column">
+                <label for="sku">SKU:</label>
+                <input type="text" id="sku" />
+              </div>
+              <div class="d-flex flex-column">
+                <label for="product-stock">Cantidad:</label>
+                <input type="text" id="product-stock" />
+              </div>
+              <div class="d-flex flex-column">
+                <label for="unit-product">Unidad:</label>
+                <input type="text" id="unit-product" />
+              </div>
+              <div class="d-flex flex-column">
+                <label for="product-price">Precio:</label>
+                <input type="text" id="product-price" />
+              </div>
+              <div class="d-flex flex-column align-items-center justify-content-end">
+                <button class="btn btn-primary my-0" id="btn-add-picture"><img src="../img/stock/add-picture-icon.png" alt=""></button>
+              </div>
             </div>
-
-            <!-- Tabla editable de productos -->
-            <div class="contenedor-form-producto">
-              <form id="form-producto" class="d-flex flex-wrap gap-2" novalidate>
-                <button type="button">Imagen</button>
-
-                <div class="input-producto d-flex flex-column mx-2">
-                  <label for="nombre-producto">Nombre</label>
-                  <input type="text" id="nombre-producto" name="nombre" required />
-                </div>
-
-                <div class="input-producto d-flex flex-column mx-2">
-                  <label for="categoria-producto">Categoría</label>
-                  <select id="categoria-producto" name="categoria" required>
-                    <option value="" selected disabled>Selecciona una categoría</option>
-                    <option value="frutas">Frutas</option>
-                    <option value="verduras">Verduras</option>
-                    <option value="granel">Granel</option>
-                    <option value="lacteos">Lácteos</option>
-                  </select>
-                </div>
-
-                <div class="input-producto d-flex flex-column mx-2">
-                  <label for="sku-producto">SKU</label>
-                  <input type="number" id="sku-producto" name="sku" required />
-                </div>
-
-                <div class="input-producto d-flex flex-column mx-2">
-                  <label for="cantidad-producto">Cantidad</label>
-                  <input type="number" id="cantidad-producto" name="cantidad" min="0" required />
-                </div>
-
-                <div class="input-producto d-flex flex-column mx-2">
-                  <label for="unidad-producto">Unidad</label>
-                  <select id="unidad-producto" name="unidad" required>
-                    <option value="" selected disabled>Selecciona la unidad</option>
-                    <option value="pieza">Pieza</option>
-                    <option value="kilo">Kilo</option>
-                  </select>
-                </div>
-
-                <div class="input-producto d-flex flex-column mx-2">
-                  <label for="precio-producto">Precio</label>
-                  <input type="number" id="precio-producto" name="precio" min="0" step="0.01" required />
-                </div>
-
-                <div class="mx-2 d-flex align-items-end">
-                  <button type="submit" class="btn btn-primary">Agregar</button>
-                </div>
-              </form>
-            </div>
-
-            <!-- Botones -->
-            <div class="text-end">
+            <div class="m-3 gap-2 d-flex justify-content-end">
               <button class="btn btn-primary">Guardar</button>
-              <button class="btn btn-success">
+              <button class="btn" id="btn-add">
                 <i class="bi bi-plus-lg"> + </i>
               </button>
             </div>
-          </div>
-
+          </form>
         </div>
+      <div class="col-4 d-none d-lg-flex justify-content-end">
+      <!-- Columna derecha (panel lateral) -->
+      <aside class="panel-lateral card p-3 shadow-sm h-fit">
+        <h5 class="fw-bold mb-3">Palabras relacionadas</h5>
+        <div class="tags mb-3">
+          <span class="tag">Frutas <button class="btn-close btn-sm"></button></span>
+          <span class="tag">Granel <button class="btn-close btn-sm"></button></span>
+          <span class="tag">Verduras <button class="btn-close btn-sm"></button></span>
+          <span class="tag">Promociones <button class="btn-close btn-sm"></button></span>
+          <span class="tag">Nuevos <button class="btn-close btn-sm"></button></span>
+        </div>
+
+        <div class="mb-3">
+          <label for="stock-alert" class="form-label">Alerta de Stock:</label>
+          <input type="number" id="stock-alert" class="form-control" value="5" />
+        </div>
+
+        <div class="mb-4">
+          <label for="ordenar" class="form-label">Ordenar por:</label>
+          <input type="text" id="ordenar" class="form-control" value="Nombre" />
+        </div>
+
+        <div class="text-end">
+          <a href="cerrar_sesion.html" class="btn btn-danger">Cerrar Sesión</a>
+      </aside>
+    </div>
       </div>
+    </div>
 
       <!--Barra de Surtido Rápido -->
       <div class="container">
