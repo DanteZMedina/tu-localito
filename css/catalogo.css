@@ -336,7 +336,8 @@ footer.principal {
 
 /* Estilo base para escritorio */
 #catalogo_cards_image {
-  height: 220px;
+  
+  height: 200px;
   object-fit: cover;
   width: 100%;
   border-radius: 8px;
@@ -353,4 +354,14 @@ footer.principal {
   #catalogo_cards_image {
     height: 120px; /* aún más pequeño para móviles */
   }
+}
+
+/* ================== side bar ======================*/
+.container {
+    max-width: 1600px;
+    margin: auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
 }
