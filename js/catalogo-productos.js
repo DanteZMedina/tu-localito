@@ -97,7 +97,7 @@ let products = [
     cantidad: 30,
     unidad: "kilo",
     precio: 78.90,
-    image: "../img/Catalogo/avocado.jpg"
+    image: "https://i.ibb.co/qYWyMLvV/Aguacate.jpg"
   },
   {
     id: 11,
