@@ -1,195 +1,164 @@
-// ================= Importar productos =================
-import { getProducts } from './catalogo-productos.js';
+import { inventario } from './catalogo-productos.js';
 
-// Objeto carrito para guardar cantidades
-let carrito = {};
-
-// --- ESTADO GLOBAL DE LA APLICACIÓN ---
-// Estas variables me ayudan a saber qué está pasando en la página
-/*            Barra lateal */
-let categoriaActiva = 'Todos';
-
-const listaCategoriasEl = document.getElementById('lista-categorias');
-
-/**
- * Con esta función, yo genero la lista de categorías en la barra lateral.
- */
-function renderizarCategorias() {
-    const nombresCategorias = {
-        "Frutas": "🍎 Frutas", "Verduras": "🥕 Verduras", "Carnes Frías": "🍖 Carnes Frías",
-        "Granel": "⚖️ Granel", "Lácteos": "🧀 Lácteos", "Bebidas": "🥤 Bebidas",
-        "Limpieza": "🧼 Limpieza", "Mascotas": "🐾 Mascotas", "Abarrotes": "🥫 Abarrotes",
-        "Cuidado Personal": "🧴 Cuidado Personal",
-    };
-
-    // 🔹 Aquí uso getProducts() en lugar de productos
-    const productos = getProducts();
-    const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
-
-    listaCategoriasEl.innerHTML = categorias.map(cat => `
-        <li>
-            <a href="#" class="${cat === 'Todos' ? 'active' : ''}" onclick="filtrarPorCategoria('${cat}', this)">
-                ${nombresCategorias[cat] || '🛒 Todos'}
-            </a>
-        </li>
-    `).join('');
+// ===============================
+// 🔹 1. Aplanar inventario
+// ===============================
+function flattenInventario(inventario) {
+  const allProducts = [];
+  inventario.forEach(dep => {
+    dep.categorias.forEach(cat => {
+      cat.productos.forEach(prod => {
+        allProducts.push({
+          ...prod,
+          departamento: dep.departamento,
+          categoria: cat.nombre
+        });
+      });
+    });
+  });
+  return allProducts;
 }
 
-/**
- * Con esta función, dibujo todos los productos en la pantalla.
- */
-function renderizarProductos() {
-    const productosAMostrar = categoriaActiva === 'Todos' ? productos : productos.filter(p => p.categoria === categoriaActiva);
-    productosListaEl.innerHTML = productosAMostrar.map(crearProductoHTML).join('');
-    actualizarResumen();
-}
-// --- FUNCIONES DE EVENTOS ---
+const allProducts = flattenInventario(inventario);
 
-/**
- * Esta función la uso para filtrar los productos cuando haces clic en una categoría.
- */
-function filtrarPorCategoria(categoria, elemento) {
-    document.querySelectorAll('#lista-categorias a').forEach(a => a.classList.remove('active'));
-    elemento.classList.add('active');
-    categoriaActiva = categoria;
-    renderizarProductos();
-}
-
-function seguirComprando() {
-    alert('🛍️ ¡Claro! Sigue explorando nuestros productos.');
-    const linkTodos = document.querySelector('#lista-categorias a');
-    if (linkTodos) {
-        filtrarPorCategoria('Todos', linkTodos);
-    }
-}
-
-// Selecciona el contenedor donde van las cards
-const productsContainer = document.querySelector(
-  ".col-md-9.col-lg-10 .row"
-);
-
-// Selecciona el contenedor de la paginación (de tu HTML)
-const paginationContainer = document.querySelector(".pagination");
-
-// ================= Config =================
-const PAGE_SIZE = 10;
+// ===============================
+// 🔹 2. Variables globales
+// ===============================
 let currentPage = 1;
+const itemsPerPage = 10;
 
-// ================= Render de productos =================
-function renderProducts(page = 1) {
-  const products = getProducts();
-  const totalPages = Math.ceil(products.length / PAGE_SIZE);
+// ===============================
+// 🔹 3. Renderizar productos
+// ===============================
+function renderProducts(products) {
+  const container = document.getElementById("contenedor-productos");
+  container.innerHTML = "";
 
-  // Asegurar que la página esté dentro del rango
-  if (page < 1) page = 1;
-  if (page > totalPages) page = totalPages;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedProducts = products.slice(startIndex, endIndex);
 
-  currentPage = page;
+  paginatedProducts.forEach(prod => {
+    const col = document.createElement("div");
+    col.classList.add(
+      "col",
+      "producto-card",
+      prod.departamento.replace(/\s+/g, "-").toLowerCase(),
+      prod.categoria.replace(/\s+/g, "-").toLowerCase()
+    );
 
-  // Limpiar contenedor
-  productsContainer.innerHTML = "";
-
-  // Calcular rango de productos a mostrar
-  const start = (page - 1) * PAGE_SIZE;
-  const end = start + PAGE_SIZE;
-  const pageProducts = products.slice(start, end);
-
-  // Renderizar cards
-  pageProducts.forEach(prod => {
-    const card = document.createElement("div");
-    card.classList.add("col", "producto-card");
-    card.setAttribute("data-category", prod.categoria);
-    card.setAttribute("data-producto", prod.nombre.toLowerCase());
-
-    card.innerHTML = `
-      <div class="card h-100 text-center ">
-        <img src="${prod.image}" class="card-img-top" alt="${prod.nombre}" id="catalogo_cards_image">
+    col.innerHTML = `
+      <div class="card h-100 text-center shadow-sm">
+        <img src="${prod.imagen}" class="card-img-top category-img" alt="${prod.nombre}">
         <div class="card-body">
           <h5 class="card-title">${prod.nombre}</h5>
-          <p class="card-text">$${prod.precio.toFixed(2)} / ${prod.unidad}</p>
-          <div class="d-flex justify-content-center align-items-center gap-2">
-            <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
-            <span class="cantidad">0</span>
-            <button class="btn btn-sm btn-outline-success plus-btn">+</button>
-          </div>
+          <p class="card-text"><strong>Precio:</strong> $${prod.precio.toFixed(2)} / ${prod.unidad}</p>
+        </div>
+        <div class="d-flex justify-content-center align-items-center gap-2">
+          <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
+          <span class="counter-badge">0</span>
+          <button class="btn btn-sm btn-outline-success rounded-circle plus-btn">+</button>
         </div>
       </div>
     `;
-
-    productsContainer.appendChild(card);
-
-    // Inicializar carrito
-    carrito[prod.nombre.toLowerCase()] = 0;
-
-    // Eventos + y -
-    const minusBtn = card.querySelector(".minus-btn");
-    const plusBtn = card.querySelector(".plus-btn");
-    const cantidadEl = card.querySelector(".cantidad");
-    let cantidad = 0;
-
-    minusBtn.addEventListener("click", () => {
-      if (cantidad > 0) {
-        cantidad--;
-        carrito[prod.nombre.toLowerCase()] = cantidad;
-        cantidadEl.textContent = cantidad;
-        console.log(carrito);
-      }
-    });
-
-    plusBtn.addEventListener("click", () => {
-      cantidad++;
-      carrito[prod.nombre.toLowerCase()] = cantidad;
-      cantidadEl.textContent = cantidad;
-      console.log(carrito);
-    });
+    container.appendChild(col);
   });
 
-  // Renderizar paginación
-  renderPagination(totalPages);
+  renderPagination(products.length);
 }
 
-// ================= Render de paginación =================
-function renderPagination(totalPages) {
+// ===============================
+// 🔹 4. Renderizar paginación con puntos suspensivos
+// ===============================
+function renderPagination(totalItems) {
+  const paginationContainer = document.querySelector(".pagination");
   paginationContainer.innerHTML = "";
 
-  // Botón Previous
-  const prev = document.createElement("li");
-  prev.className = `page-item ${currentPage === 1 ? "disabled" : ""}`;
-  prev.innerHTML = `<a class="page-link" href="#">Previous</a>`;
-  prev.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (currentPage > 1) renderProducts(currentPage - 1);
-  });
-  paginationContainer.appendChild(prev);
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  // Números de páginas
-  for (let i = 1; i <= totalPages; i++) {
-    const pageItem = document.createElement("li");
-    pageItem.className = `page-item ${i === currentPage ? "active" : ""}`;
-    pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-    pageItem.addEventListener("click", (e) => {
-      e.preventDefault();
-      renderProducts(i);
-    });
-    paginationContainer.appendChild(pageItem);
+  // Botón "Previous"
+  const prevItem = document.createElement("li");
+  prevItem.classList.add("page-item", currentPage === 1 ? "disabled" : "");
+  prevItem.innerHTML = `<a class="page-link" href="#">Previous</a>`;
+  prevItem.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentPage > 1) {
+      currentPage--;
+      renderProducts(allProducts);
+    }
+  });
+  paginationContainer.appendChild(prevItem);
+
+  // Calcular páginas visibles
+  const maxVisible = 5;
+  let startPage = Math.max(1, currentPage - 2);
+  let endPage = Math.min(totalPages, currentPage + 2);
+
+  if (currentPage <= 3) {
+    endPage = Math.min(totalPages, maxVisible);
+  } else if (currentPage >= totalPages - 2) {
+    startPage = Math.max(1, totalPages - (maxVisible - 1));
   }
 
-  // Botón Next
-  const next = document.createElement("li");
-  next.className = `page-item ${currentPage === totalPages ? "disabled" : ""}`;
-  next.innerHTML = `<a class="page-link" href="#">Next</a>`;
-  next.addEventListener("click", (e) => {
+  // Página 1 siempre
+  if (startPage > 1) {
+    addPageItem(1, paginationContainer);
+    if (startPage > 2) {
+      const dots = document.createElement("li");
+      dots.classList.add("page-item", "disabled");
+      dots.innerHTML = `<span class="page-link">...</span>`;
+      paginationContainer.appendChild(dots);
+    }
+  }
+
+  // Páginas dinámicas
+  for (let i = startPage; i <= endPage; i++) {
+    addPageItem(i, paginationContainer);
+  }
+
+  // Última página siempre
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      const dots = document.createElement("li");
+      dots.classList.add("page-item", "disabled");
+      dots.innerHTML = `<span class="page-link">...</span>`;
+      paginationContainer.appendChild(dots);
+    }
+    addPageItem(totalPages, paginationContainer);
+  }
+
+  // Botón "Next"
+  const nextItem = document.createElement("li");
+  nextItem.classList.add("page-item", currentPage === totalPages ? "disabled" : "");
+  nextItem.innerHTML = `<a class="page-link" href="#">Next</a>`;
+  nextItem.addEventListener("click", (e) => {
     e.preventDefault();
-    if (currentPage < totalPages) renderProducts(currentPage + 1);
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderProducts(allProducts);
+    }
   });
-  paginationContainer.appendChild(next);
+  paginationContainer.appendChild(nextItem);
 }
 
+// ===============================
+// 🔹 5. Helper para crear un botón de página
+// ===============================
+function addPageItem(page, container) {
+  const li = document.createElement("li");
+  li.classList.add("page-item", page === currentPage ? "active" : "");
+  li.innerHTML = `<a class="page-link" href="#">${page}</a>`;
+  li.addEventListener("click", (e) => {
+    e.preventDefault();
+    currentPage = page;
+    renderProducts(allProducts);
+  });
+  container.appendChild(li);
+}
 
-
-// ================= Inicializa =================
+// ===============================
+// 🔹 6. Inicializar
+// ===============================
 document.addEventListener("DOMContentLoaded", () => {
-  renderProducts(1);
-  renderizarCategorias();
-  
+  renderProducts(allProducts);
 });
