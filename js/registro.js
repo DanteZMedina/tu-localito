@@ -27,7 +27,7 @@ formulario.addEventListener("submit", function (e) {
 
   // Validación de zona
   if (codigosPermitidos.includes(cp)) {
-    mensaje.classList.remove("error");
+    //mensaje.classList.remove("error");
     formCp = document.getElementById("registro-cp");
     completeForm = document.getElementById("formulario-completo");
     completeForm.classList.add("active");
@@ -60,17 +60,38 @@ $('#contraseña-validada').blur(function () {
   validateInput(this);
 });
 
+const formularioCompleto = document.getElementById("formulario-completo-form");
+formularioCompleto.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const inputs = formularioCompleto.querySelectorAll("input");
+  let esValido = true;
+  inputs.forEach((input) => {
+    const resultado = validateInput(input);
+    if (!resultado) {
+      esValido = false;
+    }});
+    if (esValido){
+      console.log("Formulario completo");
+      
+    } else{
+      console.log("Formulario incompleto");
+    }
+}
+);
+
+
+
 
 /*===Esta función valida los input, según el caso o la necesidad.===*/
 
 
 function validateInput(input) {
-  /*limpieza de datos y obtención por medio delname input o id del input.*/
+  /*limpieza de datos y obtención por medio del name input o id del input.*/
   const value = input.value.trim();
   const name = input.name || input.id;
   clearValidation(input);
 
-  /*Validación de campo vacio del valor, sin importar el nombre del input.*/ 
+  /*Validación de campo vacio del valor, sin importar el nombre del input.*/
   if (value === "") {
     showValidationError(
       input,
@@ -78,7 +99,7 @@ function validateInput(input) {
     );
     return false;
   }
-/*Según el name obtenido del input, va a usar la función requerida.*/ 
+  /*Según el name obtenido del input, va a usar la función requerida.*/
   switch (name) {
     case "personalPhone":
       return validatePhoneNumber(input);
@@ -148,30 +169,30 @@ function validateEmail(input) {
   return true;
 };
 /*Validacion de nombre*/
- function validateName(input){
+function validateName(input) {
   const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
   const value = input.value.trim();
 
-  if(!nameRegex.test(value)){
+  if (!nameRegex.test(value)) {
     showValidationError(input, "El formato del nombre no es válido");
     return false;
   }
   showValidationSuccess(input);
   return true;
- };
+};
 /*Validación de nombre*/
- function validateLastName(input){
+function validateLastName(input) {
   const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
   const value = input.value.trim();
-  if(!nameRegex.test(value)){
+  if (!nameRegex.test(value)) {
     showValidationError(input, "El formato del nombre no es válido");
     return false;
   }
   showValidationSuccess(input);
   return true;
- };
+};
 /*Validación de contraseña*/
- function validatePassword(input) {
+function validatePassword(input) {
   const value = input.value.trim();
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
   if (!passwordRegex.test(value)) {
