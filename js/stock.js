@@ -10,7 +10,7 @@ const form = document.getElementById("product-form");
 const nombreInput = document.getElementById("product-name");
 const departamentoSelect = document.getElementById("product-department");
 const categoriaSelect = document.getElementById("product-category");
-const skuInput = document.getElementById("product-sku");
+//const skuInput = document.getElementById("product-sku");
 const cantidadInput = document.getElementById("product-stock");
 const unidadSelect = document.getElementById("product-unit");
 const precioInput = document.getElementById("product-price");
@@ -29,10 +29,6 @@ function isNegativeNumber(el) {
   return Number.isFinite(val) && val < 0;
 }
 
-function isDuplicateSKU(value) {
-  return products.some((p) => String(p.sku) === String(value));
-}
-
 function isDuplicateName(value) {
   return products.some(
     (p) => String(p.nombre).toLowerCase() === String(value).toLowerCase()
@@ -48,7 +44,6 @@ form.addEventListener("submit", (e) => {
     nombreInput,
     departamentoSelect,
     categoriaSelect,
-    skuInput,
     cantidadInput,
     unidadSelect,
     precioInput
@@ -80,13 +75,13 @@ form.addEventListener("submit", (e) => {
   }
 
   // SKU: no vacío y no repetido
-  if (isEmpty(skuInput.value)) {
+ /*  if (isEmpty(skuInput.value)) {
     skuInput.setCustomValidity("El SKU es obligatorio.");
     valid = false;
   } else if (isDuplicateSKU(skuInput.value)) {
     skuInput.setCustomValidity("El SKU ya existe. Debe ser único.");
     valid = false;
-  }
+  } */
 
   // Cantidad: no vacía y no negativa
   if (isEmpty(cantidadInput.value)) {
@@ -121,7 +116,7 @@ form.addEventListener("submit", (e) => {
     nombre: nombreInput.value.trim(),
     departamento: departamentoSelect.value,
     categoria: categoriaSelect.value,
-    sku: String(skuInput.value).trim(),
+    // sku: String(skuInput.value).trim(),
     cantidad: Number(cantidadInput.value),
     unidad: unidadSelect.value,
     precio: Number(precioInput.value),
@@ -195,7 +190,6 @@ function renderProductsTable(page = 1) {
       <td><!-- imagen --></td>
       <td>${p.nombre}</td>
       <td>${p.categoria}</td>
-      <td>${p.sku}</td>
       <td>${formatUnits(p)}</td>
       <td>${mxn.format(p.precio)}</td>
     `;
@@ -290,24 +284,8 @@ document.addEventListener("DOMContentLoaded", () => {
   //============================= Agregar formulario de nuevo producto ============
   const btnShowForm = document.getElementById("btn-show-form");
   const productForm = document.getElementById("product-form");
-  const btnAdd = document.getElementById("btn-add");
-  const productsContainer = document.querySelector(".products-container");
-
 
   btnShowForm.addEventListener("click", () => {
     productForm.classList.remove("d-none"); // Muestra el formulario
-  });
-
-  btnAdd.addEventListener("click", () => {
-    const firstRow = productsContainer.querySelector(".product-row");
-    const newRow = firstRow.cloneNode(true);
-
-    // Limpiar inputs y selects del clon
-    newRow.querySelectorAll("input").forEach((input) => (input.value = ""));
-    newRow
-      .querySelectorAll("select")
-      .forEach((select) => (select.selectedIndex = 0));
-
-    productsContainer.appendChild(newRow); // Agrega la nueva fila al contenedor
-  });
+ });
 });
