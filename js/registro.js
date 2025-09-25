@@ -1,5 +1,5 @@
 const formulario = document.getElementById("zona-form");
-const inputCP = document.getElementById("codigo-postal");
+const inputCP = document.getElementById("codigo-postal-cp");
 const mensaje = document.getElementById("mensaje-error");
 
 const codigosPermitidos = ["54000", "54030", "54050", "54100"];
@@ -11,7 +11,6 @@ formulario.addEventListener("submit", function (e) {
 
   // Validación: 5 dígitos numéricos
   const esValido = /^\d{5}$/.test(cp);
-
   if (cp === "") {
     mensaje.textContent = "Inserta tu código postal, por favor.";
     mensaje.classList.add("error");
@@ -24,10 +23,9 @@ formulario.addEventListener("submit", function (e) {
     mensaje.classList.add("error");
     return;
   }
-
   // Validación de zona
   if (codigosPermitidos.includes(cp)) {
-    //mensaje.classList.remove("error");
+    mensaje.classList.remove("error");
     formCp = document.getElementById("registro-cp");
     completeForm = document.getElementById("formulario-completo");
     completeForm.classList.add("active");
@@ -40,26 +38,7 @@ formulario.addEventListener("submit", function (e) {
 
 
 /*=== lógica de formulario ===*/
-
-$('input[type="text"], input[type="email"]').blur(function () {
-  validateInput(this);
-});
-$("#personalPhone").on("input", function () {
-  formatPhoneNumber(this);
-});
-$('#personalName').blur(function () {
-  validateInput(this);
-});
-$('#personalLastName').blur(function () {
-  validateInput(this);
-});
-$('#contraseña').blur(function () {
-  validateInput(this);
-});
-$('#contraseña-validada').blur(function () {
-  validateInput(this);
-});
-
+/**Lógica de validación de formulario. */
 const formularioCompleto = document.getElementById("formulario-completo-form");
 formularioCompleto.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -79,12 +58,35 @@ formularioCompleto.addEventListener("submit", function (e) {
 }
 );
 
+$('input[type="text"], input[type="email"]').blur(function () {
+  validateInput(this);
+});
+/*
+$('input[type="email"]').blur(function () {
+  validateInput(this);
+});*/
+$("#personalPhone").on("input", function () {
+  formatPhoneNumber(this);
+});
+$('#personalName').blur(function () {
+  validateInput(this);
+});
+$('#personalLastName').blur(function () {
+  validateInput(this);
+});
+$('#contraseña').blur(function () {
+  validateInput(this);
+});
+$('#contraseña-validada').blur(function () {
+  validateInput(this);
+});
+
+
+
 
 
 
 /*===Esta función valida los input, según el caso o la necesidad.===*/
-
-
 function validateInput(input) {
   /*limpieza de datos y obtención por medio del name input o id del input.*/
   const value = input.value.trim();
@@ -281,13 +283,13 @@ function clearValidation(input) {
 
 function getFieldDisplayName(fieldName) {
   const fieldNames = {
-    postalCode: "Código Postal",
-    personalName: "Nombre",
-    personalLastName: "Primer Apellido",
-    personalPhone: "Celular",
-    userEmail: "Correo",
-    password: "Contraseña",
-    confirmPassword: "Confirmar Contraseña",
+    postalCode: "código postal",
+    personalName: "nombre",
+    personalLastName: "primer apellido",
+    personalPhone: "celular",
+    userEmail: "correo",
+    password: "contraseña",
+    confirmPassword: "confirmar contraseña",
   };
   return fieldNames[fieldName] || fieldName;
 };
