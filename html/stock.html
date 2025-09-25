@@ -104,19 +104,17 @@
                 </div>
 
                 <div class="input-producto d-flex flex-column mx-2">
-                  <label for="categoria-producto">Categoría</label>
-                  <select id="categoria-producto" name="categoria" required>
-                    <option value="" selected disabled>Selecciona una categoría</option>
-                    <option value="frutas">Frutas</option>
-                    <option value="verduras">Verduras</option>
-                    <option value="granel">Granel</option>
-                    <option value="lacteos">Lácteos</option>
+                  <label for="departamento-producto">Departamento</label>
+                  <select id="departamento-producto" name="departamento" required>
+                    <option value="" selected disabled>Selecciona un departamento</option>
                   </select>
                 </div>
 
                 <div class="input-producto d-flex flex-column mx-2">
-                  <label for="sku-producto">SKU</label>
-                  <input type="number" id="sku-producto" name="sku" required />
+                  <label for="categoria-producto">Categoría</label>
+                  <select id="categoria-producto" name="categoria" required>
+                    <option value="" selected disabled>Selecciona una categoría</option>
+                  </select>
                 </div>
 
                 <div class="input-producto d-flex flex-column mx-2">
@@ -130,6 +128,7 @@
                     <option value="" selected disabled>Selecciona la unidad</option>
                     <option value="pieza">Pieza</option>
                     <option value="kilo">Kilo</option>
+                    <option value="kilo">Litro</option>
                   </select>
                 </div>
 
@@ -199,6 +198,7 @@
             <tr id="fila">
               <th id="imagen-header">Imágen</th>
               <th id="imagen-header">Nombre</th>
+              <th id="imagen-header">Departamento</th>
               <th id="imagen-header">Categoría</th>
               <th id="imagen-header">SKU</th>
               <th id="imagen-header">Unidades</th>

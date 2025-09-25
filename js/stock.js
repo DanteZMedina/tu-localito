@@ -1,5 +1,6 @@
 // stock.js
-import { products, addProduct, getProducts } from './stock-productos.js';
+import { inventario } from './stock-productos.js';
+import { getDepartamentos, getCategorias, capitalize } from './helpers-inventario.js';
 
 // ========================= Config de paginación =========================
 const PAGE_SIZE = 10;
@@ -8,15 +9,77 @@ let currentPage = 1;
 // ========================= Referencias a los campos =========================
 const form = document.getElementById('form-producto');
 const nombreInput = document.getElementById('nombre-producto');
+const departamentoSelect = document.getElementById('departamento-producto');
 const categoriaSelect = document.getElementById('categoria-producto');
-const skuInput = document.getElementById('sku-producto');
 const cantidadInput = document.getElementById('cantidad-producto');
 const unidadSelect = document.getElementById('unidad-producto');
 const precioInput = document.getElementById('precio-producto');
 
+// ========================= Poblar selects =========================
+// Poblar departamentos al cargar
+document.addEventListener('DOMContentLoaded', () => {
+  const departamentos = getDepartamentos();
+
+  departamentos.forEach(dep => {
+    const option = document.createElement('option');
+    option.value = dep;
+    option.textContent = dep;
+    departamentoSelect.appendChild(option);
+  });
+});
+
+// Cuando el usuario selecciona un departamento → poblar categorías
+departamentoSelect.addEventListener('change', () => {
+  const categorias = getCategorias(capitalize(departamentoSelect.value));
+
+  // Limpiar opciones previas
+  categoriaSelect.innerHTML = '<option value="" disabled selected>Selecciona una categoría</option>';
+
+  categorias.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat;
+    option.textContent = cat;
+    categoriaSelect.appendChild(option);
+  });
+});
+
+// ===================== Utils base sobre inventario =====================
+function getFlatProducts() {
+  const flat = [];
+  for (const dep of inventario) {
+    for (const cat of dep.categorias) {
+      for (const prod of cat.productos) {
+        flat.push({
+          ...prod,
+          _departamento: dep.departamento,
+          _categoriaNombre: cat.nombre
+        });
+      }
+    }
+  }
+  return flat;
+}
+
+// Busca un departamento por nombre
+function findDepartamentoNode(nombreDepto) {
+  return inventario.find(
+    d => d.departamento.toLowerCase() === String(nombreDepto).toLowerCase()
+  );
+}
+
+// Busca la categoría dentro de un departamento específico
+function findCategoriaNode(nombreDepto, nombreCategoria) {
+  const dep = findDepartamentoNode(nombreDepto);
+  if (!dep) return null;
+  const cat = dep.categorias.find(
+    c => c.nombre.toLowerCase() === String(nombreCategoria).toLowerCase()
+  );
+  return cat ? { dep, cat } : null;
+}
+
 // ===================== Helpers para custom validity =====================
 function clearValidity(...els) {
-  els.forEach(el => el.setCustomValidity(''));
+  els.forEach(el => el && el.setCustomValidity && el.setCustomValidity(''));
 }
 
 function isEmpty(value) {
@@ -28,48 +91,116 @@ function isNegativeNumber(el) {
   return Number.isFinite(val) && val < 0;
 }
 
-function isDuplicateSKU(value) {
-  return products.some(p => String(p.sku) === String(value));
+// Verifica nombre duplicado en misma categoría del mismo departamento
+function isDuplicateName(nombre, departamento, categoria) {
+  const bucket = findCategoriaNode(departamento, categoria);
+  if (!bucket) return false;
+  const needle = String(nombre).toLowerCase();
+  return bucket.cat.productos.some(
+    p => String(p.nombre).toLowerCase() === needle
+  );
 }
 
-function isDuplicateName(value) {
-  return products.some(p => String(p.nombre).toLowerCase() === String(value).toLowerCase());
+// ===================== SKU automático =====================
+const pad3 = n => String(n).padStart(3, '0');
+
+function nextSkuForCategory(departamento, categoria) {
+  const bucket = findCategoriaNode(departamento, categoria);
+  if (!bucket) return '';
+  const prefix = String(categoria).slice(0, 2).toUpperCase();
+  let maxSeq = 0;
+
+  for (const p of bucket.cat.productos) {
+    const m = /^([A-Z]{2})-(\d{3})$/.exec(String(p.sku || ''));
+    if (m && m[1] === prefix) {
+      const n = parseInt(m[2], 10);
+      if (!Number.isNaN(n) && n > maxSeq) maxSeq = n;
+    }
+  }
+  return `${prefix}-${pad3(maxSeq + 1)}`;
+}
+
+// ===================== ID autoincremental =====================
+function nextProductId() {
+  const items = getFlatProducts();
+  let maxId = 0;
+  for (const p of items) {
+    const idNum = Number(p.id);
+    if (Number.isInteger(idNum) && idNum > maxId) {
+      maxId = idNum;
+    }
+  }
+  return maxId + 1;
+}
+
+// ===================== Alta de producto =====================
+function addProductToInventario(data) {
+  const bucket = findCategoriaNode(data.departamento, data.categoria);
+  if (!bucket) {
+    throw new Error(
+      `La categoría "${data.categoria}" no existe en el departamento "${data.departamento}".`
+    );
+  }
+  const id = nextProductId();                               // 👈 nuevo ID autoincremental
+  const sku = nextSkuForCategory(data.departamento, data.categoria);
+  const nuevo = { id, ...data, sku };
+  bucket.cat.productos.push(nuevo);
+  return nuevo;
 }
 
 // ============================ Submit del formulario ============================
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  // Limpiar estados previos
-  clearValidity(nombreInput, categoriaSelect, skuInput, cantidadInput, unidadSelect, precioInput);
+  clearValidity(
+    nombreInput,
+    departamentoSelect,
+    categoriaSelect,
+    cantidadInput,
+    unidadSelect,
+    precioInput
+  );
 
   let valid = true;
 
-  // Nombre: no vacío, no repetido
+  // Nombre
   if (isEmpty(nombreInput.value)) {
     nombreInput.setCustomValidity('El nombre es obligatorio.');
     valid = false;
-  } else if (isDuplicateName(nombreInput.value)) {
-    nombreInput.setCustomValidity('El nombre del producto ya existe. Debe ser único.');
+  } else if (
+    isDuplicateName(
+      nombreInput.value,
+      departamentoSelect.value,
+      categoriaSelect.value
+    )
+  ) {
+    nombreInput.setCustomValidity(
+      'Ya existe un producto con ese nombre en esta categoría.'
+    );
     valid = false;
   }
 
-  // Categoría: seleccionada
+  // Departamento
+  if (isEmpty(departamentoSelect.value)) {
+    departamentoSelect.setCustomValidity('Selecciona un departamento.');
+    valid = false;
+  } else if (!findDepartamentoNode(departamentoSelect.value)) {
+    departamentoSelect.setCustomValidity('El departamento no es válido.');
+    valid = false;
+  }
+
+  // Categoría
   if (isEmpty(categoriaSelect.value)) {
     categoriaSelect.setCustomValidity('Selecciona una categoría.');
     valid = false;
-  }
-
-  // SKU: no vacío y no repetido
-  if (isEmpty(skuInput.value)) {
-    skuInput.setCustomValidity('El SKU es obligatorio.');
-    valid = false;
-  } else if (isDuplicateSKU(skuInput.value)) {
-    skuInput.setCustomValidity('El SKU ya existe. Debe ser único.');
+  } else if (!findCategoriaNode(departamentoSelect.value, categoriaSelect.value)) {
+    categoriaSelect.setCustomValidity(
+      'La categoría no pertenece al departamento seleccionado.'
+    );
     valid = false;
   }
 
-  // Cantidad: no vacía y no negativa
+  // Cantidad
   if (isEmpty(cantidadInput.value)) {
     cantidadInput.setCustomValidity('La cantidad es obligatoria.');
     valid = false;
@@ -78,13 +209,13 @@ form.addEventListener('submit', (e) => {
     valid = false;
   }
 
-  // Unidad: seleccionada
+  // Unidad
   if (isEmpty(unidadSelect.value)) {
     unidadSelect.setCustomValidity('Selecciona la unidad.');
     valid = false;
   }
 
-  // Precio: no vacío y no negativo
+  // Precio
   if (isEmpty(precioInput.value)) {
     precioInput.setCustomValidity('El precio es obligatorio.');
     valid = false;
@@ -98,33 +229,35 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
+  // Data
   const data = {
     nombre: nombreInput.value.trim(),
+    departamento: departamentoSelect.value,
     categoria: categoriaSelect.value,
-    sku: String(skuInput.value).trim(),
     cantidad: Number(cantidadInput.value),
     unidad: unidadSelect.value,
     precio: Number(precioInput.value)
   };
 
-  const creado = addProduct ? addProduct(data) : (products.push({ ...data, id: Date.now() }), data);
+  try {
+    const creado = addProductToInventario(data);
+    alert(`Producto agregado ✅ (ID: ${creado.id}, SKU: ${creado.sku})`);
+  } catch (err) {
+    alert(err.message || 'Error al agregar producto.');
+    return;
+  }
 
-  alert(`Producto agregado ✅ (ID: ${creado.id})`);
-  console.log(products);
   form.reset();
-
-  // Re-render manteniendo página actual (o salta a la última; descomenta si prefieres):
-  // const { totalPages } = getPagedItems(currentPage);
-  // goToPage(totalPages);
   renderProductsTable(currentPage);
 });
 
-// ============================ Cargar datos del stock ============================
+// ============================ Render tabla con paginación ============================
+const mxn = new Intl.NumberFormat('es-MX', {
+  style: 'currency',
+  currency: 'MXN',
+  minimumFractionDigits: 2
+});
 
-// Utilidad para formatear moneda MXN
-const mxn = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', minimumFractionDigits: 2 });
-
-// Mapea la unidad a cómo la quieres mostrar en la tabla
 function formatUnits(p) {
   const u = (p.unidad || '').toLowerCase();
   if (u === 'kilo') return `${p.cantidad} KG`;
@@ -133,9 +266,8 @@ function formatUnits(p) {
   return `${p.cantidad} ${p.unidad || ''}`.trim();
 }
 
-// =============== Paginación ===============
 function getPagedItems(page = 1) {
-  const items = getProducts ? getProducts() : products; // si no usas getProducts, usa products
+  const items = getFlatProducts();
   const total = items.length;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
@@ -159,17 +291,16 @@ function renderProductsTable(page = 1) {
   const { pageItems, totalPages, page: safePage } = getPagedItems(page);
   currentPage = safePage;
 
-  // Limpia el cuerpo de la tabla
   tbody.innerHTML = '';
 
-  // Crea filas
   pageItems.forEach(p => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><!-- imagen --></td>
+      <td>${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" style="max-height:48px;"/>` : ''}</td>
       <td>${p.nombre}</td>
+      <td>${p._departamento}</td>
       <td>${p.categoria}</td>
-      <td>${p.sku}</td>
+      <td>${p.sku || ''}</td>
       <td>${formatUnits(p)}</td>
       <td>${mxn.format(p.precio)}</td>
     `;
@@ -204,16 +335,13 @@ function renderPagination(totalPages, page) {
     return liEl;
   };
 
-  // Previous
   ul.appendChild(makeLi('Previous', page - 1, page === 1, false, 'Previous'));
 
-  // Ventana de páginas (máx 5 visibles)
   const MAX_VISIBLE = 5;
   let start = Math.max(1, page - Math.floor(MAX_VISIBLE / 2));
   let end = Math.min(totalPages, start + MAX_VISIBLE - 1);
   if (end - start + 1 < MAX_VISIBLE) start = Math.max(1, end - MAX_VISIBLE + 1);
 
-  // Inicio con "1" + …
   if (start > 1) {
     ul.appendChild(makeLi('1', 1, false, page === 1));
     if (start > 2) {
@@ -224,12 +352,10 @@ function renderPagination(totalPages, page) {
     }
   }
 
-  // Rango central
   for (let p = start; p <= end; p++) {
     ul.appendChild(makeLi(String(p), p, false, p === page));
   }
 
-  // … + última
   if (end < totalPages) {
     if (end < totalPages - 1) {
       const dots = document.createElement('li');
@@ -240,7 +366,6 @@ function renderPagination(totalPages, page) {
     ul.appendChild(makeLi(String(totalPages), totalPages, false, page === totalPages));
   }
 
-  // Next
   ul.appendChild(makeLi('Next', page + 1, page === totalPages, false, 'Next'));
 }
 
