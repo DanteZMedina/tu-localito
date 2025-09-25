@@ -78,7 +78,11 @@ function renderPagination(totalItems) {
 
   // Botón "Previous"
   const prevItem = document.createElement("li");
-  prevItem.classList.add("page-item", currentPage === 1 ? "disabled" : "");
+  prevItem.classList.add("page-item");
+if (currentPage === 1) {
+  prevItem.classList.add("disabled");
+}
+
   prevItem.innerHTML = `<a class="page-link" href="#">Previous</a>`;
   prevItem.addEventListener("click", (e) => {
     e.preventDefault();
@@ -129,7 +133,11 @@ function renderPagination(totalItems) {
 
   // Botón "Next"
   const nextItem = document.createElement("li");
-  nextItem.classList.add("page-item", currentPage === totalPages ? "disabled" : "");
+  nextItem.classList.add("page-item");
+if (currentPage === totalPages) {
+  nextItem.classList.add("disabled");
+}
+
   nextItem.innerHTML = `<a class="page-link" href="#">Next</a>`;
   nextItem.addEventListener("click", (e) => {
     e.preventDefault();
@@ -146,7 +154,11 @@ function renderPagination(totalItems) {
 // ===============================
 function addPageItem(page, container) {
   const li = document.createElement("li");
-  li.classList.add("page-item", page === currentPage ? "active" : "");
+ li.classList.add("page-item");
+if (page === currentPage) {
+  li.classList.add("active");
+}
+
   li.innerHTML = `<a class="page-link" href="#">${page}</a>`;
   li.addEventListener("click", (e) => {
     e.preventDefault();
