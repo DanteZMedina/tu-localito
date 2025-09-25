@@ -20,7 +20,7 @@
 </head>
 
 <body>
-  
+
   <header>
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -71,62 +71,42 @@
   </header>
 
   <main>
-
-
     <div class="container-fluid my-4">
-      <div class="d-flex justify-content-center gap-3 flex-wrap">
-
-        <!-- Frutas -->
-        <div class="category-card active" data-category="frutas">
-          <img src="../img/Catalogo/FRUTAS.png" class="category-img" alt="Frutas">
-          <div class="category-text">FRUTAS</div>
-        </div>
-
-        <!-- Verduras -->
-        <div class="category-card" data-category="verduras">
-          <img src="../img/Catalogo/vegetables.jpg" class="category-img" alt="Verduras">
-          <div class="category-text">VERDURAS</div>
-        </div>
-
-        <!-- Granel -->
-        <div class="category-card" data-category="granel">
-          <img src="../img/Catalogo/grains.jpg" class="category-img" alt="Granel">
-          <div class="category-text">GRANEL</div>
-        </div>
-
-        <!-- Lácteos -->
-        <div class="category-card" data-category="lacteos">
-          <img src="../img/Catalogo/dairy.jpg" class="category-img" alt="Lácteos">
-          <div class="category-text">LÁCTEOS</div>
-        </div>
-
+      <div id="departamentos-container" class="d-flex justify-content-center gap-3 flex-wrap">
+        <!-- Aquí se generarán las cards dinámicamente -->
       </div>
     </div>
+
     <div class="container-fluid">
       <div class="row">
-
         <!-- Barra lateral de filtros -->
-        <aside class="categorias-sidebar container" id="categorias-sidebar">
-                <h2>Categorías</h2>
-                <ul id="lista-categorias">
-                    </ul>
+        <aside class="col-md-3 col-lg-2 bg-light p-3 categorias-sidebar" id="categorias-sidebar">
+          <h2>Categorías</h2>
+          <ul id="lista-categorias" class="list-unstyled">
+            <!-- Se llenará dinámicamente con JS -->
+          </ul>
         </aside>
 
         <!-- Contenido principal -->
         <div class="col-md-9 col-lg-10 p-4">
           <div id="contenedor-productos" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-            <!-- Agrega más productos aquí -->
-
+            <!-- Productos renderizados con JS -->
           </div>
         </div>
+
       </div>
     </div>
 
     <!-- Barra de paginación -->
-   
-<nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
-  <ul class="pagination justify-content-center"></ul>
-</nav>
+    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+      <ul class="pagination justify-content-center"></ul>
+    </nav>
+
+    <!-- Barra de paginación -->
+
+    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+      <ul class="pagination justify-content-center"></ul>
+    </nav>
 
     <!-- Modal del carrito -->
     <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">

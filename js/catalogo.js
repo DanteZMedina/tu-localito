@@ -51,7 +51,7 @@ function renderProducts(products) {
       <div class="card h-100 text-center shadow-sm">
         <img src="${prod.imagen}" class="card-img-top category-img" alt="${prod.nombre}">
         <div class="card-body">
-          <h5 class="card-title">${prod.nombre}</h5>
+          <h5 class="card-title ">${prod.nombre}</h5>
           <p class="card-text"><strong>Precio:</strong> $${prod.precio.toFixed(2)} / ${prod.unidad}</p>
         </div>
         <div class="d-flex justify-content-center align-items-center gap-2">
@@ -169,8 +169,142 @@ if (page === currentPage) {
 }
 
 // ===============================
+// Crear barra lateral de categorías
+// ===============================
+// = Buscando elemento padre en donde implementar la barra. = 
+const listaCategoriasEl = document.getElementById('lista-categorias');
+/**
+ * Función para asignar emoji dinámico
+ */
+function getCategoriaEmoji(categoria) {
+  const emojis = {
+    "Frutas": "🍎",
+    "Verduras": "🥕",
+    "Carnes Frías": "🍖",
+    "Granel": "⚖️",
+    "Lácteos": "🧀",
+    "Bebidas": "🥤",
+    "Limpieza": "🧼",
+    "Mascotas": "🐾",
+    "Abarrotes": "🥫",
+    "Cuidado Personal": "🧴",
+    "Enlatados" : "🥫",
+    "Basicos" : "🥐",
+    "Jabón" : "🧼",
+    "Detergentes" : "🫧",
+    "Shampoo" : "🧴",
+    "Papel de baño" : "🧻",
+    "Toallas femeninas" : "🩲",
+    "Desodorante" : "🐿️​",
+    "Croquetas" : "🐶",
+    "Juguetes" : "🧸",
+    "Accesorios" : "🐕‍🦺"
+  };
+  return emojis[categoria] || "🛒";
+}
+
+
+/***
+ * Funcion para Renderizar las categorías en el DOM
+ */
+function renderizarCategoriasDinamico() {
+  const categorias = ['Todos', ...new Set(allProducts.map(p => p.categoria))];
+
+  listaCategoriasEl.innerHTML = ''; // limpiar
+
+  categorias.forEach(cat => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#';
+    a.textContent = cat === 'Todos' ? '🛒 Todos' : `${getCategoriaEmoji(cat)} ${cat}`;
+    a.classList.toggle('active', cat === 'Todos');
+
+    // Evento click
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      filtrarPorCategoria(cat, a);
+    });
+
+    li.appendChild(a);
+    listaCategoriasEl.appendChild(li);
+  });
+}
+
+
+/**
+ * Funcion para aplicar filtros a la barra de categorías
+ */
+function filtrarPorCategoria(categoria, elemento) {
+  // Actualizar clase activa
+  document.querySelectorAll('#lista-categorias a').forEach(a => a.classList.remove('active'));
+  elemento.classList.add('active');
+
+  // Filtrar productos
+  const productosFiltrados = categoria === 'Todos' 
+    ? allProducts 
+    : allProducts.filter(p => p.categoria === categoria);
+
+  // Reiniciar paginación
+  currentPage = 1;
+  renderProducts(productosFiltrados);
+}
+
+/**
+ * Función para obtener imagen por departamento
+ */
+function getDepartamentoImage(departamento) {
+  const images = {
+    "Alimentos": "https://i.ibb.co/Fkv3PPgM/alimentos.png",
+    "Abarrotes": "https://i.ibb.co/k6s5W763/Abarrotes.png",
+    "Productos de limpieza": "https://i.ibb.co/FbXVDvHr/Productos-Limpieza.png",
+    "Cuidado personal": "https://i.ibb.co/LzhXBhJV/Cuidado-Personal.png",
+    "Mascotas": "https://i.ibb.co/6R83JjQn/Productos-Mascotas.png"
+  };
+  return images[departamento] || "../img/Catalogo/default.jpg";
+}
+/**
+ * Función para renderizar las cards de departamentos
+ */
+function renderizarDepartamentos() {
+  const container = document.getElementById("departamentos-container");
+  container.innerHTML = "";
+
+  // Departamentos definidos
+  const departamentos = ["Alimentos", "Abarrotes", "Productos de limpieza", "Cuidado personal", "Mascotas"];
+
+  departamentos.forEach((dep, index) => {
+    const card = document.createElement("div");
+    card.classList.add("category-card");
+    if (index === 0) card.classList.add("active"); // Primera activa por defecto
+    card.dataset.category = dep.replace(/\s+/g, "-").toLowerCase();
+
+    card.innerHTML = `
+      <img src="${getDepartamentoImage(dep)}" class="category-img" alt="${dep}">
+      <div class="category-text">${dep.toUpperCase()}</div>
+    `;
+
+    // Evento click: filtrar por departamento
+    card.addEventListener("click", () => {
+      // Quitar clase active de todas
+      document.querySelectorAll(".category-card").forEach(c => c.classList.remove("active"));
+      card.classList.add("active");
+
+      // Filtrar productos por departamento
+      const productosFiltrados = allProducts.filter(p => p.departamento === dep);
+      currentPage = 1;
+      renderProducts(productosFiltrados);
+    });
+
+    container.appendChild(card);
+  });
+}
+
+
+// ===============================
 // 🔹 6. Inicializar
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   renderProducts(allProducts);
+  renderizarCategoriasDinamico();
+  renderizarDepartamentos();
 });
