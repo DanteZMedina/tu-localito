@@ -303,6 +303,7 @@ function renderProductsTable(page = 1) {
       <td>${p.sku || ''}</td>
       <td>${formatUnits(p)}</td>
       <td>${mxn.format(p.precio)}</td>
+      <td> <button class="btn-edit"><img src="../img/stock/edit-icon.png"></button></td>
     `;
     tbody.appendChild(tr);
   });

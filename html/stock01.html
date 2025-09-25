@@ -102,14 +102,14 @@
         <!-- Botón Agregar Nuevo Producto -->
         <div class="row mb-3">
           <div class="col-12">
-            <button class="btn btn-primary" id="btn-show-form">
+            <button class="btn" id="btn-show-form">
               Agregar Nuevo Producto
             </button>
           </div>
         </div>
 
         <!-- Formulario dinámico (oculto al inicio) -->
-        <div class="row mb-4">
+        <div class="row mb-3">
           <div class="col-12">
             <form id="product-form" class="d-none">
               <div class="products-container">
@@ -123,20 +123,13 @@
                   <div class="col-12 col-md">
                     <label for="product-department">Departamento:</label>
                     <select id="product-department" class="form-select">
-                      <option value=""></option>
-                      <option value="Alimentos">Alimentos</option>
-                      <option value="Bebidas">Bebidas</option>
-                      <option value="Productos">Productos de limpieza</option>
-                      <option value="Mascotas">Mascotas</option>
-                      <option value="Abarrotes">Abarrotes</option>
-                      <option value="Cuidado Personal">Cuidado Personal</option>
+                      <option value="" selected disabled></option>
                     </select>
                   </div>
                   <div class="col-12 col-md">
                     <label for="product-category">Categoría:</label>
                     <select id="product-category" class="form-select">
-                      <option value=""></option>
-                      <option value="Refrescos">Refrescos</option>
+                      <option value="" selected disabled></option>
                     </select>
                   </div>
                   <div class="col-12 col-md">
@@ -150,9 +143,10 @@
                   <div class="col-12 col-md">
                     <label for="product-unit">Unidad:</label>
                     <select id="product-unit" class="form-select">
-                      <option value="Pza">Pza</option>
-                      <option value="L">L</option>
-                      <option value="Kg">Kg</option>
+                      <option value="" selected disabled></option>
+                      <option value="pieza">Pieza</option>
+                      <option value="kilo">Kilo</option>
+                      <option value="kilo">Litro</option>
                     </select>
                   </div>
                   <div class="col-12 col-md">
@@ -174,17 +168,38 @@
                 </div>
               </div>
               <!-- Botones de acción (Guardar + Agregar fila) -->
-              <div class="m-3 gap-2 d-flex justify-content-end">
-                <button class="btn btn-primary" type="submit">Guardar</button>
+              <div class="d-flex justify-content-end">
+                <button class="btn" id="btn-save" type="submit">Guardar</button>
               </div>
             </form>
           </div>
         </div>
 
+        <!-- Contenedor principal: tabla + panel de filtros -->
         <div class="row">
-          <!-- BARRA DE BÚSQUEDA -->
-          <div class="col-12 col-md-8 my-3">
-            <div class="input-group">
+          <!-- Panel de filtros: 4 columnas en lg -->
+          <div class="col-12 col-lg-2 d-none d-lg-flex justify-content-end">
+            <aside class="panel-lateral card p-3 shadow-sm h-fit w-100">
+              <div class="mb-3">
+                <label for="stock-alert" class="form-label"
+                  >Alerta de Stock:</label
+                >
+                <input
+                  type="number"
+                  id="stock-alert"
+                  class="form-control"
+                  value="5"
+                />
+              </div>
+
+              <div class="text-end">
+                <button class="btn" id="btn-filter">Aplicar</button>
+              </div>
+            </aside>
+          </div>
+          <div class="col-12 col-md-10">
+            <!-- BARRA DE BÚSQUEDA -->
+            <div class="input-group mb-3">
               <input
                 type="text"
                 class="form-control search-bar"
@@ -206,15 +221,9 @@
                 </svg>
               </button>
             </div>
-          </div>
-        </div>
-
-        <!-- Contenedor principal: tabla + panel de filtros -->
-        <div class="row">
-          <!-- Tabla de productos: 8 columnas en lg -->
-          <div class="col-12 col-md-8">
-            <div class="contenedor-productos text-center">
-              <table class="table table-bordered">
+            <!-- Tabla de productos: 8 columnas en lg -->
+            <div class="contenedor-productos">
+              <table class="table table-bordered text-center align-middle">
                 <thead class="tabla-productos">
                   <tr>
                     <th>Imágen</th>
@@ -224,6 +233,7 @@
                     <th>SKU</th>
                     <th>Unidades</th>
                     <th>Precio</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody id="tbody-productos">
@@ -239,27 +249,6 @@
             >
               <ul class="pagination" id="paginacion"></ul>
             </nav>
-          </div>
-
-          <!-- Panel de filtros: 4 columnas en lg -->
-          <div class="col-12 col-lg-4 d-none d-lg-flex justify-content-end">
-            <aside class="panel-lateral card p-3 shadow-sm h-fit w-100">
-              <div class="mb-3">
-                <label for="stock-alert" class="form-label"
-                  >Alerta de Stock:</label
-                >
-                <input
-                  type="number"
-                  id="stock-alert"
-                  class="form-control"
-                  value="5"
-                />
-              </div>
-
-              <div class="text-end">
-                <a class="btn btn-filter">Aplicar</a>
-              </div>
-            </aside>
           </div>
         </div>
       </div>

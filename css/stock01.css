@@ -182,8 +182,7 @@ nav.navbar {
     box-shadow: var(--box-shadow);
 }
 
-.acciones .ingresar,
-#btn-add {
+.acciones .ingresar{
     background: var(--color-button-add);
     color: white;
     border: 2px solid var(--color-button-add);
@@ -266,8 +265,8 @@ footer.principal {
     gap: 6px;
 }
 
-.new-product-form button,
-.btn-filter {
+
+#btn-show-form, #btn-filter{
     background: var(--color-button-principal);
     color: white;
     border: 2px solid var(--color-button-principal);
@@ -278,7 +277,7 @@ footer.principal {
     box-shadow: var(--box-shadow);
 }
 
-.new-product-form button:hover {
+#btn-show-form:hover, #btn-filter:hover{
     background-color: #0e2a5e;
 }
 
@@ -299,10 +298,6 @@ footer.principal {
 
 /* ==================== TABLA DE PRODUCTOS ==================== */
 
-/* Contenedor general de la tabla */
-.contenedor-productos {
-    padding: 0 12px;
-}
 
 /* Tabla de productos */
 .contenedor-productos table {
@@ -361,6 +356,16 @@ footer.principal {
     cursor: pointer;
 }
 
+.btn-edit {
+  width: 20px;   /* tamaño fijo del botón */
+  height: 20px;
+  padding: 0;    /* elimina padding extra */
+}
+
+.btn-edit img {
+  width: 15px;   /* tamaño fijo del icono */
+  height: 15px;
+}
 /* Imágenes dentro de celdas */
 .contenedor-productos td img {
     border-radius: 8px;
