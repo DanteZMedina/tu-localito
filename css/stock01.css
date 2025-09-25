@@ -88,7 +88,8 @@ h6 {
 
     /* Colores */
     --color-orange: #E85C14;
-    --color-amarillo: #FFDE59;
+    --color-verde: #4dbe87;
+    ;
     --color-card-bg: #FEBCBC;
     --color-border-card: #E85E14;
     --color-carousel-control: #E85E14;
@@ -164,7 +165,8 @@ nav.navbar {
     background: #A0522D;
 }
 
-.menu a:hover, .menu a.active {
+.menu a:hover,
+.menu a.active {
     transform: translateY(5px);
 }
 
@@ -180,7 +182,8 @@ nav.navbar {
     box-shadow: var(--box-shadow);
 }
 
-.acciones .ingresar, #btn-add{
+.acciones .ingresar,
+#btn-add {
     background: var(--color-button-add);
     color: white;
     border: 2px solid var(--color-button-add);
@@ -197,44 +200,74 @@ nav.navbar {
     background: #c62828;
 }
 
-.acciones .ingresar:hover, #btn-add:hover{
+.acciones .ingresar:hover,
+#btn-add:hover {
     background: var(--color-button-add-hover);
 }
 
 /* ==================== LAYOUT BASE ==================== */
-html, body {
-    height: 100%;             /* Toda la ventana */
+html,
+body {
+    height: 100%;
+    /* Toda la ventana */
     margin: 0;
     display: flex;
-    flex-direction: column;   /* Header, main, footer en columna */
+    flex-direction: column;
+    /* Header, main, footer en columna */
 }
 
 body {
-    padding-top: 65px;        /* Ajuste por navbar fixed */
+    padding-top: 65px;
+    /* Ajuste por navbar fixed */
 }
 
 main {
-    flex: 1;                  /* Ocupa todo el espacio disponible */
+    flex: 1;
+    /* Ocupa todo el espacio disponible */
 }
 
 footer.principal {
-    margin-top: auto;         /* Empuja el footer al fondo */
+    margin-top: auto;
+    /* Empuja el footer al fondo */
 }
 
 
-/*body*/
-h1{
+/body/ h1 {
     font-family: var(--font-family-heading);
     font-size: var(--font-size-heading1);
 }
 
-input{
-    max-width: 100px;
+.form-container {
+    background: #FFFDFD;
+    border: 1px solid #E2D1D1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 
+.new-product-form input {
+    border: 1px solid var(--color-input-bg);
+    background-color: var(--color-input-bg);
+    font-size: var(--font-size-small);
+    color: #000;
+}
 
-.new-product-form button{
+.product-row {
+    margin-bottom: 20px;
+}
+
+.tag {
+    background-color: var(--color-verde);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 20px;
+    gap: 6px;
+}
+
+.new-product-form button,
+.btn-filter {
     background: var(--color-button-principal);
     color: white;
     border: 2px solid var(--color-button-principal);
@@ -245,8 +278,127 @@ input{
     box-shadow: var(--box-shadow);
 }
 
-.new-product-form button:hover{
+.new-product-form button:hover {
     background-color: #0e2a5e;
+}
+
+#btn-add-picture {
+    background: white;
+    border: 2px solid rgb(156, 154, 154);
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: var(--box-shadow)
+}
+
+#btn-add-picture img {
+    width: 30px;
+    height: 30px;
+}
+
+/* ==================== TABLA DE PRODUCTOS ==================== */
+
+/* Contenedor general de la tabla */
+.contenedor-productos {
+    padding: 0 12px;
+}
+
+/* Tabla de productos */
+.contenedor-productos table {
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Cabecera de la tabla */
+.contenedor-productos thead {
+    background-color: #fff;
+    /* blanco */
+    color: rgb(250, 249, 249);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Cabeceras con imagen de fondo */
+.tabla-productos th{
+    background-color: var(--color-button-navbar);
+    border: 1px solid #A0522D;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Filas de productos */
+.fila {
+    border: 2px solid white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    vertical-align: middle;
+    margin-bottom: 10px;
+    /* espacio entre filas */
+}
+
+/* Celdas con imágenes */
+.imagen-renglon {
+    background-size: cover;
+    background-position: center;
+    width: 130px;
+    height: 63px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Hover sobre filas */
+.contenedor-productos .table-hover tbody tr:hover {
+    background-color: #7b4b03;
+    cursor: pointer;
+}
+
+/* Imágenes dentro de celdas */
+.contenedor-productos td img {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(71, 42, 29, 0.2);
+}
+
+/* ==================== PANEL LATERAL / FILTROS ==================== */
+.panel-lateral {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius);
+    max-width: 300px;
+    padding: 1rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: var(--color-verde);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-close {
+    background-color: transparent;
+    border: none;
+    font-size: 0.8rem;
+}
+
+.h-fit {
+    height: fit-content !important;
 }
 
 
@@ -254,7 +406,7 @@ input{
 
 /* ==================== FOOTER ==================== */
 footer.principal {
-    background-color: var(--color-amarillo);
+    background-color: var(--color-verde);
     font-family: var(--font-family);
     font-size: 12px;
     display: flex;
@@ -272,7 +424,7 @@ footer.principal {
     color: var(--color-orange);
 }
 
-.footer-about-us a.active{
+.footer-about-us a.active {
     text-decoration: underline;
 }
 

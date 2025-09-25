@@ -7,13 +7,13 @@ const PAGE_SIZE = 10;
 let currentPage = 1;
 
 // ========================= Referencias a los campos =========================
-const form = document.getElementById('form-producto');
-const nombreInput = document.getElementById('nombre-producto');
-const departamentoSelect = document.getElementById('departamento-producto');
-const categoriaSelect = document.getElementById('categoria-producto');
-const cantidadInput = document.getElementById('cantidad-producto');
-const unidadSelect = document.getElementById('unidad-producto');
-const precioInput = document.getElementById('precio-producto');
+const form = document.getElementById('product-form');
+const nombreInput = document.getElementById('product-name');
+const departamentoSelect = document.getElementById('product-department');
+const categoriaSelect = document.getElementById('product-category');
+const cantidadInput = document.getElementById('product-stock');
+const unidadSelect = document.getElementById('product-unit');
+const precioInput = document.getElementById('product-price');
 
 // ========================= Poblar selects =========================
 // Poblar departamentos al cargar
@@ -374,6 +374,15 @@ function goToPage(page) {
 }
 
 // ============================ Inicializa ============================
-document.addEventListener('DOMContentLoaded', () => {
+// ============================ Inicializa ============================
+document.addEventListener("DOMContentLoaded", () => {
   renderProductsTable(1);
+  //============================= Agregar formulario de nuevo producto ============
+  const btnShowForm = document.getElementById("btn-show-form");
+  const productForm = document.getElementById("product-form");
+
+  btnShowForm.addEventListener("click", () => {
+    productForm.classList.remove("d-none"); // Muestra el formulario
+  });
+
 });
