@@ -30,6 +30,8 @@ formulario.addEventListener("submit", function (e) {
     completeForm = document.getElementById("formulario-completo");
     completeForm.classList.add("active");
     formCp.classList.add("hidden");
+    formCpCompleted = document.getElementById("codigo-postal");
+    formCpCompleted.value = cp;
   } else {
     mensaje.textContent = "Estás fuera de nuestro alcance. :(";
     mensaje.classList.add("error");
@@ -48,13 +50,19 @@ formularioCompleto.addEventListener("submit", function (e) {
     const resultado = validateInput(input);
     if (!resultado) {
       esValido = false;
-    }});
-    if (esValido){
-      console.log("Formulario completo");
-      
-    } else{
-      console.log("Formulario incompleto");
     }
+  });
+  if (esValido) {
+    console.log("Formulario completo");
+
+    //Construccion del json
+    constructorJson(formularioCompleto);
+
+
+
+  } else {
+    console.log("Formulario incompleto");
+  }
 }
 );
 
@@ -292,4 +300,13 @@ function getFieldDisplayName(fieldName) {
     confirmPassword: "confirmar contraseña",
   };
   return fieldNames[fieldName] || fieldName;
+};
+function constructorJson(formulario) {
+   const formData = new FormData(formulario);
+    const datosObj = Object.fromEntries(formData.entries());
+    /*Hace que no se muestre la contraseña, pero no es seguro
+    datosObj.password = "*".repeat(datosObj.password.length);
+    datosObj.confirmPassword = "*".repeat(datosObj.confirmPassword.length);*/
+    const datosJson = JSON.stringify(datosObj);
+    console.log("JSON listo para enviar:", datosJson);
 };

@@ -242,6 +242,13 @@ h2{
     color: #000;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 
 .contact-form button{
     background: var(--color-button-principal);
