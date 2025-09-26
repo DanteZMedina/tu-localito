@@ -8,7 +8,7 @@ const inventario = [
           {
             id: 1,
             nombre: "Aguacate",
-            categoria: "frutas",
+            categoria: "Frutas",
             sku: "FR-001",
             cantidad: 30,
             unidad: "kilo",

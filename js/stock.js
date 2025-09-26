@@ -6,6 +6,9 @@ import { getDepartamentos, getCategorias, capitalize } from './helpers-inventari
 const PAGE_SIZE = 10;
 let currentPage = 1;
 
+// ⬇️ NUEVO: lista "externa" que llega desde el buscador (o null = usar todo)
+let externalItems = null;
+
 // ========================= Referencias a los campos =========================
 const form = document.getElementById('form-producto');
 const nombreInput = document.getElementById('nombre-producto');
@@ -141,7 +144,7 @@ function addProductToInventario(data) {
       `La categoría "${data.categoria}" no existe en el departamento "${data.departamento}".`
     );
   }
-  const id = nextProductId();                               // 👈 nuevo ID autoincremental
+  const id = nextProductId();                               // 👈 ID autoincremental
   const sku = nextSkuForCategory(data.departamento, data.categoria);
   const nuevo = { id, ...data, sku };
   bucket.cat.productos.push(nuevo);
@@ -266,8 +269,9 @@ function formatUnits(p) {
   return `${p.cantidad} ${p.unidad || ''}`.trim();
 }
 
+// ⬇️ CAMBIO: usar resultados de búsqueda (externalItems) si existen
 function getPagedItems(page = 1) {
-  const items = getFlatProducts();
+  const items = externalItems ?? getFlatProducts();
   const total = items.length;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
@@ -372,6 +376,12 @@ function renderPagination(totalPages, page) {
 function goToPage(page) {
   renderProductsTable(page);
 }
+
+// ⬇️ NUEVO: escuchar resultados del buscador (stock-search.js)
+document.addEventListener('search:results', (e) => {
+  externalItems = Array.isArray(e.detail?.items) ? e.detail.items : null;
+  renderProductsTable(1); // cada nueva búsqueda vuelve a la página 1
+});
 
 // ============================ Inicializa ============================
 document.addEventListener('DOMContentLoaded', () => {
