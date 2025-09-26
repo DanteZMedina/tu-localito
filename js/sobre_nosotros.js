@@ -58,7 +58,7 @@ const teamMembers = [
   },
 ];
 
-const carouselInner = docut.querySelector("#teamCarousel .carousel-inner");
+const carouselInner = document.querySelector("#teamCarousel .carousel-inner");
 
 teamMembers.forEach((member, index) => {
   // Contenedor del item del carrusel
@@ -125,7 +125,7 @@ teamMembers.forEach((member, index) => {
   cardBody.appendChild(h2);
   cardBody.appendChild(pRol);
   cardBody.appendChild(pBio);
-
+  
   colText.appendChild(cardBody);
 
   row.appendChild(colImg);
