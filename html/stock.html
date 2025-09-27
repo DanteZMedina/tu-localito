@@ -72,7 +72,8 @@
       <!-- BARRA DE BÚSQUEDA -->
       <form id="form-busqueda" class="input-group" role="search" autocomplete="off">
         <input type="text" id="search-input" class="form-control search-bar"
-          placeholder="Buscar producto, por nombre, sku, categoría, departamento" aria-label="Buscar producto, SKU o categoría" />
+          placeholder="Buscar producto, por nombre, sku, categoría, departamento"
+          aria-label="Buscar producto, SKU o categoría" />
         <button class="btn btn-outline-primary" id="search-btn" type="submit" aria-label="Buscar">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
             viewBox="0 0 16 16">
@@ -198,13 +199,13 @@
         <table class="table table-bordered">
           <thead class="tabla-productos">
             <tr id="fila">
-              <th id="imagen-header">Imágen</th>
-              <th id="imagen-header">Nombre</th>
-              <th id="imagen-header">Departamento</th>
-              <th id="imagen-header">Categoría</th>
-              <th id="imagen-header">SKU</th>
-              <th id="imagen-header">Unidades</th>
-              <th id="imagen-header">Precio</th>
+              <th id="th-imagen">Imagen</th>
+              <th id="th-nombre">Nombre</th>
+              <th id="th-departamento">Departamento</th>
+              <th id="th-categoria">Categoría</th>
+              <th id="th-sku">SKU</th>
+              <th id="th-cantidad">Unidades</th>
+              <th id="th-precio">Precio</th>
             </tr>
           </thead>
           <tbody id="tbody-productos">
@@ -221,35 +222,35 @@
       </nav>
     </div>
 
-
-    <!-- Espacio de filtros -->
+    <!-- Alerta de Stock -->
     <div class="col-4 d-none d-lg-flex justify-content-end">
       <!-- Columna derecha (panel lateral) -->
       <aside class="panel-lateral card p-3 shadow-sm h-fit">
-        <h5 class="fw-bold mb-3">Palabras relacionadas</h5>
-        <div class="tags mb-3">
-          <span class="tag">Frutas <button class="btn-close btn-sm"></button></span>
-          <span class="tag">Granel <button class="btn-close btn-sm"></button></span>
-          <span class="tag">Verduras <button class="btn-close btn-sm"></button></span>
-          <span class="tag">Promociones <button class="btn-close btn-sm"></button></span>
-          <span class="tag">Nuevos <button class="btn-close btn-sm"></button></span>
-        </div>
+        <form id="form-stock-config-listado" class="gap-3 align-items-end">
+          <h5 class="text-center">Configuracion de listado</h5>
+          <div class="d-flex flex-column">
+            <label for="input-umbral" class="form-label">Alerta de stock</label>
+            <input type="number" id="input-umbral" name="umbral" min="0" step="1" class="form-control"
+              placeholder="Ej. 5" required />
+          </div>
 
-        <div class="mb-3">
-          <label for="stock-alert" class="form-label">Alerta de Stock:</label>
-          <input type="number" id="stock-alert" class="form-control" value="5" />
-        </div>
+          <div class="d-flex flex-column">
+            <label for="input-ordenar" class="form-label d-block">Ordenar por</label>
+            <select id="input-ordenar" name="ordenar" class="form-select" required>
+              <!-- Se pueden ajustar según tu modelo -->
+              <option value="nombre">Nombre (A-Z)</option>
+              <option value="departamento">Departamento (A-Z)</option>
+              <option value="categoria">Categoria (A-Z)</option>
+              <option value="cantidad">Cantidad (Ascendente)</option>
+              <option value="precio">Precio (Ascendente)</option>
+              <!-- agrega más si lo necesitas -->
+            </select>
+          </div>
 
-        <div class="mb-4">
-          <label for="ordenar" class="form-label">Ordenar por:</label>
-          <input type="text" id="ordenar" class="form-control" value="Nombre" />
-        </div>
-
-        <div class="text-end">
-          <a href="cerrar_sesion.html" class="btn btn-danger">Cerrar Sesión</a>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
       </aside>
     </div>
-  </div>
   </div>
 
 
@@ -299,6 +300,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="../js/stock.js"></script>
   <script type="module" src="../js/stock-search.js"></script>
+  <script type="module" src="../js/stock-config-listado.js"></script>
 </body>
 
 </html>

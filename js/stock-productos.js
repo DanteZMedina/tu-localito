@@ -125,10 +125,10 @@ const inventario = [
         ]
       },
       {
-        nombre: "Juguetes",
+        nombre: "Juguetes perro",
         productos: [
-          { id: 29, nombre: "Premios", categoria: "Juguetes", sku: "JU-001", cantidad: 15, unidad: "pieza", precio: 60.00, imagen: "https://i.ibb.co/XxRdybM5/juguetes-de-perro.png" },
-          { id: 30, nombre: "Mini premios", categoria: "Juguetes", sku: "JU-002", cantidad: 20, unidad: "pieza", precio: 65.00, imagen: "https://i.ibb.co/TsfP9JP/juguete-de-perro-720x720.jpg" }
+          { id: 29, nombre: "Premios", categoria: "Juguetes perro", sku: "JU-001", cantidad: 15, unidad: "pieza", precio: 60.00, imagen: "https://i.ibb.co/XxRdybM5/juguetes-de-perro.png" },
+          { id: 30, nombre: "Mini premios", categoria: "Juguetes perro", sku: "JU-002", cantidad: 20, unidad: "pieza", precio: 65.00, imagen: "https://i.ibb.co/TsfP9JP/juguete-de-perro-720x720.jpg" }
         ]
       },
       {

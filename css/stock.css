@@ -359,3 +359,31 @@ footer.principal {
 .h-fit {
   height: fit-content !important;
 }
+
+/* reemplaza tus reglas actuales de .tr-alerta-* por estas: */
+.table tbody tr.tr-alerta-low   { --bs-table-bg: #f8d7da; } /* rojo  */
+.table tbody tr.tr-alerta-equal { --bs-table-bg: #fff3cd; } /* amarillo */
+
+/* Opcional: transiciones suaves al re-render */
+#tbody-productos tr { transition: background-color 120ms ease; }
+
+/* Badge de alerta en la celda de Unidades */
+.badge-stock {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25em 0.5em;
+  border-radius: 0.5rem;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.badge-low {
+  background-color: #dc3545; /* rojo Bootstrap */
+  color: #fff;
+}
+
+.badge-equal {
+  background-color: #ffc107; /* amarillo Bootstrap */
+  color: #212529;
+}

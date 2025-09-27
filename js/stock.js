@@ -377,10 +377,57 @@ function goToPage(page) {
   renderProductsTable(page);
 }
 
-// ⬇️ NUEVO: escuchar resultados del buscador (stock-search.js)
+// ======== Integración con "Configuración de listado" ========
+const CONFIG_STORAGE_KEY = 'configListadoSettings';
+
+function loadConfigListado() {
+  try {
+    const raw = localStorage.getItem(CONFIG_STORAGE_KEY);
+    if (!raw) return { ordenar: 'nombre' };
+    const parsed = JSON.parse(raw);
+    return { ordenar: typeof parsed.ordenar === 'string' ? parsed.ordenar : 'nombre' };
+  } catch {
+    return { ordenar: 'nombre' };
+  }
+}
+
+// Mapea claves visibles -> propiedades reales de los objetos (flat)
+function sortByConfigKey(items, key) {
+  if (!Array.isArray(items) || items.length === 0) return items;
+
+  const map = {
+    departamento: '_departamento',
+    categoria: 'categoria' in items[0] ? 'categoria' : '_categoriaNombre',
+    nombre: 'nombre',
+    cantidad: 'cantidad',
+    unidad: 'unidad',
+    precio: 'precio',
+  };
+  const realKey = map[key] || key;
+
+  const arr = [...items];
+  arr.sort((a, b) => {
+    const va = a?.[realKey];
+    const vb = b?.[realKey];
+    if (typeof va === 'number' && typeof vb === 'number') return va - vb;
+    return String(va ?? '').localeCompare(String(vb ?? ''), 'es', { sensitivity: 'base' });
+  });
+  return arr;
+}
+
+// ⬇️ Re-ordenar los resultados de búsqueda según la configuración guardada
 document.addEventListener('search:results', (e) => {
-  externalItems = Array.isArray(e.detail?.items) ? e.detail.items : null;
-  renderProductsTable(1); // cada nueva búsqueda vuelve a la página 1
+  const rawItems = Array.isArray(e.detail?.items) ? e.detail.items : null;
+  if (!rawItems) {
+    externalItems = null;
+    renderProductsTable(1);
+    return;
+  }
+
+  const { ordenar } = loadConfigListado();
+  const sorted = sortByConfigKey(rawItems, ordenar);
+  externalItems = sorted;
+  renderProductsTable(1); // siempre volvemos a la página 1 tras una búsqueda
 });
 
 // ============================ Inicializa ============================
