@@ -171,7 +171,8 @@ nav.navbar {
 }
 
 /* Acciones */
-.acciones .carrito {
+.acciones .carrito,
+#btn-delete {
     background: var(--color-button-carrito);
     color: white;
     border: 2px solid var(--color-button-carrito);
@@ -182,7 +183,7 @@ nav.navbar {
     box-shadow: var(--box-shadow);
 }
 
-.acciones .ingresar{
+.acciones .ingresar {
     background: var(--color-button-add);
     color: white;
     border: 2px solid var(--color-button-add);
@@ -194,8 +195,8 @@ nav.navbar {
 }
 
 
-
-.acciones .carrito:hover {
+.acciones .carrito:hover,
+#btn-delete:hover {
     background: #c62828;
 }
 
@@ -266,7 +267,10 @@ footer.principal {
 }
 
 
-#btn-show-form, #btn-filter, #btn-save{
+#btn-show-form,
+#btn-filter,
+#btn-save,
+#btn-save-edit {
     background: var(--color-button-principal);
     color: white;
     border: 2px solid var(--color-button-principal);
@@ -277,11 +281,15 @@ footer.principal {
     box-shadow: var(--box-shadow);
 }
 
-#btn-show-form:hover, #btn-filter:hover, #btn-save:hover{
+#btn-show-form:hover,
+#btn-filter:hover,
+#btn-save:hover,
+#btn-save-edit:hover {
     background-color: #0e2a5e;
 }
 
-#btn-add-picture {
+#btn-add-picture,
+#btn-edit-picture {
     background: white;
     border: 2px solid rgb(156, 154, 154);
     padding: 5px 10px;
@@ -291,7 +299,8 @@ footer.principal {
     box-shadow: var(--box-shadow)
 }
 
-#btn-add-picture img {
+#btn-add-picture img,
+#btn-edit-picture img {
     width: 30px;
     height: 30px;
 }
@@ -319,7 +328,7 @@ footer.principal {
 }
 
 /* Cabeceras con imagen de fondo */
-.tabla-productos th{
+.tabla-productos th {
     background-color: var(--color-button-navbar);
     border: 1px solid #A0522D;
     color: white;
@@ -357,48 +366,61 @@ footer.principal {
 }
 
 .btn-edit {
-  width: 20px;   /* tamaño fijo del botón */
-  height: 20px;
-  padding: 0;    /* elimina padding extra */
+    width: 20px;
+    /* tamaño fijo del botón */
+    height: 20px;
+    padding: 0;
+    /* elimina padding extra */
 }
 
 .btn-edit img {
-  width: 15px;   /* tamaño fijo del icono */
-  height: 15px;
+    width: 15px;
+    /* tamaño fijo del icono */
+    height: 15px;
 }
+
 .btn-edit,
 .btn-delete {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin: 0 4px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    margin: 0 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 }
 
 .btn-edit img,
 .btn-delete img {
-  width: 20px;
-  height: 20px;
+    width: 20px;
+    height: 20px;
 }
 
 .btn-edit:hover img {
-  filter: brightness(0) saturate(100%) invert(36%) sepia(98%) saturate(745%) hue-rotate(185deg) brightness(95%) contrast(101%);
-  transform: scale(1.2);
-  transition: transform 0.2s, filter 0.2s;
+    filter: brightness(0) saturate(100%) invert(36%) sepia(98%) saturate(745%) hue-rotate(185deg) brightness(95%) contrast(101%);
+    transform: scale(1.2);
+    transition: transform 0.2s, filter 0.2s;
 }
 
 .btn-delete:hover img {
-  filter: brightness(0) saturate(100%) invert(18%) sepia(89%) saturate(5991%) hue-rotate(356deg) brightness(98%) contrast(112%);
-  transform: scale(1.2);
-  transition: transform 0.2s, filter 0.2s;
+    filter: brightness(0) saturate(100%) invert(18%) sepia(89%) saturate(5991%) hue-rotate(356deg) brightness(98%) contrast(112%);
+    transform: scale(1.2);
+    transition: transform 0.2s, filter 0.2s;
 }
 
 /* Imágenes dentro de celdas */
 .contenedor-productos td img {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(71, 42, 29, 0.2);
+}
+
+#delete-product-picture {
+    width: 500px;
+}
+
+h5 {
+    color: var(--color-orange);
+    font-family: var(--font-family-all)
 }
 
 /* ==================== PANEL LATERAL / FILTROS ==================== */

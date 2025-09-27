@@ -1,27 +1,31 @@
 // stock.js
-import { inventario } from './stock-productos.js';
-import { getDepartamentos, getCategorias, capitalize } from './helpers-inventario.js';
+import { inventario } from "./stock-productos.js";
+import {
+  getDepartamentos,
+  getCategorias,
+  capitalize,
+} from "./helpers-inventario.js";
 
 // ========================= Config de paginación =========================
 const PAGE_SIZE = 10;
 let currentPage = 1;
 
 // ========================= Referencias a los campos =========================
-const form = document.getElementById('product-form');
-const nombreInput = document.getElementById('product-name');
-const departamentoSelect = document.getElementById('product-department');
-const categoriaSelect = document.getElementById('product-category');
-const cantidadInput = document.getElementById('product-stock');
-const unidadSelect = document.getElementById('product-unit');
-const precioInput = document.getElementById('product-price');
+const form = document.getElementById("product-form");
+const nombreInput = document.getElementById("product-name");
+const departamentoSelect = document.getElementById("product-department");
+const categoriaSelect = document.getElementById("product-category");
+const cantidadInput = document.getElementById("product-stock");
+const unidadSelect = document.getElementById("product-unit");
+const precioInput = document.getElementById("product-price");
 
 // ========================= Poblar selects =========================
 // Poblar departamentos al cargar
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   const departamentos = getDepartamentos();
 
-  departamentos.forEach(dep => {
-    const option = document.createElement('option');
+  departamentos.forEach((dep) => {
+    const option = document.createElement("option");
     option.value = dep;
     option.textContent = dep;
     departamentoSelect.appendChild(option);
@@ -29,14 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Cuando el usuario selecciona un departamento → poblar categorías
-departamentoSelect.addEventListener('change', () => {
+departamentoSelect.addEventListener("change", () => {
   const categorias = getCategorias(capitalize(departamentoSelect.value));
 
   // Limpiar opciones previas
-  categoriaSelect.innerHTML = '<option value="" disabled selected>Selecciona una categoría</option>';
+  categoriaSelect.innerHTML =
+    '<option value="" disabled selected>Selecciona...</option>';
 
-  categorias.forEach(cat => {
-    const option = document.createElement('option');
+  categorias.forEach((cat) => {
+    const option = document.createElement("option");
     option.value = cat;
     option.textContent = cat;
     categoriaSelect.appendChild(option);
@@ -52,7 +57,7 @@ function getFlatProducts() {
         flat.push({
           ...prod,
           _departamento: dep.departamento,
-          _categoriaNombre: cat.nombre
+          _categoriaNombre: cat.nombre,
         });
       }
     }
@@ -63,7 +68,7 @@ function getFlatProducts() {
 // Busca un departamento por nombre
 function findDepartamentoNode(nombreDepto) {
   return inventario.find(
-    d => d.departamento.toLowerCase() === String(nombreDepto).toLowerCase()
+    (d) => d.departamento.toLowerCase() === String(nombreDepto).toLowerCase()
   );
 }
 
@@ -72,18 +77,18 @@ function findCategoriaNode(nombreDepto, nombreCategoria) {
   const dep = findDepartamentoNode(nombreDepto);
   if (!dep) return null;
   const cat = dep.categorias.find(
-    c => c.nombre.toLowerCase() === String(nombreCategoria).toLowerCase()
+    (c) => c.nombre.toLowerCase() === String(nombreCategoria).toLowerCase()
   );
   return cat ? { dep, cat } : null;
 }
 
 // ===================== Helpers para custom validity =====================
 function clearValidity(...els) {
-  els.forEach(el => el && el.setCustomValidity && el.setCustomValidity(''));
+  els.forEach((el) => el && el.setCustomValidity && el.setCustomValidity(""));
 }
 
 function isEmpty(value) {
-  return value == null || String(value).trim() === '';
+  return value == null || String(value).trim() === "";
 }
 
 function isNegativeNumber(el) {
@@ -97,21 +102,21 @@ function isDuplicateName(nombre, departamento, categoria) {
   if (!bucket) return false;
   const needle = String(nombre).toLowerCase();
   return bucket.cat.productos.some(
-    p => String(p.nombre).toLowerCase() === needle
+    (p) => String(p.nombre).toLowerCase() === needle
   );
 }
 
 // ===================== SKU automático =====================
-const pad3 = n => String(n).padStart(3, '0');
+const pad3 = (n) => String(n).padStart(3, "0");
 
 function nextSkuForCategory(departamento, categoria) {
   const bucket = findCategoriaNode(departamento, categoria);
-  if (!bucket) return '';
+  if (!bucket) return "";
   const prefix = String(categoria).slice(0, 2).toUpperCase();
   let maxSeq = 0;
 
   for (const p of bucket.cat.productos) {
-    const m = /^([A-Z]{2})-(\d{3})$/.exec(String(p.sku || ''));
+    const m = /^([A-Z]{2})-(\d{3})$/.exec(String(p.sku || ""));
     if (m && m[1] === prefix) {
       const n = parseInt(m[2], 10);
       if (!Number.isNaN(n) && n > maxSeq) maxSeq = n;
@@ -141,7 +146,7 @@ function addProductToInventario(data) {
       `La categoría "${data.categoria}" no existe en el departamento "${data.departamento}".`
     );
   }
-  const id = nextProductId();                               // 👈 nuevo ID autoincremental
+  const id = nextProductId(); // 👈 nuevo ID autoincremental
   const sku = nextSkuForCategory(data.departamento, data.categoria);
   const nuevo = { id, ...data, sku };
   bucket.cat.productos.push(nuevo);
@@ -149,7 +154,7 @@ function addProductToInventario(data) {
 }
 
 // ============================ Submit del formulario ============================
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   clearValidity(
@@ -165,7 +170,7 @@ form.addEventListener('submit', (e) => {
 
   // Nombre
   if (isEmpty(nombreInput.value)) {
-    nombreInput.setCustomValidity('El nombre es obligatorio.');
+    nombreInput.setCustomValidity("El nombre es obligatorio.");
     valid = false;
   } else if (
     isDuplicateName(
@@ -175,52 +180,54 @@ form.addEventListener('submit', (e) => {
     )
   ) {
     nombreInput.setCustomValidity(
-      'Ya existe un producto con ese nombre en esta categoría.'
+      "Ya existe un producto con ese nombre en esta categoría."
     );
     valid = false;
   }
 
   // Departamento
   if (isEmpty(departamentoSelect.value)) {
-    departamentoSelect.setCustomValidity('Selecciona un departamento.');
+    departamentoSelect.setCustomValidity("Selecciona un departamento.");
     valid = false;
   } else if (!findDepartamentoNode(departamentoSelect.value)) {
-    departamentoSelect.setCustomValidity('El departamento no es válido.');
+    departamentoSelect.setCustomValidity("El departamento no es válido.");
     valid = false;
   }
 
   // Categoría
   if (isEmpty(categoriaSelect.value)) {
-    categoriaSelect.setCustomValidity('Selecciona una categoría.');
+    categoriaSelect.setCustomValidity("Selecciona una categoría.");
     valid = false;
-  } else if (!findCategoriaNode(departamentoSelect.value, categoriaSelect.value)) {
+  } else if (
+    !findCategoriaNode(departamentoSelect.value, categoriaSelect.value)
+  ) {
     categoriaSelect.setCustomValidity(
-      'La categoría no pertenece al departamento seleccionado.'
+      "La categoría no pertenece al departamento seleccionado."
     );
     valid = false;
   }
 
   // Cantidad
   if (isEmpty(cantidadInput.value)) {
-    cantidadInput.setCustomValidity('La cantidad es obligatoria.');
+    cantidadInput.setCustomValidity("La cantidad es obligatoria.");
     valid = false;
   } else if (isNegativeNumber(cantidadInput)) {
-    cantidadInput.setCustomValidity('La cantidad no puede ser negativa.');
+    cantidadInput.setCustomValidity("La cantidad no puede ser negativa.");
     valid = false;
   }
 
   // Unidad
   if (isEmpty(unidadSelect.value)) {
-    unidadSelect.setCustomValidity('Selecciona la unidad.');
+    unidadSelect.setCustomValidity("Selecciona la unidad.");
     valid = false;
   }
 
   // Precio
   if (isEmpty(precioInput.value)) {
-    precioInput.setCustomValidity('El precio es obligatorio.');
+    precioInput.setCustomValidity("El precio es obligatorio.");
     valid = false;
   } else if (isNegativeNumber(precioInput)) {
-    precioInput.setCustomValidity('El precio no puede ser negativo.');
+    precioInput.setCustomValidity("El precio no puede ser negativo.");
     valid = false;
   }
 
@@ -236,14 +243,14 @@ form.addEventListener('submit', (e) => {
     categoria: categoriaSelect.value,
     cantidad: Number(cantidadInput.value),
     unidad: unidadSelect.value,
-    precio: Number(precioInput.value)
+    precio: Number(precioInput.value),
   };
 
   try {
     const creado = addProductToInventario(data);
     alert(`Producto agregado ✅ (ID: ${creado.id}, SKU: ${creado.sku})`);
   } catch (err) {
-    alert(err.message || 'Error al agregar producto.');
+    alert(err.message || "Error al agregar producto.");
     return;
   }
 
@@ -252,18 +259,18 @@ form.addEventListener('submit', (e) => {
 });
 
 // ============================ Render tabla con paginación ============================
-const mxn = new Intl.NumberFormat('es-MX', {
-  style: 'currency',
-  currency: 'MXN',
-  minimumFractionDigits: 2
+const mxn = new Intl.NumberFormat("es-MX", {
+  style: "currency",
+  currency: "MXN",
+  minimumFractionDigits: 2,
 });
 
 function formatUnits(p) {
-  const u = (p.unidad || '').toLowerCase();
-  if (u === 'kilo') return `${p.cantidad} KG`;
-  if (u === 'pieza') return `${p.cantidad} Pza`;
-  if (u === 'litro') return `${p.cantidad} L`;
-  return `${p.cantidad} ${p.unidad || ''}`.trim();
+  const u = (p.unidad || "").toLowerCase();
+  if (u === "kilo") return `${p.cantidad} KG`;
+  if (u === "pieza") return `${p.cantidad} Pza`;
+  if (u === "litro") return `${p.cantidad} L`;
+  return `${p.cantidad} ${p.unidad || ""}`.trim();
 }
 
 function getPagedItems(page = 1) {
@@ -280,31 +287,39 @@ function getPagedItems(page = 1) {
     pageItems: items.slice(start, end),
     total,
     totalPages,
-    page: safePage
+    page: safePage,
   };
 }
 
 function renderProductsTable(page = 1) {
-  const tbody = document.getElementById('tbody-productos');
+  const tbody = document.getElementById("tbody-productos");
   if (!tbody) return;
 
   const { pageItems, totalPages, page: safePage } = getPagedItems(page);
   currentPage = safePage;
 
-  tbody.innerHTML = '';
+  tbody.innerHTML = "";
 
-  pageItems.forEach(p => {
-    const tr = document.createElement('tr');
+  pageItems.forEach((p) => {
+    const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" style="max-height:48px;"/>` : ''}</td>
+      <td>${
+        p.imagen
+          ? `<img src="${p.imagen}" alt="${p.nombre}" style="max-height:48px;"/>`
+          : ""
+      }</td>
       <td>${p.nombre}</td>
       <td>${p._departamento}</td>
       <td>${p.categoria}</td>
-      <td>${p.sku || ''}</td>
+      <td>${p.sku || ""}</td>
       <td>${formatUnits(p)}</td>
       <td>${mxn.format(p.precio)}</td>
-      <td> <button class="btn-edit"><img src="../img/stock/edit-icon.png"></button></td>
-      <td><button class="btn-delete"><img src="../img/stock/delete-icon.png" alt="Eliminar"></button></td>
+      <td><button class="btn-edit" data-id="${
+        p.id
+      }" data-bs-toggle="modal" data-bs-target="#modal-edit"><img src="../img/stock/edit-icon.png"></button></td>
+      <td><button class="btn-delete" data-id="${
+        p.id
+      }" data-bs-toggle="modal" data-bs-target="#modal-delete"><img src="../img/stock/delete-icon.png" alt="Eliminar"></button></td>
 
     `;
     tbody.appendChild(tr);
@@ -314,22 +329,30 @@ function renderProductsTable(page = 1) {
 }
 
 function renderPagination(totalPages, page) {
-  const ul = document.getElementById('paginacion');
+  const ul = document.getElementById("paginacion");
   if (!ul) return;
 
-  ul.innerHTML = '';
+  ul.innerHTML = "";
 
-  const makeLi = (label, targetPage, disabled = false, active = false, ariaLabel = null) => {
-    const liEl = document.createElement('li');
-    liEl.className = `page-item${disabled ? ' disabled' : ''}${active ? ' active' : ''}`;
+  const makeLi = (
+    label,
+    targetPage,
+    disabled = false,
+    active = false,
+    ariaLabel = null
+  ) => {
+    const liEl = document.createElement("li");
+    liEl.className = `page-item${disabled ? " disabled" : ""}${
+      active ? " active" : ""
+    }`;
 
-    const aEl = document.createElement('a');
-    aEl.className = 'page-link';
-    aEl.href = '#';
+    const aEl = document.createElement("a");
+    aEl.className = "page-link";
+    aEl.href = "#";
     aEl.textContent = label;
-    if (ariaLabel) aEl.setAttribute('aria-label', ariaLabel);
+    if (ariaLabel) aEl.setAttribute("aria-label", ariaLabel);
 
-    aEl.addEventListener('click', (e) => {
+    aEl.addEventListener("click", (e) => {
       e.preventDefault();
       if (!disabled && targetPage !== page) goToPage(targetPage);
     });
@@ -338,7 +361,7 @@ function renderPagination(totalPages, page) {
     return liEl;
   };
 
-  ul.appendChild(makeLi('Previous', page - 1, page === 1, false, 'Previous'));
+  ul.appendChild(makeLi("Previous", page - 1, page === 1, false, "Previous"));
 
   const MAX_VISIBLE = 5;
   let start = Math.max(1, page - Math.floor(MAX_VISIBLE / 2));
@@ -346,10 +369,10 @@ function renderPagination(totalPages, page) {
   if (end - start + 1 < MAX_VISIBLE) start = Math.max(1, end - MAX_VISIBLE + 1);
 
   if (start > 1) {
-    ul.appendChild(makeLi('1', 1, false, page === 1));
+    ul.appendChild(makeLi("1", 1, false, page === 1));
     if (start > 2) {
-      const dots = document.createElement('li');
-      dots.className = 'page-item disabled';
+      const dots = document.createElement("li");
+      dots.className = "page-item disabled";
       dots.innerHTML = `<span class="page-link">…</span>`;
       ul.appendChild(dots);
     }
@@ -361,31 +384,171 @@ function renderPagination(totalPages, page) {
 
   if (end < totalPages) {
     if (end < totalPages - 1) {
-      const dots = document.createElement('li');
-      dots.className = 'page-item disabled';
+      const dots = document.createElement("li");
+      dots.className = "page-item disabled";
       dots.innerHTML = `<span class="page-link">…</span>`;
       ul.appendChild(dots);
     }
-    ul.appendChild(makeLi(String(totalPages), totalPages, false, page === totalPages));
+    ul.appendChild(
+      makeLi(String(totalPages), totalPages, false, page === totalPages)
+    );
   }
 
-  ul.appendChild(makeLi('Next', page + 1, page === totalPages, false, 'Next'));
+  ul.appendChild(makeLi("Next", page + 1, page === totalPages, false, "Next"));
 }
 
 function goToPage(page) {
   renderProductsTable(page);
 }
 
-// ============================ Inicializa ============================
+// ============================ Editar producto ============================
+function findProductById(id) {
+  const items = getFlatProducts();
+  return items.find((p) => String(p.id) === String(id)) || null;
+}
+
+function populateEditModal(product) {
+  if (!product) return;
+  document.getElementById("edit-id").value = product.id;
+  document.getElementById("edit-name").value = product.nombre;
+  document.getElementById("edit-stock").value = product.cantidad;
+  document.getElementById("edit-unit").value = product.unidad;
+  document.getElementById("edit-price").value = product.precio;
+}
+
+function initEditButtons() {
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn-edit");
+    if (!btn) return;
+    const productId = btn.getAttribute("data-id");
+    openEditModal(productId);
+  });
+}
+
+function openEditModal(productId) {
+  const product = findProductById(productId);
+  if (!product) return;
+  populateEditModal(product);
+}
+
+function saveEditedProduct(e) {
+  e.preventDefault();
+
+  const id = Number(document.getElementById("edit-id").value);
+  const nombre = document.getElementById("edit-name").value.trim();
+  const cantidad = Number(document.getElementById("edit-stock").value);
+  const unidad = document.getElementById("edit-unit").value;
+  const precio = Number(document.getElementById("edit-price").value);
+  const imagenInput = document.getElementById("edit-image");
+
+  if (!nombre || cantidad < 0 || precio < 0) {
+    alert("Por favor revisa los campos del formulario.");
+    return;
+  }
+
+  // Buscar producto original
+  let originalProduct = null;
+  for (const dep of inventario) {
+    for (const cat of dep.categorias) {
+      const found = cat.productos.find((p) => p.id === id);
+      if (found) {
+        originalProduct = found;
+        break;
+      }
+    }
+    if (originalProduct) break;
+  }
+
+  if (!originalProduct) {
+    alert("No se encontró el producto.");
+    return;
+  }
+
+  // Actualizar datos editables
+  originalProduct.nombre = nombre;
+  originalProduct.cantidad = cantidad;
+  originalProduct.unidad = unidad;
+  originalProduct.precio = precio;
+
+  /*  if (imagenInput.files && imagenInput.files[0]) {
+    // Crear URL temporal para previsualización
+    originalProduct.imagen = URL.createObjectURL(imagenInput.files[0]);
+  } */
+
+  renderProductsTable(currentPage);
+
+  const modalEl = document.getElementById("modal-edit");
+  const modal = bootstrap.Modal.getInstance(modalEl);
+  modal.hide();
+}
+
+// ============================ Eliminar producto ============================
+function populateDeleteModal(product) {
+  if (!product) return;
+  document.getElementById("delete-id").value = product.id;
+  document.getElementById("delete-name-product").textContent = product.nombre;
+  document.getElementById("delete-department").textContent =
+    product._departamento;
+  document.getElementById("delete-category").textContent =
+    product._categoriaNombre;
+  document.getElementById(
+    "delete-stock"
+  ).textContent = `${product.cantidad} ${product.unidad}`;
+  document.getElementById("delete-price").textContent = product.precio;
+  document.getElementById("delete-product-picture").src = product.imagen || "";
+}
+
+function initDeleteButtons() {
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn-delete");
+    if (!btn) return;
+    const productId = btn.getAttribute("data-id");
+    const product = findProductById(productId);
+    populateDeleteModal(product);
+  });
+}
+
+function deleteProduct(e) {
+  e.preventDefault();
+  const id = Number(document.getElementById("delete-id").value);
+
+  for (const dep of inventario) {
+    for (const cat of dep.categorias) {
+      const idx = cat.productos.findIndex((p) => p.id === id);
+      if (idx !== -1) {
+        cat.productos.splice(idx, 1); // ✅ eliminar
+        break;
+      }
+    }
+  }
+
+  renderProductsTable(currentPage);
+
+  const modalEl = document.getElementById("modal-delete");
+  const modal = bootstrap.Modal.getInstance(modalEl);
+  modal.hide();
+}
+
 // ============================ Inicializa ============================
 document.addEventListener("DOMContentLoaded", () => {
+  // ====== Render inicial de la tabla ======
   renderProductsTable(1);
-  //============================= Agregar formulario de nuevo producto ============
+
+  // ====== Botón Mostrar/Ocultar Formulario ======
   const btnShowForm = document.getElementById("btn-show-form");
   const productForm = document.getElementById("product-form");
-
   btnShowForm.addEventListener("click", () => {
-    productForm.classList.remove("d-none"); // Muestra el formulario
+    productForm.classList.toggle("d-none");
   });
 
+  initEditButtons();
+  const editForm = document.getElementById("edit-form");
+  editForm.addEventListener("submit", saveEditedProduct);
+
+  const btnDelete = document.getElementById("btn-delete");
+  if (btnDelete) {
+    btnDelete.addEventListener("click", deleteProduct);
+  }
+  initDeleteButtons();
 });
+

@@ -71,21 +71,13 @@
             <!-- Acciones mobile -->
             <div class="d-lg-none d-flex justify-content-center w-100">
               <div class="acciones mt-3 d-flex gap-3">
-                <a
-                  href="ingresar.html" 
-                  class="carrito btn"
-                  >Cerrar Sesión</a
-                >
+                <a href="ingresar.html" class="carrito btn">Cerrar Sesión</a>
                 <a href="ingresar.html" class="ingresar btn">Mi cuenta</a>
               </div>
             </div>
             <!-- Acciones desktop -->
             <div class="d-none d-lg-flex acciones ms-lg-3 mt-lg-0 gap-3">
-              <a
-                href="ingresar.html"
-                class="carrito btn"
-                >Cerrar Sesión</a
-              >
+              <a href="ingresar.html" class="carrito btn">Cerrar Sesión</a>
               <a href="ingresar.html" class="ingresar btn">Mi cuenta</a>
             </div>
           </div>
@@ -119,13 +111,13 @@
                   <div class="col-12 col-md">
                     <label for="product-department">Departamento:</label>
                     <select id="product-department" class="form-select">
-                      <option value="" selected disabled></option>
+                      <option value="" selected disabled>Selecciona...</option>
                     </select>
                   </div>
                   <div class="col-12 col-md">
                     <label for="product-category">Categoría:</label>
                     <select id="product-category" class="form-select">
-                      <option value="" selected disabled></option>
+                      <option value="" selected disabled>Selecciona...</option>
                     </select>
                   </div>
                   <div class="col-12 col-md">
@@ -139,7 +131,7 @@
                   <div class="col-12 col-md">
                     <label for="product-unit">Unidad:</label>
                     <select id="product-unit" class="form-select">
-                      <option value="" selected disabled></option>
+                      <option value="" selected disabled>Selecciona...</option>
                       <option value="pieza">Pieza</option>
                       <option value="kilo">Kilo</option>
                       <option value="kilo">Litro</option>
@@ -163,7 +155,7 @@
                   </div>
                 </div>
               </div>
-              <!-- Botones de acción (Guardar + Agregar fila) -->
+              <!-- Botones de acción: Guardar -->
               <div class="d-flex justify-content-end">
                 <button class="btn" id="btn-save" type="submit">Guardar</button>
               </div>
@@ -251,6 +243,149 @@
         </div>
       </div>
     </main>
+
+    <!-- Modal para Editar Producto -->
+    <div class="modal fade" id="modal-edit" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <!-- xl para que respete las columnas -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar producto</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <form id="edit-form">
+              <div class="products-container">
+                <div
+                  class="row g-2 p-3 form-container align-items-end product-row mb-3"
+                >
+                  <div class="col-12 col-md">
+                    <label for="edit-name">Nombre:</label>
+                    <input type="text" id="edit-name" class="form-control" />
+                  </div>
+                  <div class="col-12 col-md">
+                    <label for="edit-stock">Cantidad:</label>
+                    <input type="text" id="edit-stock" class="form-control" />
+                  </div>
+                  <div class="col-12 col-md">
+                    <label for="edit-unit">Unidad:</label>
+                    <select id="edit-unit" class="form-select">
+                      <option value="" selected disabled>Selecciona...</option>
+                      <option value="pieza">Pieza</option>
+                      <option value="kilo">Kilo</option>
+                      <option value="litro">Litro</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md">
+                    <label for="edit-price">Precio:</label>
+                    <input type="text" id="edit-price" class="form-control" />
+                  </div>
+                  <div class="col-auto d-flex align-items-end">
+                    <button
+                      type="button"
+                      class="btn btn-light"
+                      id="btn-edit-picture"
+                    >
+                      <img
+                        src="../img/stock/add-picture-icon.png"
+                        alt="Agregar imagen"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Campo oculto para ID -->
+              <input type="hidden" id="edit-id" />
+              <!-- Botones de acción -->
+              <div class="d-flex justify-content-end gap-2 mt-3">
+                <button class="btn" id="btn-save-edit" type="submit">
+                  Guardar cambios
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para Eliminar Producto -->
+    <div class="modal fade" id="modal-delete" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliminar producto</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <!-- Campo oculto para ID -->
+            <input type="hidden" id="delete-id" />
+
+            <!-- Fila con datos e imagen -->
+            <div class="row g-3 align-items-center">
+              <!-- Imagen -->
+              <div class="col-12 col-md-3 text-center">
+                <img
+                  id="delete-product-picture"
+                  src=""
+                  alt="Imagen del producto"
+                  class="img-fluid rounded shadow-sm"
+                />
+              </div>
+
+              <!-- Datos en texto -->
+              <div class="col-12 col-md-9">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <strong>Nombre:</strong>
+                    <span id="delete-name-product"></span>
+                  </li>
+                  <li>
+                    <strong>Departamento:</strong>
+                    <span id="delete-department"></span>
+                  </li>
+                  <li>
+                    <strong>Categoría:</strong>
+                    <span id="delete-category"></span>
+                  </li>
+                  <li>
+                    <strong>Unidades:</strong> <span id="delete-stock"></span>
+                  </li>
+                  <li>
+                    <strong>Precio:</strong> $<span id="delete-price"></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="d-flex justify-content-end gap-2 mt-4">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button class="btn btn-danger" id="btn-delete" type="submit">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="principal mt-5">
