@@ -304,6 +304,8 @@ function renderProductsTable(page = 1) {
       <td>${formatUnits(p)}</td>
       <td>${mxn.format(p.precio)}</td>
       <td> <button class="btn-edit"><img src="../img/stock/edit-icon.png"></button></td>
+      <td><button class="btn-delete"><img src="../img/stock/delete-icon.png" alt="Eliminar"></button></td>
+
     `;
     tbody.appendChild(tr);
   });

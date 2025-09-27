@@ -366,6 +366,35 @@ footer.principal {
   width: 15px;   /* tamaño fijo del icono */
   height: 15px;
 }
+.btn-edit,
+.btn-delete {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-edit img,
+.btn-delete img {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-edit:hover img {
+  filter: brightness(0) saturate(100%) invert(36%) sepia(98%) saturate(745%) hue-rotate(185deg) brightness(95%) contrast(101%);
+  transform: scale(1.2);
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.btn-delete:hover img {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(89%) saturate(5991%) hue-rotate(356deg) brightness(98%) contrast(112%);
+  transform: scale(1.2);
+  transition: transform 0.2s, filter 0.2s;
+}
+
 /* Imágenes dentro de celdas */
 .contenedor-productos td img {
     border-radius: 8px;
