@@ -309,11 +309,11 @@ function renderProductsTable(page = 1) {
           : ""
       }</td>
       <td>${p.nombre}</td>
-      <td>${p._departamento}</td>
-      <td>${p.categoria}</td>
-      <td>${p.sku || ""}</td>
-      <td>${formatUnits(p)}</td>
-      <td>${mxn.format(p.precio)}</td>
+      <td class="d-none d-lg-table-cell">${p._departamento}</td>
+      <td class="d-none d-lg-table-cell">${p.categoria}</td>
+      <td class="d-none d-lg-table-cell">${p.sku || ""}</td>
+      <td class="d-none d-lg-table-cell">${formatUnits(p)}</td>
+      <td class="d-none d-lg-table-cell">${mxn.format(p.precio)}</td>
       <td><button class="btn-edit" data-id="${
         p.id
       }" data-bs-toggle="modal" data-bs-target="#modal-edit"><img src="../img/stock/edit-icon.png"></button></td>

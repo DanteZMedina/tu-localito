@@ -164,9 +164,9 @@
         </div>
 
         <!-- Contenedor principal: tabla + panel de filtros -->
-        <div class="row d-none d-lg-flex">
+        <div class="row">
           <!-- Panel de filtros: 4 columnas en lg -->
-          <div class="col-12 col-lg-2 d-none d-lg-flex justify-content-end">
+          <div class="col-lg-2 d-none d-lg-flex justify-content-end">
             <aside class="panel-lateral card p-3 shadow-sm h-fit w-100">
               <div class="mb-3">
                 <label for="stock-alert" class="form-label"
@@ -185,7 +185,7 @@
               </div>
             </aside>
           </div>
-          <div class="col-12 col-md-10">
+          <div class="col-12 col-lg-10">
             <!-- BARRA DE BÚSQUEDA -->
             <div class="input-group mb-3">
               <input
@@ -217,15 +217,16 @@
                   <tr>
                     <th>Imágen</th>
                     <th>Nombre</th>
-                    <th>Departamento</th>
-                    <th>Categoría</th>
-                    <th>SKU</th>
-                    <th>Unidades</th>
-                    <th>Precio</th>
-                    <th></th>
-                    <th></th>
+                    <th class="d-none d-lg-table-cell">Departamento</th>
+                    <th class="d-none d-lg-table-cell">Categoría</th>
+                    <th class="d-none d-lg-table-cell">SKU</th>
+                    <th class="d-none d-lg-table-cell">Unidades</th>
+                    <th class="d-none d-lg-table-cell">Precio</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                   </tr>
                 </thead>
+
                 <tbody id="tbody-productos">
                   <!-- Filas generadas dinámicamente -->
                 </tbody>
@@ -245,7 +246,7 @@
     </main>
 
     <!-- Modal para Editar Producto -->
-    <div class="modal fade" id="modal-edit" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modal-edit" tabindex="-1">
       <div class="modal-dialog modal-xl">
         <!-- xl para que respete las columnas -->
         <div class="modal-content">
@@ -315,7 +316,7 @@
     </div>
 
     <!-- Modal para Eliminar Producto -->
-    <div class="modal fade" id="modal-delete" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modal-delete" tabindex="-1">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
