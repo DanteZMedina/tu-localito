@@ -26,12 +26,21 @@ const allProducts = flattenInventario(inventario);
 // ===============================
 let currentPage = 1;
 const itemsPerPage = 10;
+const cart = {}; // carrito con cantidades por id
+let currentProducts = allProducts.slice(); // productos actuales en vista (pueden ser filtrados)
 
 // ===============================
 // 🔹 3. Renderizar productos
 // ===============================
-function renderProducts(products) {
+function renderProducts(products = currentProducts) {
+  // actualizar referencia global
+  currentProducts = products;
+
   const container = document.getElementById("contenedor-productos");
+  if (!container) {
+    console.error("No existe el contenedor de productos (#contenedor-productos)");
+    return;
+  }
   container.innerHTML = "";
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -43,24 +52,56 @@ function renderProducts(products) {
     col.classList.add(
       "col",
       "producto-card",
-      prod.departamento.replace(/\s+/g, "-").toLowerCase(),
-      prod.categoria.replace(/\s+/g, "-").toLowerCase()
+      (prod.departamento || "").replace(/\s+/g, "-").toLowerCase(),
+      (prod.categoria || "").replace(/\s+/g, "-").toLowerCase()
     );
+
+    // id único para cada producto
+    const prodId = prod.id ?? `${(prod.departamento||"").replace(/\s+/g,"-")}-${(prod.categoria||"").replace(/\s+/g,"-")}-${(prod.nombre||"").replace(/\s+/g,"-")}`.toLowerCase();
 
     col.innerHTML = `
       <div class="card h-100 text-center shadow-sm">
-        <img src="${prod.imagen}" class="card-img-top category-img" alt="${prod.nombre}">
+        <img src="${prod.imagen || '../img/Catalogo/default.jpg'}" class="card-img-top category-img" alt="${prod.nombre || ''}">
         <div class="card-body">
-          <h5 class="card-title ">${prod.nombre}</h5>
-          <p class="card-text"><strong>Precio:</strong> $${prod.precio.toFixed(2)} / ${prod.unidad}</p>
+          <h5 class="card-title">${prod.nombre || ''}</h5>
+          <p class="card-text"><strong>Precio:</strong> $${Number(prod.precio || 0).toFixed(2)} / ${prod.unidad || ''}</p>
         </div>
         <div class="d-flex justify-content-center align-items-center gap-2">
-          <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn">-</button>
-          <span class="counter-badge">0</span>
-          <button class="btn btn-sm btn-outline-success rounded-circle plus-btn">+</button>
+          <button class="btn btn-sm btn-outline-danger rounded-circle minus-btn" data-id="${prodId}">-</button>
+          <span class="counter-badge" data-id="${prodId}">0</span>
+          <button class="btn btn-sm btn-outline-success rounded-circle plus-btn" data-id="${prodId}">+</button>
         </div>
       </div>
     `;
+
+    // inicializar en carrito si no existe
+    cart[prodId] = cart[prodId] || 0;
+
+    // obtener referencias
+    const counterBadge = col.querySelector(`.counter-badge[data-id="${prodId}"]`);
+    const plusBtn = col.querySelector(`.plus-btn[data-id="${prodId}"]`);
+    const minusBtn = col.querySelector(`.minus-btn[data-id="${prodId}"]`);
+
+    // mostrar cantidad actual
+    counterBadge.textContent = cart[prodId];
+
+    // Evento para botón +. 
+    plusBtn.addEventListener("click", e => {
+      e.preventDefault();
+      cart[prodId]++;
+      counterBadge.textContent = cart[prodId];
+      console.log(`Producto agregado: ${prod.nombre} | Cantidad: ${cart[prodId]}`)
+    });
+    // Evento para botón -.   
+    minusBtn.addEventListener("click", e => {
+      e.preventDefault();
+      if (cart[prodId] > 0) {
+        cart[prodId]--;
+        counterBadge.textContent = cart[prodId];
+        console.log(`Producto disminuido: ${prod.nombre} | Cantidad: ${cart[prodId]}`)
+      }
+    });
+
     container.appendChild(col);
   });
 
@@ -72,59 +113,53 @@ function renderProducts(products) {
 // ===============================
 function renderPagination(totalItems) {
   const paginationContainer = document.querySelector(".pagination");
+  if (!paginationContainer) return;
   paginationContainer.innerHTML = "";
 
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
 
   // Botón "Previous"
   const prevItem = document.createElement("li");
-  prevItem.classList.add("page-item");
-if (currentPage === 1) {
-  prevItem.classList.add("disabled");
-}
-
+  prevItem.className = "page-item" + (currentPage === 1 ? " disabled" : "");
   prevItem.innerHTML = `<a class="page-link" href="#">Previous</a>`;
-  prevItem.addEventListener("click", (e) => {
+  prevItem.addEventListener("click", e => {
     e.preventDefault();
     if (currentPage > 1) {
       currentPage--;
-      renderProducts(allProducts);
+      renderProducts();
     }
   });
   paginationContainer.appendChild(prevItem);
 
-  // Calcular páginas visibles
+  // Calcular rango visible
   const maxVisible = 5;
   let startPage = Math.max(1, currentPage - 2);
   let endPage = Math.min(totalPages, currentPage + 2);
 
-  if (currentPage <= 3) {
-    endPage = Math.min(totalPages, maxVisible);
-  } else if (currentPage >= totalPages - 2) {
-    startPage = Math.max(1, totalPages - (maxVisible - 1));
-  }
+  if (currentPage <= 3) endPage = Math.min(totalPages, maxVisible);
+  else if (currentPage >= totalPages - 2) startPage = Math.max(1, totalPages - (maxVisible - 1));
 
-  // Página 1 siempre
+  // Página 1
   if (startPage > 1) {
     addPageItem(1, paginationContainer);
     if (startPage > 2) {
       const dots = document.createElement("li");
-      dots.classList.add("page-item", "disabled");
+      dots.className = "page-item disabled";
       dots.innerHTML = `<span class="page-link">...</span>`;
       paginationContainer.appendChild(dots);
     }
   }
 
-  // Páginas dinámicas
+  // Dinámicas
   for (let i = startPage; i <= endPage; i++) {
     addPageItem(i, paginationContainer);
   }
 
-  // Última página siempre
+  // Última página
   if (endPage < totalPages) {
     if (endPage < totalPages - 1) {
       const dots = document.createElement("li");
-      dots.classList.add("page-item", "disabled");
+      dots.className = "page-item disabled";
       dots.innerHTML = `<span class="page-link">...</span>`;
       paginationContainer.appendChild(dots);
     }
@@ -133,48 +168,43 @@ if (currentPage === 1) {
 
   // Botón "Next"
   const nextItem = document.createElement("li");
-  nextItem.classList.add("page-item");
-if (currentPage === totalPages) {
-  nextItem.classList.add("disabled");
-}
-
+  nextItem.className = "page-item" + (currentPage === totalPages ? " disabled" : "");
   nextItem.innerHTML = `<a class="page-link" href="#">Next</a>`;
-  nextItem.addEventListener("click", (e) => {
+  nextItem.addEventListener("click", e => {
     e.preventDefault();
     if (currentPage < totalPages) {
       currentPage++;
-      renderProducts(allProducts);
+      renderProducts();
     }
   });
   paginationContainer.appendChild(nextItem);
 }
 
 // ===============================
-// 🔹 5. Helper para crear un botón de página
+// 🔹 5. Helper crear botón de página
 // ===============================
 function addPageItem(page, container) {
   const li = document.createElement("li");
- li.classList.add("page-item");
-if (page === currentPage) {
-  li.classList.add("active");
-}
-
+  li.className = "page-item" + (page === currentPage ? " active" : "");
   li.innerHTML = `<a class="page-link" href="#">${page}</a>`;
-  li.addEventListener("click", (e) => {
+  li.addEventListener("click", e => {
     e.preventDefault();
-    currentPage = page;
-    renderProducts(allProducts);
+    if (page !== currentPage) {
+      currentPage = page;
+      renderProducts();
+    }
   });
   container.appendChild(li);
 }
 
 // ===============================
-// Crear barra lateral de categorías
+// 🔹 6. Categorías (barra lateral)
 // ===============================
-// = Buscando elemento padre en donde implementar la barra. = 
 const listaCategoriasEl = document.getElementById('lista-categorias');
 /**
- * Función para asignar emoji dinámico
+ * 
+ * @param {categoria} categoria 
+ * @returns emoji | categoria.nombre || "🛒" en caso de no encontrar un emoji para la categoría. 
  */
 function getCategoriaEmoji(categoria) {
   const emojis = {
@@ -195,22 +225,19 @@ function getCategoriaEmoji(categoria) {
     "Shampoo" : "🧴",
     "Papel de baño" : "🧻",
     "Toallas femeninas" : "🩲",
-    "Desodorante" : "🐿️​",
+    "Desodorante" : "🐿️",
     "Croquetas" : "🐶",
     "Juguetes" : "🧸",
     "Accesorios" : "🐕‍🦺"
   };
   return emojis[categoria] || "🛒";
 }
-
-
-/***
- * Funcion para Renderizar las categorías en el DOM
+/**
+ * Función para crear las tarjetas de las categorías dinámicamente. 
  */
 function renderizarCategoriasDinamico() {
   const categorias = ['Todos', ...new Set(allProducts.map(p => p.categoria))];
-
-  listaCategoriasEl.innerHTML = ''; // limpiar
+  listaCategoriasEl.innerHTML = '';
 
   categorias.forEach(cat => {
     const li = document.createElement('li');
@@ -219,8 +246,7 @@ function renderizarCategoriasDinamico() {
     a.textContent = cat === 'Todos' ? '🛒 Todos' : `${getCategoriaEmoji(cat)} ${cat}`;
     a.classList.toggle('active', cat === 'Todos');
 
-    // Evento click
-    a.addEventListener('click', (e) => {
+    a.addEventListener('click', e => {
       e.preventDefault();
       filtrarPorCategoria(cat, a);
     });
@@ -229,29 +255,26 @@ function renderizarCategoriasDinamico() {
     listaCategoriasEl.appendChild(li);
   });
 }
-
-
 /**
- * Funcion para aplicar filtros a la barra de categorías
+ * Función para filtrar por categoría del menú de la izquierda. 
+ * @param {categoria} categoria 
+ * @param {elemento} elemento 
  */
 function filtrarPorCategoria(categoria, elemento) {
-  // Actualizar clase activa
   document.querySelectorAll('#lista-categorias a').forEach(a => a.classList.remove('active'));
   elemento.classList.add('active');
 
-  // Filtrar productos
   const productosFiltrados = categoria === 'Todos' 
     ? allProducts 
     : allProducts.filter(p => p.categoria === categoria);
 
-  // Reiniciar paginación
   currentPage = 1;
   renderProducts(productosFiltrados);
 }
 
-/**
- * Función para obtener imagen por departamento
- */
+// ===============================
+// 🔹 7. Departamentos (cards superiores)
+// ===============================
 function getDepartamentoImage(departamento) {
   const images = {
     "Alimentos": "https://i.ibb.co/Fkv3PPgM/alimentos.png",
@@ -263,19 +286,18 @@ function getDepartamentoImage(departamento) {
   return images[departamento] || "../img/Catalogo/default.jpg";
 }
 /**
- * Función para renderizar las cards de departamentos
+ * Función para renderizar los departamentos en la parte superior del catálogo.
  */
 function renderizarDepartamentos() {
   const container = document.getElementById("departamentos-container");
   container.innerHTML = "";
 
-  // Departamentos definidos
   const departamentos = ["Alimentos", "Abarrotes", "Productos de limpieza", "Cuidado personal", "Mascotas"];
 
   departamentos.forEach((dep, index) => {
     const card = document.createElement("div");
     card.classList.add("category-card");
-    if (index === 0) card.classList.add("active"); // Primera activa por defecto
+    if (index === 0) card.classList.add("active");
     card.dataset.category = dep.replace(/\s+/g, "-").toLowerCase();
 
     card.innerHTML = `
@@ -283,13 +305,10 @@ function renderizarDepartamentos() {
       <div class="category-text">${dep.toUpperCase()}</div>
     `;
 
-    // Evento click: filtrar por departamento
     card.addEventListener("click", () => {
-      // Quitar clase active de todas
       document.querySelectorAll(".category-card").forEach(c => c.classList.remove("active"));
       card.classList.add("active");
 
-      // Filtrar productos por departamento
       const productosFiltrados = allProducts.filter(p => p.departamento === dep);
       currentPage = 1;
       renderProducts(productosFiltrados);
@@ -299,9 +318,8 @@ function renderizarDepartamentos() {
   });
 }
 
-
 // ===============================
-// 🔹 6. Inicializar
+// 🔹 8. Inicializar
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   renderProducts(allProducts);
