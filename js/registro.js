@@ -89,11 +89,6 @@ $('#contraseña-validada').blur(function () {
   validateInput(this);
 });
 
-
-
-
-
-
 /*===Esta función valida los input, según el caso o la necesidad.===*/
 function validateInput(input) {
   /*limpieza de datos y obtención por medio del name input o id del input.*/
@@ -132,19 +127,23 @@ function validateInput(input) {
 
 
 function formatPhoneNumber(input) {
-  let value = input.value.replace(/\D/g, "");
-  if (value.length >= 4 && value.length <= 8) {
-    value = value.substring(0, 2) + "-" + value.substring(4);
-  } else if (value.length > 8) {
+  let value = input.value.replace(/\D/g, ""); // Solo dígitos;
+  // Limita a 10 dígitos
+  value = value.substring(0, 10);;
+  // Formato progresivo
+  if (value.length >= 3 && value.length <= 6) {
+    value = value.substring(0, 2) + "-" + value.substring(2);
+  } else if (value.length > 6) {
     value =
       value.substring(0, 2) +
       "-" +
       value.substring(2, 6) +
       "-" +
-      value.substring(6, 10);
+      value.substring(6);
   }
   input.value = value;
 };
+
 
 /*===Vaidaciones de cada input especial,recibe el input como argumento.
 Familia: Validate===*/
@@ -307,6 +306,9 @@ function getFieldDisplayName(fieldName) {
   };
   return fieldNames[fieldName] || fieldName;
 };
+
+
+
 function constructorJson(formulario) {
    const formData = new FormData(formulario);
     const datosObj = Object.fromEntries(formData.entries());

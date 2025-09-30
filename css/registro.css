@@ -240,6 +240,7 @@ h2{
     background-color: var(--color-input-bg);
     font-size: var(--font-size-small);
     color: #000;
+    margin-bottom: 0px;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -331,6 +332,7 @@ footer.principal {
     text-decoration: none;
     font-weight: var(--font-weight-bold);
 }
+
 
 .footer-about-us a:hover {
     color: var(--color-orange);
