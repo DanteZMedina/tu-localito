@@ -352,7 +352,6 @@ footer.principal {
 
 /* Estilo base para escritorio */
 #catalogo_cards_image {
-  
   height: 200px;
   object-fit: cover;
   width: 100%;
@@ -360,9 +359,18 @@ footer.principal {
 }
 
 /* Para tablets y móviles */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #catalogo_cards_image {
     height: 160px; /* más pequeño para pantallas medianas */
+  }
+}
+
+/* En mobile, que el dropdown quede fijo arriba (opcional) */
+@media (max-width: 767px) {
+  .dropdown {
+    position: sticky;
+    top: 60px; /* debajo del navbar fijo */
+    z-index: 1050;
   }
 }
 

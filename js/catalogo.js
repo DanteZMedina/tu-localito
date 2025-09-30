@@ -1,4 +1,4 @@
-import { inventario } from './catalogo-productos.js';
+import { inventario } from './stock-productos.js';
 
 // ===============================
 // 🔹 1. Aplanar inventario
@@ -33,7 +33,6 @@ let currentProducts = allProducts.slice(); // productos actuales en vista (puede
 // 🔹 3. Renderizar productos
 // ===============================
 function renderProducts(products = currentProducts) {
-  // actualizar referencia global
   currentProducts = products;
 
   const container = document.getElementById("contenedor-productos");
@@ -56,7 +55,6 @@ function renderProducts(products = currentProducts) {
       (prod.categoria || "").replace(/\s+/g, "-").toLowerCase()
     );
 
-    // id único para cada producto
     const prodId = prod.id ?? `${(prod.departamento||"").replace(/\s+/g,"-")}-${(prod.categoria||"").replace(/\s+/g,"-")}-${(prod.nombre||"").replace(/\s+/g,"-")}`.toLowerCase();
 
     col.innerHTML = `
@@ -74,25 +72,21 @@ function renderProducts(products = currentProducts) {
       </div>
     `;
 
-    // inicializar en carrito si no existe
     cart[prodId] = cart[prodId] || 0;
 
-    // obtener referencias
     const counterBadge = col.querySelector(`.counter-badge[data-id="${prodId}"]`);
     const plusBtn = col.querySelector(`.plus-btn[data-id="${prodId}"]`);
     const minusBtn = col.querySelector(`.minus-btn[data-id="${prodId}"]`);
 
-    // mostrar cantidad actual
     counterBadge.textContent = cart[prodId];
 
-    // Evento para botón +. 
     plusBtn.addEventListener("click", e => {
       e.preventDefault();
       cart[prodId]++;
       counterBadge.textContent = cart[prodId];
       console.log(`Producto agregado: ${prod.nombre} | Cantidad: ${cart[prodId]}`)
     });
-    // Evento para botón -.   
+
     minusBtn.addEventListener("click", e => {
       e.preventDefault();
       if (cart[prodId] > 0) {
@@ -118,7 +112,6 @@ function renderPagination(totalItems) {
 
   const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
 
-  // Botón "Previous"
   const prevItem = document.createElement("li");
   prevItem.className = "page-item" + (currentPage === 1 ? " disabled" : "");
   prevItem.innerHTML = `<a class="page-link" href="#">Previous</a>`;
@@ -131,7 +124,6 @@ function renderPagination(totalItems) {
   });
   paginationContainer.appendChild(prevItem);
 
-  // Calcular rango visible
   const maxVisible = 5;
   let startPage = Math.max(1, currentPage - 2);
   let endPage = Math.min(totalPages, currentPage + 2);
@@ -139,7 +131,6 @@ function renderPagination(totalItems) {
   if (currentPage <= 3) endPage = Math.min(totalPages, maxVisible);
   else if (currentPage >= totalPages - 2) startPage = Math.max(1, totalPages - (maxVisible - 1));
 
-  // Página 1
   if (startPage > 1) {
     addPageItem(1, paginationContainer);
     if (startPage > 2) {
@@ -150,12 +141,10 @@ function renderPagination(totalItems) {
     }
   }
 
-  // Dinámicas
   for (let i = startPage; i <= endPage; i++) {
     addPageItem(i, paginationContainer);
   }
 
-  // Última página
   if (endPage < totalPages) {
     if (endPage < totalPages - 1) {
       const dots = document.createElement("li");
@@ -166,7 +155,6 @@ function renderPagination(totalItems) {
     addPageItem(totalPages, paginationContainer);
   }
 
-  // Botón "Next"
   const nextItem = document.createElement("li");
   nextItem.className = "page-item" + (currentPage === totalPages ? " disabled" : "");
   nextItem.innerHTML = `<a class="page-link" href="#">Next</a>`;
@@ -198,14 +186,11 @@ function addPageItem(page, container) {
 }
 
 // ===============================
-// 🔹 6. Categorías (barra lateral)
+// 🔹 6. Categorías (sidebar + mobile dropdown)
 // ===============================
 const listaCategoriasEl = document.getElementById('lista-categorias');
-/**
- * 
- * @param {categoria} categoria 
- * @returns emoji | categoria.nombre || "🛒" en caso de no encontrar un emoji para la categoría. 
- */
+const listaCategoriasMobileEl = document.getElementById('lista-categorias-mobile');
+
 function getCategoriaEmoji(categoria) {
   const emojis = {
     "Frutas": "🍎",
@@ -232,37 +217,48 @@ function getCategoriaEmoji(categoria) {
   };
   return emojis[categoria] || "🛒";
 }
-/**
- * Función para crear las tarjetas de las categorías dinámicamente. 
- */
+
 function renderizarCategoriasDinamico() {
   const categorias = ['Todos', ...new Set(allProducts.map(p => p.categoria))];
   listaCategoriasEl.innerHTML = '';
+  if (listaCategoriasMobileEl) listaCategoriasMobileEl.innerHTML = '';
 
   categorias.forEach(cat => {
+    // Sidebar
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = '#';
     a.textContent = cat === 'Todos' ? '🛒 Todos' : `${getCategoriaEmoji(cat)} ${cat}`;
     a.classList.toggle('active', cat === 'Todos');
-
     a.addEventListener('click', e => {
       e.preventDefault();
       filtrarPorCategoria(cat, a);
     });
-
     li.appendChild(a);
     listaCategoriasEl.appendChild(li);
+
+    // Dropdown (mobile)
+    if (listaCategoriasMobileEl) {
+      const liMobile = document.createElement('li');
+      const aMobile = document.createElement('a');
+      aMobile.href = '#';
+      aMobile.classList.add('dropdown-item');
+      aMobile.textContent = cat === 'Todos' ? '🛒 Todos' : `${getCategoriaEmoji(cat)} ${cat}`;
+      aMobile.addEventListener('click', e => {
+        e.preventDefault();
+        filtrarPorCategoria(cat, aMobile);
+      });
+      liMobile.appendChild(aMobile);
+      listaCategoriasMobileEl.appendChild(liMobile);
+    }
   });
 }
-/**
- * Función para filtrar por categoría del menú de la izquierda. 
- * @param {categoria} categoria 
- * @param {elemento} elemento 
- */
+
 function filtrarPorCategoria(categoria, elemento) {
   document.querySelectorAll('#lista-categorias a').forEach(a => a.classList.remove('active'));
-  elemento.classList.add('active');
+  if (elemento && elemento.closest('#lista-categorias')) {
+    elemento.classList.add('active');
+  }
 
   const productosFiltrados = categoria === 'Todos' 
     ? allProducts 
@@ -285,9 +281,7 @@ function getDepartamentoImage(departamento) {
   };
   return images[departamento] || "../img/Catalogo/default.jpg";
 }
-/**
- * Función para renderizar los departamentos en la parte superior del catálogo.
- */
+
 function renderizarDepartamentos() {
   const container = document.getElementById("departamentos-container");
   container.innerHTML = "";

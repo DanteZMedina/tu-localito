@@ -71,32 +71,42 @@
   </header>
 
   <main>
-    <div class="container-fluid my-4">
-      <div id="departamentos-container" class="d-flex justify-content-center gap-3 flex-wrap">
-        <!-- Aquí se generarán las cards dinámicamente -->
-      </div>
-    </div>
+    <!-- =================================================================================== -->
+    <!-- Contenido Cards -->
+    <main>
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Aside: solo se muestra en >=768px -->
+          <aside class="d-none d-md-block col-md-3 col-lg-2 bg-light p-3 categorias-sidebar" id="categorias-sidebar">
+            <h2>Categorías</h2>
+            <ul id="lista-categorias" class="list-unstyled"></ul>
+          </aside>
 
-    <div class="container-fluid">
-      <div class="row">
-        <!-- Barra lateral de filtros -->
-        <aside class="col-md-3 col-lg-2 bg-light p-3 categorias-sidebar" id="categorias-sidebar">
-          <h2>Categorías</h2>
-          <ul id="lista-categorias" class="list-unstyled">
-            <!-- Se llenará dinámicamente con JS -->
-          </ul>
-        </aside>
+          <!-- Contenido principal -->
+          <div class="col-12 col-md-9 col-lg-10 p-4">
 
-        <!-- Contenido principal -->
-        <div class="col-md-9 col-lg-10 p-4">
-          <div id="contenedor-productos" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-            <!-- Productos renderizados con JS -->
+            <!-- Dropdown categorías solo en mobile -->
+            <div class="d-block d-md-none mb-3">
+              <button class="btn btn-secondary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                Categorías
+              </button>
+              <ul class="dropdown-menu w-100" id="lista-categorias-mobile"></ul>
+            </div>
+
+            <!-- 🔹 Departamentos: SOLO en escritorio (≥992px) -->
+            <div id="departamentos-container" class="d-none d-lg-flex justify-content-center gap-3 flex-wrap mb-4">
+              <!-- JS insertará las cards -->
+            </div>
+
+            <!-- Cards -->
+            <div id="contenedor-productos" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+              <!-- Productos con JS -->
+            </div>
           </div>
         </div>
-
       </div>
-    </div>
-
+    </main>
+    <!-- =================================================================================== -->
     <!-- Barra de paginación -->
     <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
       <ul class="pagination justify-content-center"></ul>
