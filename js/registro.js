@@ -134,14 +134,14 @@ function validateInput(input) {
 function formatPhoneNumber(input) {
   let value = input.value.replace(/\D/g, "");
   if (value.length >= 4 && value.length <= 8) {
-    value = value.substring(0, 4) + "-" + value.substring(4);
+    value = value.substring(0, 2) + "-" + value.substring(4);
   } else if (value.length > 8) {
     value =
-      value.substring(0, 4) +
+      value.substring(0, 2) +
       "-" +
-      value.substring(4, 8) +
+      value.substring(2, 6) +
       "-" +
-      value.substring(8, 10);
+      value.substring(6, 10);
   }
   input.value = value;
 };
@@ -153,7 +153,7 @@ Familia: Validate===*/
 function validatePhoneNumber(input) {
   /*Aquí se genera un test. Si es false, se llama a la función showValidateError para mostrar
   un mensaje de error.*/
-  const phoneRegex = /^\d{4}-\d{4}-\d{2}$/;
+  const phoneRegex = /^\d{2}-\d{4}-\d{4}$/;
   if (!phoneRegex.test(input.value)) {
     /* Se conecta con la función de mostrar error, dando el input y el mensaje que debe 
     mostrar. */
@@ -280,6 +280,12 @@ function showValidationSuccess(input) {
     $(input).after(feedback);
   }
   feedback.text("✓ Válido");
+  // Elimina el mensaje después de 3 segundos
+  setTimeout(() => {
+    feedback.fadeOut(300, () => {
+      feedback.remove();
+    });
+  }, 3000);
 };
 
 /*Esta función limpia las clases*/
