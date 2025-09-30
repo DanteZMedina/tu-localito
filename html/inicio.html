@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu localito - Home</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+  <link rel="icon" type="image/png" href="favicon.png?v=2">
+
+    <meta http-equiv="Permissions-Policy" content="accelerometer=(self), autoplay=(self), clipboard-write=(self), encrypted-media=(self), gyroscope=(self), picture-in-picture=(self)">
+</head>
+<body>
+    <header class="bg-white shadow-sm">
+        <div class="container">
+            <div class="row align-items-center py-3">
+                <div class="col-md-3">
+                    <div class="d-flex align-items-center">
+                        <div class="logo-circle mr-2"></div>
+                        <span class="h4 mb-0 font-weight-bold text-dark">Te localito</span>
+                    </div>
+                </div>
+                <div class="col-md-6 d-none d-md-block">
+                    <nav class="d-flex justify-content-center">
+                        <a href="#" class="btn btn-nav mx-2">Inicio</a>
+                        <a href="#catalogo" class="btn btn-nav mx-2">Catálogo</a>
+                        <a href="#" class="btn btn-nav mx-2">Sobre Nosotros</a>
+                        <a href="#" class="btn btn-nav mx-2">Contacto</a>
+                    </nav>
+                </div>
+                <div class="col-md-3">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a href="#carrito" id="cart-link" class="btn btn-carrito mr-2 btn-hover">
+                            <i class="fas fa-shopping-cart"></i> Carrito
+                            <span id="cart-count" class="badge badge-light ml-1 d-none">0</span>
+                        </a>
+                        <div id="user-section">
+                           <a href="#autenticacion" id="login-link" class="btn btn-celeste btn-hover">
+                               <i class="fas fa-user"></i> Ingresar
+                           </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="message-alert" class="alert alert-dismissible fade show d-none message-fixed" role="alert">
+        <span id="message-text"></span>
+    </div>
+
+    <div class="modal fade" id="authModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title" id="authModalTitle">Iniciar Sesión</h5><button type="button" class="close" data-dismiss="modal"><span>&times;</span></button></div>
+                <div class="modal-body">
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group"><label>Email</label><input type="email" class="form-control" id="loginEmail" required></div>
+                        <div class="form-group"><label>Contraseña</label><input type="password" class="form-control" id="loginPassword" required></div>
+                        <button type="submit" class="btn btn-naranja btn-block btn-hover">Iniciar Sesión</button>
+                        <p class="text-center mt-3">¿No tienes cuenta? <a href="#" id="switchToRegister" class="text-orange">Crear cuenta</a></p>
+                    </form>
+                    <form id="registerForm" class="auth-form d-none">
+                        <div class="form-group"><label>Email</label><input type="email" class="form-control" id="registerEmail" required></div>
+                        <div class="form-group"><label>Contraseña</label><input type="password" class="form-control" id="registerPassword" required></div>
+                        <div class="form-group"><label>Confirmar Contraseña</label><input type="password" class="form-control" id="confirmPassword" required></div>
+                        <button type="submit" class="btn btn-naranja btn-block btn-hover">Crear Cuenta</button>
+                        <p class="text-center mt-3">¿Ya tienes cuenta? <a href="#" id="switchToLogin" class="text-orange">Iniciar sesión</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="text-center mb-4">Recetas del día</h1>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="card recipe-card shadow-lg">
+                            <div class="row no-gutters">
+                                <div class="col-lg-6">
+                                    <div class="recipe-image-container">
+                                        <img id="recipeImage" class="recipe-image" alt="Receta">
+                                        <div id="recipeCounter" class="badge recipe-counter">1 / 11</div>
+                                        <button id="prevRecipeBtn" class="btn-carousel prev"><i class="fas fa-chevron-left"></i></button>
+                                        <button id="nextRecipeBtn" class="btn-carousel next"><i class="fas fa-chevron-right"></i></button>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="recipe-details">
+                                        <h2 id="recipeName" class="mb-3">Cargando...</h2>
+                                        <h3 class="mb-3">INGREDIENTES DISPONIBLES:</h3>
+                                        <div id="ingredientsList" class="ingredients-list mb-4"></div>
+                                        <div class="border-top pt-3 mb-4">
+                                            <div class="d-flex justify-content-between">
+                                                <span class="h5">Total a pagar:</span>
+                                                <span id="totalPrice" class="h5 text-success font-weight-bold">$0.00</span>
+                                            </div>
+                                        </div>
+                                        <button id="addToCartBtn" class="btn btn-magenta btn-block btn-hover">🛒 Agregar al Carrito</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5 bg-white" id="departamentos">
+            <div class="container">
+                <h2 class="text-center mb-5">DEPARTAMENTOS</h2>
+                <div class="row">
+                    <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://images.unsplash.com/photo-1556881286-fc6915169721" alt="Bebidas" class="department-image"></div><h5 class="text-muted">Bebidas</h5></div>
+                    <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://images.unsplash.com/photo-1582215241983-2248743b3518" alt="Limpieza" class="department-image"></div><h5 class="text-muted">Limpieza</h5></div>
+                    <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e" alt="Alimentos" class="department-image"></div><h5 class="text-muted">Alimentos</h5></div>
+                    <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://images.unsplash.com/photo-1620189507195-68309c04c4d5" alt="Lácteos" class="department-image"></div><h5 class="text-muted">Lácteos</h5></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-4 bg-light" id="categorias">
+            <div class="container">
+                <div class="card shadow-sm hover-shadow mb-3"><div class="row no-gutters align-items-center"><div class="col-auto"><img src="https://images.unsplash.com/photo-1556011284-54aa6466d402" alt="Frutas" class="category-image"></div><div class="col"><div class="card-body"><h3 class="mb-0">Frutas</h3></div></div><div class="col-auto"><a href="#catalogo-frutas" class="btn btn-rojo m-3 btn-hover">IR</a></div></div></div>
+                <div class="card shadow-sm hover-shadow mb-3"><div class="row no-gutters align-items-center"><div class="col-auto"><img src="https://images.unsplash.com/photo-1670680901600-8b2b1856ce3c" alt="Verduras" class="category-image"></div><div class="col"><div class="card-body"><h3 class="mb-0">Verduras</h3></div></div><div class="col-auto"><a href="#catalogo-verduras" class="btn btn-rojo m-3 btn-hover">IR</a></div></div></div>
+                <div class="card shadow-sm hover-shadow mb-3"><div class="row no-gutters align-items-center"><div class="col-auto"><img src="https://images.unsplash.com/photo-1670087792710-de546fc8b74c" alt="Granel" class="category-image"></div><div class="col"><div class="card-body"><h3 class="mb-0">Granel</h3></div></div><div class="col-auto"><a href="#catalogo-granel" class="btn btn-rojo m-3 btn-hover">IR</a></div></div></div>
+            </div>
+        </section>
+
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4">¿Prefieres esta receta clásica?</h2>
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="video-preview-container shadow">
+                            <img src="https://img.youtube.com/vi/tG4M5PH0scg/maxresdefault.jpg" class="video-preview-image" alt="Video de espagueti con albóndigas">
+                            <div class="play-button-overlay">
+                                <button class="btn-play btn-hover-scale"><i class="fas fa-play"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card basic-recipe-card">
+                            <div class="card-body">
+                                <h3 class="text-orange mb-3">ESPAGUETI CON ALBÓNDIGAS:</h3>
+                                <div id="basicIngredientsList" class="basic-ingredients-list"></div>
+                                <div class="border-top pt-3 mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="h5">Total básico:</span>
+                                        <span id="basicRecipeTotal" class="h5 text-success font-weight-bold">$0.00</span>
+                                    </div>
+                                </div>
+                                <button id="addBasicRecipeBtn" class="btn btn-magenta btn-block btn-hover">🛒 Agregar Receta Básica</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-amarillo py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3"><h5 class="font-weight-bold">Tu lclit</h5><p class="small mb-1">Sobre Nosotros</p><p class="small">Contacto</p></div>
+                <div class="col-md-4 mb-3"><h5 class="font-weight-bold">Dirección:</h5><p class="small mb-1"><i class="fas fa-map-marker-alt mr-1"></i> Calle Juan Escutia Av. Revolución Col. Centro</p><p class="small"><i class="fas fa-phone mr-1"></i> 322 234 7344</p></div>
+                <div class="col-md-4 text-center"><div class="d-flex justify-content-center mb-3"><div class="social-circle bg-magenta mr-2"></div><div class="social-circle bg-info mr-2"></div><div class="social-circle bg-primary"></div></div><p class="small mb-1"><i class="fas fa-globe mr-1"></i> Te locatfo</p><p class="small mb-0">© 2025 Te locatfo Web App</p><p class="small">Hecho en 🇲🇽</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="video-responsive-container bg-dark">
+                        <iframe id="youtube-video-iframe" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
