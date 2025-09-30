@@ -2,6 +2,18 @@
 import { inventario } from './stock-productos.js';
 import { getDepartamentos, getCategorias, capitalize } from './helpers-inventario.js';
 
+// --- SINCRONIZAR INVENTARIO DESDE LOCALSTORAGE ---
+function syncInventarioFromStorage() {
+  try {
+    const raw = localStorage.getItem('inventario');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (!Array.isArray(data)) return;
+    // MUY IMPORTANTE: mutar (no reasignar) para conservar la referencia exportada
+    inventario.splice(0, inventario.length, ...data);
+  } catch (_) {}
+}
+
 // ========================= Config de paginación =========================
 const PAGE_SIZE = 10;
 let currentPage = 1;
@@ -271,7 +283,14 @@ function formatUnits(p) {
 
 // ⬇️ CAMBIO: usar resultados de búsqueda (externalItems) si existen
 function getPagedItems(page = 1) {
-  const items = externalItems ?? getFlatProducts();
+  // 1) Fuente: resultados de búsqueda activos o inventario plano
+  const base = externalItems ?? getFlatProducts();
+
+  // 2) Leer config guardada y aplicar orden SIEMPRE
+  const { ordenar } = loadConfigListado();
+  const items = sortByConfigKey(base, ordenar);
+
+  // 3) Paginar
   const total = items.length;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
@@ -284,9 +303,10 @@ function getPagedItems(page = 1) {
     pageItems: items.slice(start, end),
     total,
     totalPages,
-    page: safePage
+    page: safePage,
   };
 }
+
 
 function renderProductsTable(page = 1) {
   const tbody = document.getElementById('tbody-productos');
@@ -432,5 +452,21 @@ document.addEventListener('search:results', (e) => {
 
 // ============================ Inicializa ============================
 document.addEventListener('DOMContentLoaded', () => {
+  syncInventarioFromStorage();
   renderProductsTable(1);
+});
+
+// Re-lee storage (por si el otro módulo persistió) y re-renderiza la tabla
+window.addEventListener('inventario:updated', (e) => {
+  // Si quieres conservar la página actual:
+  const page = currentPage;
+
+  // Si guardas inventario en localStorage, vuelve a sincronizar:
+  syncInventarioFromStorage?.();
+
+  // Si tienes resultados de búsqueda activos y quieres mantenerlos, quita esta línea.
+  // Si prefieres ver todo de nuevo, déjala:
+  externalItems = null;
+
+  renderProductsTable(page);
 });

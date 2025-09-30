@@ -141,7 +141,6 @@ const inventario = [
   }
 ];
 
-
 // Generar siguiente id
 function nextProductId() {
   return products.length
