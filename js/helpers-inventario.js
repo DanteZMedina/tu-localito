@@ -3,7 +3,6 @@ import { inventario } from './stock-productos.js';
 
 // Obtener lista de departamentos únicos
 function getDepartamentos() {
-  debugger
   return inventario.map(dep => dep.departamento);
 }
 
