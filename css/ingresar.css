@@ -231,6 +231,10 @@ h2{
     margin-bottom: 5px;
     font-weight: var(--font-weight-bold);
 }
+/*
+.input-group{
+    width: 80%;
+}*/
 
 .contact-form input{
     width: 80%;
@@ -273,7 +277,7 @@ main {
 /* Imagen cereza */
 .cereza {
   position: absolute;
-  left: 55%;
+  left: 57%;
   top: 85%; /* un poco más arriba para no tocar footer */
   transform: translate(-50%, -50%);
   z-index: 1;
