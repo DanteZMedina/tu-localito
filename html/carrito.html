@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermercado Moderno</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/carrito.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1 class="titulo-carrito">Carrito de Compras</h1>
+            <button class="btn-cerrar" onclick="cerrarCarrito()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+
+        <div class="admin-toggle">
+            <label for="admin-mode-toggle">Modo Administrador</label>
+            <input type="checkbox" id="admin-mode-toggle">
+        </div>
+
+        <div class="main-content">
+
+            <main class="productos-lista" id="productos-lista">
+                </main>
+            
+            <aside class="resumen-wrapper">
+                <div class="resumen-container">
+                    <h3 class="resumen-titulo">Resumen de compra</h3>
+                    
+                    <div class="resumen-linea">
+                        <span>Subtotal</span>
+                        <span id="subtotal-valor">$0.00</span>
+                    </div>
+
+                    <div class="resumen-linea">
+                        <span>Envío</span>
+                        <span id="envio-valor">$50.00</span>
+                    </div>
+
+                    <div class="total-container">
+                        <span id="total-valor">$0.00</span>
+                        <span class="total-label">Total</span>
+                    </div>
+
+                    <button class="btn-finalizar" onclick="finalizarCompra()">
+                        Finalizar compra
+                    </button>
+                    <button class="btn-seguir" onclick="seguirComprando()">
+                        Seguir Comprando
+                    </button>
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <script src="../js/carrito.js"></script>
+</body>
+</html>

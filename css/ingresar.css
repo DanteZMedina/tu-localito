@@ -76,6 +76,7 @@ h6 {
     isolation: isolate;
 }
 
+
 /* ==================== VARIABLES CSS ==================== */
 :root {
     /* Fonts */
@@ -115,10 +116,26 @@ h6 {
     --font-size-small: 14px;
 }
 
+/* ==================== LAYOUT BASE ==================== */
+html, body {
+    height: 100%;             /* Toda la ventana */
+    margin: 0;
+    display: flex;
+    flex-direction: column;   /* Header, main, footer en columna */
+}
 
 body {
-    padding-top: 65px;
+    padding-top: 65px;        /* Ajuste por navbar fixed */
 }
+
+main {
+    flex: 1;                  /* Ocupa todo el espacio disponible */
+}
+
+footer.principal {
+    margin-top: auto;         /* Empuja el footer al fondo */
+}
+
 
 /* ==================== NAVBAR ==================== */
 nav.navbar {
@@ -202,6 +219,70 @@ h1{
     font-size: var(--font-size-heading1);
 }
 
+h2{
+    font-size: var(--font-size-large);
+}
+
+
+/* Formulario */
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: var(--font-weight-bold);
+}
+/*
+.input-group{
+    width: 80%;
+}*/
+
+.contact-form input{
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--color-input-bg);
+    background-color: var(--color-input-bg);
+    font-size: var(--font-size-small);
+    color: #000;
+}
+
+
+.contact-form button, .btn-register {
+    background: var(--color-button-principal);
+    color: white;
+    border: 2px solid var(--color-button-principal);
+    padding: 5px 30px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+}
+
+.contact-form button:hover, .btn-register:hover{
+    background-color: #0e2a5e;
+}
+
+.btn-google img {
+    max-width: 80px;
+    height: auto;
+}
+
+.actions-container{
+    width: 80%;
+}
+main {
+  position: relative; /* para que la cereza se posicione respecto a este contenedor */
+}
+
+/* Imagen cereza */
+.cereza {
+  position: absolute;
+  left: 57%;
+  top: 85%; /* un poco más arriba para no tocar footer */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 200px;
+}
 
 /* ==================== FOOTER ==================== */
 footer.principal {

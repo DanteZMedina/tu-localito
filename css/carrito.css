@@ -1,0 +1,345 @@
+/* --- Reset y configuraciones base --- */
+/* Reseteo universal para asegurar consistencia entre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos base para el body del documento */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 2rem;
+}
+
+/* --- Contenedor Principal --- */
+/* Estilo del contenedor principal que envuelve la aplicación */
+.container {
+    max-width: 1600px;
+    margin: auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+/* --- Encabezado --- */
+/* Se utiliza Flexbox para alinear los elementos del encabezado */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.titulo-carrito {
+    font-weight: 900;
+    font-size: 40px;
+}
+
+.btn-cerrar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #636a70;
+}
+/* --- ESTILOS PARA MODO ADMIN (Alineado a la derecha) --- */
+/* Estilo para el contenedor del interruptor "Modo Administrador" */
+.admin-toggle {
+    display: flex;
+    justify-content: flex-end; /* <-- Esta línea lo alinea a la derecha */
+    align-items: center;       /* Esto lo centra verticalmente */
+    padding: 10px 24px;
+    background-color: #FFE854;
+    border-bottom: 1px solid #e3e5e7;
+    gap: 8px; /* Espacio entre el texto y el interruptor */
+}
+
+/* Estilo para el texto que muestra el stock en la tarjeta del producto */
+.producto-stock.admin-view {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0d6efd; /* Color azul para que destaque */
+    margin-top: 4px;
+}
+
+/* --- Contenido Principal (Layout General) --- */
+/* Define el layout de dos columnas para el contenido principal */
+.main-content {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 24px;
+}
+
+/* --- Lista de Productos --- */
+/* Contenedor de la columna de productos */
+.productos-lista {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 1050px; /* Define el ancho máximo de esta columna, controlando el tamaño de las tarjetas */
+}
+
+/* --- Tarjeta de Producto --- */
+/* Estilo para cada tarjeta de producto individual */
+.producto-card {
+    position: relative; /* Se establece como relativa para posicionar elementos hijos absolutos */
+    display: flex;
+    align-items: flex-start;
+    padding: 70px;
+    padding-bottom: 40px; /* Espacio inferior para el botón de eliminar */
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    background-color: white;
+    transition: box-shadow 0.2s ease;
+}
+.producto-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.producto-detalles {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.producto-imagen {
+    width: 120px;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-left: -40px; 
+    margin-top: -10px
+}
+
+.producto-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    height: 120px; /* Se iguala la altura a la de la imagen para mantener la alineación vertical */
+}
+
+.producto-nombre {
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0;
+}
+
+.producto-precio {
+    font-size: 15px;
+    color: #6c757d;
+    margin: 0;
+}
+
+.controles-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-cantidad {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #FFE854;
+    background-color: #FFE854;
+    color: #333;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.cantidad-display {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    min-width: 25px;
+    text-align: center;
+}
+
+/* Botón para eliminar el producto del carrito */
+.btn-eliminar {
+    position: absolute; /* Posicionamiento absoluto respecto al padre (.producto-card) */
+    bottom: 10px; /* Anclado a la parte inferior */
+    right: 15px; /* Anclado a la derecha */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: #db2033;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+}
+.btn-eliminar:hover {
+    opacity: 1;
+}
+/* --- Resumen de Compra --- */
+.resumen-wrapper {
+    width: 600px; /* <-- Reducido de 600px */
+    flex-shrink: 0;
+}
+
+.resumen-container {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 50px; /* <-- Reducido  */
+    position: sticky;
+    top: 2rem;
+    border: 1px solid #e9ecef;
+}
+
+.resumen-titulo {
+    font-weight: 700;
+    font-size: 28px; /* <-- Ajustado de 36px */
+    margin: 0 0 25px 0; /* <-- Margen ajustado */
+    text-align: center;
+}
+
+.resumen-linea {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px; /* <-- Espaciado ajustado */
+    font-size: 18px;   /* <-- Texto ajustado */
+}
+
+.total-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;    /* <-- Separación ajustada */
+    padding-top: 20px;   /* <-- Espaciado ajustado */
+    border-top: 2px solid #333; /* <-- Borde ajustado */
+}
+
+#total-valor {
+    font-weight: bold;
+    font-size: 32px; /* <-- TAMAÑO AJUSTADO */
+}
+
+/* Botones de acción del resumen */
+.btn-finalizar, .btn-seguir {
+    width: 100%;
+    padding: 15px; /* <-- Ajustado para botones más compactos */
+    border-radius: 10px; /* <-- Bordes ajustados */
+    font-size: 18px; /* <-- Texto de botón ajustado */
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 30px; /* <-- Separación ajustada */
+}
+
+.btn-finalizar {
+    background-color: #134DB9;
+    color: white;
+}
+.btn-finalizar:hover {
+    background-color: #0f3a94;
+}
+
+.btn-seguir {
+    background-color: #FFE854;
+    color: #1e1e1e;
+}
+.btn-seguir:hover {
+    background-color: #FFE854;
+}
+/* ================================================================
+--- AJUSTES RESPONSIVOS ---
+================================================================
+*/
+
+/* Para Tablets y pantallas medianas */
+@media (max-width: 1700px) {
+    .main-content {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .productos-lista {
+        max-width: 100%; 
+        width: 100%;
+        max-width: 800px; 
+    }
+    
+    .resumen-wrapper {
+        width: 100%; 
+        max-width: 800px;
+    }
+    
+    .resumen-container {
+        position: static; 
+    }
+}
+
+/* Para Celulares */
+@media (max-width: 767px) {
+    body {
+        padding: 0; 
+    }
+    
+    .container {
+        border-radius: 0;
+    }
+
+    .main-content {
+        padding: 16px;
+    }
+    
+    .titulo-carrito {
+        font-size: 28px;
+    }
+
+    .producto-card {
+        padding: 20px;
+        padding-bottom: 50px;
+    }
+
+    .producto-detalles {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .producto-imagen {
+        margin-left: 0;
+        margin-top: 0;
+        width: 100px;
+        height: 100px;
+    }
+    
+    .producto-info-wrapper {
+        height: auto;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .resumen-container {
+        padding: 24px;
+    }
+
+    .resumen-titulo {
+        font-size: 24px;
+    }
+
+    #total-valor, .resumen-linea {
+        font-size: 16px;
+    }
+    #total-valor {
+        font-size: 28px;
+    }
+}

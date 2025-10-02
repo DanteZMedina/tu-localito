@@ -1,0 +1,361 @@
+/* ==================== VARIABLES CSS ==================== */
+:root {
+  /* Fonts */
+  --font-family: 'Inter', sans-serif;
+  --font-family-all: 'Inter', sans-serif;
+  --font-family-heading: 'Playwrite HU', cursive;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  /* Colores */
+  --color-orange: #e85c14;
+  --color-amarillo: #4dbe87;
+  --color-card-bg: #febcbc;
+  --color-border-card: #e85e14;
+  --color-carousel-control: #e85e14;
+  --color-button-navbar: #b5651d;
+  --color-navbar-toggler-focus: #b5651d;
+  --color-button-mvv: #ff4e4e;
+  --color-button-principal: #134db9;
+  --color-button-carrito: #e92736;
+  --color-button-ingresar: #13a751;
+
+  /* Tamaños y bordes */
+  --border-radius: 8px;
+  --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --btn-width-navbar: 154px;
+  --btn-height-navbar: 35px;
+
+  /* Fonts */
+  --font-size-heading1: 50px;
+  --font-size-heading2: 40px;
+  --font-size-heading3: 30px;
+  --font-size-large: 20px;
+  --font-size-medium: 16px;
+  --font-size-small: 13px;
+}
+
+body {
+  padding-top: 65px;
+}
+
+/* ==================== NAVBAR ==================== */
+
+.login-btn {
+  color: white;
+  background: var(--color-button-ingresar);
+  padding: 5px 30px;
+  border: 1px solid var(--color-button-ingresar);
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  box-shadow: var(--box-shadow);
+  text-decoration: none;
+}
+
+nav.navbar {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 2px var(--color-navbar-toggler-focus);
+  border-color: var(--color-navbar-toggler-focus);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(181,101,29,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.menu a::before,
+.menu a::after {
+  content: '';
+  position: absolute;
+  top: -30px;
+  width: 3px;
+  height: 30px;
+  background: #a0522d;
+}
+
+.menu a:hover,
+.menu a.active {
+  transform: translateY(5px);
+}
+
+/* ==================== FOOTER ==================== */
+footer.principal {
+  background-color: var(--color-amarillo);
+  font-family: var(--font-family);
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-about-us a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+}
+
+.footer-about-us a:hover {
+  color: var(--color-orange);
+}
+
+.footer-about-us a.active {
+  text-decoration: underline;
+}
+
+.hecho-en-mexico {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: var(--font-weight-regular);
+}
+
+.hecho-en-mexico img {
+  width: 30px;
+}
+
+.footer-social img {
+  width: 25px;
+  height: 25px;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.footer-social img:hover {
+  transform: scale(1.1);
+}
+
+.logo-footer {
+  width: 120px;
+  height: 40px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 991.98px) {
+  .menu a {
+    width: 100%;
+    text-align: center;
+    transition: none;
+  }
+
+  #navbarMenu {
+    text-align: center;
+  }
+
+  .menu {
+    align-items: center;
+    padding-top: 10px;
+  }
+
+  .menu a::before,
+  .menu a::after {
+    content: none;
+  }
+
+  .brandTuLocalito {
+    margin: 20px auto;
+    display: block;
+  }
+
+  .boxImagenesVerduras {
+    display: none;
+  }
+
+  /**------------ Diseño de botones-------------- **/
+
+  bottom {
+    color: white;
+    background: #134db9;
+    padding: 5px 20px;
+    border: 1px solid #134db9;
+    border-radius: var(--border-radius);
+  }
+
+  table {
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+  }
+
+  thead {
+    background-color: var(--color-white);
+    color: rgb(250, 249, 249);
+    font-weight: var(--font-weight-bold);
+  }
+
+  td img {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(71, 42, 29, 0.2);
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: #7b4b03;
+    cursor: pointer;
+  }
+}
+
+#picture-btn {
+  color: white;
+  background: #134db9;
+  padding: 5px 20px;
+  border: 1px solid #134db9;
+  border-radius: var(--border-radius);
+}
+
+#sku-producto, #cantidad-producto, #precio-producto {
+  width: 100px;
+}
+
+.btn-primary {
+  background-color: var(--color-button-principal);
+  border: none;
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--box-shadow);
+}
+
+#imagen-header {
+  background-image: url('../img/stock/tabla.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: auto;
+  height: auto;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-primer-renglon {
+  background-image: url('../img/stock/zanahoria.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-segundo-renglon {
+  background-image: url('../img/stock/zarzamora.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-tercer-renglon {
+  background-image: url('../img/stock/sandia.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-cuarto-renglon {
+  background-image: url('../img/stock/pimiento.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-quinto-renglon {
+  background-image: url('../img/stock/mango.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-sexto-renglon {
+  background-image: url('../img/stock/pera.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-septimo-renglon {
+  background-image: url('../img/stock/aguacate.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#imagen-octavo-renglon {
+  background-image: url('../img/stock/kiwi.png');
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 63px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.contenerdor-productos {
+  padding: 0 12px;
+}
+
+#fila {
+  border-collapse: collapse;
+  border: 2px solid white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  vertical-align: middle;
+}
+
+.panel-lateral {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: var(--border-radius);
+  max-width: 300px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background-color: var(--color-amarillo);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-close {
+  background-color: transparent;
+  border: none;
+  font-size: 0.8rem;
+}
+
+.h-fit {
+  height: fit-content !important;
+}
