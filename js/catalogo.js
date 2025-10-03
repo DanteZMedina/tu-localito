@@ -339,6 +339,22 @@ function filtrarPorCategoria(categoria, elemento) {
   renderProducts(productosFiltrados);
 }
 
+function vaciarCarrito() {
+  // limpiar localStorage
+  localStorage.setItem(CART_KEY, JSON.stringify([]));
+  cart = {};
+
+  // actualizar UI
+  updateCartBadges(cart);
+  renderCartModal();
+
+  // resetear los contadores de todas las cards visibles
+  document.querySelectorAll('.counter-badge').forEach(badge => {
+    badge.textContent = 0;
+  });
+}
+
+
 // ===============================
 // 🔹 7. Departamentos (cards superiores)
 // ===============================
@@ -401,6 +417,7 @@ function renderCartModal() {
   const listEl = document.getElementById('carrito-items');
   const emptyEl = document.getElementById('carrito-vacio');
   const totalEl = document.getElementById('carrito-total');
+  const emptyCartBtn = document.getElementById('vaciar-carrito-btn');
   const payBtn = document.querySelector('#carritoModal .btn.btn-primary');
 
   if (!listEl || !emptyEl || !totalEl) return;
@@ -411,12 +428,14 @@ function renderCartModal() {
   if (!items.length) {
     emptyEl.classList.remove('d-none');
     if (payBtn) payBtn.disabled = true;
+    if (emptyCartBtn) emptyCartBtn.classList.add('d-none');
     totalEl.textContent = formatCurrency(0);
     return;
   }
 
   emptyEl.classList.add('d-none');
   if (payBtn) payBtn.disabled = false;
+  if (emptyCartBtn) emptyCartBtn.classList.remove('d-none'); // mostrar si hay productos
 
   items.forEach(item => {
     const qty = Number(item.cantidadSeleccionada || 0);
@@ -537,6 +556,16 @@ function isCartModalOpen() {
 // Llama a esto al final de tus handlers +/-
 function refreshCartIfOpen() {
   if (isCartModalOpen()) renderCartModal();
+}
+
+// Listener botón vaciar carrito
+const vaciarBtn = document.getElementById('vaciar-carrito-btn');
+if (vaciarBtn) {
+  vaciarBtn.addEventListener('click', () => {
+    if (confirm('¿Seguro que quieres vaciar todo el carrito?')) {
+      vaciarCarrito();
+    }
+  });
 }
 
 
