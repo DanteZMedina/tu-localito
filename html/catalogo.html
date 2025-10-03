@@ -7,6 +7,7 @@
   <title>Tu localito - Catálogo</title>
 
   <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
 
   <!-- Google Fonts -->
@@ -55,16 +56,36 @@
           <!-- Acciones mobile -->
           <div class="d-lg-none d-flex justify-content-center w-100">
             <div class="acciones mt-3 d-flex gap-3">
-              <a class="carrito btn" data-bs-toggle="modal" data-bs-target="#carritoModal">Carrito</a>
-              <a href="ingresar.html" class="ingresar btn">Ingresar</a>
+              <a class="carrito btn position-relative d-inline-flex align-items-center" data-bs-toggle="modal"
+                data-bs-target="#carritoModal">
+                <i class="bi bi-cart3 me-2" aria-hidden="true"></i>
+                Carrito
+                <!-- 🟡 Badge contador con color de la página -->
+                <span id="carrito-count-mobile"
+                  class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-warning text-dark">
+                  0
+                </span>
+              </a>
+              <a href="ingresar.html" class="ingresar btn">Mi perfil</a>
             </div>
           </div>
 
           <!-- Acciones desktop -->
           <div class="d-none d-lg-flex acciones ms-lg-3 mt-lg-0 gap-3">
-            <a class="carrito btn" data-bs-toggle="modal" data-bs-target="#carritoModal">Carrito</a>
-            <a href="ingresar.html" class="ingresar btn">Ingresar</a>
+            <a class="carrito btn position-relative d-inline-flex align-items-center" data-bs-toggle="modal"
+              data-bs-target="#carritoModal">
+              <i class="bi bi-cart3 me-2" aria-hidden="true"></i>
+              Carrito
+              <!-- 🟡 Badge contador con color de la página -->
+              <span id="carrito-count-desktop"
+                class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-warning text-dark">
+                0
+              </span>
+            </a>
+            <a href="ingresar.html" class="ingresar btn">Mi perfil</a>
           </div>
+
+
         </div>
       </div>
     </nav>
