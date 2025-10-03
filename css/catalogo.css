@@ -178,20 +178,21 @@ nav.navbar {
     box-shadow: var(--box-shadow);
 }
 
-#carrito-count-desktop, #carrito-count-mobile {
-    background-color: var(--color-amarillo); /* amarillo del tema */
-    color: #000;                             /* texto negro */
-    min-width: 22px;
-    height: 22px;
-    font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-weight: bold;
-    padding: 0 4px;
-    border: 2px solid var(--color-orange) !important;   /* borde naranja */
+.carrito-count {
+  background-color: var(--color-amarillo) !important; /* fuerza tu amarillo */
+  color: #000 !important;
+  min-width: 22px;
+  height: 22px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  padding: 0 4px;
+  border: 2px solid var(--color-orange) !important;
 }
+
 
 .acciones .ingresar {
     width: max-content;
