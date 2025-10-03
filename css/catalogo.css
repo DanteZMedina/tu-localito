@@ -339,17 +339,27 @@ footer.principal {
   outline: 3px solid orange;
 }
 
-
 .plus-btn,
 .minus-btn {
-  width: 35px;       /* ancho fijo */
-  height: 35px;      /* alto fijo */
+  width: 25px;       /* ancho fijo */
+  height: 25px;      /* alto fijo */
   border-radius: 50%; /* círculo perfecto */
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   margin-bottom: 15px;
+}
+
+.plus-btn-carrito,
+.minus-btn-carrito {
+  width: 20px;       /* ancho fijo */
+  height: 20px;      /* alto fijo */
+  border-radius: 50%; /* círculo perfecto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
 .counter-badge {
