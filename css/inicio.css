@@ -15,6 +15,33 @@
     --color-amarillo-fondo: #FEF3C7;
     --color-amarillo-footer: #FDE047;
     --color-fondo-gradiente: linear-gradient(180deg, #FEF3C7, #FFFFFF);
+
+      /* Colores */
+  --color-orange: #E85C14;
+  --color-amarillo: #FFDE59;
+  --color-card-bg: #FEBCBC;
+  --color-border-card: #E85E14;
+  --color-carousel-control: #E85E14;
+  --color-button-navbar: #B5651D;
+  --color-navbar-toggler-focus: #B5651D;
+  --color-button-mvv: #FF4E4E;
+  --color-button-principal: #134DB9;
+  --color-button-carrito: #E92736;
+  --color-button-ingresar: #13A751;
+
+   /* Tamaños y bordes */
+  --border-radius: 8px;
+  --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --btn-width-navbar: 154px;
+  --btn-height-navbar: 35px;
+
+  /* Fonts */
+  --font-size-heading1: 50px;
+  --font-size-heading2: 40px;
+  --font-size-heading3: 30px;
+  --font-size-large: 20px;
+  --font-size-medium: 16px;
+  --font-size-small: 13px;
 }
 
 body {
@@ -22,49 +49,106 @@ body {
     background-color: #F8FAFC;
 }
 
-/* =============================================
-    2. COMPONENTES REUTILIZABLES (BOTONES)
-    ============================================= */
-.btn {
-    font-weight: 600;
-    border-radius: 0.5rem;
-    transition: all 0.2s ease-in-out;
+/* ==================== LAYOUT BASE ==================== */
+html, body {
+    height: 100%;             /* Toda la ventana */
+    margin: 0;
+    display: flex;
+    flex-direction: column;   /* Header, main, footer en columna */
 }
 
-.btn-hover:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+body {
+    padding-top: 65px;        /* Ajuste por navbar fixed */
 }
 
-.btn-hover:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+main {
+    flex: 1;                  /* Ocupa todo el espacio disponible */
 }
 
-.btn-naranja { background-color: var(--color-naranja); border-color: var(--color-naranja); color: white; }
-.btn-naranja:hover { background-color: var(--color-naranja-hover); border-color: var(--color-naranja-hover); color: white; }
+footer.principal {
+    margin-top: auto;         /* Empuja el footer al fondo */
+}
 
-.btn-magenta { background-color: #FF4E4E; border-color: #FF4E4E; color: white; font-size: 1.1rem; }
-.btn-magenta:hover { background-color: var(--color-naranja); border-color: var(--color-naranja); color: white; } /* <-- CORREGIDO */
+body {
+  padding-top: 65px;
+}
 
-.btn-rojo { background-color: var(--color-rojo-ir); border-color: var(--color-rojo-ir); color: white; }
-.btn-rojo:hover { background-color: var(--color-naranja); border-color: var(--color-naranja); color: white; } /* <-- CORREGIDO */
+/* ==================== NAVBAR ==================== */
+nav.navbar {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-.btn-carrito { background-color: var(--color-rojo-carrito); border-color: var(--color-rojo-carrito); color: white; }
-.btn-carrito:hover { background-color: #FF4E4E; border-color: #FF4E4E; color: white; }
+.navbar-toggler {
+  border: none;
+}
 
-.btn-celeste { background-color: var(--color-celeste); border-color: var(--color-celeste); color: white; }
-.btn-celeste:hover { background-color: var(--color-celeste-hover); border-color: var(--color-celeste-hover); color: white; }
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 2px var(--color-navbar-toggler-focus);
+  border-color: var(--color-navbar-toggler-focus);
+}
 
-.btn-nav { background-color: var(--color-naranja-suave); color: white; }
-.btn-nav:hover { background-color: var(--color-naranja); color: white; }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(181,101,29,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
 
-/* =============================================
-    3. LAYOUT Y SECCIONES PRINCIPALES
-    ============================================= */
-.hero-section {
-    background: var(--color-fondo-gradiente);
-    padding: 4rem 0;
+.menu a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  background: var(--color-button-navbar);
+  padding: 5px 30px;
+  border: 1px solid #A0522D;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease;
+}
+
+.menu a::before,
+.menu a::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  width: 3px;
+  height: 30px;
+  background: #A0522D;
+}
+
+.menu a:hover, .menu a.active {
+    transform: translateY(5px);
+}
+
+
+/* Acciones */
+.acciones .carrito {
+  background: var(--color-button-carrito);
+  color: white;
+  border: 2px solid var(--color-button-carrito);
+  padding: 5px 30px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+}
+
+.acciones .ingresar {
+  background: white;
+  color: var(--color-button-ingresar);
+  border: 2px solid var(--color-button-ingresar);
+  padding: 5px 30px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+}
+
+.acciones .carrito:hover {
+  background: #c62828;
+}
+
+.acciones .ingresar:hover {
+  background: #e8f5e9;
 }
 
 /* =============================================
@@ -263,4 +347,56 @@ body {
     .hero-section h1 { font-size: 2rem; }
     .department-circle { width: 100px; height: 100px; }
     .category-image { width: 100px; height: 80px; }
+}
+
+
+/* ==================== FOOTER ==================== */
+footer.principal {
+  background-color: var(--color-amarillo-footer);
+  font-family: var(--font-family);
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-about-us a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+}
+
+.footer-about-us a:hover {
+    color: var(--color-orange);
+}
+
+.footer-about-us a.active{
+    text-decoration: underline;
+} 
+
+.hecho-en-mexico {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: var(--font-weight-regular);
+}
+
+.hecho-en-mexico img {
+  width: 30px;
+}
+
+.footer-social img {
+  width: 25px;
+  height: 25px;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.footer-social img:hover {
+  transform: scale(1.1);
+}
+
+.logo-footer {
+  width: 120px;
+  height: 40px;
 }
