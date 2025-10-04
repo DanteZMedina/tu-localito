@@ -61,15 +61,44 @@ function getCartTotalItems(cartObj) {
   return Object.values(cartObj).reduce((acc, n) => acc + Number(n || 0), 0);
 }
 
+function toggleCartTriggers(enabled) {
+  ['#carrito-btn-mobile', '#carrito-btn-desktop'].forEach(sel => {
+    const btn = document.querySelector(sel);
+    if (!btn) return;
+
+    if (enabled) {
+      // habilitar
+      btn.classList.remove('disabled');
+      btn.removeAttribute('aria-disabled');
+      btn.style.pointerEvents = '';
+      btn.setAttribute('data-bs-toggle', 'modal');
+      btn.setAttribute('data-bs-target', '#carritoModal');
+      btn.removeAttribute('tabindex');
+      btn.title = '';
+    } else {
+      // deshabilitar
+      btn.classList.add('disabled');
+      btn.setAttribute('aria-disabled', 'true');
+      btn.style.pointerEvents = 'none';
+      btn.removeAttribute('data-bs-toggle');
+      btn.removeAttribute('data-bs-target');
+      btn.setAttribute('tabindex', '-1');
+      btn.title = 'Carrito vacío';
+    }
+  });
+}
+
 function updateCartBadges(cartObj) {
   const total = getCartTotalItems(cartObj);
   const display = total > 9 ? '9+' : String(total);
-  const ids = ['carrito-count-mobile', 'carrito-count-desktop'];
-  ids.forEach(id => {
+  ['carrito-count-mobile', 'carrito-count-desktop'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = display;
   });
+  // ⬇️ habilita/deshabilita el botón según haya items
+  toggleCartTriggers(total > 0);
 }
+
 
 
 // ===============================
