@@ -148,7 +148,7 @@ form.addEventListener("submit", async function (e) {
       console.log("🔒 JSON cifrado:", cipherBase64);
 
       // Redirigir a inicio
-      window.location.href = "index.html";
+      window.location.href = "../index.html";
     }
   }
 });
