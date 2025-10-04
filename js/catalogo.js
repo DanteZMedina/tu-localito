@@ -22,11 +22,91 @@ function flattenInventario(inventario) {
 const allProducts = flattenInventario(inventario);
 
 // ===============================
+// 🔸 Carrito (persistencia)
+// ===============================
+const CART_KEY = 'tl_cart_v1';
+
+function loadCart() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    const cartObj = {};
+    stored.forEach(item => {
+      cartObj[item.id] = item.cantidadSeleccionada;
+    });
+    return cartObj; // seguimos trabajando internamente con objeto {id: cantidad}
+  } catch {
+    return {};
+  }
+}
+
+
+function saveCart(cartObj) {
+  const cartArray = Object.entries(cartObj)
+    .filter(([_, cantidad]) => cantidad > 0) // solo los que tengan cantidad > 0
+    .map(([id, cantidad]) => {
+      const prod = allProducts.find(p => String(p.id) === String(id));
+      if (!prod) return null;
+      return {
+        ...prod,
+        cantidadSeleccionada: cantidad
+      };
+    })
+    .filter(Boolean);
+
+  localStorage.setItem(CART_KEY, JSON.stringify(cartArray));
+}
+
+
+function getCartTotalItems(cartObj) {
+  return Object.values(cartObj).reduce((acc, n) => acc + Number(n || 0), 0);
+}
+
+function toggleCartTriggers(enabled) {
+  ['#carrito-btn-mobile', '#carrito-btn-desktop'].forEach(sel => {
+    const btn = document.querySelector(sel);
+    if (!btn) return;
+
+    if (enabled) {
+      // habilitar
+      btn.classList.remove('disabled');
+      btn.removeAttribute('aria-disabled');
+      btn.style.pointerEvents = '';
+      btn.setAttribute('data-bs-toggle', 'modal');
+      btn.setAttribute('data-bs-target', '#carritoModal');
+      btn.removeAttribute('tabindex');
+      btn.title = '';
+    } else {
+      // deshabilitar
+      btn.classList.add('disabled');
+      btn.setAttribute('aria-disabled', 'true');
+      btn.style.pointerEvents = 'none';
+      btn.removeAttribute('data-bs-toggle');
+      btn.removeAttribute('data-bs-target');
+      btn.setAttribute('tabindex', '-1');
+      btn.title = 'Carrito vacío';
+    }
+  });
+}
+
+function updateCartBadges(cartObj) {
+  const total = getCartTotalItems(cartObj);
+  const display = total > 9 ? '9+' : String(total);
+  ['carrito-count-mobile', 'carrito-count-desktop'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = display;
+  });
+  // ⬇️ habilita/deshabilita el botón según haya items
+  toggleCartTriggers(total > 0);
+}
+
+
+
+// ===============================
 // 🔹 2. Variables globales
 // ===============================
 let currentPage = 1;
 const itemsPerPage = 10;
-const cart = {}; // carrito con cantidades por id
+let cart = loadCart(); // carrito persistente
 let currentProducts = allProducts.slice(); // productos actuales en vista (pueden ser filtrados)
 
 // ===============================
@@ -55,7 +135,7 @@ function renderProducts(products = currentProducts) {
       (prod.categoria || "").replace(/\s+/g, "-").toLowerCase()
     );
 
-    const prodId = prod.id ?? `${(prod.departamento||"").replace(/\s+/g,"-")}-${(prod.categoria||"").replace(/\s+/g,"-")}-${(prod.nombre||"").replace(/\s+/g,"-")}`.toLowerCase();
+    const prodId = productDomId(prod);
 
     col.innerHTML = `
       <div class="card h-100 text-center shadow-sm">
@@ -78,23 +158,35 @@ function renderProducts(products = currentProducts) {
     const plusBtn = col.querySelector(`.plus-btn[data-id="${prodId}"]`);
     const minusBtn = col.querySelector(`.minus-btn[data-id="${prodId}"]`);
 
-    counterBadge.textContent = cart[prodId];
+    counterBadge.textContent = cart[prodId] || 0;
 
     plusBtn.addEventListener("click", e => {
       e.preventDefault();
-      cart[prodId]++;
+      cart[prodId] = (cart[prodId] || 0) + 1;
       counterBadge.textContent = cart[prodId];
-      console.log(`Producto agregado: ${prod.nombre} | Cantidad: ${cart[prodId]}`)
+      saveCart(cart);
+      updateCartBadges(cart);
+      console.log(`Producto agregado: ${prod.nombre} | Cantidad: ${cart[prodId]}`);
+      refreshCartIfOpen();
     });
 
     minusBtn.addEventListener("click", e => {
       e.preventDefault();
-      if (cart[prodId] > 0) {
-        cart[prodId]--;
-        counterBadge.textContent = cart[prodId];
-        console.log(`Producto disminuido: ${prod.nombre} | Cantidad: ${cart[prodId]}`)
+      const current = cart[prodId] || 0;
+      if (current > 0) {
+        cart[prodId] = current - 1;
+        if (cart[prodId] === 0) {
+          // opcional: limpiar claves en cero
+          // delete cart[prodId];
+        }
+        counterBadge.textContent = cart[prodId] || 0;
+        saveCart(cart);
+        updateCartBadges(cart);
+        console.log(`Producto disminuido: ${prod.nombre} | Cantidad: ${cart[prodId] || 0}`);
+        refreshCartIfOpen();
       }
     });
+
 
     container.appendChild(col);
   });
@@ -185,6 +277,8 @@ function addPageItem(page, container) {
   container.appendChild(li);
 }
 
+
+
 // ===============================
 // 🔹 6. Categorías (sidebar + mobile dropdown)
 // ===============================
@@ -203,21 +297,27 @@ function getCategoriaEmoji(categoria) {
     "Mascotas": "🐾",
     "Abarrotes": "🥫",
     "Cuidado Personal": "🧴",
-    "Enlatados" : "🥫",
-    "Basicos" : "🥐",
-    "Jabón" : "🧼",
-    "Detergentes" : "🫧",
-    "Shampoo" : "🧴",
-    "Papel de baño" : "🧻",
-    "Toallas femeninas" : "🩲",
-    "Desodorante" : "🐿️",
-    "Croquetas" : "🐶",
-    "Juguetes" : "🧸",
-    "Accesorios" : "🐕‍🦺"
+    "Enlatados": "🥫",
+    "Basicos": "🥐",
+    "Jabón": "🧼",
+    "Detergentes": "🫧",
+    "Shampoo": "🧴",
+    "Papel de baño": "🧻",
+    "Toallas femeninas": "🩲",
+    "Desodorante": "🐿️",
+    "Croquetas": "🐶",
+    "Juguetes": "🧸",
+    "Accesorios": "🐕‍🦺"
   };
   return emojis[categoria] || "🛒";
 }
 
+// ===============================
+// 🛒 Helpers carrito
+// ===============================
+function productDomId(prod) {
+  return prod.id ?? `${(prod.departamento || "").replace(/\s+/g, "-")}-${(prod.categoria || "").replace(/\s+/g, "-")}-${(prod.nombre || "").replace(/\s+/g, "-")}`.toLowerCase();
+}
 function renderizarCategoriasDinamico() {
   const categorias = ['Todos', ...new Set(allProducts.map(p => p.categoria))];
   listaCategoriasEl.innerHTML = '';
@@ -260,13 +360,29 @@ function filtrarPorCategoria(categoria, elemento) {
     elemento.classList.add('active');
   }
 
-  const productosFiltrados = categoria === 'Todos' 
-    ? allProducts 
+  const productosFiltrados = categoria === 'Todos'
+    ? allProducts
     : allProducts.filter(p => p.categoria === categoria);
 
   currentPage = 1;
   renderProducts(productosFiltrados);
 }
+
+function vaciarCarrito() {
+  // limpiar localStorage
+  localStorage.setItem(CART_KEY, JSON.stringify([]));
+  cart = {};
+
+  // actualizar UI
+  updateCartBadges(cart);
+  renderCartModal();
+
+  // resetear los contadores de todas las cards visibles
+  document.querySelectorAll('.counter-badge').forEach(badge => {
+    badge.textContent = 0;
+  });
+}
+
 
 // ===============================
 // 🔹 7. Departamentos (cards superiores)
@@ -312,11 +428,182 @@ function renderizarDepartamentos() {
   });
 }
 
+// ============== Modal Carrito (render) ==============
+function getStoredCartArray() {
+  try {
+    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+function formatCurrency(n) {
+  return Number(n || 0).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+}
+
+function renderCartModal() {
+  const items = getStoredCartArray(); // <-- tu array [{...producto, cantidadSeleccionada}]
+  const listEl = document.getElementById('carrito-items');
+  const emptyEl = document.getElementById('carrito-vacio');
+  const totalEl = document.getElementById('carrito-total');
+  const emptyCartBtn = document.getElementById('vaciar-carrito-btn');
+  const payBtn = document.querySelector('#carritoModal .btn.btn-primary');
+
+  if (!listEl || !emptyEl || !totalEl) return;
+
+  listEl.innerHTML = '';
+  let total = 0;
+
+  if (!items.length) {
+    emptyEl.classList.remove('d-none');
+    if (payBtn) payBtn.disabled = true;
+    if (emptyCartBtn) emptyCartBtn.classList.add('d-none');
+    totalEl.textContent = formatCurrency(0);
+    return;
+  }
+
+  emptyEl.classList.add('d-none');
+  if (payBtn) payBtn.disabled = false;
+  if (emptyCartBtn) emptyCartBtn.classList.remove('d-none'); // mostrar si hay productos
+
+  items.forEach(item => {
+    const qty = Number(item.cantidadSeleccionada || 0);
+    const price = Number(item.precio || 0);
+    const subtotal = qty * price;
+    total += subtotal;
+
+    const li = document.createElement('li');
+    li.className = 'list-group-item d-flex align-items-center gap-3 border-bottom border-top border-1 ';
+
+    li.innerHTML = `
+      <div class="position-relative w-100 d-flex align-items-center gap-3">
+        <!-- Botón eliminar -->
+        <button class="btn btn-sm position-absolute top-0 end-0 text-danger cart-remove-btn"
+                data-id="${item.id}" title="Eliminar">
+          <i class="bi bi-trash"></i>
+        </button>
+
+        <img src="${item.imagen || '../img/Catalogo/default.jpg'}"
+            alt="${item.nombre || ''}" width="48" height="48"
+            class="rounded object-fit-cover" style="object-fit:cover;">
+
+        <div class="flex-grow-1">
+          <div class="fw-semibold">${item.nombre || ''}</div>
+          <div class="small text-muted">
+            ${item.categoria || ''} · ${item.unidad || ''} ${item.sku ? '· ' + item.sku : ''}
+          </div>
+          <div class="d-flex align-items-center gap-2 mt-1">
+            <button class="btn btn-sm btn-outline-danger rounded-circle cart-minus-btn minus-btn-carrito" data-id="${item.id}">-</button>
+            <span class="badge bg-light text-dark border" id="cart-counter-${item.id}">${qty}</span>
+            <button class="btn btn-sm btn-outline-success rounded-circle cart-plus-btn plus-btn-carrito" data-id="${item.id}">+</button>
+          </div>
+        </div>
+
+        <div class="fw-semibold subtotal pt-4" id="cart-subtotal-${item.id}">${formatCurrency(subtotal)}</div>
+      </div>
+    `;
+
+
+    listEl.appendChild(li);
+  });
+
+  listEl.querySelectorAll('.cart-plus-btn').forEach(btn => {
+    btn.addEventListener('click', () => changeCartQty(btn.dataset.id, +1));
+  });
+  listEl.querySelectorAll('.cart-minus-btn').forEach(btn => {
+    btn.addEventListener('click', () => changeCartQty(btn.dataset.id, -1));
+  });
+  listEl.querySelectorAll('.cart-remove-btn').forEach(btn => {
+    btn.addEventListener('click', () => removeFromCart(btn.dataset.id));
+  });
+
+  totalEl.textContent = formatCurrency(total);
+}
+
+// Cambiar cantidad en carrito (y persistir)
+function changeCartQty(prodId, delta) {
+  const stored = getStoredCartArray();
+  const index = stored.findIndex(p => String(p.id) === String(prodId));
+  if (index === -1) return;
+
+  let newQty = (stored[index].cantidadSeleccionada || 0) + delta;
+  if (newQty < 0) newQty = 0;
+  stored[index].cantidadSeleccionada = newQty;
+
+  // Si quieres eliminar completamente cuando qty = 0:
+  if (newQty === 0) stored.splice(index, 1);
+
+  // Guardar de nuevo
+  localStorage.setItem(CART_KEY, JSON.stringify(stored));
+
+  // Reconstruir el objeto cart interno
+  cart = {};
+  stored.forEach(item => cart[item.id] = item.cantidadSeleccionada);
+
+  // 🔄 Actualizar todo
+  updateCartBadges(cart);
+  renderCartModal();
+
+  // También actualizar las cards visibles
+  const badgeEl = document.querySelector(`.counter-badge[data-id="${prodId}"]`);
+  if (badgeEl) badgeEl.textContent = newQty;
+}
+
+// Eliminar producto del carrito
+function removeFromCart(prodId) {
+  const stored = getStoredCartArray();
+  const newStored = stored.filter(p => String(p.id) !== String(prodId));
+
+  // Guardar en localStorage
+  localStorage.setItem(CART_KEY, JSON.stringify(newStored));
+
+  // Actualizar objeto cart en memoria
+  cart = {};
+  newStored.forEach(item => cart[item.id] = item.cantidadSeleccionada);
+
+  // 🔄 Actualizar todo
+  updateCartBadges(cart);
+  renderCartModal();
+
+  // También poner en cero el contador de la card en catálogo
+  const badgeEl = document.querySelector(`.counter-badge[data-id="${prodId}"]`);
+  if (badgeEl) badgeEl.textContent = 0;
+}
+
+
+// Re-render al abrir el modal
+const carritoModalEl = document.getElementById('carritoModal');
+if (carritoModalEl) {
+  carritoModalEl.addEventListener('show.bs.modal', renderCartModal);
+}
+
+// (Opcional) si cambias cantidades mientras el modal está abierto, re-píntalo
+function isCartModalOpen() {
+  const el = document.getElementById('carritoModal');
+  return el && el.classList.contains('show');
+}
+// Llama a esto al final de tus handlers +/-
+function refreshCartIfOpen() {
+  if (isCartModalOpen()) renderCartModal();
+}
+
+// Listener botón vaciar carrito
+const vaciarBtn = document.getElementById('vaciar-carrito-btn');
+if (vaciarBtn) {
+  vaciarBtn.addEventListener('click', () => {
+    if (confirm('¿Seguro que quieres vaciar todo el carrito?')) {
+      vaciarCarrito();
+    }
+  });
+}
+
+
 // ===============================
 // 🔹 8. Inicializar
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   renderProducts(allProducts);
+  updateCartBadges(cart);
   renderizarCategoriasDinamico();
   renderizarDepartamentos();
 });
