@@ -362,6 +362,17 @@ footer.principal {
   padding: 0;
 }
 
+.plus-btn-carrito-page,
+.minus-btn-carrito-page {
+  width: 30px;       /* ancho fijo */
+  height: 30px;      /* alto fijo */
+  border-radius: 50%; /* círculo perfecto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
 .counter-badge {
   width: 35px;
   height: 35px;
