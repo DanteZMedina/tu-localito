@@ -207,15 +207,3 @@ export function initSurtidoRapido() {
 
 // Auto-init al cargar el DOM
 document.addEventListener('DOMContentLoaded', initSurtidoRapido);
-
-window.addEventListener('inventario:updated', (e) => {
-  // Opcional: si quieres conservar resultados de búsqueda activos, puedes NO tocar externalItems.
-  // Para simplificar, te propongo limpiar para ver todo actualizado:
-  externalItems = null;
-
-  // Si el otro módulo persistió en localStorage, re-lee para mantenerte en sync:
-  syncInventarioFromStorage();
-
-  // Re-render en la misma página actual
-  renderProductsTable(currentPage);
-});

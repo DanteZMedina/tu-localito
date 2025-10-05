@@ -34,7 +34,7 @@ const inventario = [
         ]
       },
       {
-        nombre: "Lácteos",
+        nombre: "Lacteos",
         productos: [
           { id: 8, nombre: "Leche", categoria: "Lacteos", sku: "LA-001", cantidad: 60, unidad: "litro", precio: 24.50, imagen: "https://i.ibb.co/5xJGPgMB/leche.jpg" }
         ]

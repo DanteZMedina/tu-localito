@@ -2,33 +2,18 @@
 import { inventario } from './stock-productos.js';
 import { getDepartamentos, getCategorias, capitalize } from './helpers-inventario.js';
 
-// --- SINCRONIZAR INVENTARIO DESDE LOCALSTORAGE ---
-function syncInventarioFromStorage() {
-  try {
-    const raw = localStorage.getItem('inventario');
-    if (!raw) return;
-    const data = JSON.parse(raw);
-    if (!Array.isArray(data)) return;
-    // MUY IMPORTANTE: mutar (no reasignar) para conservar la referencia exportada
-    inventario.splice(0, inventario.length, ...data);
-  } catch (_) {}
-}
-
 // ========================= Config de paginación =========================
 const PAGE_SIZE = 10;
 let currentPage = 1;
 
-// ⬇️ NUEVO: lista "externa" que llega desde el buscador (o null = usar todo)
-let externalItems = null;
-
 // ========================= Referencias a los campos =========================
-const form = document.getElementById('form-producto');
-const nombreInput = document.getElementById('nombre-producto');
-const departamentoSelect = document.getElementById('departamento-producto');
-const categoriaSelect = document.getElementById('categoria-producto');
-const cantidadInput = document.getElementById('cantidad-producto');
-const unidadSelect = document.getElementById('unidad-producto');
-const precioInput = document.getElementById('precio-producto');
+const form = document.getElementById('product-form');
+const nombreInput = document.getElementById('product-name');
+const departamentoSelect = document.getElementById('product-department');
+const categoriaSelect = document.getElementById('product-category');
+const cantidadInput = document.getElementById('product-stock');
+const unidadSelect = document.getElementById('product-unit');
+const precioInput = document.getElementById('product-price');
 
 // ========================= Poblar selects =========================
 // Poblar departamentos al cargar
@@ -156,14 +141,14 @@ function addProductToInventario(data) {
       `La categoría "${data.categoria}" no existe en el departamento "${data.departamento}".`
     );
   }
-  const id = nextProductId();                               // 👈 ID autoincremental
+  const id = nextProductId();                               // 👈 nuevo ID autoincremental
   const sku = nextSkuForCategory(data.departamento, data.categoria);
   const nuevo = { id, ...data, sku };
   bucket.cat.productos.push(nuevo);
   return nuevo;
 }
 
-// ============================ Submit del formulario agregar producto ============================
+// ============================ Submit del formulario ============================
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -256,7 +241,6 @@ form.addEventListener('submit', (e) => {
 
   try {
     const creado = addProductToInventario(data);
-    saveInventarioToStorage();
     alert(`Producto agregado ✅ (ID: ${creado.id}, SKU: ${creado.sku})`);
   } catch (err) {
     alert(err.message || 'Error al agregar producto.');
@@ -282,16 +266,8 @@ function formatUnits(p) {
   return `${p.cantidad} ${p.unidad || ''}`.trim();
 }
 
-// ⬇️ CAMBIO: usar resultados de búsqueda (externalItems) si existen
 function getPagedItems(page = 1) {
-  // 1) Fuente: resultados de búsqueda activos o inventario plano
-  const base = externalItems ?? getFlatProducts();
-
-  // 2) Leer config guardada y aplicar orden SIEMPRE
-  const { ordenar } = loadConfigListado();
-  const items = sortByConfigKey(base, ordenar);
-
-  // 3) Paginar
+  const items = getFlatProducts();
   const total = items.length;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
@@ -304,10 +280,9 @@ function getPagedItems(page = 1) {
     pageItems: items.slice(start, end),
     total,
     totalPages,
-    page: safePage,
+    page: safePage
   };
 }
-
 
 function renderProductsTable(page = 1) {
   const tbody = document.getElementById('tbody-productos');
@@ -328,6 +303,7 @@ function renderProductsTable(page = 1) {
       <td>${p.sku || ''}</td>
       <td>${formatUnits(p)}</td>
       <td>${mxn.format(p.precio)}</td>
+      <td> <button class="btn-edit"><img src="../img/stock/edit-icon.png"></button></td>
     `;
     tbody.appendChild(tr);
   });
@@ -398,103 +374,16 @@ function goToPage(page) {
   renderProductsTable(page);
 }
 
-// ======== Integración con "Configuración de listado" ========
-const CONFIG_STORAGE_KEY = 'configListadoSettings';
-
-function loadConfigListado() {
-  try {
-    const raw = localStorage.getItem(CONFIG_STORAGE_KEY);
-    if (!raw) return { ordenar: 'nombre' };
-    const parsed = JSON.parse(raw);
-    return { ordenar: typeof parsed.ordenar === 'string' ? parsed.ordenar : 'nombre' };
-  } catch {
-    return { ordenar: 'nombre' };
-  }
-}
-
-// Mapea claves visibles -> propiedades reales de los objetos (flat)
-function sortByConfigKey(items, key) {
-  if (!Array.isArray(items) || items.length === 0) return items;
-
-  const map = {
-    departamento: '_departamento',
-    categoria: 'categoria' in items[0] ? 'categoria' : '_categoriaNombre',
-    nombre: 'nombre',
-    cantidad: 'cantidad',
-    unidad: 'unidad',
-    precio: 'precio',
-  };
-  const realKey = map[key] || key;
-
-  const arr = [...items];
-  arr.sort((a, b) => {
-    const va = a?.[realKey];
-    const vb = b?.[realKey];
-    if (typeof va === 'number' && typeof vb === 'number') return va - vb;
-    return String(va ?? '').localeCompare(String(vb ?? ''), 'es', { sensitivity: 'base' });
-  });
-  return arr;
-}
-
-// ⬇️ Re-ordenar los resultados de búsqueda según la configuración guardada
-document.addEventListener('search:results', (e) => {
-  const rawItems = Array.isArray(e.detail?.items) ? e.detail.items : null;
-  if (!rawItems) {
-    externalItems = null;
-    renderProductsTable(1);
-    return;
-  }
-
-  const { ordenar } = loadConfigListado();
-  const sorted = sortByConfigKey(rawItems, ordenar);
-  externalItems = sorted;
-  renderProductsTable(1); // siempre volvemos a la página 1 tras una búsqueda
-});
-
-
-// ============================ Inventario localStorage  ============================
-// --- GUARDAR INVENTARIO EN LOCALSTORAGE ---
-function saveInventarioToStorage() {
-  try {
-    localStorage.setItem('inventario', JSON.stringify(inventario));
-    // Dispara un evento global (opcional) para que otros módulos se actualicen
-    window.dispatchEvent(new Event('inventario:updated'));
-  } catch (err) {
-    console.error('Error al guardar inventario en localStorage:', err);
-  }
-}
-
-// --- SIEMBRA INVENTARIO EN LOCALSTORAGE SI NO EXISTE ---
-function ensureInventarioInStorage() {
-  try {
-    const raw = localStorage.getItem('inventario');
-    if (!raw) {
-      // Guarda el inventario base del módulo stock-productos.js
-      localStorage.setItem('inventario', JSON.stringify(inventario));
-    }
-  } catch (err) {
-    console.error('No se pudo inicializar inventario en localStorage:', err);
-  }
-}
-
-
 // ============================ Inicializa ============================
-document.addEventListener('DOMContentLoaded', () => {
-  syncInventarioFromStorage();
+// ============================ Inicializa ============================
+document.addEventListener("DOMContentLoaded", () => {
   renderProductsTable(1);
-});
+  //============================= Agregar formulario de nuevo producto ============
+  const btnShowForm = document.getElementById("btn-show-form");
+  const productForm = document.getElementById("product-form");
 
-// Re-lee storage (por si el otro módulo persistió) y re-renderiza la tabla
-window.addEventListener('inventario:updated', (e) => {
-  // Si quieres conservar la página actual:
-  const page = currentPage;
+  btnShowForm.addEventListener("click", () => {
+    productForm.classList.remove("d-none"); // Muestra el formulario
+  });
 
-  // Si guardas inventario en localStorage, vuelve a sincronizar:
-  syncInventarioFromStorage?.();
-
-  // Si tienes resultados de búsqueda activos y quieres mantenerlos, quita esta línea.
-  // Si prefieres ver todo de nuevo, déjala:
-  externalItems = null;
-
-  renderProductsTable(page);
 });
