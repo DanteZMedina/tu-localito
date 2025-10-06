@@ -311,33 +311,65 @@ function getPagedItems(page = 1) {
 
 function renderProductsTable(page = 1) {
   const tbody = document.getElementById('tbody-productos');
-  if (!tbody) return;
+  const listaMobile = document.getElementById('lista-productos-mobile');
+  if (!tbody || !listaMobile) return;
 
   const { pageItems, totalPages, page: safePage } = getPagedItems(page);
   currentPage = safePage;
 
+  // Desktop
   tbody.innerHTML = '';
-
   pageItems.forEach(p => {
     const tr = document.createElement('tr');
-    tr.setAttribute('data-id', p.id);
     tr.innerHTML = `
-      <td>${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" style="max-height:48px;"/>` : ''}</td>
+      <td>${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" class="img-thumbnail" style="max-height:60px;">` : ''}</td>
       <td>${p.nombre}</td>
       <td>${p._departamento}</td>
       <td>${p.categoria}</td>
       <td>${p.sku || ''}</td>
       <td>${formatUnits(p)}</td>
       <td>${mxn.format(p.precio)}</td>
-      <td class="text-center">
-        ${accionesDropdownHTML(p.id)}
-      </td>
+      <td class="text-center">${accionesDropdownHTML(p.id)}</td>
     `;
     tbody.appendChild(tr);
   });
 
+  // Mobile
+  listaMobile.innerHTML = '';
+  pageItems.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'col-12';
+    card.innerHTML = `
+    <div class="card shadow border rounded-3">
+      <div class="card-body d-flex align-items-center">
+        <!-- Imagen -->
+        <img src="${p.imagen || '../img/placeholder.png'}"
+             alt="${p.nombre}"
+             class="img-fluid rounded me-3"
+             style="width:70px;height:70px;object-fit:cover;">
+
+        <!-- Info -->
+        <div class="flex-grow-1">
+          <h6 class="fw-semibold mb-1">${p.nombre}</h6>
+          <p class="mb-1 text-muted small">${formatUnits(p)}</p>
+          <p class="mb-0 fw-bold text-success">${mxn.format(p.precio)}</p>
+        </div>
+
+        <!-- Acciones -->
+        <div class="ms-auto">
+          ${accionesDropdownHTML(p.id)}
+        </div>
+      </div>
+    </div>
+  `;
+    listaMobile.appendChild(card);
+  });
+
+
+
   renderPagination(totalPages, safePage);
 }
+
 
 // =========== Dropdown acciones (editar, eliminar) ============================
 function accionesDropdownHTML(idProducto) {

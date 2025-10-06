@@ -62,8 +62,8 @@
   </header>
 
   <!-- Contenedor principal -->
-  <div class="container-lg d-flex justify-content-center mt-5 pt-4">
-    <div class="col-11 row col-9-lg">
+  <div class="d-flex flex-column align-items-center container-lg d-xl-flex flex-xl-row justify-content-center mt-5 pt-4">
+    <div class="order-1 order-xl-0 col-11 row col-9-lg">
       <!-- BARRA DE BÚSQUEDA -->
       <form id="form-busqueda" class="input-group" role="search" autocomplete="off">
         <input type="text" id="search-input" class="form-control search-bar"
@@ -82,12 +82,12 @@
       </form>
 
       <!-- Contenedor form productos -->
-      <div class="container mb-4 mt-5">
+      <div class="container mb-3 mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h2>Agregar nuevo producto</h2>
         </div>
 
-        <!-- Tabla editable de productos -->
+        <!-- Formulario agregar productos -->
         <div class="contenedor-form-producto">
           <form id="form-producto" class="products-container" novalidate>
             <div class="row g-2 p-3 form-container align-items-end product-row mb-3">
@@ -150,7 +150,7 @@
 
       <!--Barra de Surtido Rápido -->
       <!-- <div class="mt-5 container mt-lg-0"> -->
-      <div class="mt-5 container mt-lg-auto mb-lg-3">
+      <div class="container mb-4 mt-lg-auto mb-lg-3">
         <h2 class="mb-4">Surtido rápido</h2>
         <form id="boxSurtidoRapido" class="p-4 border rounded shadow-sm bg-light">
           <div class="row g-3">
@@ -175,25 +175,40 @@
       </div>
 
       <!-- Tabla de productos en stock -->
-      <div class="d-none d-lg-block contenedor-productos mt-4">
-        <table class="table table-bordered">
-          <thead class="tabla-productos">
-            <tr id="fila">
-              <th id="th-imagen">Imagen</th>
-              <th id="th-nombre">Nombre</th>
-              <th id="th-departamento">Departamento</th>
-              <th id="th-categoria">Categoría</th>
-              <th id="th-sku">SKU</th>
-              <th id="th-cantidad">Unidades</th>
-              <th id="th-precio">Precio</th>
-              <th id="th-acciones" class="text-center">Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tbody-productos">
-            <!-- Filas de productos se generarán aquí dinámicamente -->
-          </tbody>
-        </table>
+      <!-- Contenedor de productos -->
+      <div class="contenedor-productos mt-4">
+
+        <!-- 🟢 Vista mobile: cards -->
+        <div class="d-block d-lg-none">
+          <div id="lista-productos-mobile" class="row gy-3">
+            <!-- Tarjetas dinámicas aquí -->
+          </div>
+        </div>
+
+        <!-- 🖥️ Vista desktop: tabla -->
+        <div class="d-none d-lg-block">
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead class="tabla-productos table-light">
+                <tr id="fila">
+                  <th>Imagen</th>
+                  <th>Nombre</th>
+                  <th>Departamento</th>
+                  <th>Categoría</th>
+                  <th>SKU</th>
+                  <th>Unidades</th>
+                  <th>Precio</th>
+                  <th class="text-center">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-productos">
+                <!-- Filas desktop -->
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+
 
       <!-- Paginación -->
       <!-- Barra de paginación -->
@@ -204,7 +219,7 @@
     </div>
 
     <!-- Alerta de Stock -->
-    <div class="col-3 d-none d-lg-flex justify-content-end">
+    <div class="mb-5 w-min-content order-0 order-xl-1 col-8 col-lg-3 d-lg-flex justify-content-end align-self-xl-baseline">
       <!-- Columna derecha (panel lateral) -->
       <aside class="panel-lateral card p-3 shadow-sm h-fit">
         <form id="form-stock-config-listado" class="gap-3 align-items-end">
