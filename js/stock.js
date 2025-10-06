@@ -406,24 +406,28 @@ function accionesDropdownHTML(idProducto) {
 }
 
 // Delegación de eventos para botones editar/eliminar
-const tbody = document.getElementById('tbody-productos');
 const modalEditarEl = document.getElementById('modalEditarProducto');
 const modalEditar = new bootstrap.Modal(modalEditarEl);
 
-tbody.addEventListener('click', (e) => {
-  const btnEditar = e.target.closest('.btn-editar');
-  const btnEliminar = e.target.closest('.btn-eliminar');
+// Delegación global: funciona en tabla (desktop) y cards (mobile)
+document.addEventListener('click', (e) => {
+  const editar = e.target.closest('.btn-editar');
+  const eliminar = e.target.closest('.btn-eliminar');
 
-  if (btnEditar) {
-    const id = btnEditar.dataset.id;
+  if (editar) {
+    const id = editar.dataset.id;
+    // Cierra el dropdown si sigue abierto
+    editar.closest('.dropdown')?.querySelector('.dropdown-toggle')?.dispatchEvent(new Event('click'));
     abrirModalEdicion(id);
   }
 
-  if (btnEliminar) {
-    const id = btnEliminar.dataset.id;
+  if (eliminar) {
+    const id = eliminar.dataset.id;
+    eliminar.closest('.dropdown')?.querySelector('.dropdown-toggle')?.dispatchEvent(new Event('click'));
     confirmarEliminarProducto(id);
   }
 });
+
 
 // =========== Modal edición de producto ============================
 function fillEditDepartamentosSelect() {
