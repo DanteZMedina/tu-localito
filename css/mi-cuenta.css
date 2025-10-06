@@ -1,311 +1,472 @@
+/* Estilos generales del cuerpo de la página */
 body {
+    /* Color de fondo: gris muy claro */
     background-color: #f8f9fa;
+    /* Fuente: tipografía moderna y limpia */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
+/* Estilos para el encabezado de la página */
 header {
+    /* Línea delgada en la parte inferior para separarlo del contenido */
     border-bottom: 1px solid #dee2e6;
 }
 
+/* Estilo para la marca o logo de la barra de navegación */
 .navbar-brand {
+    /* Tamaño de fuente más grande */
     font-size: 1.25rem;
 }
 
-
+/* Contenedor del selector de personajes */
 .character-selector {
+    /* Habilita un diseño flexible (flexbox) */
     display: flex;
+    /* Permite que los elementos se envuelvan en múltiples líneas */
     flex-wrap: wrap;
+    /* Espacio entre los elementos */
     gap: 10px;
 }
 
+/* Botones individuales de personaje */
 .character-btn {
-    width: 90px;
-    height: 90px;
+    /* Ancho y alto fijos */
+    width: 85px;
+    height: 85px;
+    /* Borde redondeado */
     border-radius: 10%;
+    /* Sin borde */
     border: none;
+    /* Fondo blanco */
     background: white;
+    /* Tamaño de la fuente (para el ícono del personaje) */
     font-size: 1.5rem;
+    /* Cursor de puntero al pasar el mouse */
     cursor: pointer;
+    /* Transición suave para todos los cambios de estilo */
     transition: all 0.3s ease;
+    /* Habilita un diseño flexible */
     display: flex;
+    /* Centra el ícono verticalmente */
     align-items: center;
+    /* Centra el ícono horizontalmente */
     justify-content: center;
 }
 
+/* Estilos para las imágenes dentro de los botones de personaje */
 .btn-img{
+    /* Ancho y alto fijos para la imagen */
     width: 85px;
     height: 85px;
 }
 
+/* Efecto al pasar el mouse sobre un botón de personaje */
 .character-btn:hover {
+    /* Cambia el color del borde a azul */
     border-color: #007bff;
+    /* Escala el botón para hacerlo un poco más grande */
     transform: scale(1.05);
 }
 
+/* Estilo para el botón de personaje que está activo o seleccionado */
 .character-btn.active {
+    /* Borde de color azul */
     border-color: #007bff;
+    /* Color de fondo azul claro */
     background-color: #e3f2fd;
 }
 
-
+/* Contenedor para mostrar el personaje seleccionado */
 .character-display {
+    /* Ancho y alto fijos */
     width: 120px;
     height: 120px;
-    background: #fff3cd;
+    /* Fondo amarillo claro */
+    background: #f5e6c6;
+    /* Bordes redondeados */
     border-radius: 10px;
+    /* Centra el contenedor horizontalmente */
     margin: 0 auto;
+    /* Habilita flexbox para centrar el contenido */
     display: flex;
+    /* Centra verticalmente */
     align-items: center;
+    /* Centra horizontalmente */
     justify-content: center;
 }
 
+/* Estilo para el ícono del personaje */
 .character-avatar {
+    /* Tamaño de fuente grande */
     font-size: 4rem;
 }
 
+/* Estilos para el menú de la barra lateral */
 .sidebar-menu {
+    /* Fondo amarillo claro */
     background: #fff3cd;
+    /* Bordes redondeados */
     border-radius: 10px;
+    /* Espaciado interno */
     padding: 20px;
 }
 
+/* Enlaces dentro del menú de la barra lateral */
 .sidebar-link {
+    /* Se comporta como un bloque, ocupando todo el ancho disponible */
     display: block;
+    /* Espaciado interno */
     padding: 10px 15px;
+    /* Color de texto gris oscuro */
     color: #495057;
+    /* Quita el subrayado del enlace */
     text-decoration: none;
+    /* Bordes redondeados */
     border-radius: 5px;
+    /* Transición suave para el color de fondo */
     transition: background-color 0.3s ease;
+    /* Margen inferior para separarlo de otros enlaces */
     margin-bottom: 5px;
 }
 
+/* Efecto al pasar el mouse sobre un enlace de la barra lateral */
 .sidebar-link:hover {
+    /* Color de fondo amarillo un poco más oscuro */
     background-color: #ffeeba;
+    /* Asegura que no haya subrayado */
     text-decoration: none;
+    /* Mantiene el color del texto */
     color: #495057;
 }
 
+/* Estilo para el enlace de la barra lateral que está activo */
 .sidebar-link.active {
+    /* Color de fondo amarillo más oscuro */
     background-color: #ffeeba;
+    /* Texto en negrita */
     font-weight: bold;
 }
 
+/* Contenedor para los enlaces de redes sociales */
 .social-links {
+    /* Habilita flexbox */
     display: flex;
+    /* Centra los enlaces horizontalmente */
     justify-content: center;
+    /* Espacio entre los enlaces */
     gap: 10px;
 }
 
+/* Enlaces individuales de redes sociales */
 .social-link {
+    /* Ancho y alto fijos */
     width: 32px;
     height: 32px;
+    /* Borde completamente redondeado para hacer un círculo */
     border-radius: 50%;
+    /* Habilita flexbox para centrar el ícono */
     display: flex;
+    /* Centra verticalmente */
     align-items: center;
+    /* Centra horizontalmente */
     justify-content: center;
+    /* Quita el subrayado del enlace */
     text-decoration: none;
+    /* Tamaño de fuente pequeño */
     font-size: 0.9rem;
 }
 
+/* Efecto al pasar el mouse sobre un enlace social */
 .social-link:hover {
+    /* Asegura que no haya subrayado */
     text-decoration: none;
+    /* Reduce la opacidad para crear un efecto de "desvanecimiento" */
     opacity: 0.8;
 }
 
+/* Estilos para los elementos de dirección y pago */
 .address-item, .payment-item {
+    /* Fondo gris claro */
     background: #f8f9fa;
+    /* Transición suave para la sombra de la caja */
     transition: box-shadow 0.3s ease;
 }
 
+/* Efecto al pasar el mouse sobre los elementos de dirección y pago */
 .address-item:hover, .payment-item:hover {
+    /* Agrega una sombra sutil para dar un efecto de elevación */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-
+/* Estilo para campos de formulario con validación de error */
 .is-invalid {
+    /* Borde de color rojo */
     border-color: #dc3545;
 }
 
+/* Mensaje de retroalimentación de error */
 .invalid-feedback {
+    /* Asegura que el mensaje se muestre */
     display: block;
+    /* Color del texto rojo */
     color: #dc3545;
+    /* Tamaño de fuente pequeño */
     font-size: 0.875rem;
+    /* Margen superior para separarlo del campo de entrada */
     margin-top: 0.25rem;
 }
 
-/* Alerta */
+/* Alerta de éxito */
 .alert-success {
+    /* Color de fondo verde claro */
     background-color: #d4edda;
+    /* Color del borde verde claro */
     border-color: #c3e6cb;
+    /* Color del texto verde oscuro */
     color: #155724;
 }
 
+/* Alerta de error */
 .alert-error {
+    /* Color de fondo rojo claro */
     background-color: #f8d7da;
+    /* Color del borde rojo claro */
     border-color: #f5c6cb;
+    /* Color del texto rojo oscuro */
     color: #721c24;
 }
 
+/* Estilo para botones de advertencia (warning) */
 .btn-warning {
+    /* Color de fondo amarillo */
     background-color: #ffc107;
+    /* Color del borde amarillo */
     border-color: #ffc107;
+    /* Color del texto oscuro */
     color: #212529;
 }
 
+/* Efecto al pasar el mouse sobre el botón de advertencia */
 .btn-warning:hover {
+    /* Color de fondo amarillo un poco más oscuro */
     background-color: #e0a800;
+    /* Color del borde amarillo un poco más oscuro */
     border-color: #d39e00;
+    /* Mantiene el color del texto */
     color: #212529;
 }
 
-
+/* Estilo para las tarjetas (card) */
 .card {
+    /* Transición suave para la sombra */
     transition: box-shadow 0.3s ease;
+    /* Borde sólido con color transparente */
     border: 1px solid rgba(0,0,0,.125);
 }
 
+/* Efecto al pasar el mouse sobre la tarjeta */
 .card:hover {
+    /* Agrega una sombra sutil para dar un efecto de elevación */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-
+/* Ajustes para botones en grupos de entrada */
 .input-group .btn {
+    /* Elimina el redondeo del borde superior izquierdo */
     border-top-left-radius: 0;
+    /* Elimina el redondeo del borde inferior izquierdo */
     border-bottom-left-radius: 0;
 }
 
-/* Responsive adjustments */
+/* Ajustes para dispositivos móviles (responsive) */
 @media (max-width: 768px) {
+    /* Centra los botones del selector de personajes */
     .character-selector {
         justify-content: center;
     }
     
+    /* Reduce el tamaño de los botones de personaje */
     .character-btn {
         width: 50px;
         height: 50px;
         font-size: 1.25rem;
     }
     
+    /* Reduce el tamaño del ícono del personaje */
     .character-avatar {
         font-size: 3rem;
     }
     
+    /* Reduce el tamaño del contenedor de visualización del personaje */
     .character-display {
         width: 100px;
         height: 100px;
     }
     
+    /* Organiza los elementos de la barra de navegación en una columna */
     .navbar-nav {
         flex-direction: column;
         gap: 5px;
     }
     
+    /* Margen para los botones de la barra de navegación en vista móvil */
     .navbar-nav .btn {
         margin: 2px 0;
     }
 }
 
+/* Animación de entrada (fade-in) */
 .fade-in {
+    /* Aplica la animación 'fadeIn' */
     animation: fadeIn 0.5s ease-in;
 }
 
+/* Animación de salida (fade-out) */
 .fade-out {
+    /* Aplica la animación 'fadeOut' */
     animation: fadeOut 0.5s ease-out;
 }
 
+/* Definición de la animación de entrada */
 @keyframes fadeIn {
+    /* Comienza con opacidad 0 y ligeramente desplazado hacia arriba */
     from { opacity: 0; transform: translateY(-10px); }
+    /* Termina con opacidad 1 y en su posición original */
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Definición de la animación de salida */
 @keyframes fadeOut {
+    /* Comienza con opacidad 1 y en su posición original */
     from { opacity: 1; transform: translateY(0); }
+    /* Termina con opacidad 0 y ligeramente desplazado hacia arriba */
     to { opacity: 0; transform: translateY(-10px); }
 }
 
-/* Loading spinner */
+/* Estilo para el ícono de carga (spinner) */
 .spinner {
+    /* Se comporta como un elemento en línea */
     display: inline-block;
+    /* Ancho y alto fijos */
     width: 20px;
     height: 20px;
+    /* Borde para crear el círculo, con un borde superior blanco para el efecto de giro */
     border: 3px solid rgba(255,255,255,.3);
+    /* Borde completamente redondeado */
     border-radius: 50%;
+    /* Color del borde superior */
     border-top-color: #fff;
+    /* Aplica la animación 'spin' */
     animation: spin 1s ease-in-out infinite;
 }
 
+/* Definición de la animación de giro */
 @keyframes spin {
+    /* Rota el elemento 360 grados */
     to { transform: rotate(360deg); }
 }
 
-/*  error states */
+/* Estilos para mensajes de éxito y error */
 .success-feedback {
+    /* Color del texto verde */
     color: #28a745;
+    /* Tamaño de fuente pequeño */
     font-size: 0.875rem;
+    /* Margen superior */
     margin-top: 0.25rem;
+    /* Se muestra como un bloque */
     display: block;
 }
 
+/* Estilo para el contenido de los modales */
 .modal-content {
+    /* Bordes redondeados */
     border-radius: 10px;
+    /* Sin borde */
     border: none;
+    /* Sombra para dar un efecto de elevación */
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
+/* Estilo para el encabezado del modal */
 .modal-header {
+    /* Borde inferior delgado */
     border-bottom: 1px solid #dee2e6;
+    /* Bordes superiores redondeados */
     border-radius: 10px 10px 0 0;
 }
 
+/* Estilo para el pie de página del modal */
 .modal-footer {
+    /* Borde superior delgado */
     border-top: 1px solid #dee2e6;
+    /* Bordes inferiores redondeados */
     border-radius: 0 0 10px 10px;
 }
 
-
+/* Estilo al enfocar los campos de formulario */
 .form-control:focus {
+    /* Color del borde azul */
     border-color: #80bdff;
+    /* Sombra sutil para indicar que el campo está activo */
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
-/* Plus and minus button styles */
+/* Estilos para los botones pequeños de más (+) y menos (-) */
 .btn-sm.btn-success, .btn-sm.btn-danger {
+    /* Ancho y alto fijos */
     width: 32px;
     height: 32px;
+    /* Sin relleno */
     padding: 0;
+    /* Bordes completamente redondeados */
     border-radius: 50%;
+    /* Habilita flexbox para centrar el ícono */
     display: flex;
+    /* Centra verticalmente */
     align-items: center;
+    /* Centra horizontalmente */
     justify-content: center;
 }
 
-/* Section spacing */
+/* Espaciado para los encabezados de las secciones de la tarjeta */
 .card-body h3 {
+    /* Margen inferior */
     margin-bottom: 1rem;
+    /* Color de texto gris oscuro */
     color: #495057;
 }
 
-
+/* Estilo para las etiquetas (labels) de los campos */
 label {
+    /* Fuente semi-negrita */
     font-weight: 500;
+    /* Color de texto gris oscuro */
     color: #495057;
+    /* Margen inferior */
     margin-bottom: 0.5rem;
+    /* Se muestra como un bloque */
     display: block;
 }
 
-/* Input placeholder styles */
+/* Estilos para el texto de marcador de posición (placeholder) en los campos de entrada */
 .form-control::placeholder {
+    /* Color del texto gris */
     color: #6c757d;
+    /* Asegura que el color se muestre completamente */
     opacity: 1;
 }
 
-/* Footer link styles */
+/* Estilos para los enlaces en el pie de página */
 footer a {
+    /* Transición suave para el color del texto */
     transition: color 0.3s ease;
 }
 
+/* Efecto al pasar el mouse sobre los enlaces del pie de página */
 footer a:hover {
+    /* Color del texto gris oscuro */
     color: #495057 !important;
+    /* Subraya el enlace */
     text-decoration: underline;
 }
