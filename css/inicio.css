@@ -291,7 +291,7 @@ nav.navbar {
     width: 120px; height: 120px;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 6 4px 12px rgba(74, 166, 16, 0.79);
     transition: transform 0.2s ease;
 }
 .department-circle:hover { transform: scale(1.05); }
@@ -350,6 +350,8 @@ nav.navbar {
 }
 
 
+
+
 /* ==================== FOOTER ==================== */
 footer.principal {
   background-color: var(--color-amarillo-footer);
@@ -399,4 +401,60 @@ footer.principal {
 .logo-footer {
   width: 120px;
   height: 40px;
+}
+
+/* =============================================
+   ESTILOS FINALES PARA LAS BARRAS DE CATEGORÍAS
+   ============================================= */
+
+.category-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    height: 80px; /* Aumentamos un poco la altura para que luzca mejor */
+    background-color: #FFFFFF; /* Fondo oscuro para el contenedor */
+    border-radius: 50px; /* Redondeamos el contenedor principal */
+    box-shadow: 0 0 0 3px #42a5f5; /* Borde azul brillante */
+    overflow: hidden; 
+    transition: transform 0.2s ease;
+}
+
+.category-bar:hover {
+    transform: scale(1.02);
+}
+
+.category-bar .category-image {
+    width: 400px; /* anchura */
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Contenedor para el texto y el botón (la parte blanca) */
+.category-bar .content-wrapper {
+    flex-grow: 1; /* Permite que este contenedor crezca y ocupe el espacio */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 0 25px;
+
+    /* LA MAGIA DE LA FORMA */
+    border-radius: 30px 40px 40px 0; /* (arriba-izq, arriba-der, abajo-der, abajo-izq) */
+    margin-left: -30px; /* Traslapamos este div sobre la imagen */
+}
+
+.category-bar h3 {
+    font-family: 'Inter', sans-serif; /* Usamos la fuente de la imagen */
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+
+.category-bar .btn-rojo {
+    padding: 8px 25px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
 }

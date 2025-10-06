@@ -110,7 +110,7 @@
       </nav>
     </header>
 
-    <div id="message-alert" class="alert alert-dismissible fade show d-none message-fixed" role="alert">
+  <div id="message-alert" class="alert alert-dismissible fade show d-none message-fixed" role="alert">
         <span id="message-text"></span>
     </div>
 
@@ -130,7 +130,7 @@
                         <div class="form-group"><label>Contraseña</label><input type="password" class="form-control" id="registerPassword" required></div>
                         <div class="form-group"><label>Confirmar Contraseña</label><input type="password" class="form-control" id="confirmPassword" required></div>
                         <button type="submit" class="btn btn-naranja btn-block btn-hover">Crear Cuenta</button>
-                        <p class="text-center mt-3">¿Ya tienes cuenta? <a href="#" id="switchToLogin" class="text-orange">Iniciar sesión</a></p>
+                        <p class="text-center mt-3">¿Ya tienes cuenta? <a href="./html/ingresar.html" href="#" id="switchToLogin" class="text-orange">Iniciar sesión</a></p>
                     </form>
                 </div>
             </div>
@@ -151,7 +151,7 @@
                                         <div id="recipeCounter" class="badge recipe-counter">1 / 11</div>
                                         <button id="prevRecipeBtn" class="btn-carousel prev"><i class="fas fa-chevron-left"></i></button>
                                         <button id="nextRecipeBtn" class="btn-carousel next"><i class="fas fa-chevron-right"></i></button>
-
+                                        
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -165,7 +165,7 @@
                                                 <span id="totalPrice" class="h5 text-success font-weight-bold">$0.00</span>
                                             </div>
                                         </div>
-                                        <button id="addToCartBtn" class="btn btn-magenta btn-block btn-hover">🛒 Agregar al Carrito</button>
+                                        <button id="addToCartBtn" class="btn btn-magenta btn-block btn-hover" style="background-color: #FF4E4E; border-color: #FF4E4E;">🛒 Agregar al Carrito</button>
                                     </div>
                                 </div>
                             </div>
@@ -180,20 +180,40 @@
                 <h2 class="text-center mb-5">DEPARTAMENTOS</h2>
                 <div class="row">
                     <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://images.unsplash.com/photo-1556881286-fc6915169721" alt="Bebidas" class="department-image"></div><h5 class="text-muted">Bebidas</h5></div>
-                    <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://images.unsplash.com/photo-1582215241983-2248743b3518" alt="Limpieza" class="department-image"></div><h5 class="text-muted">Limpieza</h5></div>
+                    <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://i.ibb.co/LDn7cq3m/Detergente-720x720.jpg" alt="Limpieza" class="department-image"></div><h5 class="text-muted">Limpieza</h5></div>
                     <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e" alt="Alimentos" class="department-image"></div><h5 class="text-muted">Alimentos</h5></div>
-                    <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://images.unsplash.com/photo-1620189507195-68309c04c4d5" alt="Lácteos" class="department-image"></div><h5 class="text-muted">Lácteos</h5></div>
+                    <div class="col-6 col-md-3 text-center mb-4"><div class="department-circle mx-auto mb-3"><img src="https://i.ibb.co/5xJGPgMB/leche.jpg" alt="Lácteos" class="department-image"></div><h5 class="text-muted">Lácteos</h5></div>
                 </div>
             </div>
         </section>
 
         <section class="py-4 bg-light" id="categorias">
-            <div class="container">
-                <div class="card shadow-sm hover-shadow mb-3"><div class="row no-gutters align-items-center"><div class="col-auto"><img src="https://images.unsplash.com/photo-1556011284-54aa6466d402" alt="Frutas" class="category-image"></div><div class="col"><div class="card-body"><h3 class="mb-0">Frutas</h3></div></div><div class="col-auto"><a href="#catalogo-frutas" class="btn btn-rojo m-3 btn-hover">IR</a></div></div></div>
-                <div class="card shadow-sm hover-shadow mb-3"><div class="row no-gutters align-items-center"><div class="col-auto"><img src="https://images.unsplash.com/photo-1670680901600-8b2b1856ce3c" alt="Verduras" class="category-image"></div><div class="col"><div class="card-body"><h3 class="mb-0">Verduras</h3></div></div><div class="col-auto"><a href="#catalogo-verduras" class="btn btn-rojo m-3 btn-hover">IR</a></div></div></div>
-                <div class="card shadow-sm hover-shadow mb-3"><div class="row no-gutters align-items-center"><div class="col-auto"><img src="https://images.unsplash.com/photo-1670087792710-de546fc8b74c" alt="Granel" class="category-image"></div><div class="col"><div class="card-body"><h3 class="mb-0">Granel</h3></div></div><div class="col-auto"><a href="#catalogo-granel" class="btn btn-rojo m-3 btn-hover">IR</a></div></div></div>
+    <div class="container">
+        <div class="category-bar">
+            <img src="https://i.ibb.co/MkG2DymQ/Aguacate.jpg" alt="Frutas" class="category-image">
+            <div class="content-wrapper">
+                <h3>Frutas</h3>
+                <a href="#catalogo-frutas" class="btn btn-rojo btn-hover" style="background-color: #Ffffff; border-color: #FF4E4E;">IR</a>
             </div>
-        </section>
+        </div>
+
+        <div class="category-bar">
+            <img src="https://i.ibb.co/QF7hfXfp/verduras.jpg" alt="Verduras" class="category-image">
+            <div class="content-wrapper">
+                <h3>Verduras</h3>
+                <a href="#catalogo-verduras" class="btn btn-rojo btn-hover" style="background-color: #ffffff; border-color: #FF4E4E;">IR</a>
+            </div>
+        </div>
+
+        <div class="category-bar">
+            <img src="https://i.ibb.co/39GY3G8p/granel.jpg" alt="Granel" class="category-image">
+            <div class="content-wrapper">
+                <h3>Granel</h3>
+                <a href="#catalogo-granel" class="btn btn-rojo btn-hover" style="background-color: #Ffffff; border-color: #FF4E4E;">IR</a>
+            </div>
+        </div>
+    </div>
+</section>
 
         <section class="py-5 bg-light">
             <div class="container">
@@ -218,7 +238,7 @@
                                         <span id="basicRecipeTotal" class="h5 text-success font-weight-bold">$0.00</span>
                                     </div>
                                 </div>
-                                <button id="addBasicRecipeBtn" class="btn btn-magenta btn-block btn-hover">🛒 Agregar Receta Básica</button>
+                               <button id="addBasicRecipeBtn" class="btn btn-magenta btn-block btn-hover" style="background-color: #FF4E4E; border-color: #FF4E4E;">🛒 Agregar Ingredientes de esta receta</button>
                             </div>
                         </div>
                     </div>
@@ -226,77 +246,6 @@
             </div>
         </section>
     </main>
-
-      <!-- FOOTER -->
-    <footer class="principal">
-      <div class="container-fluid">
-        <!-- Redes sociales -->
-        <div class="row">
-          <div
-            class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3"
-          >
-            <a href="#" class="d-block">Preguntas Frecuentes</a>
-            <a href="sobre_nosotros.html" class="d-block active"
-              >Sobre nosotros</a
-            >
-            <a href="contacto.html" class="d-block">Contacto</a>
-          </div>
-          <div
-            class="footer-social my-3 col-12 col-lg-4 d-flex justify-content-center align-items-center"
-          >
-            <a href="#"
-              ><img
-                id="footer-social-instagram"
-                src="./img/footer/instagram.png"
-                alt="Instagram"
-            /></a>
-            <a href="#"
-              ><img
-                id="footer-social-whatsapp"
-                src="./img/footer/whatsapp.png"
-                alt="WhatsApp"
-            /></a>
-            <a href="#"
-              ><img
-                id="footer-social-facebook"
-                src="./img/footer/facebook.png"
-                alt="Facebook"
-            /></a>
-          </div>
-          <div
-            class="my-3 d-none d-lg-block col-lg-4 d-flex flex-column text-end justify-content-center"
-          >
-            <p class="mb-0">Dirección:</p>
-            <p class="mb-0">Calle Juan Escutia</p>
-            <p class="mb-0">Colonia Roma</p>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-12 d-flex justify-content-center">
-            <img
-              class="logo-footer"
-              src="./img/footer/tu-localito-logo.png"
-              alt="Tu localito"
-            />
-          </div>
-        </div>
-        <div class="row mt-3 mb-0">
-          <div class="col-4 d-none d-lg-block">
-            <p class="hecho-en-mexico mb-0">
-              Hecho en
-              <img src="./img/footer/mexico.png" alt="Bandera de México" />
-            </p>
-          </div>
-          <div class="tu-localito-copyright fst-italic col-md-4 text-center">
-            <p class="tu-localito-copyright fst-italic">© 2025 Tu localito</p>
-          </div>
-          <div class="col-4 text-end d-none d-lg-block">
-            <p>Tel: 522 234 2344</p>
-          </div>
-        </div>
-      </div>
-    </footer>
 
     <div class="modal fade" id="videoModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
