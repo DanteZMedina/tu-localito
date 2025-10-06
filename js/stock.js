@@ -336,26 +336,37 @@ function renderProductsTable(page = 1) {
 
   // Mobile
   listaMobile.innerHTML = '';
+  const umbralMobile = loadUmbralStock();
+
   pageItems.forEach(p => {
+    const qty = Number(p.cantidad) || 0;
+    const badge = buildStockBadge(qty, umbralMobile);
+
+    // decidir color de card según umbral
+    let alertaClass = '';
+    if (umbralMobile > 0) {
+      if (qty < umbralMobile) alertaClass = 'card-alerta-low';
+      else if (qty === umbralMobile) alertaClass = 'card-alerta-equal';
+    }
+
     const card = document.createElement('div');
     card.className = 'col-12';
     card.innerHTML = `
-    <div class="card shadow border rounded-3">
+    <div class="card shadow border rounded-3 ${alertaClass}">
       <div class="card-body d-flex align-items-center">
-        <!-- Imagen -->
         <img src="${p.imagen || '../img/placeholder.png'}"
              alt="${p.nombre}"
              class="img-fluid rounded me-3"
              style="width:70px;height:70px;object-fit:cover;">
 
-        <!-- Info -->
         <div class="flex-grow-1">
           <h6 class="fw-semibold mb-1">${p.nombre}</h6>
-          <p class="mb-1 text-muted small">${formatUnits(p)}</p>
+          <p class="mb-1 text-muted small">
+            ${formatUnits(p)} ${badge}
+          </p>
           <p class="mb-0 fw-bold text-success">${mxn.format(p.precio)}</p>
         </div>
 
-        <!-- Acciones -->
         <div class="ms-auto">
           ${accionesDropdownHTML(p.id)}
         </div>
@@ -364,8 +375,6 @@ function renderProductsTable(page = 1) {
   `;
     listaMobile.appendChild(card);
   });
-
-
 
   renderPagination(totalPages, safePage);
 }
@@ -676,6 +685,30 @@ function ensureInventarioInStorage() {
   } catch (err) {
     console.error('No se pudo inicializar inventario en localStorage:', err);
   }
+}
+
+// ============================ Badges(alerta de stock) para mobile ============================
+// Lee el umbral guardado (o toma el del input si existe)
+function loadUmbralStock() {
+  try {
+    const raw = localStorage.getItem('configListadoSettings');
+    if (raw) {
+      const cfg = JSON.parse(raw);
+      if (cfg && Number.isFinite(cfg.umbral)) return Number(cfg.umbral);
+    }
+  } catch (_) { }
+  const el = document.getElementById('input-umbral');
+  const v = el ? Number(el.value) : NaN;
+  return Number.isFinite(v) ? v : 0; // 0 = sin alertas
+}
+
+// Devuelve el badge según cantidad vs umbral
+function buildStockBadge(cantidad, umbral) {
+  const qty = Number(cantidad) || 0;
+  if (!Number.isFinite(umbral) || umbral <= 0) return '';
+  if (qty < umbral) return `<span class="badge-stock badge-low">Bajo</span>`;
+  if (qty === umbral) return `<span class="badge-stock badge-equal">Al límite</span>`;
+  return '';
 }
 
 
