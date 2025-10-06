@@ -139,13 +139,92 @@ function setupEvents() {
   });
 }
 
-// === Acciones de botones del layout ===
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// {Modal de "Compra exitosa" (Bootstrap 5)
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+function ensureSuccessModal() {
+  let modalEl = document.getElementById('checkoutSuccessModal');
+  if (modalEl) return modalEl;
+
+  const html = `
+  <div class="modal fade" id="checkoutSuccessModal" tabindex="-1" aria-labelledby="checkoutSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header">
+          <h5 class="modal-title" id="checkoutSuccessModalLabel">🎉 ¡Compra realizada!</h5>
+          <!-- Botón cerrar opcional
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          -->
+        </div>
+        <div class="modal-body">
+          <p class="mb-2">Gracias por tu compra. Estamos procesando tu pedido.</p>
+          <p class="text-muted mb-0">
+            Serás redirigido al inicio en <span id="redirect-countdown">3</span>…
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button id="go-home-btn" type="button" class="btn btn-primary">Ir al inicio ahora</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.body.insertAdjacentHTML('beforeend', html);
+  return document.getElementById('checkoutSuccessModal');
+}
+
+// ===============================
+// Reemplaza tu finalizarCompra() por este
+// ===============================
 function finalizarCompra() {
   const items = getStoredItems();
-  if (!items.length) { alert('Tu carrito está vacío.'); return; }
-  // Aquí podrías redirigir a checkout real
-  alert('¡Gracias por tu compra! (demo)');
+  if (!items.length) {
+    alert('Tu carrito está vacío.');
+    return;
+  }
+
+  // 1) Vaciar carrito (persistencia) y refrescar UI local
+  setStoredItems([]);
+  updateCartBadges();
+  renderCartPage();
+
+  // 2) Mostrar modal de éxito con Bootstrap
+  const modalEl = ensureSuccessModal();
+  const modal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+  modal.show();
+
+  // 3) Botón "Ir al inicio"
+  const goHomeBtn = modalEl.querySelector('#go-home-btn');
+  if (goHomeBtn) {
+    goHomeBtn.onclick = () => {
+      window.location.href = '../index.html';
+    };
+  }
+
+  // 4) Cuenta regresiva y redirección automática
+  const cdEl = modalEl.querySelector('#redirect-countdown');
+  let seconds = 3;
+  cdEl.textContent = String(seconds);
+  const interval = setInterval(() => {
+    seconds -= 1;
+    cdEl.textContent = String(seconds);
+    if (seconds <= 0) {
+      clearInterval(interval);
+      window.location.href = '../index.html';
+    }
+  }, 1000);
+
+  // (Opcional) si el usuario cierra el modal por algún motivo, igual redirige
+  modalEl.addEventListener('hidden.bs.modal', () => {
+    // Por si el usuario presionó ESC o se cerró de otra forma (aunque keyboard:false lo evita)
+    if (seconds > 0) clearInterval(interval);
+    window.location.href = '../index.html';
+  }, { once: true });
 }
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// Modal de "Compra exitosa" (Bootstrap 5)}
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 
 function seguirComprando() {
   window.location.href = './catalogo.html';
