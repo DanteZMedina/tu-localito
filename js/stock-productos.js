@@ -8,7 +8,7 @@ const inventario = [
           {
             id: 1,
             nombre: "Aguacate",
-            categoria: "frutas",
+            categoria: "Frutas",
             sku: "FR-001",
             cantidad: 30,
             unidad: "kilo",
@@ -34,7 +34,7 @@ const inventario = [
         ]
       },
       {
-        nombre: "Lácteos",
+        nombre: "Lacteos",
         productos: [
           { id: 8, nombre: "Leche", categoria: "Lacteos", sku: "LA-001", cantidad: 60, unidad: "litro", precio: 24.50, imagen: "https://i.ibb.co/5xJGPgMB/leche.jpg" }
         ]
@@ -125,10 +125,10 @@ const inventario = [
         ]
       },
       {
-        nombre: "Juguetes",
+        nombre: "Juguetes perro",
         productos: [
-          { id: 29, nombre: "Premios", categoria: "Juguetes", sku: "JU-001", cantidad: 15, unidad: "pieza", precio: 60.00, imagen: "https://i.ibb.co/XxRdybM5/juguetes-de-perro.png" },
-          { id: 30, nombre: "Mini premios", categoria: "Juguetes", sku: "JU-002", cantidad: 20, unidad: "pieza", precio: 65.00, imagen: "https://i.ibb.co/TsfP9JP/juguete-de-perro-720x720.jpg" }
+          { id: 29, nombre: "Premios", categoria: "Juguetes perro", sku: "JU-001", cantidad: 15, unidad: "pieza", precio: 60.00, imagen: "https://i.ibb.co/XxRdybM5/juguetes-de-perro.png" },
+          { id: 30, nombre: "Mini premios", categoria: "Juguetes perro", sku: "JU-002", cantidad: 20, unidad: "pieza", precio: 65.00, imagen: "https://i.ibb.co/TsfP9JP/juguete-de-perro-720x720.jpg" }
         ]
       },
       {
@@ -161,4 +161,18 @@ function getProducts() {
   return [...products]; // spread devuelve un nuevo array
 }
 
-export { inventario, addProduct, getProducts };
+// Helper para encontrar producto por id
+function findProductById(idBuscado) {
+  for (const dep of inventario) {
+    for (const cat of dep.categorias) {
+      const idx = cat.productos.findIndex(p => String(p.id) === String(idBuscado));
+      if (idx !== -1) {
+        return { dep, cat, idx, producto: cat.productos[idx] };
+      }
+    }
+  }
+  return null;
+}
+
+
+export { inventario, addProduct, getProducts, findProductById };
