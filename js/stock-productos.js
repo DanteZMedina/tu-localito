@@ -160,4 +160,18 @@ function getProducts() {
   return [...products]; // spread devuelve un nuevo array
 }
 
-export { inventario, addProduct, getProducts };
+// Helper para encontrar producto por id
+function findProductById(idBuscado) {
+  for (const dep of inventario) {
+    for (const cat of dep.categorias) {
+      const idx = cat.productos.findIndex(p => String(p.id) === String(idBuscado));
+      if (idx !== -1) {
+        return { dep, cat, idx, producto: cat.productos[idx] };
+      }
+    }
+  }
+  return null;
+}
+
+
+export { inventario, addProduct, getProducts, findProductById };

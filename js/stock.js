@@ -1,5 +1,5 @@
 // stock.js
-import { inventario } from './stock-productos.js';
+import { inventario, findProductById } from './stock-productos.js';
 import { getDepartamentos, getCategorias, capitalize } from './helpers-inventario.js';
 
 // --- SINCRONIZAR INVENTARIO DESDE LOCALSTORAGE ---
@@ -11,7 +11,7 @@ function syncInventarioFromStorage() {
     if (!Array.isArray(data)) return;
     // MUY IMPORTANTE: mutar (no reasignar) para conservar la referencia exportada
     inventario.splice(0, inventario.length, ...data);
-  } catch (_) {}
+  } catch (_) { }
 }
 
 // ========================= Config de paginación =========================
@@ -320,6 +320,7 @@ function renderProductsTable(page = 1) {
 
   pageItems.forEach(p => {
     const tr = document.createElement('tr');
+    tr.setAttribute('data-id', p.id);
     tr.innerHTML = `
       <td>${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" style="max-height:48px;"/>` : ''}</td>
       <td>${p.nombre}</td>
@@ -328,6 +329,9 @@ function renderProductsTable(page = 1) {
       <td>${p.sku || ''}</td>
       <td>${formatUnits(p)}</td>
       <td>${mxn.format(p.precio)}</td>
+      <td class="text-center">
+        ${accionesDropdownHTML(p.id)}
+      </td>
     `;
     tbody.appendChild(tr);
   });
@@ -335,6 +339,171 @@ function renderProductsTable(page = 1) {
   renderPagination(totalPages, safePage);
 }
 
+// =========== Dropdown acciones (editar, eliminar) ============================
+function accionesDropdownHTML(idProducto) {
+  return `
+    <div class="dropdown">
+      <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+        Acciones
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+          <button class="dropdown-item btn-editar" type="button" data-id="${idProducto}">
+            Editar
+          </button>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <button class="dropdown-item text-danger btn-eliminar" type="button" data-id="${idProducto}">
+            Eliminar
+          </button>
+        </li>
+      </ul>
+    </div>
+  `;
+}
+
+// Delegación de eventos para botones editar/eliminar
+const tbody = document.getElementById('tbody-productos');
+const modalEditarEl = document.getElementById('modalEditarProducto');
+const modalEditar = new bootstrap.Modal(modalEditarEl);
+
+tbody.addEventListener('click', (e) => {
+  const btnEditar = e.target.closest('.btn-editar');
+  const btnEliminar = e.target.closest('.btn-eliminar');
+
+  if (btnEditar) {
+    const id = btnEditar.dataset.id;
+    abrirModalEdicion(id);
+  }
+
+  if (btnEliminar) {
+    const id = btnEliminar.dataset.id;
+    confirmarEliminarProducto(id);
+  }
+});
+
+// =========== Modal edición de producto ============================
+function fillEditDepartamentosSelect() {
+  const sel = document.getElementById('edit-departamento');
+  sel.innerHTML = '<option value="" disabled selected>Selecciona un departamento</option>';
+  getDepartamentos().forEach(dep => {
+    const op = document.createElement('option');
+    op.value = dep;
+    op.textContent = dep;
+    sel.appendChild(op);
+  });
+}
+
+function fillEditCategoriasSelect(depValue, selected = '') {
+  const sel = document.getElementById('edit-categoria');
+  sel.innerHTML = '<option value="" disabled selected>Selecciona una categoría</option>';
+  if (!depValue) return;
+  const cats = getCategorias(capitalize(depValue));
+  cats.forEach(cat => {
+    const op = document.createElement('option');
+    op.value = cat;
+    op.textContent = cat;
+    if (cat === selected) op.selected = true;
+    sel.appendChild(op);
+  });
+}
+
+function abrirModalEdicion(id) {
+  const found = findProductById(id);
+  if (!found) return;
+
+  const { producto, dep, cat } = found;
+
+  // Poblar selects
+  fillEditDepartamentosSelect();
+  document.getElementById('edit-departamento').value = dep.departamento;
+  fillEditCategoriasSelect(dep.departamento, cat.nombre);
+
+  // Llenar campos
+  document.getElementById('edit-id').value = producto.id;
+  document.getElementById('edit-nombre').value = producto.nombre || '';
+  document.getElementById('edit-unidad').value = producto.unidad || '';
+  document.getElementById('edit-cantidad').value = Number(producto.cantidad ?? 0);
+  document.getElementById('edit-precio').value = Number(producto.precio ?? 0);
+
+  modalEditar.show();
+}
+
+// Dependencia depto → categorías dentro del modal
+document.getElementById('edit-departamento').addEventListener('change', (e) => {
+  fillEditCategoriasSelect(e.target.value, '');
+});
+
+// Guardar cambios (Acutalizar producto)
+document.getElementById('form-editar-producto').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const id = document.getElementById('edit-id').value;
+  const nombre = document.getElementById('edit-nombre').value.trim();
+  const unidad = document.getElementById('edit-unidad').value;
+  const departamento = document.getElementById('edit-departamento').value;
+  const categoria = document.getElementById('edit-categoria').value;
+  const cantidad = Number(document.getElementById('edit-cantidad').value);
+  const precio = Number(document.getElementById('edit-precio').value);
+
+  if (!nombre || !unidad || !departamento || !categoria || cantidad < 0 || precio < 0) {
+    // podrías usar reportValidity si añades validity a cada input
+    alert('Revisa los campos del formulario.');
+    return;
+  }
+
+  const found = findProductById(id);
+  if (!found) return;
+
+  const { dep, cat, idx, producto } = found;
+
+  const sameDep = dep.departamento === departamento;
+  const sameCat = cat.nombre === categoria;
+
+  if (sameDep && sameCat) {
+    // Actualiza en su lugar
+    cat.productos[idx] = { ...producto, nombre, unidad, cantidad, precio };
+  } else {
+    // Mover de bucket
+    cat.productos.splice(idx, 1);
+
+    const targetDep = findDepartamentoNode(departamento);
+    if (!targetDep) {
+      alert('Departamento destino no encontrado.');
+      return;
+    }
+    let targetCat = targetDep.categorias.find(c => c.nombre === categoria);
+    if (!targetCat) {
+      targetCat = { nombre: categoria, productos: [] };
+      targetDep.categorias.push(targetCat);
+    }
+    // Mantener id y sku existentes
+    targetCat.productos.push({ ...producto, nombre, unidad, cantidad, precio });
+  }
+
+  saveInventarioToStorage();
+  modalEditar.hide();
+  // Mantén página actual y orden/filters
+  renderProductsTable(currentPage);
+});
+
+// Eliminar con confirmación
+function confirmarEliminarProducto(id) {
+  if (!confirm('¿Eliminar este producto? Esta acción no se puede deshacer.')) return;
+
+  const found = findProductById(id);
+  if (!found) return;
+
+  const { cat, idx } = found;
+  cat.productos.splice(idx, 1);
+
+  saveInventarioToStorage();
+  renderProductsTable(currentPage);
+}
+
+// ========== Paginación ============
 function renderPagination(totalPages, page) {
   const ul = document.getElementById('paginacion');
   if (!ul) return;
