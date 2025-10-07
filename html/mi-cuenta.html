@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="../css/mi-cuenta.css" rel="stylesheet">
 </head>
+
 <body>
 
     <header class="bg-white shadow-sm">
@@ -17,7 +19,7 @@
                     <span class="mr-2"></span>
                     <span class="font-weight-bold">Tu localito</span>
                 </div>
-                
+
                 <div class="navbar-nav ml-auto d-none d-md-flex">
                     <a href="#" class="btn btn-warning mx-1">I</a>
                     <a href="#" class="btn btn-warning mx-1"></a>
@@ -57,11 +59,12 @@
                                         </label>
                                     </div>
                                     <p class="text-muted small mb-3">Aquí se entregarán todos tus pedidos</p>
-                                    
+
                                     <div class="row mb-3">
                                         <div class="col-md-3">
                                             <label>Código Postal:</label>
-                                            <input type="text" class="form-control" name="postalCode" value="11500" placeholder="11500">
+                                            <input type="text" class="form-control" name="postalCode" value="11500"
+                                                placeholder="11500">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Calle:</label>
@@ -73,10 +76,11 @@
                                         </div>
                                         <div class="col-md-3">
                                             <label>Número Interior:</label>
-                                            <input type="text" class="form-control" name="interior" placeholder="Interior">
+                                            <input type="text" class="form-control" name="interior"
+                                                placeholder="Interior">
                                         </div>
                                     </div>
-                                    
+
                                     <button class="btn btn-primary" onclick="saveAddress(1)">Guardar</button>
                                 </div>
                             </div>
@@ -97,7 +101,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label>Celular:</label>
-                                    <input type="text" class="form-control" id="personalPhone" value="5555-5555-55" placeholder="5555-5555-55">
+                                    <input type="text" class="form-control" id="personalPhone" value="5555-5555-55"
+                                        placeholder="5555-5555-55">
                                 </div>
                             </div>
                             <button class="btn btn-primary" onclick="savePersonalData()">Guardar</button>
@@ -108,13 +113,20 @@
                         <div class="card-body">
                             <h3 class="h4 mb-3">Elige tu personaje</h3>
                             <div class="character-selector mb-3">
-                                <button class="character-btn" data-character="1"><img src="https://i.ibb.co/Pv2n9FLK/tomate.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="2"><img src="https://i.ibb.co/YTyJpq0B/zanahoria.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="3"><img src="https://i.ibb.co/Y7HQLWvR/mango.png" alt="" class="btn-img"></button>
-                                <button class="character-btn active" data-character="4"><img src="https://i.ibb.co/LhZv0YFS/uva.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="5"><img src="https://i.ibb.co/jPZqtLKt/pera.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="6"><img src="https://i.ibb.co/wrpD1FK6/cereza.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="7"><img src="https://i.ibb.co/mCNPyVNL/limon.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="1"><img
+                                        src="https://i.ibb.co/Pv2n9FLK/tomate.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="2"><img
+                                        src="https://i.ibb.co/YTyJpq0B/zanahoria.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="3"><img
+                                        src="https://i.ibb.co/Y7HQLWvR/mango.png" alt="" class="btn-img"></button>
+                                <button class="character-btn active" data-character="4"><img
+                                        src="https://i.ibb.co/LhZv0YFS/uva.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="5"><img
+                                        src="https://i.ibb.co/jPZqtLKt/pera.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="6"><img
+                                        src="https://i.ibb.co/wrpD1FK6/cereza.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="7"><img
+                                        src="https://i.ibb.co/mCNPyVNL/limon.png" alt="" class="btn-img"></button>
                             </div>
                             <button class="btn btn-primary" onclick="saveCharacter()">Guardar</button>
                         </div>
@@ -144,15 +156,18 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label>Número de tarjeta:</label>
-                                            <input type="text" class="form-control" name="cardNumber" value="5555-5555-5555-5555" placeholder="5555-5555-5555-5555">
+                                            <input type="text" class="form-control" name="cardNumber"
+                                                value="5555-5555-5555-5555" placeholder="5555-5555-5555-5555">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Fecha de vencimiento:</label>
-                                            <input type="text" class="form-control" name="expiryDate" value="03/30" placeholder="MM/AA">
+                                            <input type="text" class="form-control" name="expiryDate" value="03/30"
+                                                placeholder="MM/AA">
                                         </div>
                                         <div class="col-md-3">
                                             <label>CVV/CVC:</label>
-                                            <input type="text" class="form-control" name="cvv" value="***" placeholder="***" maxlength="3">
+                                            <input type="text" class="form-control" name="cvv" value="***"
+                                                placeholder="***" maxlength="3">
                                         </div>
                                     </div>
                                     <button class="btn btn-primary" onclick="savePaymentData(1)">Guardar</button>
@@ -179,7 +194,8 @@
                                 <div class="input-group">
                                     <input type="password" class="form-control" value="••••••••••" readonly>
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" onclick="togglePasswordChange()">Cambiar</button>
+                                        <button class="btn btn-primary"
+                                            onclick="togglePasswordChange()">Cambiar</button>
                                     </div>
                                 </div>
                             </div>
@@ -188,11 +204,13 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label>Nueva Contraseña:</label>
-                                        <input type="password" class="form-control" id="newPassword" placeholder="••••••••••">
+                                        <input type="password" class="form-control" id="newPassword"
+                                            placeholder="••••••••••">
                                     </div>
                                     <div class="col-md-6">
                                         <label>Volver a escribir contraseña:</label>
-                                        <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••••">
+                                        <input type="password" class="form-control" id="confirmPassword"
+                                            placeholder="••••••••••">
                                     </div>
                                 </div>
                                 <button class="btn btn-primary" onclick="changePassword()">Guardar</button>
@@ -216,7 +234,7 @@
                         <div class="character-display mb-4">
                             <div class="character-avatar" id="selectedCharacterDisplay">🍇</div>
                         </div>
-                        
+
                         <div class="sidebar-menu">
                             <h5 class="font-weight-bold text-warning mb-3">Menú</h5>
                             <ul class="list-unstyled">
@@ -232,31 +250,31 @@
             </div>
         </div>
     </div>
-    
+
     <footer class="bg-warning py-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-dark">Preguntas Frecuentes</a></li>
-                        <li><a href="#" class="text-dark">Sobre Nosotros</a></li>
-                        <li><a href="#" class="text-dark">Contacto</a></li>
+                        <li><a href="./preguntasRespuestas.html" class="text-dark">Preguntas Frecuentes</a></li>
+                        <a href="sobre_nosotros.html" class="d-block active">Sobre nosotros</a>
+                        <a href="contacto.html" class="d-block">Contacto</a>
                     </ul>
                 </div>
-                
+
                 <div class="col-md-4 text-center">
                     <div class="d-flex align-items-center justify-content-center mb-3">
                         <span class="mr-2"></span>
                         <span class="font-weight-bold">Tu localito</span>
                     </div>
-                    
+
                     <div class="social-links">
                         <a href="#" class="social-link bg-danger text-white"></a>
                         <a href="#" class="social-link bg-success text-white"></a>
                         <a href="#" class="social-link bg-primary text-white"></a>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4 text-right">
                     <div>
                         <p class="mb-1">Dirección:</p>
@@ -266,7 +284,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="border-top border-dark mt-4 pt-3 d-flex justify-content-between">
                 <p class="mb-0">Hecho en 🇫🇷</p>
                 <p class="mb-0">© 2025 Tu localito</p>
@@ -284,7 +302,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="alertModalBody">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -303,7 +321,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="confirmModalBody">
-                
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -318,4 +336,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../js/mi-cuenta.js"></script>
 </body>
+
 </html>
