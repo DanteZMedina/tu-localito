@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,6 +58,7 @@
 
 
 </head>
+
 <body>
 
  <!-- NAVBAR -->
@@ -157,7 +159,8 @@
                                     <div class="row mb-3">
                                         <div class="col-md-3">
                                             <label>Código Postal:</label>
-                                            <input type="text" class="form-control" name="postalCode" value="11500" placeholder="11500">
+                                            <input type="text" class="form-control" name="postalCode" value="11500"
+                                                placeholder="11500">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Calle:</label>
@@ -169,7 +172,8 @@
                                         </div>
                                         <div class="col-md-3">
                                             <label>Número Interior:</label>
-                                            <input type="text" class="form-control" name="interior" placeholder="Interior">
+                                            <input type="text" class="form-control" name="interior"
+                                                placeholder="Interior">
                                         </div>
                                     </div>
 
@@ -193,7 +197,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label>Celular:</label>
-                                    <input type="text" class="form-control" id="personalPhone" value="5555-5555-55" placeholder="5555-5555-55">
+                                    <input type="text" class="form-control" id="personalPhone" value="5555-5555-55"
+                                        placeholder="5555-5555-55">
                                 </div>
                             </div>
                             <button class="btn btn-primary" onclick="savePersonalData()">Guardar</button>
@@ -204,13 +209,20 @@
                         <div class="card-body">
                             <h3 class="h4 mb-3">Elige tu personaje</h3>
                             <div class="character-selector mb-3">
-                                <button class="character-btn" data-character="1"><img src="https://i.ibb.co/Pv2n9FLK/tomate.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="2"><img src="https://i.ibb.co/YTyJpq0B/zanahoria.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="3"><img src="https://i.ibb.co/Y7HQLWvR/mango.png" alt="" class="btn-img"></button>
-                                <button class="character-btn active" data-character="4"><img src="https://i.ibb.co/LhZv0YFS/uva.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="5"><img src="https://i.ibb.co/jPZqtLKt/pera.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="6"><img src="https://i.ibb.co/wrpD1FK6/cereza.png" alt="" class="btn-img"></button>
-                                <button class="character-btn" data-character="7"><img src="https://i.ibb.co/mCNPyVNL/limon.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="1"><img
+                                        src="https://i.ibb.co/Pv2n9FLK/tomate.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="2"><img
+                                        src="https://i.ibb.co/YTyJpq0B/zanahoria.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="3"><img
+                                        src="https://i.ibb.co/Y7HQLWvR/mango.png" alt="" class="btn-img"></button>
+                                <button class="character-btn active" data-character="4"><img
+                                        src="https://i.ibb.co/LhZv0YFS/uva.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="5"><img
+                                        src="https://i.ibb.co/jPZqtLKt/pera.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="6"><img
+                                        src="https://i.ibb.co/wrpD1FK6/cereza.png" alt="" class="btn-img"></button>
+                                <button class="character-btn" data-character="7"><img
+                                        src="https://i.ibb.co/mCNPyVNL/limon.png" alt="" class="btn-img"></button>
                             </div>
                             <button class="btn btn-primary" onclick="saveCharacter()">Guardar</button>
                         </div>
@@ -240,15 +252,18 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label>Número de tarjeta:</label>
-                                            <input type="text" class="form-control" name="cardNumber" value="5555-5555-5555-5555" placeholder="5555-5555-5555-5555">
+                                            <input type="text" class="form-control" name="cardNumber"
+                                                value="5555-5555-5555-5555" placeholder="5555-5555-5555-5555">
                                         </div>
                                         <div class="col-md-3">
                                             <label>Fecha de vencimiento:</label>
-                                            <input type="text" class="form-control" name="expiryDate" value="03/30" placeholder="MM/AA">
+                                            <input type="text" class="form-control" name="expiryDate" value="03/30"
+                                                placeholder="MM/AA">
                                         </div>
                                         <div class="col-md-3">
                                             <label>CVV/CVC:</label>
-                                            <input type="text" class="form-control" name="cvv" value="***" placeholder="***" maxlength="3">
+                                            <input type="text" class="form-control" name="cvv" value="***"
+                                                placeholder="***" maxlength="3">
                                         </div>
                                     </div>
                                     <button class="btn btn-primary" onclick="savePaymentData(1)">Guardar</button>
@@ -275,7 +290,8 @@
                                 <div class="input-group">
                                     <input type="password" class="form-control" value="••••••••••" readonly>
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" onclick="togglePasswordChange()">Cambiar</button>
+                                        <button class="btn btn-primary"
+                                            onclick="togglePasswordChange()">Cambiar</button>
                                     </div>
                                 </div>
                             </div>
@@ -284,11 +300,13 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label>Nueva Contraseña:</label>
-                                        <input type="password" class="form-control" id="newPassword" placeholder="••••••••••">
+                                        <input type="password" class="form-control" id="newPassword"
+                                            placeholder="••••••••••">
                                     </div>
                                     <div class="col-md-6">
                                         <label>Volver a escribir contraseña:</label>
-                                        <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••••">
+                                        <input type="password" class="form-control" id="confirmPassword"
+                                            placeholder="••••••••••">
                                     </div>
                                 </div>
                                 <button class="btn btn-primary" onclick="changePassword()">Guardar</button>
@@ -334,7 +352,7 @@
             <!-- Redes sociales -->
             <div class="row">
                 <div class="footer-about-us d-none d-lg-block col-12 col-lg-4 text-start my-3">
-                    <a href="#" class="d-block">Preguntas Frecuentes</a>
+                    <a href="./preguntasRespuestas.html" class="d-block">Preguntas Frecuentes</a>
                     <a href="sobre_nosotros.html" class="d-block">Sobre nosotros</a>
                     <a href="contacto.html" class="d-block">Contacto</a>
                 </div>
@@ -417,4 +435,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../js/mi-cuenta.js"></script>
 </body>
+<<<<<<< HEAD
+
 </html>
+=======
+</html>
+>>>>>>> f56acaddc6c9c641db9b84e43ee819f4a8f75773
