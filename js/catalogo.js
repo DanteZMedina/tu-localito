@@ -407,13 +407,14 @@ function renderizarDepartamentos() {
   if (!container) return;
   container.innerHTML = "";
 
-  const departamentos = ["Alimentos", "Abarrotes", "Productos de limpieza", "Cuidado personal", "Mascotas"];
+  // Derivar departamentos únicos desde los datos
+  const departamentos = [...new Set(allProducts.map(p => p.departamento))].filter(Boolean);
 
   departamentos.forEach((dep, index) => {
     const card = document.createElement("div");
     card.classList.add("category-card");
     if (index === 0) card.classList.add("active");
-    card.dataset.category = dep.replace(/\s+/g, "-").toLowerCase();
+    card.dataset.dep = dep; // ⭐ nombre canónico del departamento
 
     card.innerHTML = `
       <img src="${getDepartamentoImage(dep)}" class="category-img" alt="${dep}">
@@ -432,6 +433,67 @@ function renderizarDepartamentos() {
     container.appendChild(card);
   });
 }
+
+// ============== Helpers departamentos ==============
+
+// Normaliza strings: minúsculas y sin acentos
+function normalizeStr(s) {
+  return (s || "")
+    .toString()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // quita acentos
+    .toLowerCase()
+    .trim();
+}
+
+// Mapa opcional de sinónimos "amigables" del index → nombre canónico en inventario
+const DEP_SYNONYMS = {
+  "limpieza": "Productos de limpieza",
+  "productos de limpieza": "Productos de limpieza",
+  "cuidado personal": "Cuidado personal",
+  "alimentos": "Alimentos",
+  "abarrotes": "Abarrotes",
+  "mascotas": "Mascotas",
+  "lacteos": "Lácteos" // solo funcionará si este departamento realmente existe en tu inventario
+};
+
+function resolverDepartamento(depParam) {
+  const target = normalizeStr(depParam);
+
+  // 0) Sinónimo directo
+  const synonym = DEP_SYNONYMS[target];
+  if (synonym) return synonym;
+
+  // 1) match exacto (normalizado) contra los del inventario
+  const deps = [...new Set(allProducts.map(p => p.departamento))].filter(Boolean);
+  let found = deps.find(d => normalizeStr(d) === target);
+  if (found) return found;
+
+  // 2) por prefijo
+  found = deps.find(d => normalizeStr(d).startsWith(target));
+  if (found) return found;
+
+  // 3) por inclusión
+  found = deps.find(d => normalizeStr(d).includes(target));
+  if (found) return found;
+
+  return null;
+}
+
+function filtrarPorDepartamento(depParam) {
+  const depCanonical = resolverDepartamento(depParam);
+  if (!depCanonical) return; // no hay match, no hacemos nada
+
+  // Marcar activa la card correcta por data-dep
+  document.querySelectorAll(".category-card").forEach(c => {
+    c.classList.toggle("active", c.dataset.dep === depCanonical);
+  });
+
+  // Filtrar productos
+  const productosFiltrados = allProducts.filter(p => p.departamento === depCanonical);
+  currentPage = 1;
+  renderProducts(productosFiltrados);
+}
+
 
 // ============== Modal Carrito (render) ==============
 function getStoredCartArray() {
@@ -593,15 +655,20 @@ document.addEventListener("DOMContentLoaded", () => {
   renderizarCategoriasDinamico();
   renderizarDepartamentos();
 
-  // 🔎 Leer categoría desde query string y filtrar (usa data-cat)
   const params = new URLSearchParams(window.location.search);
   const catParam = params.get('cat');
+  const depParam = params.get('dep');
 
   if (catParam) {
-    // Llamamos versión programática para que marque activo en ambas listas por data-cat
+    // Categoría (ya lo tenías)
     filtrarPorCategoria(catParam, null);
+  } else if (depParam) {
+    // ⭐ Departamento desde el index (nuevo)
+    filtrarPorDepartamento(depParam);
+  }
 
-    const cont = document.getElementById('contenedor-productos');
-    if (cont) cont.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const cont = document.getElementById('contenedor-productos');
+  if (cont && (catParam || depParam)) {
+    cont.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 });
