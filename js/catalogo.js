@@ -33,16 +33,15 @@ function loadCart() {
     stored.forEach(item => {
       cartObj[item.id] = item.cantidadSeleccionada;
     });
-    return cartObj; // seguimos trabajando internamente con objeto {id: cantidad}
+    return cartObj;
   } catch {
     return {};
   }
 }
 
-
 function saveCart(cartObj) {
   const cartArray = Object.entries(cartObj)
-    .filter(([_, cantidad]) => cantidad > 0) // solo los que tengan cantidad > 0
+    .filter(([_, cantidad]) => cantidad > 0)
     .map(([id, cantidad]) => {
       const prod = allProducts.find(p => String(p.id) === String(id));
       if (!prod) return null;
@@ -56,7 +55,6 @@ function saveCart(cartObj) {
   localStorage.setItem(CART_KEY, JSON.stringify(cartArray));
 }
 
-
 function getCartTotalItems(cartObj) {
   return Object.values(cartObj).reduce((acc, n) => acc + Number(n || 0), 0);
 }
@@ -67,7 +65,6 @@ function toggleCartTriggers(enabled) {
     if (!btn) return;
 
     if (enabled) {
-      // habilitar
       btn.classList.remove('disabled');
       btn.removeAttribute('aria-disabled');
       btn.style.pointerEvents = '';
@@ -76,7 +73,6 @@ function toggleCartTriggers(enabled) {
       btn.removeAttribute('tabindex');
       btn.title = '';
     } else {
-      // deshabilitar
       btn.classList.add('disabled');
       btn.setAttribute('aria-disabled', 'true');
       btn.style.pointerEvents = 'none';
@@ -95,7 +91,6 @@ function updateCartBadges(cartObj) {
     const el = document.getElementById(id);
     if (el) el.textContent = display;
   });
-  // ⬇️ habilita/deshabilita el botón según haya items
   toggleCartTriggers(total > 0);
 }
 
@@ -106,8 +101,8 @@ function updateCartBadges(cartObj) {
 // ===============================
 let currentPage = 1;
 const itemsPerPage = 10;
-let cart = loadCart(); // carrito persistente
-let currentProducts = allProducts.slice(); // productos actuales en vista (pueden ser filtrados)
+let cart = loadCart();
+let currentProducts = allProducts.slice();
 
 // ===============================
 // 🔹 3. Renderizar productos
@@ -166,7 +161,6 @@ function renderProducts(products = currentProducts) {
       counterBadge.textContent = cart[prodId];
       saveCart(cart);
       updateCartBadges(cart);
-      console.log(`Producto agregado: ${prod.nombre} | Cantidad: ${cart[prodId]}`);
       refreshCartIfOpen();
     });
 
@@ -175,18 +169,12 @@ function renderProducts(products = currentProducts) {
       const current = cart[prodId] || 0;
       if (current > 0) {
         cart[prodId] = current - 1;
-        if (cart[prodId] === 0) {
-          // opcional: limpiar claves en cero
-          // delete cart[prodId];
-        }
         counterBadge.textContent = cart[prodId] || 0;
         saveCart(cart);
         updateCartBadges(cart);
-        console.log(`Producto disminuido: ${prod.nombre} | Cantidad: ${cart[prodId] || 0}`);
         refreshCartIfOpen();
       }
     });
-
 
     container.appendChild(col);
   });
@@ -318,6 +306,7 @@ function getCategoriaEmoji(categoria) {
 function productDomId(prod) {
   return prod.id ?? `${(prod.departamento || "").replace(/\s+/g, "-")}-${(prod.categoria || "").replace(/\s+/g, "-")}-${(prod.nombre || "").replace(/\s+/g, "-")}`.toLowerCase();
 }
+
 function renderizarCategoriasDinamico() {
   const categorias = ['Todos', ...new Set(allProducts.map(p => p.categoria))];
   listaCategoriasEl.innerHTML = '';
@@ -329,6 +318,7 @@ function renderizarCategoriasDinamico() {
     const a = document.createElement('a');
     a.href = '#';
     a.textContent = cat === 'Todos' ? '🛒 Todos' : `${getCategoriaEmoji(cat)} ${cat}`;
+    a.dataset.cat = cat; // ⭐ data-cat para comparar sin emojis
     a.classList.toggle('active', cat === 'Todos');
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -344,6 +334,7 @@ function renderizarCategoriasDinamico() {
       aMobile.href = '#';
       aMobile.classList.add('dropdown-item');
       aMobile.textContent = cat === 'Todos' ? '🛒 Todos' : `${getCategoriaEmoji(cat)} ${cat}`;
+      aMobile.dataset.cat = cat; // ⭐ también aquí
       aMobile.addEventListener('click', e => {
         e.preventDefault();
         filtrarPorCategoria(cat, aMobile);
@@ -354,12 +345,30 @@ function renderizarCategoriasDinamico() {
   });
 }
 
+// ⭐ Versión basada en data-cat (sin depender del texto con emojis)
 function filtrarPorCategoria(categoria, elemento) {
+  // Quitar active en ambas listas
   document.querySelectorAll('#lista-categorias a').forEach(a => a.classList.remove('active'));
-  if (elemento && elemento.closest('#lista-categorias')) {
+  document.querySelectorAll('#lista-categorias-mobile a').forEach(a => a.classList.remove('active'));
+
+  if (elemento) {
+    // Marca solo el link clicado
     elemento.classList.add('active');
+    // y marca su "par" en la otra lista usando data-cat
+    const cat = elemento.dataset.cat;
+    document.querySelectorAll('#lista-categorias a, #lista-categorias-mobile a').forEach(a => {
+      if (a !== elemento && a.dataset.cat === cat) a.classList.add('active');
+    });
+  } else {
+    // Modo programático: marca ambos por data-cat
+    document.querySelectorAll('#lista-categorias a, #lista-categorias-mobile a').forEach(a => {
+      if ((categoria === 'Todos' && a.dataset.cat === 'Todos') || a.dataset.cat === categoria) {
+        a.classList.add('active');
+      }
+    });
   }
 
+  // Filtrado de productos
   const productosFiltrados = categoria === 'Todos'
     ? allProducts
     : allProducts.filter(p => p.categoria === categoria);
@@ -369,15 +378,10 @@ function filtrarPorCategoria(categoria, elemento) {
 }
 
 function vaciarCarrito() {
-  // limpiar localStorage
   localStorage.setItem(CART_KEY, JSON.stringify([]));
   cart = {};
-
-  // actualizar UI
   updateCartBadges(cart);
   renderCartModal();
-
-  // resetear los contadores de todas las cards visibles
   document.querySelectorAll('.counter-badge').forEach(badge => {
     badge.textContent = 0;
   });
@@ -400,6 +404,7 @@ function getDepartamentoImage(departamento) {
 
 function renderizarDepartamentos() {
   const container = document.getElementById("departamentos-container");
+  if (!container) return;
   container.innerHTML = "";
 
   const departamentos = ["Alimentos", "Abarrotes", "Productos de limpieza", "Cuidado personal", "Mascotas"];
@@ -442,7 +447,7 @@ function formatCurrency(n) {
 }
 
 function renderCartModal() {
-  const items = getStoredCartArray(); // <-- tu array [{...producto, cantidadSeleccionada}]
+  const items = getStoredCartArray();
   const listEl = document.getElementById('carrito-items');
   const emptyEl = document.getElementById('carrito-vacio');
   const totalEl = document.getElementById('carrito-total');
@@ -464,7 +469,7 @@ function renderCartModal() {
 
   emptyEl.classList.add('d-none');
   if (payBtn) payBtn.disabled = false;
-  if (emptyCartBtn) emptyCartBtn.classList.remove('d-none'); // mostrar si hay productos
+  if (emptyCartBtn) emptyCartBtn.classList.remove('d-none');
 
   items.forEach(item => {
     const qty = Number(item.cantidadSeleccionada || 0);
@@ -477,7 +482,6 @@ function renderCartModal() {
 
     li.innerHTML = `
       <div class="position-relative w-100 d-flex align-items-center gap-3">
-        <!-- Botón eliminar -->
         <button class="btn btn-sm position-absolute top-0 end-0 text-danger cart-remove-btn"
                 data-id="${item.id}" title="Eliminar">
           <i class="bi bi-trash"></i>
@@ -503,7 +507,6 @@ function renderCartModal() {
       </div>
     `;
 
-
     listEl.appendChild(li);
   });
 
@@ -520,7 +523,6 @@ function renderCartModal() {
   totalEl.textContent = formatCurrency(total);
 }
 
-// Cambiar cantidad en carrito (y persistir)
 function changeCartQty(prodId, delta) {
   const stored = getStoredCartArray();
   const index = stored.findIndex(p => String(p.id) === String(prodId));
@@ -530,64 +532,49 @@ function changeCartQty(prodId, delta) {
   if (newQty < 0) newQty = 0;
   stored[index].cantidadSeleccionada = newQty;
 
-  // Si quieres eliminar completamente cuando qty = 0:
   if (newQty === 0) stored.splice(index, 1);
 
-  // Guardar de nuevo
   localStorage.setItem(CART_KEY, JSON.stringify(stored));
 
-  // Reconstruir el objeto cart interno
   cart = {};
   stored.forEach(item => cart[item.id] = item.cantidadSeleccionada);
 
-  // 🔄 Actualizar todo
   updateCartBadges(cart);
   renderCartModal();
 
-  // También actualizar las cards visibles
   const badgeEl = document.querySelector(`.counter-badge[data-id="${prodId}"]`);
   if (badgeEl) badgeEl.textContent = newQty;
 }
 
-// Eliminar producto del carrito
 function removeFromCart(prodId) {
   const stored = getStoredCartArray();
   const newStored = stored.filter(p => String(p.id) !== String(prodId));
 
-  // Guardar en localStorage
   localStorage.setItem(CART_KEY, JSON.stringify(newStored));
 
-  // Actualizar objeto cart en memoria
   cart = {};
   newStored.forEach(item => cart[item.id] = item.cantidadSeleccionada);
 
-  // 🔄 Actualizar todo
   updateCartBadges(cart);
   renderCartModal();
 
-  // También poner en cero el contador de la card en catálogo
   const badgeEl = document.querySelector(`.counter-badge[data-id="${prodId}"]`);
   if (badgeEl) badgeEl.textContent = 0;
 }
 
-
-// Re-render al abrir el modal
 const carritoModalEl = document.getElementById('carritoModal');
 if (carritoModalEl) {
   carritoModalEl.addEventListener('show.bs.modal', renderCartModal);
 }
 
-// (Opcional) si cambias cantidades mientras el modal está abierto, re-píntalo
 function isCartModalOpen() {
   const el = document.getElementById('carritoModal');
   return el && el.classList.contains('show');
 }
-// Llama a esto al final de tus handlers +/-
 function refreshCartIfOpen() {
   if (isCartModalOpen()) renderCartModal();
 }
 
-// Listener botón vaciar carrito
 const vaciarBtn = document.getElementById('vaciar-carrito-btn');
 if (vaciarBtn) {
   vaciarBtn.addEventListener('click', () => {
@@ -597,7 +584,6 @@ if (vaciarBtn) {
   });
 }
 
-
 // ===============================
 // 🔹 8. Inicializar
 // ===============================
@@ -606,4 +592,16 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartBadges(cart);
   renderizarCategoriasDinamico();
   renderizarDepartamentos();
+
+  // 🔎 Leer categoría desde query string y filtrar (usa data-cat)
+  const params = new URLSearchParams(window.location.search);
+  const catParam = params.get('cat');
+
+  if (catParam) {
+    // Llamamos versión programática para que marque activo en ambas listas por data-cat
+    filtrarPorCategoria(catParam, null);
+
+    const cont = document.getElementById('contenedor-productos');
+    if (cont) cont.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 });
