@@ -409,5 +409,61 @@ footer.principal {
     background-color: #0d6efd;
     color: white;
 }
+/* ================== paginacion ======================*/
+.pagination {
+  font-size: 1.2rem;         /* aumenta el tamaño del texto */
+  gap: 10px;                 /* espacio entre botones */
+}
 
+.pagination .page-link {
+  min-width: 60px;           /* más ancho para texto largo */
+  height: 60px;              /* más alto para mejor proporción */
+  border-radius: 50%;        /* forma circular para números */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  font-weight: bold;
+  border: none;
+  background-color: white;
+  color: #134DB9;
+  transition: all 0.3s ease;
+}
 
+/* Botón activo */
+.pagination .page-item.active .page-link {
+  background-color: #134DB9;
+  color: white;
+}
+
+/* Botones Previous y Next con forma ovalada */
+.pagination .page-link.prev-next {
+  border-radius: 30px;
+  min-width: 100px;
+  height: 60px;
+  padding: 0 20px;
+  background-color: transparent;
+  color: #134DB9;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Hover */
+.pagination .page-link:hover {
+  background-color: #f0f0f0;
+}
+/* Responsive: Ajustes para pantallas pequeñas */
+@media (max-width: 576px) {
+  .pagination .page-link {
+    min-width: 50px;
+    height: 50px;
+    font-size: 13px;
+    padding: 0 10px;
+  }
+
+  .pagination .page-link.prev-next {
+    min-width: 80px;
+    padding: 0 12px;
+    border-radius: 25px;
+  }
+}
