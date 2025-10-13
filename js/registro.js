@@ -57,7 +57,7 @@ formularioCompleto.addEventListener("submit", function (e) {
 
     //Construccion del json
     constructorJson(formularioCompleto);
-
+    window.location.href = "../html/mi-cuenta.html";
 
 
   } else {
