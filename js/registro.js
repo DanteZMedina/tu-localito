@@ -61,7 +61,7 @@ formularioCompleto.addEventListener("submit", function (e) {
 
 
   } else {
-    console.log("Formulario incompleto");
+    console.log("Formulario incompleto :c");
   }
 }
 );
