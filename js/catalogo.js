@@ -393,11 +393,11 @@ function vaciarCarrito() {
 // ===============================
 function getDepartamentoImage(departamento) {
   const images = {
-    "Alimentos": "https://i.ibb.co/Fkv3PPgM/alimentos.png",
-    "Abarrotes": "https://i.ibb.co/k6s5W763/Abarrotes.png",
-    "Productos de limpieza": "https://i.ibb.co/FbXVDvHr/Productos-Limpieza.png",
-    "Cuidado personal": "https://i.ibb.co/LzhXBhJV/Cuidado-Personal.png",
-    "Mascotas": "https://i.ibb.co/6R83JjQn/Productos-Mascotas.png"
+    "Alimentos": "https://i.ibb.co/ZRH5mtCY/productos-de-comida.jpg",
+    "Abarrotes": "https://i.ibb.co/7JfdCM18/granel.jpg",
+    "Productos de limpieza": "https://i.ibb.co/cKCYgK1P/productos-de-limpieza.jpg",
+    "Cuidado personal": "https://i.ibb.co/LXrkG7MN/productos-de-higiene-personal.png",
+    "Mascotas": "https://i.ibb.co/wFQXj99m/productos-para-mascota.jpg"
   };
   return images[departamento] || "../img/Catalogo/default.jpg";
 }
