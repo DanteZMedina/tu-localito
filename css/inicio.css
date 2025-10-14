@@ -74,6 +74,7 @@ body {
 }
 
 /* ==================== NAVBAR ==================== */
+/*
 nav.navbar {
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -118,7 +119,7 @@ nav.navbar {
 .menu a:hover, .menu a.active {
     transform: translateY(5px);
 }
-
+*/
 
 /* Acciones */
 .acciones .carrito {

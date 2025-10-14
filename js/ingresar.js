@@ -39,7 +39,8 @@ function getFieldDisplayName(fieldName) {
 const usuariosDePrueba = [
   { email: "jesus@example.com", password: "ClaveSegura123!" },
   { email: "ana@example.com", password: "AnaPassword456$" },
-  { email: "carlos@example.com", password: "CarlosClave789#" }
+  { email: "carlos@example.com", password: "CarlosClave789#" },
+  { email: "example@example.com", password: "12345"}
 ];
 
 // Guardar en localStorage
