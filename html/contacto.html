@@ -1,224 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tu localito - Contacto</title>
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="icon" type="image/png" href="../img/favicon-32x32.png">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tu localito - Contacto</title>
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=JetBrains+Mono"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap"
-      rel="stylesheet"
-    />
-    <!-- CSS personalziado -->
-    <link rel="stylesheet" href="../css/contacto.css" />
-    <link rel="stylesheet" href="../css/footer.css" />
-  </head>
- <body class="d-flex flex-column min-vh-100">
-    <header>
-      <!-- NAVBAR -->
-      <nav class="navbar navbar-expand-lg fixed-top">
-        <div
-          class="container-fluid d-flex align-items-center justify-content-between"
-        >
-          <!-- Contenedor logo mobile -->
-          <div class="d-flex d-lg-none flex-grow-1 justify-content-center">
-            <a class="navbar-brand m-0" href="#">
-              <img
-                src="../img/logo-nav-bar.png"
-                alt="Logo oficial de Tu localito"
-                height="50"
-              />
-            </a>
-          </div>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../img/favicon-32x32.png">
 
-          <!-- Logo desktop -->
-          <a class="navbar-brand d-none d-lg-block me-auto" href="#">
-            <img src="../img/logo-nav-bar.png" alt="Logo" height="50" />
-          </a>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet" />
+  <!-- CSS personalziado -->
+  <link rel="stylesheet" href="../css/contacto.css" />
+  <link rel="stylesheet" href="../css/navBar.css" />
+</head>
 
-          <!-- Botón toggler mobile -->
-          <button
-            class="navbar-toggler ms-auto"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu"
-          >
-            <span class="navbar-toggler-icon">.</span>
-          </button>
+<body class="d-flex flex-column min-vh-100">
+  <header>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+      <!-- El contenido se carga dinámicamente con navBar.js -->
+    </nav>
+  </header>
 
-          <!-- Menú -->
-          <div class="collapse navbar-collapse" id="navbarMenu">
-            <div
-              class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center w-100 justify-content-lg-center gap-3 menu"
-            >
-              <a href="../index.html">Inicio</a>
-              <a href="catalogo.html">Catálogo</a>
-              <a href="sobre_nosotros.html">Sobre Nosotros</a>
-              <a href="contacto.html" class="active">Contacto</a>
-            </div>
+  <main class="flex-grow-1">
+    <div class="container">
+      <div class="row my-4 align-items-center justify-content-center">
+        <!-- Formulario -->
+        <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+          <div class="contact-form">
+            <h1>Contacto</h1>
+            <form id="contactForm" action="https://formspree.io/f/xrbawdlz" method="POST">
+              <label for="name">Nombre:</label>
+              <input type="text" id="name" name="name" placeholder="Ejemplo: María" required
+                pattern="[A-Za-zÁáÉéÍíÓóÚúÑñÜü]+" title="Solo se permiten letras" />
+              <span id="error-name" class="error-message"></span>
 
-            <!-- Acciones mobile -->
-            <div class="d-lg-none d-flex justify-content-center w-100">
-              <div class="acciones mt-3 d-flex gap-3">
-                <a
-                  class="carrito btn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#carritoModal"
-                  >Carrito</a
-                >
-                <a href="ingresar.html" class="ingresar btn">Ingresar</a>
-              </div>
-            </div>
-
-            <!-- Acciones desktop -->
-            <div class="d-none d-lg-flex acciones ms-lg-3 mt-lg-0 gap-3">
-              <a
-                class="carrito btn"
-                data-bs-toggle="modal"
-                data-bs-target="#carritoModal"
-                >Carrito</a
-              >
-              <a href="ingresar.html" class="ingresar btn">Ingresar</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <main class="flex-grow-1">
-      <div class="container">
-        <div class="row my-4 align-items-center justify-content-center">
-          <!-- Formulario -->
-          <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-            <div class="contact-form">
-              <h1>Contacto</h1>
-              <form
-                id="contactForm"
-                action="https://formspree.io/f/xrbawdlz"
-                method="POST"
-              >
-                <label for="name">Nombre:</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Ejemplo: María"
-                  required
-                  pattern="[A-Za-zÁáÉéÍíÓóÚúÑñÜü]+"
-                   title="Solo se permiten letras"
-                />
-                <span
-                id="error-name"
-                class="error-message"></span>
-
-                <label for="email">Correo:</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="ejemplo@gmail.com"
-                  required
-                />
-                <span
-                id="error-email"
-                class="error-message">
+              <label for="email">Correo:</label>
+              <input type="email" id="email" name="email" placeholder="ejemplo@gmail.com" required />
+              <span id="error-email" class="error-message">
               </span>
 
-                <label for="phone">Teléfono:</label>
-                <input
-                type="text"
-                id="phone"
-                name="phone"
-                placeholder="Ejemplo a 10 dígitos: 55 5425 1234"
-                pattern="[0-9]{10}"
-                maxlength="10"
-                required/>
-                <span id="phoneError"
-                style="color: red;
+              <label for="phone">Teléfono:</label>
+              <input type="text" id="phone" name="phone" placeholder="Ejemplo a 10 dígitos: 55 5425 1234"
+                pattern="[0-9]{10}" maxlength="10" required />
+              <span id="phoneError" style="color: red;
                 display: none;"></span>
 
-                <label for="message">Mensaje:</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Escribe tu mensaje..."
-                  required
-                ></textarea>
-                <div class="d-flex justify-content-end mb-3">
-                  <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <!-- Imagen -->
-          <div class="col-12 col-md-6 d-flex justify-content-center">
-            <div class="contact-image">
-              <img
-                src="../img/contacto/uva.png"
-                alt="Racimo de uvas animado con carita feliz, razos y piernas de palo."
-              />
-            </div>
+              <label for="message">Mensaje:</label>
+              <textarea id="message" name="message" placeholder="Escribe tu mensaje..." required></textarea>
+              <div class="d-flex justify-content-end mb-3">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </div>
+            </form>
           </div>
         </div>
-      </div>
-    </main>
 
-    <!-- Modal del carrito -->
-    <div
-      class="modal fade"
-      id="carritoModal"
-      tabindex="-1"
-      aria-labelledby="carritoModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="carritoModalLabel">
-              Carrito de compras
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>Aquí se mostrarán los productos del carrito.</p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-            <button type="button" class="btn btn-primary">Ir a pagar</button>
+        <!-- Imagen -->
+        <div class="col-12 col-md-6 d-flex justify-content-center">
+          <div class="contact-image">
+            <img src="../img/contacto/uva.png"
+              alt="Racimo de uvas animado con carita feliz, razos y piernas de palo." />
           </div>
         </div>
       </div>
     </div>
+  </main>
 
     <!-- FOOTER -->
     <footer class="principal mt-5 mt-auto" >

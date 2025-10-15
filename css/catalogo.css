@@ -76,148 +76,7 @@ h6 {
     isolation: isolate;
 }
 
-/* ==================== VARIABLES CSS ==================== */
-:root {
-    /* Fonts */
-    --font-family: 'Inter', sans-serif;
-    --font-family-all: 'Inter', sans-serif;
-    --font-family-heading: "Playwrite HU", cursive;
-    ;
-    --font-weight-regular: 400;
-    --font-weight-bold: 700;
 
-    /* Colores */
-    --color-orange: #E85C14;
-    --color-amarillo: #FFDE59;
-    --color-card-bg: #FEBCBC;
-    --color-border-card: #E85E14;
-    --color-carousel-control: #E85E14;
-    --color-button-navbar: #B5651D;
-    --color-navbar-toggler-focus: #B5651D;
-    --color-button-mvv: #FF4E4E;
-    --color-button-principal: #134DB9;
-    --color-button-carrito: #E92736;
-    --color-button-ingresar: #13A751;
-    --color-input-bg: #D9D9D9;
-
-    /* Tamaños y bordes */
-    --border-radius: 8px;
-    --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    --btn-width-navbar: 154px;
-    --btn-height-navbar: 35px;
-
-    /* Fonts */
-    --font-size-heading1: 50px;
-    --font-size-heading2: 40px;
-    --font-size-heading3: 30px;
-    --font-size-large: 20px;
-    --font-size-medium: 16px;
-    --font-size-small: 14px;
-}
-
-
-body {
-    padding-top: 65px;
-}
-
-/* ==================== NAVBAR ==================== */
-nav.navbar {
-    background: rgba(255, 255, 255, 0.7);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-toggler {
-    border: none;
-}
-
-.navbar-toggler:focus {
-    box-shadow: 0 0 0 2px var(--color-navbar-toggler-focus);
-    border-color: var(--color-navbar-toggler-focus);
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(181,101,29,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
-.menu a {
-    position: relative;
-    text-decoration: none;
-    color: white;
-    background: var(--color-button-navbar);
-    padding: 5px 30px;
-    border: 1px solid #A0522D;
-    border-radius: var(--border-radius);
-    font-weight: bold;
-    box-shadow: var(--box-shadow);
-    transition: transform 0.3s ease;
-}
-
-.menu a::before,
-.menu a::after {
-    content: "";
-    position: absolute;
-    top: -30px;
-    width: 3px;
-    height: 30px;
-    background: #A0522D;
-}
-
-.menu a:hover, .menu a.active {
-    transform: translateY(5px);
-}
-
-/* Acciones */
-.acciones .carrito {
-    background: var(--color-button-carrito);
-    color: white;
-    border: 2px solid var(--color-button-carrito);
-    padding: 5px 30px;
-    border-radius: var(--border-radius);
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: var(--box-shadow);
-}
-
-.carrito-count {
-  background-color: var(--color-amarillo) !important; /* fuerza tu amarillo */
-  color: #000 !important;
-  min-width: 22px;
-  height: 22px;
-  font-size: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-weight: bold;
-  padding: 0 4px;
-  border: 2px solid var(--color-orange) !important;
-}
-
-
-.acciones .ingresar {
-    width: max-content;
-    background: white;
-    color: var(--color-button-ingresar);
-    border: 2px solid var(--color-button-ingresar);
-    padding: 5px 30px;
-    border-radius: var(--border-radius);
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: var(--box-shadow);
-}
-
-.acciones .carrito:hover {
-    background: #c62828;
-}
-
-.acciones .ingresar:hover {
-    background: #e8f5e9;
-}
-
-h1{
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-heading1);
-}
 
 
 
@@ -259,85 +118,98 @@ h1{
 
 /* ==================== Menu superior categorias ==================== */
 .category-card {
-  position: relative;
-  width: 200px;
-  height: 120px;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+    position: relative;
+    width: 200px;
+    height: 120px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
+
 .category-card:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
+
 .category-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  filter: brightness(70%);
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(70%);
 }
+
 .category-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-weight: bold;
-  font-size: 1.3rem;
-  text-shadow: 0px 2px 6px rgba(0,0,0,0.8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.8);
 }
+
 .category-card.active {
-  outline: 3px solid orange;
+    outline: 3px solid orange;
 }
 
 .plus-btn,
 .minus-btn {
-  width: 25px;       /* ancho fijo */
-  height: 25px;      /* alto fijo */
-  border-radius: 50%; /* círculo perfecto */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin-bottom: 15px;
+    width: 25px;
+    /* ancho fijo */
+    height: 25px;
+    /* alto fijo */
+    border-radius: 50%;
+    /* círculo perfecto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 15px;
 }
 
 .plus-btn-carrito,
 .minus-btn-carrito {
-  width: 20px;       /* ancho fijo */
-  height: 20px;      /* alto fijo */
-  border-radius: 50%; /* círculo perfecto */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+    width: 20px;
+    /* ancho fijo */
+    height: 20px;
+    /* alto fijo */
+    border-radius: 50%;
+    /* círculo perfecto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .plus-btn-carrito-page,
 .minus-btn-carrito-page {
-  width: 30px;       /* ancho fijo */
-  height: 30px;      /* alto fijo */
-  border-radius: 50%; /* círculo perfecto */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+    width: 30px;
+    /* ancho fijo */
+    height: 30px;
+    /* alto fijo */
+    border-radius: 50%;
+    /* círculo perfecto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .counter-badge {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background-color: #f8f9fa; /* gris claro */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  border: 1px solid #dee2e6; /* borde sutil */
-  margin-bottom: 15px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    /* gris claro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 1px solid #dee2e6;
+    /* borde sutil */
+    margin-bottom: 15px;
 }
-
-
 
 /* Estilo base para escritorio */
 #catalogo_cards_image {
