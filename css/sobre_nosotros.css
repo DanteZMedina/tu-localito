@@ -350,56 +350,7 @@ nav.navbar {
 }
 
 
-/* ==================== FOOTER ==================== */
-footer.principal {
-  background-color: var(--color-amarillo);
-  font-family: var(--font-family);
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-}
 
-.footer-about-us a {
-  display: block;
-  color: black;
-  text-decoration: none;
-  font-weight: var(--font-weight-bold);
-}
-
-.footer-about-us a:hover {
-    color: var(--color-orange);
-}
-
-.footer-about-us a.active{
-    text-decoration: underline;
-} 
-
-.hecho-en-mexico {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: var(--font-weight-regular);
-}
-
-.hecho-en-mexico img {
-  width: 30px;
-}
-
-.footer-social img {
-  width: 25px;
-  height: 25px;
-  margin: 0 10px;
-  transition: transform 0.3s;
-}
-
-.footer-social img:hover {
-  transform: scale(1.1);
-}
-
-.logo-footer {
-  width: 120px;
-  height: 40px;
-}
 
 
 /* ==================== RESPONSIVE ==================== */
