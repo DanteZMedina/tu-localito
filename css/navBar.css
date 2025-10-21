@@ -4,7 +4,7 @@
     --font-family: 'Inter', sans-serif;
     --font-family-all: 'Inter', sans-serif;
     --font-family-heading: "Playwrite HU", cursive;
-    
+
     --font-weight-regular: 400;
     --font-weight-bold: 700;
 
@@ -74,7 +74,7 @@ nav.navbar {
     transition: transform 0.3s ease;
 }
 
-.menu a::before,
+/* .menu a::before,
 .menu a::after {
     content: "";
     position: absolute;
@@ -82,7 +82,7 @@ nav.navbar {
     width: 3px;
     height: 30px;
     background: #A0522D;
-}
+} */
 
 .menu a:hover, .menu a.active {
     transform: translateY(5px);
@@ -139,4 +139,17 @@ nav.navbar {
 h1{
     font-family: var(--font-family-heading);
     font-size: var(--font-size-heading1);
+}
+
+/* Solo mostrar las líneas decorativas en pantallas grandes */
+@media (min-width: 992px) {
+  .menu a::before,
+  .menu a::after {
+      content: "";
+      position: absolute;
+      top: -30px;
+      width: 3px;
+      height: 30px;
+      background: #A0522D;
+  }
 }
