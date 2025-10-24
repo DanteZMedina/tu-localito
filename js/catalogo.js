@@ -45,8 +45,16 @@ function saveCart(cartObj) {
   const cartArray = Object.entries(cartObj)
     .filter(([_, cantidad]) => cantidad > 0)
     .map(([id, cantidad]) => {
-      const prod = allProducts.find(p => String(p.id) === String(id));
-      if (!prod) return null;
+      // Buscamos el producto en allProducts igual que antes:
+      const prod = allProducts.find(p =>
+        String(p.id ?? productDomId(p)) === String(id)
+      );
+
+      if (!prod) {
+        console.warn('[saveCart] No encontré producto para id', id);
+        return null;
+      }
+
       return {
         ...prod,
         cantidadSeleccionada: cantidad
