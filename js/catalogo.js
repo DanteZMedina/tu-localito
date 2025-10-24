@@ -1,4 +1,5 @@
-import { inventario } from './stock-productos.js';
+// import { inventario } from './stock-productos.js';
+import { loadProductos, getProductosFlat } from './fetch-productos.js';
 
 // ===============================
 // 🔹 1. Aplanar inventario
@@ -19,7 +20,8 @@ function flattenInventario(inventario) {
   return allProducts;
 }
 
-const allProducts = flattenInventario(inventario);
+// const allProducts = flattenInventario(inventario);
+let allProducts = [];
 
 // ===============================
 // 🔸 Carrito (persistencia)
@@ -649,7 +651,18 @@ if (vaciarBtn) {
 // ===============================
 // 🔹 8. Inicializar
 // ===============================
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+  try {
+    const { flat } = await loadProductos();
+    allProducts = flat;            // 👈 ya viene plano con {departamento, categoria, ...}
+
+    console.log('[catalogo] Productos cargados:', allProducts.length);
+  } catch (e) {
+    console.error('[catalogo] No se pudieron cargar productos', e);
+    allProducts = []; // deja vacío (o muestra un estado vacío)
+  }
+
   renderProducts(allProducts);
   updateCartBadges(cart);
   renderizarCategoriasDinamico();
