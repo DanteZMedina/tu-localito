@@ -1,7 +1,7 @@
 // fetch-productos.js
 // 100.24.238.243
 // const API_BASE = 'http://localhost:8081';
-const API_BASE = 'http://100.24.238.243:8080';
+const API_BASE = 'https://tulocalito.duckdns.org';
 const PLACEHOLDER_IMG = '../img/Catalogo/default.jpg';
 
 // ===== CACHES EN MEMORIA =====
